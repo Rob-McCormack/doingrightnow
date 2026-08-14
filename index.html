@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#fafafa" />
-  <meta name="description" content="A minimalist, offline journal for getting unstuck. Don’t plan your day — write the tiny next step and do that." />
+  <meta name="description" content="A journal for getting unstuck. Don’t plan your day — write one timestamped line and do that. No sign-up, no cloud." />
   <title>Doing Right Now</title>
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
@@ -21,7 +21,6 @@
       --border: #e5e5e5;
       --today: #4ba764;
       --today-hover: #3e9156;
-      --today-soft: rgba(75, 167, 100, 0.12);
       --dot: rgba(0, 0, 0, 0.04);
     }
 
@@ -45,12 +44,9 @@
     }
 
     .page {
-      max-width: 1040px;
+      max-width: 760px;
       margin: 0 auto;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      padding: 28px 24px 32px;
+      padding: 28px 24px 40px;
     }
 
     .brand {
@@ -70,12 +66,8 @@
     }
 
     .hero {
-      flex: 1;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      gap: 48px;
-      padding: 48px 0 32px;
+      text-align: center;
+      padding: 48px 0 0;
     }
 
     .byline {
@@ -88,24 +80,22 @@
     }
 
     h1 {
-      font-size: clamp(32px, 4.4vw, 46px);
+      font-size: clamp(28px, 5vw, 40px);
       font-weight: 650;
       letter-spacing: -0.03em;
-      line-height: 1.15;
-      margin-bottom: 18px;
+      line-height: 1.18;
+      margin-bottom: 16px;
     }
 
     .lede {
       font-size: 17px;
       color: var(--text-soft);
-      max-width: 42ch;
-      margin-bottom: 28px;
+      max-width: 44ch;
+      margin: 0 auto 28px;
     }
 
     .cta {
       display: inline-flex;
-      align-items: center;
-      gap: 8px;
       background: var(--today);
       color: #fff;
       text-decoration: none;
@@ -126,19 +116,75 @@
     }
 
     .note {
-      margin-top: 14px;
+      margin-top: 12px;
       font-size: 13px;
       color: var(--text-muted);
     }
 
+    .shot {
+      margin: 40px auto 0;
+      max-width: 340px;
+    }
+
+    .shot img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+      background: #fff;
+    }
+
+    .idea {
+      text-align: center;
+      font-size: 17px;
+      color: var(--text-soft);
+      max-width: 48ch;
+      margin: 48px auto 0;
+    }
+
+    .points {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 40px;
+    }
+
+    .points h2 {
+      font-size: 16px;
+      font-weight: 650;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .points p {
+      font-size: 14px;
+      color: var(--text-soft);
+    }
+
+    .works {
+      margin-top: 48px;
+      padding: 18px 20px;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+      font-size: 14px;
+      color: var(--text-soft);
+    }
+
+    .works strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
     .art {
-      display: flex;
-      justify-content: center;
+      margin: 40px auto 0;
+      max-width: 420px;
     }
 
     .art img {
       width: 100%;
-      max-width: 520px;
       height: auto;
     }
 
@@ -148,7 +194,8 @@
       align-items: center;
       gap: 16px;
       flex-wrap: wrap;
-      padding-top: 20px;
+      margin-top: 36px;
+      padding-top: 18px;
       border-top: 1px solid var(--border);
       font-size: 12px;
       color: var(--text-muted);
@@ -163,27 +210,22 @@
       color: var(--text);
     }
 
-    @media (max-width: 760px) {
+    @media (max-width: 640px) {
       .page {
-        padding: 20px 18px 28px;
+        padding: 20px 18px 32px;
       }
 
       .hero {
+        padding-top: 36px;
+      }
+
+      .points {
         grid-template-columns: 1fr;
-        gap: 28px;
-        padding: 36px 0 24px;
-      }
-
-      .art {
-        order: -1;
-      }
-
-      .art img {
-        max-width: 380px;
-      }
-
-      .lede {
-        max-width: none;
+        gap: 22px;
+        text-align: center;
+        max-width: 42ch;
+        margin-left: auto;
+        margin-right: auto;
       }
     }
   </style>
@@ -195,17 +237,45 @@
       <span>DoingRightNow.com</span>
     </header>
 
-    <main class="hero">
-      <div>
+    <main>
+      <section class="hero">
         <p class="byline">A journal for getting unstuck</p>
-        <h1>Don’t plan your day.<br>Just start.</h1>
-        <p class="lede">When a task feels too big, write the tiny next step and do that. No logins, no cloud — just a trail of small starts that add up.</p>
-        <a class="cta" href="DoingRightNow.html">Open the journal</a>
-        <p class="note">Works offline. Stays on this device.</p>
-      </div>
-      <div class="art">
-        <img src="images/Schedule-bro.png" alt="A person checking the time beside today’s schedule" width="800" height="800" />
-      </div>
+        <h1>Don’t plan your day.<br>Just start with what’s right in front of you.</h1>
+        <p class="lede">Not a planner, todo list, or habit tracker. Write one timestamped line — what you just did, or the tiny next step — and do that.</p>
+        <a class="cta" href="DoingRightNow.html">Start Doing Right Now</a>
+        <p class="note">No sign-up required. Stays on this device.</p>
+      </section>
+
+      <figure class="shot">
+        <img src="images/screenshot.png" alt="Doing Right Now journal showing today’s timestamped entries" width="840" height="1720" />
+      </figure>
+
+      <p class="idea">Each line lowers the bar for the next one. If you drift, the last line is exactly where you left off.</p>
+
+      <section class="points">
+        <div>
+          <h2>Shrink the next step</h2>
+          <p>Don’t write “Write the report.” Write “Open the document.” Tiny starts beat big plans.</p>
+        </div>
+        <div>
+          <h2>Anchor your attention</h2>
+          <p>Your timeline is a safety net. Come back anytime and see what you were just doing.</p>
+        </div>
+        <div>
+          <h2>Private by default</h2>
+          <p>No accounts, no cloud, no tracking. Export or clear everything from Settings.</p>
+        </div>
+      </section>
+
+      <p class="works">
+        One prompt: <strong>What are you doing right now?</strong>
+        · Today, 2d, 3d, 7d, All
+        · Optional <strong>@person</strong> <strong>#location</strong> <strong>*project</strong> <strong>!</strong>
+      </p>
+
+      <figure class="art">
+        <img src="images/Schedule-bro.png" alt="" width="800" height="800" />
+      </figure>
     </main>
 
     <footer>
