@@ -30,6 +30,7 @@
       --border: #e5e5e5;
       --today: #4ba764;
       --today-hover: #3e9156;
+      --danger: #e05c5c;
       --dot: rgba(0, 0, 0, 0.04);
     }
 
@@ -231,6 +232,30 @@
       margin-top: 12px;
     }
 
+    .tag {
+      font-style: italic;
+      font-weight: 500;
+      border-radius: 3px;
+      padding: 0 2px;
+    }
+
+    .tag-person {
+      color: #7c6bc4;
+    }
+
+    .tag-location {
+      color: #2a9d8f;
+    }
+
+    .tag-project {
+      color: #e9a825;
+    }
+
+    .bang {
+      font-weight: 600;
+      color: var(--danger);
+    }
+
     .art {
       margin: 40px auto 0;
       max-width: 420px;
@@ -345,7 +370,7 @@
       <section class="extras">
         <h2>If you want them</h2>
         <p>Search when you need to look back. Export a copy from Settings anytime. Notes is a scratchpad; Quick Add saves lines you reuse. Any past entry can be brought into Today — the original stays where it was.</p>
-        <p>You can also tag a line with <strong>@person</strong>, <strong>#location</strong>, or <strong>*project</strong> — a <strong>!</strong> makes it stand out.</p>
+        <p>You can also tag a line with <span class="tag tag-person">@person</span>, <span class="tag tag-location">#location</span>, or <span class="tag tag-project">*project</span> — a <span class="bang">!</span> makes it stand out.</p>
       </section>
 
       <figure class="art">
