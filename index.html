@@ -210,6 +210,12 @@
       color: var(--text);
     }
 
+    .credits {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 14px;
+    }
+
     @media (max-width: 640px) {
       .page {
         padding: 20px 18px 32px;
@@ -280,7 +286,10 @@
 
     <footer>
       <span>No planning · No streaks · No pressure to finish</span>
-      <a href="https://storyset.com/event">Event illustrations by Storyset</a>
+      <span class="credits">
+        <a href="https://storyset.com/event">Event illustrations by Storyset</a>
+        <a href="https://www.flaticon.com/free-icons/calendar" title="calendar icons">Calendar icons created by Hilmy Abiyyu A. - Flaticon</a>
+      </span>
     </footer>
   </div>
 </body>
