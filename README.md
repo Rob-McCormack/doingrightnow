@@ -2,7 +2,7 @@
 
 A minimalist, offline-first journal to cure task paralysis. No logins, no cloud — just focus on your next tiny step.
 
-**Don’t plan your day. Just start with what’s right in front of you.**
+**Don’t plan your entire day. Just start with what’s right in front of you.**
 
 Not a planner, to-do list, or habit tracker. Write one timestamped line — what you just did, or the tiny next step — and do that. Each line lowers the bar for the next one. If you drift, the last line is exactly where you left off.
 
