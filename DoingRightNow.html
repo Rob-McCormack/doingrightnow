@@ -722,18 +722,31 @@
       align-items: center;
       gap: 12px;
       padding: 13px 4px;
+      width: 100%;
+      font: inherit;
       font-size: 15px;
       color: var(--text-soft);
+      background: none;
+      border: none;
+      text-align: left;
       cursor: pointer;
       border-radius: 8px;
       transition: background 0.12s, color 0.12s;
       user-select: none;
+      appearance: none;
+      -webkit-appearance: none;
     }
 
     .menu-item:hover,
     .menu-item:active {
       background: var(--bg-secondary);
       color: var(--text);
+    }
+
+    .menu-item:focus-visible,
+    #panel-settings .settings-row:focus-visible {
+      outline: 2px solid var(--today);
+      outline-offset: 2px;
     }
 
     .menu-item svg {
@@ -830,12 +843,19 @@
       align-items: center;
       gap: 12px;
       padding: 12px 10px;
+      width: 100%;
+      font: inherit;
       font-size: 14px;
       color: var(--text-soft);
+      background: none;
+      border: none;
+      text-align: left;
       border-radius: 8px;
       cursor: pointer;
       transition: background 0.12s, color 0.12s;
       user-select: none;
+      appearance: none;
+      -webkit-appearance: none;
     }
 
     #panel-settings .settings-row:hover {
@@ -1046,16 +1066,16 @@
       </div>
 
       <!-- Settings -->
-      <div class="menu-item" id="menu-settings">
+      <button type="button" class="menu-item" id="menu-settings" aria-expanded="false" aria-controls="panel-settings">
         <span class="menu-icon" data-icon="settings"></span>
         <span class="settings-label">Settings</span>
         <span class="settings-chevron" id="settings-chevron" data-icon="chevron-down"></span>
-      </div>
+      </button>
       <div class="panel" id="panel-settings">
-        <div class="settings-row" id="menu-theme">
+        <button type="button" class="settings-row" id="menu-theme">
           <span class="row-icon" id="theme-icon" data-icon="moon"></span>
           <span class="row-label" id="theme-label">Dark Mode</span>
-        </div>
+        </button>
         <div class="settings-row static-row">
           <span class="row-icon" data-icon="type"></span>
           <span class="row-label">Size</span>
@@ -1069,29 +1089,29 @@
           <input type="number" id="trophy-threshold" min="1" max="99" value="6" />
           <span class="row-label" style="flex:0;">entries</span>
         </div>
-        <div class="settings-row" id="menu-export">
+        <button type="button" class="settings-row" id="menu-export">
           <span class="row-icon" data-icon="download"></span>
           <span class="row-label">Export Data</span>
-        </div>
-        <div class="settings-row" id="menu-clear">
+        </button>
+        <button type="button" class="settings-row" id="menu-clear">
           <span class="row-icon" data-icon="trash-2"></span>
           <span class="row-label">Clear All Data</span>
-        </div>
-        <div class="settings-row" id="menu-clear-old">
+        </button>
+        <button type="button" class="settings-row" id="menu-clear-old">
           <span class="row-icon" data-icon="calendar-x"></span>
           <span class="row-label">Clear Data Older Than 30 Days</span>
-        </div>
-        <div class="settings-row" id="menu-reset-sample">
+        </button>
+        <button type="button" class="settings-row" id="menu-reset-sample">
           <span class="row-icon" data-icon="refresh-cw"></span>
           <span class="row-label">Clear All, Add Sample Data</span>
-        </div>
+        </button>
       </div>
 
       <!-- Help -->
-      <div class="menu-item" id="menu-help">
+      <button type="button" class="menu-item" id="menu-help" aria-expanded="false" aria-controls="panel-help">
         <span class="menu-icon" data-icon="help-circle"></span>
         <span>Help</span>
-      </div>
+      </button>
       <div class="panel" id="panel-help">
         <div class="help-content">
           <h3>Don’t plan your entire day. Just start with what’s right in front of you.</h3>
@@ -1283,20 +1303,33 @@
       // Only auto-seed on true first visit, not after user clears data
       if (journal.length === 0 && !localStorage.getItem(KEYS.seeded)) {
         seedDummyData();
-        localStorage.setItem(KEYS.seeded, '1');
+        persist(KEYS.seeded, '1');
+      }
+    }
+
+    let saveWarned = false;
+
+    function persist(key, value) {
+      try {
+        localStorage.setItem(key, value);
+      } catch (e) {
+        if (!saveWarned) {
+          saveWarned = true;
+          window.alert("Couldn't save — export a copy from Settings, then free some browser storage.");
+        }
       }
     }
 
     function saveJournal() {
-      localStorage.setItem(KEYS.journal, JSON.stringify(journal));
+      persist(KEYS.journal, JSON.stringify(journal));
     }
 
     function saveQuickAdds() {
-      localStorage.setItem(KEYS.quickadds, JSON.stringify(quickAdds));
+      persist(KEYS.quickadds, JSON.stringify(quickAdds));
     }
 
     function saveNotes() {
-      localStorage.setItem(KEYS.notes, notes);
+      persist(KEYS.notes, notes);
     }
 
     function applyTheme(mode) {
@@ -1318,14 +1351,14 @@
         document.getElementById('theme-label').textContent = 'Dark Mode';
         document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fafafa');
       }
-      localStorage.setItem(KEYS.theme, mode);
+      persist(KEYS.theme, mode);
     }
 
     function applyFont(size) {
       document.documentElement.classList.remove('font-medium', 'font-large');
       if (size === 'medium') document.documentElement.classList.add('font-medium');
       if (size === 'large') document.documentElement.classList.add('font-large');
-      localStorage.setItem(KEYS.font, size);
+      persist(KEYS.font, size);
       document.querySelectorAll('.font-btn').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.font === size);
       });
@@ -1404,7 +1437,7 @@
 
       saveJournal();
       saveQuickAdds();
-      localStorage.setItem(KEYS.seeded, '1');
+      persist(KEYS.seeded, '1');
     }
 
     // ─────────────────────────────────────────────
@@ -1937,7 +1970,8 @@
         bodyEl.contentEditable = 'false';
         const newText = bodyEl.textContent.trim();
         if (!newText) {
-          deleteEntry(entry.id);
+          bodyEl.innerHTML = formatEntryText(entry.text);
+          bodyEl.classList.toggle('emphasis', hasEmphasis(entry.text));
           return;
         }
         if (newText !== entry.text) {
@@ -2104,18 +2138,29 @@
       openPanel = null;
 
       const settingsBtn = document.getElementById('menu-settings');
+      const helpBtn = document.getElementById('menu-help');
       const chevron = document.getElementById('settings-chevron');
-      if (settingsBtn) settingsBtn.classList.remove('open-settings');
+      if (settingsBtn) {
+        settingsBtn.classList.remove('open-settings');
+        settingsBtn.setAttribute('aria-expanded', 'false');
+      }
+      if (helpBtn) helpBtn.setAttribute('aria-expanded', 'false');
       if (chevron) chevron.innerHTML = icon('chevron-down');
 
       if (!isOpen) {
         panel.classList.add('open');
         openPanel = id;
         if (id === 'panel-settings') {
-          if (settingsBtn) settingsBtn.classList.add('open-settings');
+          if (settingsBtn) {
+            settingsBtn.classList.add('open-settings');
+            settingsBtn.setAttribute('aria-expanded', 'true');
+          }
           if (chevron) chevron.innerHTML = icon('chevron-up');
           const ti = document.getElementById('trophy-threshold');
           if (ti) ti.value = trophyThreshold;
+        }
+        if (id === 'panel-help' && helpBtn) {
+          helpBtn.setAttribute('aria-expanded', 'true');
         }
       }
     }
@@ -2217,7 +2262,7 @@
       saveJournal();
       saveQuickAdds();
       saveNotes();
-      localStorage.setItem(KEYS.seeded, '1'); // prevent auto re-seed on reload
+      persist(KEYS.seeded, '1'); // prevent auto re-seed on reload
       searchOpen = false;
       searchQuery = '';
       render();
@@ -2232,7 +2277,7 @@
       const before = journal.length;
       journal = journal.filter(entry => entry.date >= cutoffISO);
       saveJournal();
-      localStorage.setItem(KEYS.seeded, '1');
+      persist(KEYS.seeded, '1');
       const removed = before - journal.length;
       searchOpen = false;
       searchQuery = '';
@@ -2272,7 +2317,7 @@
       if (v > 99) v = 99;
       trophyThreshold = v;
       e.target.value = v;
-      localStorage.setItem(KEYS.trophy, String(v));
+      persist(KEYS.trophy, String(v));
       render();
     });
 
