@@ -14,6 +14,7 @@
   <meta name="twitter:title" content="Doing Right Now" />
   <meta name="twitter:description" content="A journal for getting unstuck. Don’t plan your day — write one timestamped line and do that." />
   <title>Doing Right Now</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="48x48" href="images/favicon-48x48.png">
@@ -67,10 +68,14 @@
       color: var(--text-muted);
     }
 
-    .brand img {
+    .brand svg {
       width: 28px;
       height: 28px;
-      border-radius: 6px;
+      stroke: var(--today);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
     .hero {
@@ -79,12 +84,12 @@
     }
 
     .byline {
-      font-size: 13px;
-      font-weight: 600;
+      font-size: clamp(18px, 2.4vw, 22px);
+      font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--today);
-      margin-bottom: 14px;
+      margin-bottom: 16px;
     }
 
     h1 {
@@ -246,7 +251,13 @@
 <body>
   <div class="page">
     <header class="brand">
-      <img src="images/favicon-192x192.png" alt="" width="28" height="28" />
+      <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+        <rect x="3" y="4" width="18" height="18" rx="2"/>
+        <line x1="16" y1="2" x2="16" y2="6"/>
+        <line x1="8" y1="2" x2="8" y2="6"/>
+        <line x1="3" y1="10" x2="21" y2="10"/>
+        <path d="m9 16 2 2 4-4"/>
+      </svg>
       <span>DoingRightNow.com</span>
     </header>
 
@@ -300,7 +311,6 @@
       </nav>
       <span class="credits">
         <a href="https://storyset.com/event">Event illustrations by Storyset</a>
-        <a href="https://www.flaticon.com/free-icons/calendar" title="calendar icons">Calendar icons created by Hilmy Abiyyu A. - Flaticon</a>
       </span>
     </footer>
   </div>

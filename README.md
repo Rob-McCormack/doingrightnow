@@ -61,7 +61,6 @@ Everything lives in this browser’s `localStorage`. No accounts, no cloud, no t
 ## Credits
 
 - [Event illustrations by Storyset](https://storyset.com/event)
-- [Calendar icons created by Hilmy Abiyyu A. - Flaticon](https://www.flaticon.com/free-icons/calendar)
 
 Made by [Simpler Tasks](https://simplertasks.com).
 
