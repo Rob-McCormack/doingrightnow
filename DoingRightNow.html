@@ -347,6 +347,17 @@
       font-weight: 500;
     }
 
+    .search-meta-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    #search-export {
+      padding: 3px 8px;
+      font-size: 12px;
+    }
+
     .entry.search-hidden {
       display: none !important;
     }
@@ -1545,7 +1556,10 @@
                 <button type="button" class="view-btn search-range-btn${searchRange === 7 ? ' active' : ''}" data-search-range="7">7d</button>
                 <button type="button" class="view-btn search-range-btn${searchRange === 'all' ? ' active' : ''}" data-search-range="all">All</button>
               </div>
-              <span class="search-hit-count" id="search-hit-count"></span>
+              <div class="search-meta-right">
+                <span class="search-hit-count" id="search-hit-count"></span>
+                <button type="button" class="view-btn" id="search-export">Export</button>
+              </div>
             </div>
           `;
           group.appendChild(searchPanel);
@@ -1723,6 +1737,15 @@
           }, 40);
         };
       });
+
+      const exportBtn = document.getElementById('search-export');
+      if (exportBtn) {
+        exportBtn.onclick = (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          exportSearchResults();
+        };
+      }
     }
 
     function applySearchFilter() {
@@ -2178,6 +2201,76 @@
       return String(dayNum).padStart(2, '0') + '-' + months[d.getMonth()] + '-' + d.getFullYear();
     }
 
+    function matchingSearchEntries() {
+      const q = searchQuery.trim().toLowerCase();
+      return journal.filter(entry => {
+        if (searchRange !== 'all') {
+          const days = daysAgo(entry.date);
+          if (days < 0 || days >= Number(searchRange)) return false;
+        }
+        if (q && !entry.text.toLowerCase().includes(q)) return false;
+        return true;
+      });
+    }
+
+    function downloadTextFile(filename, text) {
+      const blob = new Blob(['\uFEFF' + text], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function exportStamp() {
+      const d = new Date();
+      return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    }
+
+    function formatGroupedEntries(entries) {
+      const groups = {};
+      entries.forEach(e => {
+        if (!groups[e.date]) groups[e.date] = [];
+        groups[e.date].push(e);
+      });
+      const dates = Object.keys(groups).sort((a, b) => b.localeCompare(a));
+      let out = '';
+      dates.forEach(date => {
+        const dayEntries = groups[date].sort((a, b) => timeToMinutes(b.time) - timeToMinutes(a.time));
+        out += exportDayLabel(date) + '  (' + dayEntries.length + ')\n';
+        out += '----------------------------------------\n';
+        dayEntries.forEach(e => {
+          out += String(e.time).padEnd(10) + '  ' + e.text + '\n';
+        });
+        out += '\n';
+      });
+      return out;
+    }
+
+    function exportSearchResults() {
+      const entries = matchingSearchEntries();
+      if (entries.length === 0) {
+        window.alert('No matching entries to export.');
+        return;
+      }
+
+      const q = searchQuery.trim();
+      const rangeLabel = searchRange === 'all' ? 'All' : (Number(searchRange) === 1 ? 'Today' : searchRange + 'd');
+      let out = 'Doing Right Now - Search export\n';
+      out += 'Query: ' + (q || '(all)') + '\n';
+      out += 'Range: ' + rangeLabel + '\n';
+      out += 'Generated: ' + new Date().toLocaleString() + '\n';
+      out += '========================================\n\n';
+      out += formatGroupedEntries(entries);
+
+      const slug = q.replace(/[^\w@#-]+/g, '_').replace(/^_+|_+$/g, '').slice(0, 40);
+      const fname = slug
+        ? 'DoingRightNow_' + slug + '_' + exportStamp() + '.txt'
+        : 'DoingRightNow_Search_' + exportStamp() + '.txt';
+      downloadTextFile(fname, out);
+    }
+
     function exportData() {
       const groups = {};
       journal.forEach(e => {
@@ -2190,16 +2283,7 @@
       let out = 'Doing Right Now - Export\n';
       out += 'Generated: ' + new Date().toLocaleString() + '\n';
       out += '========================================\n\n';
-
-      dates.forEach(date => {
-        const entries = groups[date].sort((a, b) => timeToMinutes(b.time) - timeToMinutes(a.time));
-        out += exportDayLabel(date) + '  (' + entries.length + ')\n';
-        out += '----------------------------------------\n';
-        entries.forEach(e => {
-          out += String(e.time).padEnd(10) + '  ' + e.text + '\n';
-        });
-        out += '\n';
-      });
+      out += formatGroupedEntries(journal);
 
       if (notes.trim()) {
         out += '========================================\n';
@@ -2208,16 +2292,7 @@
         out += notes + '\n';
       }
 
-      // UTF-8 with BOM helps Notepad and some Windows tools read the file correctly
-      const blob = new Blob(['\uFEFF' + out], { type: 'text/plain;charset=utf-8' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      const d = new Date();
-      const fname = `DoingRightNow_Export_${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}.txt`;
-      a.href = url;
-      a.download = fname;
-      a.click();
-      URL.revokeObjectURL(url);
+      downloadTextFile('DoingRightNow_Export_' + exportStamp() + '.txt', out);
     }
 
     // ─────────────────────────────────────────────
