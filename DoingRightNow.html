@@ -2248,6 +2248,25 @@
       return out;
     }
 
+    function formatNotesAndQuickAdds() {
+      let out = '';
+      if (notes.trim()) {
+        out += '========================================\n';
+        out += 'NOTES\n';
+        out += '----------------------------------------\n';
+        out += notes.replace(/\s+$/, '') + '\n\n';
+      }
+      if (quickAdds.length) {
+        out += '========================================\n';
+        out += 'QUICK ADD\n';
+        out += '----------------------------------------\n';
+        quickAdds.forEach(t => {
+          out += t.text + '\n';
+        });
+      }
+      return out;
+    }
+
     function exportSearchResults() {
       const entries = matchingSearchEntries();
       if (entries.length === 0) {
@@ -2263,6 +2282,7 @@
       out += 'Generated: ' + new Date().toLocaleString() + '\n';
       out += '========================================\n\n';
       out += formatGroupedEntries(entries);
+      out += formatNotesAndQuickAdds();
 
       const slug = q.replace(/[^\w@#-]+/g, '_').replace(/^_+|_+$/g, '').slice(0, 40);
       const fname = slug
@@ -2272,25 +2292,11 @@
     }
 
     function exportData() {
-      const groups = {};
-      journal.forEach(e => {
-        if (!groups[e.date]) groups[e.date] = [];
-        groups[e.date].push(e);
-      });
-      const dates = Object.keys(groups).sort((a, b) => b.localeCompare(a));
-
-      // Plain ASCII only so the file opens cleanly in any editor / OS
       let out = 'Doing Right Now - Export\n';
       out += 'Generated: ' + new Date().toLocaleString() + '\n';
       out += '========================================\n\n';
       out += formatGroupedEntries(journal);
-
-      if (notes.trim()) {
-        out += '========================================\n';
-        out += 'NOTES\n';
-        out += '----------------------------------------\n';
-        out += notes + '\n';
-      }
+      out += formatNotesAndQuickAdds();
 
       downloadTextFile('DoingRightNow_Export_' + exportStamp() + '.txt', out);
     }
