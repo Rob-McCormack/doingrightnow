@@ -4,6 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#fafafa" />
+  <script>
+    try {
+      if (localStorage.getItem('doingrightnow_theme') === 'dark') {
+        document.documentElement.classList.add('dark');
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#121212');
+      }
+    } catch (e) {}
+  </script>
   <meta name="description" content="A journal for getting unstuck. Don’t plan your entire day — write one timestamped line and do that. No sign-up, no cloud." />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Doing Right Now" />
@@ -24,14 +32,44 @@
   <style>
     :root {
       --bg: #fafafa;
+      --bg-secondary: #f0f0f0;
       --text: #1a1a1a;
       --text-muted: #888;
-      --text-soft: #555;
+      --text-soft: #666;
       --border: #e5e5e5;
       --today: #4ba764;
       --today-hover: #3e9156;
+      --today-soft: rgba(75, 167, 100, 0.12);
       --danger: #e05c5c;
+      --shadow: rgba(0, 0, 0, 0.08);
       --dot: rgba(0, 0, 0, 0.04);
+    }
+
+    html.dark {
+      --bg: #121212;
+      --bg-secondary: #1e1e1e;
+      --text: #e8e8e8;
+      --text-muted: #777;
+      --text-soft: #999;
+      --border: #2a2a2a;
+      --today: #5db976;
+      --today-hover: #4aa868;
+      --today-soft: rgba(93, 185, 118, 0.15);
+      --danger: #e05c5c;
+      --shadow: rgba(0, 0, 0, 0.45);
+      --dot: rgba(255, 255, 255, 0.04);
+    }
+
+    html.dark .tag-person {
+      color: #a99be8;
+    }
+
+    html.dark .tag-location {
+      color: #5ecfbf;
+    }
+
+    html.dark .tag-project {
+      color: #f0c14a;
     }
 
     * {
@@ -67,6 +105,47 @@
       font-weight: 600;
       letter-spacing: -0.02em;
       color: var(--text);
+    }
+
+    .brand-mark {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .theme-btn {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      border: none;
+      border-radius: 8px;
+      background: none;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    .theme-btn:hover {
+      color: var(--text);
+      background: var(--bg-secondary);
+    }
+
+    .theme-btn:focus-visible {
+      outline: 2px solid var(--today);
+      outline-offset: 2px;
+    }
+
+    .theme-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
     .brand svg {
@@ -146,8 +225,8 @@
       height: auto;
       border-radius: 16px;
       border: 1px solid var(--border);
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
-      background: #fff;
+      box-shadow: 0 18px 40px var(--shadow);
+      background: var(--bg);
     }
 
     .idea {
@@ -316,14 +395,21 @@
 <body>
   <div class="page">
     <header class="brand">
-      <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
-        <rect x="3" y="4" width="18" height="18" rx="2"/>
-        <line x1="16" y1="2" x2="16" y2="6"/>
-        <line x1="8" y1="2" x2="8" y2="6"/>
-        <line x1="3" y1="10" x2="21" y2="10"/>
-        <path d="m9 16 2 2 4-4"/>
-      </svg>
-      <span>DoingRightNow.com</span>
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" width="32" height="32" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="18" rx="2"/>
+          <line x1="16" y1="2" x2="16" y2="6"/>
+          <line x1="8" y1="2" x2="8" y2="6"/>
+          <line x1="3" y1="10" x2="21" y2="10"/>
+          <path d="m9 16 2 2 4-4"/>
+        </svg>
+        <span>DoingRightNow.com</span>
+      </span>
+      <button type="button" class="theme-btn" id="theme-btn" aria-label="Dark Mode">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
     </header>
 
     <main>
@@ -389,5 +475,39 @@
       </span>
     </footer>
   </div>
+  <script>
+    const THEME_KEY = 'doingrightnow_theme';
+    const moonIcon = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+    const sunIcon = '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>';
+
+    function applyTheme(mode) {
+      const btn = document.getElementById('theme-btn');
+      const meta = document.querySelector('meta[name="theme-color"]');
+      if (mode === 'dark') {
+        document.documentElement.classList.add('dark');
+        if (meta) meta.setAttribute('content', '#121212');
+        if (btn) {
+          btn.setAttribute('aria-label', 'Light Mode');
+          btn.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">' + sunIcon + '</svg>';
+        }
+      } else {
+        document.documentElement.classList.remove('dark');
+        if (meta) meta.setAttribute('content', '#fafafa');
+        if (btn) {
+          btn.setAttribute('aria-label', 'Dark Mode');
+          btn.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">' + moonIcon + '</svg>';
+        }
+      }
+      try { localStorage.setItem(THEME_KEY, mode); } catch (e) {}
+    }
+
+    const initial = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+    applyTheme(initial);
+
+    document.getElementById('theme-btn').addEventListener('click', () => {
+      const isDark = document.documentElement.classList.contains('dark');
+      applyTheme(isDark ? 'light' : 'dark');
+    });
+  </script>
 </body>
 </html>
