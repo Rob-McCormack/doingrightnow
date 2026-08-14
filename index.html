@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#fafafa" />
   <meta name="description" content="A journal for getting unstuck. Don’t plan your day — write one timestamped line and do that. No sign-up, no cloud." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Doing Right Now" />
+  <meta property="og:description" content="A journal for getting unstuck. Don’t plan your day — write one timestamped line and do that." />
+  <meta property="og:url" content="https://doingrightnow.com/" />
+  <meta property="og:image" content="https://doingrightnow.com/images/screenshot.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Doing Right Now" />
+  <meta name="twitter:description" content="A journal for getting unstuck. Don’t plan your day — write one timestamped line and do that." />
   <title>Doing Right Now</title>
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
@@ -190,10 +198,8 @@
 
     footer {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 14px;
       margin-top: 36px;
       padding-top: 18px;
       border-top: 1px solid var(--border);
@@ -210,6 +216,7 @@
       color: var(--text);
     }
 
+    .footer-nav,
     .credits {
       display: flex;
       flex-wrap: wrap;
@@ -287,6 +294,12 @@
 
     <footer>
       <span>No planning · No streaks · No pressure to finish</span>
+      <nav class="footer-nav" aria-label="Project links">
+        <a href="https://github.com/simplertasks/doingrightnow">GitHub</a>
+        <a href="https://simplertasks.com">Simpler Tasks</a>
+        <a href="https://twitter.com/intent/tweet?text=Don%E2%80%99t%20plan%20your%20day.%20Just%20start%20with%20what%E2%80%99s%20right%20in%20front%20of%20you.&amp;url=https%3A%2F%2Fdoingrightnow.com">Twitter</a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdoingrightnow.com">Facebook</a>
+      </nav>
       <span class="credits">
         <a href="https://storyset.com/event">Event illustrations by Storyset</a>
         <a href="https://www.flaticon.com/free-icons/calendar" title="calendar icons">Calendar icons created by Hilmy Abiyyu A. - Flaticon</a>
