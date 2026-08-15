@@ -30,6 +30,7 @@ Optional tags in any line:
 | `#location` | Place |
 | `*project` | Project |
 | `!` | Makes the line bold and red |
+| `xx` | Strikes the line out (any case) |
 
 ## Gestures
 
