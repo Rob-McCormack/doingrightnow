@@ -1,9 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-color="pumpkin">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="theme-color" content="#ffffff" />
+  <script>
+    try {
+      if (localStorage.getItem('doingrightnow_theme') === 'dark') {
+        document.documentElement.classList.add('dark');
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#13171e');
+      }
+      var color = localStorage.getItem('doingrightnow_color');
+      if (color) document.documentElement.setAttribute('data-color', color);
+    } catch (e) {}
+  </script>
   <title>Doing Right Now</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
@@ -24,6 +34,7 @@
       --today: #ff9500;
       --today-heading: #9c5900;
       --today-soft: rgba(255, 149, 0, 0.14);
+      --today-ink: #000;
       --danger: #e05c5c;
       --danger-bg: #ffebeb;
       --input-bg: #fff;
@@ -44,6 +55,7 @@
       --today: #ff9500;
       --today-heading: #e48500;
       --today-soft: rgba(255, 149, 0, 0.18);
+      --today-ink: #000;
       --danger: #e05c5c;
       --danger-bg: #3a1f1f;
       --input-bg: #181c25;
@@ -51,6 +63,288 @@
       --shadow: rgba(0,0,0,0.3);
       --dot: rgba(255,255,255,0.04);
       --latest-glow: rgba(200, 200, 200, 0.4);
+    }
+
+    /* Pico color themes — tokens only, no Pico CSS */
+    html[data-color="red"] {
+      --accent: #c52f21;
+      --today: #c52f21;
+      --today-heading: #c52f21;
+      --today-soft: rgba(197, 47, 33, 0.14);
+      --today-ink: #fff;
+    }
+    html.dark[data-color="red"] {
+      --accent: #f17961;
+      --today: #c52f21;
+      --today-heading: #f17961;
+      --today-soft: rgba(197, 47, 33, 0.18);
+      --today-ink: #fff;
+    }
+    html[data-color="pink"] {
+      --accent: #c72259;
+      --today: #d92662;
+      --today-heading: #c72259;
+      --today-soft: rgba(217, 38, 98, 0.14);
+      --today-ink: #fff;
+    }
+    html.dark[data-color="pink"] {
+      --accent: #f7708e;
+      --today: #d92662;
+      --today-heading: #f7708e;
+      --today-soft: rgba(217, 38, 98, 0.18);
+      --today-ink: #fff;
+    }
+    html[data-color="fuchsia"] {
+      --accent: #c1208b;
+      --today: #c1208b;
+      --today-heading: #c1208b;
+      --today-soft: rgba(193, 32, 139, 0.14);
+      --today-ink: #fff;
+    }
+    html.dark[data-color="fuchsia"] {
+      --accent: #f869bf;
+      --today: #c1208b;
+      --today-heading: #f869bf;
+      --today-soft: rgba(193, 32, 139, 0.18);
+      --today-ink: #fff;
+    }
+    html[data-color="purple"] {
+      --accent: #aa40bf;
+      --today: #9236a4;
+      --today-heading: #aa40bf;
+      --today-soft: rgba(146, 54, 164, 0.14);
+      --today-ink: #fff;
+    }
+    html.dark[data-color="purple"] {
+      --accent: #d47de4;
+      --today: #9236a4;
+      --today-heading: #d47de4;
+      --today-soft: rgba(146, 54, 164, 0.18);
+      --today-ink: #fff;
+    }
+    html[data-color="violet"] {
+      --accent: #8352c5;
+      --today: #7540bf;
+      --today-heading: #8352c5;
+      --today-soft: rgba(117, 64, 191, 0.14);
+      --today-ink: #fff;
+    }
+    html.dark[data-color="violet"] {
+      --accent: #b290d9;
+      --today: #7540bf;
+      --today-heading: #b290d9;
+      --today-soft: rgba(117, 64, 191, 0.18);
+      --today-ink: #fff;
+    }
+    html[data-color="indigo"] {
+      --accent: #655cd6;
+      --today: #524ed2;
+      --today-heading: #655cd6;
+      --today-soft: rgba(82, 78, 210, 0.14);
+      --today-ink: #fff;
+    }
+    html.dark[data-color="indigo"] {
+      --accent: #a294e5;
+      --today: #524ed2;
+      --today-heading: #a294e5;
+      --today-soft: rgba(82, 78, 210, 0.18);
+      --today-ink: #fff;
+    }
+    html[data-color="blue"] {
+      --accent: #2060df;
+      --today: #2060df;
+      --today-heading: #2060df;
+      --today-soft: rgba(32, 96, 223, 0.14);
+      --today-ink: #fff;
+    }
+    html.dark[data-color="blue"] {
+      --accent: #8999f9;
+      --today: #2060df;
+      --today-heading: #8999f9;
+      --today-soft: rgba(32, 96, 223, 0.18);
+      --today-ink: #fff;
+    }
+    html[data-color="azure"] {
+      --accent: #0172ad;
+      --today: #0172ad;
+      --today-heading: #0172ad;
+      --today-soft: rgba(1, 114, 173, 0.14);
+      --today-ink: #fff;
+    }
+    html.dark[data-color="azure"] {
+      --accent: #01aaff;
+      --today: #0172ad;
+      --today-heading: #01aaff;
+      --today-soft: rgba(1, 114, 173, 0.18);
+      --today-ink: #fff;
+    }
+    html[data-color="cyan"] {
+      --accent: #047878;
+      --today: #047878;
+      --today-heading: #047878;
+      --today-soft: rgba(4, 120, 120, 0.14);
+      --today-ink: #fff;
+    }
+    html.dark[data-color="cyan"] {
+      --accent: #0ab1b1;
+      --today: #047878;
+      --today-heading: #0ab1b1;
+      --today-soft: rgba(4, 120, 120, 0.18);
+      --today-ink: #fff;
+    }
+    html[data-color="jade"] {
+      --accent: #007a50;
+      --today: #007a50;
+      --today-heading: #007a50;
+      --today-soft: rgba(0, 122, 80, 0.14);
+      --today-ink: #fff;
+    }
+    html.dark[data-color="jade"] {
+      --accent: #00b478;
+      --today: #007a50;
+      --today-heading: #00b478;
+      --today-soft: rgba(0, 122, 80, 0.18);
+      --today-ink: #fff;
+    }
+    html[data-color="green"] {
+      --accent: #33790f;
+      --today: #398712;
+      --today-heading: #33790f;
+      --today-soft: rgba(57, 135, 18, 0.14);
+      --today-ink: #fff;
+    }
+    html.dark[data-color="green"] {
+      --accent: #4eb31b;
+      --today: #398712;
+      --today-heading: #4eb31b;
+      --today-soft: rgba(57, 135, 18, 0.18);
+      --today-ink: #fff;
+    }
+    html[data-color="lime"] {
+      --accent: #577400;
+      --today: #a5d601;
+      --today-heading: #577400;
+      --today-soft: rgba(165, 214, 1, 0.14);
+      --today-ink: #000;
+    }
+    html.dark[data-color="lime"] {
+      --accent: #82ab00;
+      --today: #a5d601;
+      --today-heading: #82ab00;
+      --today-soft: rgba(165, 214, 1, 0.18);
+      --today-ink: #000;
+    }
+    html[data-color="yellow"] {
+      --accent: #756b00;
+      --today: #f2df0d;
+      --today-heading: #756b00;
+      --today-soft: rgba(242, 223, 13, 0.14);
+      --today-ink: #000;
+    }
+    html.dark[data-color="yellow"] {
+      --accent: #ad9f00;
+      --today: #f2df0d;
+      --today-heading: #ad9f00;
+      --today-soft: rgba(242, 223, 13, 0.18);
+      --today-ink: #000;
+    }
+    html[data-color="amber"] {
+      --accent: #876400;
+      --today: #ffbf00;
+      --today-heading: #876400;
+      --today-soft: rgba(255, 191, 0, 0.14);
+      --today-ink: #000;
+    }
+    html.dark[data-color="amber"] {
+      --accent: #c79400;
+      --today: #ffbf00;
+      --today-heading: #c79400;
+      --today-soft: rgba(255, 191, 0, 0.18);
+      --today-ink: #000;
+    }
+    html[data-color="pumpkin"] {
+      --accent: #9c5900;
+      --today: #ff9500;
+      --today-heading: #9c5900;
+      --today-soft: rgba(255, 149, 0, 0.14);
+      --today-ink: #000;
+    }
+    html.dark[data-color="pumpkin"] {
+      --accent: #e48500;
+      --today: #ff9500;
+      --today-heading: #e48500;
+      --today-soft: rgba(255, 149, 0, 0.18);
+      --today-ink: #000;
+    }
+    html[data-color="orange"] {
+      --accent: #bd3c13;
+      --today: #d24317;
+      --today-heading: #bd3c13;
+      --today-soft: rgba(210, 67, 23, 0.14);
+      --today-ink: #fff;
+    }
+    html.dark[data-color="orange"] {
+      --accent: #f56b3d;
+      --today: #d24317;
+      --today-heading: #f56b3d;
+      --today-soft: rgba(210, 67, 23, 0.18);
+      --today-ink: #fff;
+    }
+    html[data-color="sand"] {
+      --accent: #6e6a60;
+      --today: #ccc6b4;
+      --today-heading: #6e6a60;
+      --today-soft: rgba(204, 198, 180, 0.14);
+      --today-ink: #000;
+    }
+    html.dark[data-color="sand"] {
+      --accent: #a39e8f;
+      --today: #ccc6b4;
+      --today-heading: #a39e8f;
+      --today-soft: rgba(204, 198, 180, 0.18);
+      --today-ink: #000;
+    }
+    html[data-color="grey"] {
+      --accent: #6a6a6a;
+      --today: #ababab;
+      --today-heading: #6a6a6a;
+      --today-soft: rgba(171, 171, 171, 0.14);
+      --today-ink: #000;
+    }
+    html.dark[data-color="grey"] {
+      --accent: #9e9e9e;
+      --today: #ababab;
+      --today-heading: #9e9e9e;
+      --today-soft: rgba(171, 171, 171, 0.18);
+      --today-ink: #000;
+    }
+    html[data-color="zinc"] {
+      --accent: #646b79;
+      --today: #646b79;
+      --today-heading: #646b79;
+      --today-soft: rgba(100, 107, 121, 0.14);
+      --today-ink: #fff;
+    }
+    html.dark[data-color="zinc"] {
+      --accent: #969eaf;
+      --today: #646b79;
+      --today-heading: #969eaf;
+      --today-soft: rgba(100, 107, 121, 0.18);
+      --today-ink: #fff;
+    }
+    html[data-color="slate"] {
+      --accent: #5d6b89;
+      --today: #525f7a;
+      --today-heading: #5d6b89;
+      --today-soft: rgba(82, 95, 122, 0.14);
+      --today-ink: #fff;
+    }
+    html.dark[data-color="slate"] {
+      --accent: #909ebe;
+      --today: #525f7a;
+      --today-heading: #909ebe;
+      --today-soft: rgba(82, 95, 122, 0.18);
+      --today-ink: #fff;
     }
 
     * {
@@ -705,13 +999,13 @@
     .strike-check {
       display: inline-flex;
       align-items: center;
-      color: #3b82f6;
+      color: #4ba764;
       margin-right: 0.35em;
       vertical-align: -0.12em;
     }
 
     html.dark .strike-check {
-      color: #60a5fa;
+      color: #4ba764;
     }
 
     .strike-check svg {
@@ -783,7 +1077,7 @@
       align-items: center;
       justify-content: center;
       z-index: 1;
-      color: white;
+      color: var(--today-ink);
       cursor: pointer;
     }
 
@@ -877,7 +1171,8 @@
     }
 
     .menu-item:focus-visible,
-    #panel-settings .settings-row:focus-visible {
+    .fold-panel .settings-row:focus-visible,
+    .theme-swatch:focus-visible {
       outline: 2px solid var(--today);
       outline-offset: 2px;
     }
@@ -920,7 +1215,7 @@
       flex: 1;
     }
 
-    #menu-settings .settings-label {
+    .menu-fold .settings-label {
       flex: 0 0 auto;
     }
 
@@ -936,42 +1231,42 @@
       display: block;
     }
 
-    #menu-settings {
+    .menu-fold {
       justify-content: flex-start;
       gap: 12px;
     }
 
-    #menu-settings .settings-label {
+    .menu-fold .settings-label {
       flex: 0 1 auto;
     }
 
-    #menu-settings .settings-chevron {
+    .menu-fold .settings-chevron {
       color: var(--text-muted);
       display: flex;
       margin-left: auto;
       flex-shrink: 0;
     }
 
-    #menu-settings .settings-chevron svg {
+    .menu-fold .settings-chevron svg {
       width: 18px;
       height: 18px;
       color: var(--text-muted);
     }
 
-    #menu-settings.open-settings {
+    .menu-fold.open-fold {
       background: var(--bg-secondary);
       color: var(--text);
       border-radius: 8px 8px 0 0;
     }
 
-    #panel-settings {
+    .fold-panel {
       background: var(--bg-secondary);
       border-radius: 0 0 10px 10px;
       padding: 4px 8px 10px;
       margin: 0 0 8px;
     }
 
-    #panel-settings .settings-row {
+    .fold-panel .settings-row {
       display: flex;
       align-items: center;
       gap: 12px;
@@ -991,12 +1286,12 @@
       -webkit-appearance: none;
     }
 
-    #panel-settings .settings-row:hover {
+    .fold-panel .settings-row:hover {
       background: var(--card);
       color: var(--text);
     }
 
-    #panel-settings .settings-row .row-icon {
+    .fold-panel .settings-row .row-icon {
       display: flex;
       width: 20px;
       height: 20px;
@@ -1006,23 +1301,74 @@
       justify-content: center;
     }
 
-    #panel-settings .settings-row .row-icon svg {
+    .fold-panel .settings-row .row-icon svg {
       width: 18px;
       height: 18px;
     }
 
-    #panel-settings .settings-row .row-label {
+    .fold-panel .settings-row .row-label {
       flex: 1;
       line-height: 1.3;
     }
 
-    #panel-settings .settings-row.static-row {
+    .fold-panel .settings-row.static-row {
       cursor: default;
     }
 
-    #panel-settings .settings-row.static-row:hover {
+    .fold-panel .settings-row.static-row:hover {
       background: transparent;
       color: var(--text-soft);
+    }
+
+    .theme-picker-name {
+      color: var(--today-heading);
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      padding: 6px 10px 10px;
+    }
+
+    .theme-swatches {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      padding: 2px 6px 8px;
+    }
+
+    @media (min-width: 480px) {
+      .theme-swatches {
+        grid-template-columns: repeat(10, 1fr);
+      }
+    }
+
+    .theme-swatch {
+      aspect-ratio: 1;
+      width: 100%;
+      border: none;
+      border-radius: 50%;
+      padding: 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      appearance: none;
+      -webkit-appearance: none;
+      transition: transform 0.12s, box-shadow 0.12s;
+    }
+
+    .theme-swatch:hover {
+      transform: scale(1.08);
+    }
+
+    .theme-swatch svg {
+      width: 52%;
+      height: 52%;
+      color: #fff;
+      stroke-width: 3;
+    }
+
+    .theme-swatch.ink-dark svg {
+      color: #000;
     }
 
     #trophy-threshold {
@@ -1203,17 +1549,28 @@
         </div>
       </div>
 
-      <!-- Settings -->
-      <button type="button" class="menu-item" id="menu-settings" aria-expanded="false" aria-controls="panel-settings">
-        <span class="menu-icon" data-icon="settings"></span>
-        <span class="settings-label">Settings</span>
-        <span class="settings-chevron" id="settings-chevron" data-icon="chevron-down"></span>
+      <!-- Theme -->
+      <button type="button" class="menu-item menu-fold" id="menu-theme-panel" aria-expanded="false" aria-controls="panel-theme">
+        <span class="menu-icon" data-icon="palette"></span>
+        <span class="settings-label">Theme</span>
+        <span class="settings-chevron" id="theme-chevron" data-icon="chevron-down"></span>
       </button>
-      <div class="panel" id="panel-settings">
+      <div class="panel fold-panel" id="panel-theme">
         <button type="button" class="settings-row" id="menu-theme">
           <span class="row-icon" id="theme-icon" data-icon="moon"></span>
           <span class="row-label" id="theme-label">Dark Mode</span>
         </button>
+        <div class="theme-picker-name" id="theme-color-name">Pumpkin</div>
+        <div class="theme-swatches" id="theme-swatches" role="listbox" aria-label="Color theme"></div>
+      </div>
+
+      <!-- Settings -->
+      <button type="button" class="menu-item menu-fold" id="menu-settings" aria-expanded="false" aria-controls="panel-settings">
+        <span class="menu-icon" data-icon="settings"></span>
+        <span class="settings-label">Settings</span>
+        <span class="settings-chevron" id="settings-chevron" data-icon="chevron-down"></span>
+      </button>
+      <div class="panel fold-panel" id="panel-settings">
         <div class="settings-row static-row">
           <span class="row-icon" data-icon="type"></span>
           <span class="row-label">Size</span>
@@ -1288,7 +1645,9 @@
       'trophy': '<path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>',
       'chevron-down': '<polyline points="6 9 12 15 18 9"/>',
       'chevron-up': '<polyline points="18 15 12 9 6 15"/>',
-      'type': '<polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/>'
+      'type': '<polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/>',
+      'palette': '<circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>',
+      'check': '<polyline points="20 6 9 17 4 12"/>'
     };
 
     function icon(name, extraClass = '') {
@@ -1309,10 +1668,34 @@
       quickadds: 'doingrightnow_quickadds',
       notes: 'doingrightnow_usernotes',
       theme: 'doingrightnow_theme',
+      color: 'doingrightnow_color',
       font: 'doingrightnow_font',
       seeded: 'doingrightnow_seeded',
       trophy: 'doingrightnow_trophy'
     };
+
+    const COLOR_THEMES = [
+      { id: 'red', name: 'Red', swatch: '#c52f21' },
+      { id: 'pink', name: 'Pink', swatch: '#d92662' },
+      { id: 'fuchsia', name: 'Fuchsia', swatch: '#c1208b' },
+      { id: 'purple', name: 'Purple', swatch: '#9236a4' },
+      { id: 'violet', name: 'Violet', swatch: '#7540bf' },
+      { id: 'indigo', name: 'Indigo', swatch: '#524ed2' },
+      { id: 'blue', name: 'Blue', swatch: '#2060df' },
+      { id: 'azure', name: 'Azure', swatch: '#0172ad' },
+      { id: 'cyan', name: 'Cyan', swatch: '#047878' },
+      { id: 'jade', name: 'Jade', swatch: '#007a50' },
+      { id: 'green', name: 'Green', swatch: '#398712' },
+      { id: 'lime', name: 'Lime', swatch: '#a5d601', ink: 'dark' },
+      { id: 'yellow', name: 'Yellow', swatch: '#f2df0d', ink: 'dark' },
+      { id: 'amber', name: 'Amber', swatch: '#ffbf00', ink: 'dark' },
+      { id: 'pumpkin', name: 'Pumpkin', swatch: '#ff9500', ink: 'dark' },
+      { id: 'orange', name: 'Orange', swatch: '#d24317' },
+      { id: 'sand', name: 'Sand', swatch: '#ccc6b4', ink: 'dark' },
+      { id: 'grey', name: 'Grey', swatch: '#ababab', ink: 'dark' },
+      { id: 'zinc', name: 'Zinc', swatch: '#646b79' },
+      { id: 'slate', name: 'Slate', swatch: '#525f7a' }
+    ];
 
     let journal = [];
     let quickAdds = [];
@@ -1434,6 +1817,7 @@
         notes = localStorage.getItem(KEYS.notes) || '';
         const theme = localStorage.getItem(KEYS.theme) || 'light';
         applyTheme(theme);
+        applyColorTheme(localStorage.getItem(KEYS.color) || 'pumpkin');
         const font = localStorage.getItem(KEYS.font) || 'small';
         applyFont(font);
         const t = parseInt(localStorage.getItem(KEYS.trophy) || '6', 10);
@@ -1442,6 +1826,7 @@
         journal = [];
         quickAdds = [];
         notes = '';
+        applyColorTheme('pumpkin');
       }
 
       // Only auto-seed on true first visit, not after user clears data
@@ -1484,7 +1869,8 @@
           themeIcon.setAttribute('data-icon', 'sun');
           themeIcon.innerHTML = icon('sun');
         }
-        document.getElementById('theme-label').textContent = 'Light Mode';
+        const themeLabel = document.getElementById('theme-label');
+        if (themeLabel) themeLabel.textContent = 'Light Mode';
         document.querySelector('meta[name="theme-color"]').setAttribute('content', '#13171e');
       } else {
         document.documentElement.classList.remove('dark');
@@ -1492,10 +1878,26 @@
           themeIcon.setAttribute('data-icon', 'moon');
           themeIcon.innerHTML = icon('moon');
         }
-        document.getElementById('theme-label').textContent = 'Dark Mode';
+        const themeLabel = document.getElementById('theme-label');
+        if (themeLabel) themeLabel.textContent = 'Dark Mode';
         document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff');
       }
       persist(KEYS.theme, mode);
+    }
+
+    function applyColorTheme(id) {
+      const theme = COLOR_THEMES.find(t => t.id === id) || COLOR_THEMES.find(t => t.id === 'pumpkin');
+      document.documentElement.setAttribute('data-color', theme.id);
+      persist(KEYS.color, theme.id);
+      const nameEl = document.getElementById('theme-color-name');
+      if (nameEl) nameEl.textContent = theme.name;
+      const wrap = document.getElementById('theme-swatches');
+      if (!wrap) return;
+      wrap.innerHTML = COLOR_THEMES.map(t => {
+        const selected = t.id === theme.id;
+        const ink = t.ink === 'dark' ? ' ink-dark' : '';
+        return `<button type="button" class="theme-swatch${ink}${selected ? ' selected' : ''}" data-color="${t.id}" style="background:${t.swatch}" title="${t.name}" aria-label="${t.name}" role="option" aria-selected="${selected}">${selected ? icon('check') : ''}</button>`;
+      }).join('');
     }
 
     function applyFont(size) {
@@ -2321,26 +2723,40 @@
       openPanel = null;
 
       const settingsBtn = document.getElementById('menu-settings');
+      const themeBtn = document.getElementById('menu-theme-panel');
       const helpBtn = document.getElementById('menu-help');
-      const chevron = document.getElementById('settings-chevron');
+      const settingsChevron = document.getElementById('settings-chevron');
+      const themeChevron = document.getElementById('theme-chevron');
       if (settingsBtn) {
-        settingsBtn.classList.remove('open-settings');
+        settingsBtn.classList.remove('open-fold');
         settingsBtn.setAttribute('aria-expanded', 'false');
       }
+      if (themeBtn) {
+        themeBtn.classList.remove('open-fold');
+        themeBtn.setAttribute('aria-expanded', 'false');
+      }
       if (helpBtn) helpBtn.setAttribute('aria-expanded', 'false');
-      if (chevron) chevron.innerHTML = icon('chevron-down');
+      if (settingsChevron) settingsChevron.innerHTML = icon('chevron-down');
+      if (themeChevron) themeChevron.innerHTML = icon('chevron-down');
 
       if (!isOpen) {
         panel.classList.add('open');
         openPanel = id;
         if (id === 'panel-settings') {
           if (settingsBtn) {
-            settingsBtn.classList.add('open-settings');
+            settingsBtn.classList.add('open-fold');
             settingsBtn.setAttribute('aria-expanded', 'true');
           }
-          if (chevron) chevron.innerHTML = icon('chevron-up');
+          if (settingsChevron) settingsChevron.innerHTML = icon('chevron-up');
           const ti = document.getElementById('trophy-threshold');
           if (ti) ti.value = trophyThreshold;
+        }
+        if (id === 'panel-theme') {
+          if (themeBtn) {
+            themeBtn.classList.add('open-fold');
+            themeBtn.setAttribute('aria-expanded', 'true');
+          }
+          if (themeChevron) themeChevron.innerHTML = icon('chevron-up');
         }
         if (id === 'panel-help' && helpBtn) {
           helpBtn.setAttribute('aria-expanded', 'true');
@@ -2484,6 +2900,7 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
+    document.getElementById('menu-theme-panel').addEventListener('click', () => togglePanel('panel-theme'));
     document.getElementById('menu-settings').addEventListener('click', () => togglePanel('panel-settings'));
     document.getElementById('menu-help').addEventListener('click', () => togglePanel('panel-help'));
 
@@ -2491,6 +2908,13 @@
       e.stopPropagation();
       const isDark = document.documentElement.classList.contains('dark');
       applyTheme(isDark ? 'light' : 'dark');
+    });
+
+    document.getElementById('theme-swatches').addEventListener('click', (e) => {
+      const btn = e.target.closest('.theme-swatch');
+      if (!btn) return;
+      e.stopPropagation();
+      applyColorTheme(btn.dataset.color);
     });
 
     document.getElementById('menu-export').addEventListener('click', (e) => {
