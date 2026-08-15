@@ -29,6 +29,7 @@
       --card: #fff;
       --shadow: rgba(0,0,0,0.04);
       --dot: rgba(0,0,0,0.04);
+      --latest-glow: rgba(120, 120, 120, 0.35);
     }
 
     html.dark {
@@ -47,6 +48,7 @@
       --card: #1a1a1a;
       --shadow: rgba(0,0,0,0.3);
       --dot: rgba(255,255,255,0.04);
+      --latest-glow: rgba(200, 200, 200, 0.4);
     }
 
     * {
@@ -575,7 +577,7 @@
       touch-action: pan-y;
     }
 
-    .entry-inner {
+      .entry-inner {
       display: flex;
       width: 100%;
       padding: 9px 10px 9px 0;
@@ -592,6 +594,55 @@
 
     .entry.swiped-right .entry-inner {
       transform: translateX(72px);
+    }
+
+    .entry.latest {
+      overflow: visible;
+      z-index: 3;
+    }
+
+    .entry.latest::before {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 8px;
+      background: linear-gradient(
+        120deg,
+        transparent 20%,
+        #9a9a9a 40%,
+        rgba(255, 255, 255, 0.75) 50%,
+        #9a9a9a 60%,
+        transparent 80%
+      );
+      background-size: 280% 280%;
+      filter: blur(7px);
+      opacity: 0.42;
+      z-index: 0;
+      pointer-events: none;
+      animation: latest-glow-shift 7s linear infinite;
+    }
+
+    html.dark .entry.latest::before {
+      opacity: 0.55;
+    }
+
+    .entry.latest .entry-inner {
+      box-shadow: 0 0 10px var(--latest-glow);
+    }
+
+    @keyframes latest-glow-shift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .entry.latest::before {
+        animation: none;
+        opacity: 0.28;
+        background: #9a9a9a;
+        filter: blur(8px);
+      }
     }
 
     .entry-time {
@@ -1123,7 +1174,7 @@
     <div id="bottom-menu">
       <div class="brand-sep">
         <span class="brand-sep-line"></span>
-        <a href="index.html">DoingRightNow.com</a>
+        <a href="https://doingrightnow.com/">DoingRightNow.com</a>
         <span class="brand-sep-line"></span>
         <button type="button" class="scroll-top-btn" id="scroll-top-btn" title="Jump to top" aria-label="Jump to top" data-icon="arrow-up"></button>
       </div>
@@ -1680,8 +1731,8 @@
           empty.textContent = 'No entries';
           group.appendChild(empty);
         } else {
-          entries.forEach(entry => {
-            group.appendChild(createEntryEl(entry, isToday));
+          entries.forEach((entry, i) => {
+            group.appendChild(createEntryEl(entry, isToday, isToday && i === 0));
           });
         }
 
@@ -1843,7 +1894,10 @@
         if (!isTodayGroup) {
           group.classList.toggle('search-empty-hidden', q && visibleInDay === 0);
         } else {
-          // Update today's count display? leave as is
+          const todayEntries = group.querySelectorAll('.entry');
+          todayEntries.forEach(el => el.classList.remove('latest'));
+          const firstVisible = Array.from(todayEntries).find(el => !el.classList.contains('search-hidden'));
+          if (firstVisible) firstVisible.classList.add('latest');
         }
       });
 
@@ -1931,9 +1985,9 @@
       }
     }
 
-    function createEntryEl(entry, isToday) {
+    function createEntryEl(entry, isToday, isLatest) {
       const el = document.createElement('div');
-      el.className = 'entry' + (isToday ? ' today-entry' : '');
+      el.className = 'entry' + (isToday ? ' today-entry' : '') + (isLatest ? ' latest' : '');
       el.dataset.id = entry.id;
 
       const emphasisClass = hasEmphasis(entry.text) ? ' emphasis' : '';
