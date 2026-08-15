@@ -454,14 +454,14 @@
 
     .view-btn {
       background: none;
-      border: 1px solid transparent;
+      border: none;
       border-radius: 6px;
       padding: 5px 10px;
       font-size: 13px;
       font-weight: 500;
       color: var(--text-muted);
       cursor: pointer;
-      transition: background 0.12s, color 0.12s, border-color 0.12s;
+      transition: background 0.12s, color 0.12s;
     }
 
     .view-btn:hover {
@@ -471,7 +471,6 @@
 
     .view-btn.active {
       color: var(--today);
-      border-color: var(--today);
       background: var(--today-soft);
     }
 
@@ -617,7 +616,7 @@
       flex: 1;
       padding: 10px 12px;
       font-size: 14px;
-      border: 1.5px solid var(--today);
+      border: 1.5px solid var(--border);
       border-radius: 8px;
       background: var(--input-bg);
       color: var(--text);
@@ -729,6 +728,8 @@
       margin-right: 6px;
       display: inline-block;
       vertical-align: -3px;
+      color: #4ba764;
+      stroke: #4ba764;
     }
 
     .day-header.today .sup {
@@ -800,10 +801,10 @@
       font-weight: 500;
       color: var(--today);
       background: var(--today-soft);
-      border: 1px solid transparent;
+      border: none;
       border-radius: 8px;
       cursor: pointer;
-      transition: background 0.12s, border-color 0.12s;
+      transition: background 0.12s;
     }
 
     .today-tool-btn .tool-chevron {
@@ -820,7 +821,6 @@
     .today-tool-btn:hover,
     .today-tool-btn.active {
       background: var(--today-soft);
-      border-color: var(--today);
     }
 
     .today-tool-btn svg {
@@ -842,7 +842,7 @@
       width: 100%;
       padding: 12px 14px;
       font-size: 15px;
-      border: 1.5px dashed var(--today);
+      border: 1.5px dashed var(--border);
       border-radius: 8px;
       background: var(--input-bg);
       color: var(--text);
@@ -867,7 +867,7 @@
       align-items: flex-start;
       margin-bottom: 2px;
       background: var(--card);
-      border-radius: 6px;
+      border-radius: 0;
       overflow: hidden;
       user-select: none;
       touch-action: pan-y;
@@ -901,7 +901,7 @@
       content: '';
       position: absolute;
       inset: -3px;
-      border-radius: 8px;
+      border-radius: 0;
       background: linear-gradient(
         120deg,
         transparent 20%,
@@ -974,13 +974,13 @@
     }
 
     .entry.today-entry .entry-body {
-      border-left-color: var(--today);
+      border-left-color: var(--border);
     }
 
     .entry-body[contenteditable="true"] {
       outline: none;
       background: var(--today-soft);
-      border-radius: 4px;
+      border-radius: 0;
       padding: 2px 4px;
       margin: -2px -4px;
     }
@@ -1119,7 +1119,6 @@
 
     .entry-action-btn.bring:hover {
       color: var(--today);
-      border-color: var(--today);
       background: var(--today-soft);
     }
 
@@ -1384,7 +1383,7 @@
     }
 
     #trophy-threshold:focus {
-      border-color: var(--today);
+      border-color: var(--border);
     }
 
     @keyframes fadeIn {
@@ -1406,7 +1405,7 @@
     }
 
     #quickadd-input:focus {
-      border-color: var(--accent);
+      border-color: var(--border);
     }
 
     .template-list {
@@ -1477,7 +1476,7 @@
     }
 
     #notes-area:focus {
-      border-color: var(--accent);
+      border-color: var(--border);
     }
 
     /* Help panel */
