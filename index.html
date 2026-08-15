@@ -172,6 +172,15 @@
       margin-bottom: 16px;
     }
 
+    .byline .free {
+      font-size: 0.55em;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: none;
+      color: var(--danger);
+      margin-left: 3px;
+    }
+
     h1 {
       font-size: clamp(28px, 5vw, 40px);
       font-weight: 650;
@@ -209,7 +218,8 @@
     }
 
     .note {
-      margin-top: 12px;
+      margin: 12px auto 0;
+      max-width: 42ch;
       font-size: 13px;
       color: var(--text-muted);
     }
@@ -360,11 +370,12 @@
     footer {
       display: flex;
       flex-direction: column;
-      gap: 14px;
-      margin-top: 36px;
-      padding-top: 18px;
+      align-items: center;
+      gap: 10px;
+      margin-top: 48px;
+      padding-top: 22px;
       border-top: 1px solid var(--border);
-      font-size: 12px;
+      font-size: 13px;
       color: var(--text-muted);
     }
 
@@ -377,11 +388,8 @@
       color: var(--text);
     }
 
-    .footer-nav,
     .credits {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px 14px;
+      font-size: 10px;
     }
 
     @media (max-width: 640px) {
@@ -426,11 +434,11 @@
 
     <main>
       <section class="hero">
-        <p class="byline">A journal for getting unstuck</p>
+        <p class="byline">A journal for getting unstuck <sup class="free">Free</sup></p>
         <h1>Don’t plan your entire day.<br>Just start with what’s right in front of you.</h1>
         <p class="lede">Not a planner, to-do list, or habit tracker. Write one timestamped line — what you just did, or the tiny next step — and do that.</p>
         <a class="cta" href="DoingRightNow.html">Start Doing Right Now</a>
-        <p class="note">No sign-up required. Stays on this device.</p>
+        <p class="note">No sign up required, no login, no passwords, no ads and no tracking. Your data stays on your device.</p>
       </section>
 
       <figure class="shot">
@@ -478,13 +486,9 @@
     </main>
 
     <footer>
-      <nav class="footer-nav" aria-label="Project links">
-        <a href="https://github.com/simplertasks/doingrightnow">GitHub</a>
-        <a href="https://simplertasks.com">Simpler Tasks</a>
-      </nav>
-      <span class="credits">
-        <a href="https://storyset.com/event">Event illustrations by Storyset</a>
-      </span>
+      <a href="https://github.com/simplertasks/doingrightnow">GitHub</a>
+      <a href="https://simplertasks.com">Designed by SimplerTasks</a>
+      <a class="credits" href="https://storyset.com/event">Event illustrations by Storyset</a>
     </footer>
   </div>
   <script>
