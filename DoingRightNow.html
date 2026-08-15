@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-color="pumpkin">
+<html lang="en" data-color="green">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -30,11 +30,11 @@
       --text-muted: #646b79;
       --text-soft: #4d5461;
       --border: #e7eaef;
-      --accent: #9c5900;
-      --today: #ff9500;
-      --today-heading: #9c5900;
-      --today-soft: #fceee3;
-      --today-ink: #000;
+      --accent: #33790f;
+      --today: #398712;
+      --today-heading: #33790f;
+      --today-soft: #d7fbc1;
+      --today-ink: #fff;
       --danger: #e05c5c;
       --danger-bg: #ffebeb;
       --input-bg: #fff;
@@ -51,11 +51,11 @@
       --text-muted: #7b8495;
       --text-soft: #9aa3b2;
       --border: #202632;
-      --accent: #e48500;
-      --today: #ff9500;
-      --today-heading: #e48500;
-      --today-soft: rgba(255, 149, 0, 0.22);
-      --today-ink: #000;
+      --accent: #4eb31b;
+      --today: #398712;
+      --today-heading: #4eb31b;
+      --today-soft: rgba(57, 135, 18, 0.22);
+      --today-ink: #fff;
       --danger: #e05c5c;
       --danger-bg: #3a1f1f;
       --input-bg: #181c25;
@@ -1559,7 +1559,7 @@
           <span class="row-icon" id="theme-icon" data-icon="moon"></span>
           <span class="row-label" id="theme-label">Dark Mode</span>
         </button>
-        <div class="theme-picker-name" id="theme-color-name">Pumpkin</div>
+        <div class="theme-picker-name" id="theme-color-name">Green</div>
         <div class="theme-swatches" id="theme-swatches" role="listbox" aria-label="Color theme"></div>
       </div>
 
@@ -1816,7 +1816,7 @@
         notes = localStorage.getItem(KEYS.notes) || '';
         const theme = localStorage.getItem(KEYS.theme) || 'light';
         applyTheme(theme);
-        applyColorTheme(localStorage.getItem(KEYS.color) || 'pumpkin');
+        applyColorTheme(localStorage.getItem(KEYS.color) || 'green');
         const font = localStorage.getItem(KEYS.font) || 'small';
         applyFont(font);
         const t = parseInt(localStorage.getItem(KEYS.trophy) || '6', 10);
@@ -1825,7 +1825,7 @@
         journal = [];
         quickAdds = [];
         notes = '';
-        applyColorTheme('pumpkin');
+        applyColorTheme('green');
       }
 
       // Only auto-seed on true first visit, not after user clears data
@@ -1885,7 +1885,7 @@
     }
 
     function applyColorTheme(id) {
-      const theme = COLOR_THEMES.find(t => t.id === id) || COLOR_THEMES.find(t => t.id === 'pumpkin');
+      const theme = COLOR_THEMES.find(t => t.id === id) || COLOR_THEMES.find(t => t.id === 'green');
       document.documentElement.setAttribute('data-color', theme.id);
       persist(KEYS.color, theme.id);
       const nameEl = document.getElementById('theme-color-name');
