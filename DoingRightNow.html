@@ -644,9 +644,16 @@
       color: var(--danger);
     }
 
-    .entry-body.struck {
+    .entry-body.struck .entry-line {
       text-decoration: line-through;
-      opacity: 0.65;
+      opacity: 0.7;
+    }
+
+    .strike-check {
+      color: var(--danger);
+      font-weight: 700;
+      margin-right: 0.4em;
+      font-family: "Segoe UI Symbol", "Apple Symbols", "Noto Sans Symbols 2", sans-serif;
     }
 
     .tag {
@@ -2011,6 +2018,10 @@
       html = html.replace(/(^|\s)@([\w-]+)/g, '$1<span class="tag tag-person">@$2</span>');
       html = html.replace(/(^|\s)#([\w-]+)/g, '$1<span class="tag tag-location">#$2</span>');
       html = html.replace(/(^|\s)\*([\w-]+)/g, '$1<span class="tag tag-project">*$2</span>');
+
+      if (hasStrike(raw)) {
+        html = '<span class="strike-check" aria-hidden="true">&#x2714;&#xFE0E;</span><span class="entry-line">' + html + '</span>';
+      }
 
       return html;
     }
