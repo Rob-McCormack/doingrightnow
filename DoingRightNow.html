@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="theme-color" content="#fafafa" />
+  <meta name="theme-color" content="#ffffff" />
   <title>Doing Right Now</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
@@ -14,15 +14,16 @@
   <link rel="icon" type="image/png" sizes="512x512" href="images/favicon-512x512.png">
   <style>
     :root {
-      --bg: #fafafa;
-      --bg-secondary: #f0f0f0;
-      --text: #1a1a1a;
-      --text-muted: #888;
-      --text-soft: #666;
-      --border: #e5e5e5;
-      --accent: #e28787;
-      --today: #4ba764;
-      --today-soft: rgba(75, 167, 100, 0.12);
+      --bg: #ffffff;
+      --bg-secondary: #f4f5f7;
+      --text: #373c44;
+      --text-muted: #646b79;
+      --text-soft: #4d5461;
+      --border: #e7eaef;
+      --accent: #9c5900;
+      --today: #ff9500;
+      --today-heading: #9c5900;
+      --today-soft: rgba(255, 149, 0, 0.14);
       --danger: #e05c5c;
       --danger-bg: #ffebeb;
       --input-bg: #fff;
@@ -33,19 +34,20 @@
     }
 
     html.dark {
-      --bg: #121212;
-      --bg-secondary: #1e1e1e;
-      --text: #e8e8e8;
-      --text-muted: #777;
-      --text-soft: #999;
-      --border: #2a2a2a;
-      --accent: #e28787;
-      --today: #5db976;
-      --today-soft: rgba(93, 185, 118, 0.15);
+      --bg: #13171e;
+      --bg-secondary: #181c25;
+      --text: #c2c7d0;
+      --text-muted: #7b8495;
+      --text-soft: #9aa3b2;
+      --border: #202632;
+      --accent: #e48500;
+      --today: #ff9500;
+      --today-heading: #e48500;
+      --today-soft: rgba(255, 149, 0, 0.18);
       --danger: #e05c5c;
       --danger-bg: #3a1f1f;
-      --input-bg: #1a1a1a;
-      --card: #1a1a1a;
+      --input-bg: #181c25;
+      --card: #181c25;
       --shadow: rgba(0,0,0,0.3);
       --dot: rgba(255,255,255,0.04);
       --latest-glow: rgba(200, 200, 200, 0.4);
@@ -420,7 +422,7 @@
 
     .day-header.today {
       border-bottom: 2px solid var(--today);
-      color: var(--today);
+      color: var(--today-heading);
       font-size: 26px;
       font-weight: 700;
       letter-spacing: -0.02em;
@@ -1483,7 +1485,7 @@
           themeIcon.innerHTML = icon('sun');
         }
         document.getElementById('theme-label').textContent = 'Light Mode';
-        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#121212');
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#13171e');
       } else {
         document.documentElement.classList.remove('dark');
         if (themeIcon) {
@@ -1491,7 +1493,7 @@
           themeIcon.innerHTML = icon('moon');
         }
         document.getElementById('theme-label').textContent = 'Dark Mode';
-        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fafafa');
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff');
       }
       persist(KEYS.theme, mode);
     }

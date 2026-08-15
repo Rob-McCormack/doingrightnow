@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#fafafa" />
+  <meta name="theme-color" content="#ffffff" />
   <script>
     try {
       if (localStorage.getItem('doingrightnow_theme') === 'dark') {
         document.documentElement.classList.add('dark');
-        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#121212');
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#13171e');
       }
     } catch (e) {}
   </script>
@@ -31,30 +31,30 @@
   <link rel="icon" type="image/png" sizes="512x512" href="images/favicon-512x512.png">
   <style>
     :root {
-      --bg: #fafafa;
-      --bg-secondary: #f0f0f0;
-      --text: #1a1a1a;
-      --text-muted: #888;
-      --text-soft: #666;
-      --border: #e5e5e5;
-      --today: #4ba764;
-      --today-hover: #3e9156;
-      --today-soft: rgba(75, 167, 100, 0.12);
+      --bg: #ffffff;
+      --bg-secondary: #f4f5f7;
+      --text: #373c44;
+      --text-muted: #646b79;
+      --text-soft: #4d5461;
+      --border: #e7eaef;
+      --today: #ff9500;
+      --today-hover: #e48500;
+      --today-soft: rgba(255, 149, 0, 0.14);
       --danger: #e05c5c;
       --shadow: rgba(0, 0, 0, 0.08);
       --dot: rgba(0, 0, 0, 0.04);
     }
 
     html.dark {
-      --bg: #121212;
-      --bg-secondary: #1e1e1e;
-      --text: #e8e8e8;
-      --text-muted: #777;
-      --text-soft: #999;
-      --border: #2a2a2a;
-      --today: #5db976;
-      --today-hover: #4aa868;
-      --today-soft: rgba(93, 185, 118, 0.15);
+      --bg: #13171e;
+      --bg-secondary: #181c25;
+      --text: #c2c7d0;
+      --text-muted: #7b8495;
+      --text-soft: #9aa3b2;
+      --border: #202632;
+      --today: #ff9500;
+      --today-hover: #ffa23a;
+      --today-soft: rgba(255, 149, 0, 0.18);
       --danger: #e05c5c;
       --shadow: rgba(0, 0, 0, 0.45);
       --dot: rgba(255, 255, 255, 0.04);
@@ -519,14 +519,14 @@
       const meta = document.querySelector('meta[name="theme-color"]');
       if (mode === 'dark') {
         document.documentElement.classList.add('dark');
-        if (meta) meta.setAttribute('content', '#121212');
+        if (meta) meta.setAttribute('content', '#13171e');
         if (btn) {
           btn.setAttribute('aria-label', 'Light Mode');
           btn.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">' + sunIcon + '</svg>';
         }
       } else {
         document.documentElement.classList.remove('dark');
-        if (meta) meta.setAttribute('content', '#fafafa');
+        if (meta) meta.setAttribute('content', '#ffffff');
         if (btn) {
           btn.setAttribute('aria-label', 'Dark Mode');
           btn.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">' + moonIcon + '</svg>';
