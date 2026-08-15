@@ -895,49 +895,63 @@
     .entry.latest {
       overflow: visible;
       z-index: 3;
-    }
-
-    .entry.latest::before {
-      content: '';
-      position: absolute;
-      inset: -3px;
-      border-radius: 0;
-      background: linear-gradient(
-        120deg,
-        transparent 20%,
-        #9a9a9a 40%,
-        rgba(255, 255, 255, 0.75) 50%,
-        #9a9a9a 60%,
-        transparent 80%
-      );
-      background-size: 280% 280%;
-      filter: blur(7px);
-      opacity: 0.42;
-      z-index: 0;
-      pointer-events: none;
-      animation: latest-glow-shift 7s linear infinite;
-    }
-
-    html.dark .entry.latest::before {
-      opacity: 0.55;
+      margin: 6px 0;
     }
 
     .entry.latest .entry-inner {
-      box-shadow: 0 0 10px var(--latest-glow);
+      align-items: center;
+      padding-top: 14px;
+      padding-bottom: 14px;
+      min-height: 52px;
     }
 
-    @keyframes latest-glow-shift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    .latest-loader {
+      display: none;
+    }
+
+    .entry.latest .latest-loader {
+      --color-1: var(--today);
+      --size: 0.38px;
+      display: inline-block;
+      width: calc(48 * var(--size));
+      height: calc(48 * var(--size));
+      border: calc(5 * var(--size)) solid var(--color-1);
+      border-radius: 50%;
+      box-sizing: border-box;
+      position: relative;
+      flex-shrink: 0;
+      margin-right: 10px;
+      animation: latest-pulse 1.7s linear infinite;
+    }
+
+    .entry.latest .latest-loader::after {
+      content: '';
+      position: absolute;
+      width: calc(48 * var(--size));
+      height: calc(48 * var(--size));
+      border: calc(5 * var(--size)) solid var(--color-1);
+      border-radius: 50%;
+      box-sizing: border-box;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      animation: latest-scale-up 1.7s linear infinite;
+    }
+
+    @keyframes latest-scale-up {
+      0% { transform: translate(-50%, -50%) scale(0); }
+      60%, 100% { transform: translate(-50%, -50%) scale(1); }
+    }
+
+    @keyframes latest-pulse {
+      0%, 60%, 100% { transform: scale(1); }
+      80% { transform: scale(1.2); }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .entry.latest::before {
+      .entry.latest .latest-loader,
+      .entry.latest .latest-loader::after {
         animation: none;
-        opacity: 0.28;
-        background: #9a9a9a;
-        filter: blur(8px);
       }
     }
 
@@ -2415,6 +2429,7 @@
         </div>
         <div class="entry-inner">
           <div class="entry-time">${formatTimeHtml(entry.time)}</div>
+          <span class="latest-loader" aria-hidden="true"></span>
           <div class="entry-body${emphasisClass}${strikeClass}" data-id="${entry.id}">${formatEntryText(entry.text)}</div>
           <div class="entry-actions">
             <button type="button" class="entry-action-btn bring" data-id="${entry.id}" title="Bring to Today">${icon('calendar-plus')}</button>
