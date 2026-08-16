@@ -1007,6 +1007,11 @@
       padding-top: 1px;
     }
 
+    .entry.latest .entry-time {
+      color: var(--today);
+      font-weight: 600;
+    }
+
     .entry-time .ampm {
       font-size: 0.62em;
       font-weight: 600;
@@ -1661,6 +1666,10 @@
           <span class="row-icon" data-icon="trash-2"></span>
           <span class="row-label">Clear All Data</span>
         </button>
+        <button type="button" class="settings-row" id="menu-clear-except-today">
+          <span class="row-icon" data-icon="calendar-minus"></span>
+          <span class="row-label">Clear All Except Today</span>
+        </button>
         <button type="button" class="settings-row" id="menu-clear-old">
           <span class="row-icon" data-icon="calendar-x"></span>
           <span class="row-label">Clear Data Older Than 30 Days</span>
@@ -1726,6 +1735,7 @@
       'download': '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>',
       'trash-2': '<polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/>',
       'calendar-x': '<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="10" y1="14" x2="14" y2="18"/><line x1="14" y1="14" x2="10" y2="18"/>',
+      'calendar-minus': '<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="10" y1="16" x2="14" y2="16"/>',
       'refresh-cw': '<polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>',
       'help-circle': '<circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>',
       'calendar-check': '<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="m9 16 2 2 4-4"/>',
@@ -2118,11 +2128,27 @@
       return next;
     }
 
-    function dayCountHtml(count) {
+    function dayCountLabel(entries) {
+      const total = entries.length;
+      const done = entries.filter(e => hasStrike(e.text)).length;
+      return done > 0 ? `${done}/${total}` : String(total);
+    }
+
+    function dayCountHtml(entries) {
+      const count = entries.length;
       const trophy = count >= trophyThreshold
         ? icon('trophy', 'trophy-icon')
         : '';
-      return `<span class="day-count-wrap">${trophy}<span class="day-count">${count}</span></span>`;
+      return `<span class="day-count-wrap">${trophy}<span class="day-count">${dayCountLabel(entries)}</span></span>`;
+    }
+
+    function refreshDayCount(date) {
+      const group = document.querySelector(`.day-group[data-date="${date}"]`);
+      if (!group) return;
+      const wrap = group.querySelector('.day-count-wrap');
+      if (!wrap) return;
+      const entries = journal.filter(e => e.date === date);
+      wrap.outerHTML = dayCountHtml(entries);
     }
 
     function render() {
@@ -2175,7 +2201,7 @@
 
         const header = document.createElement('div');
         header.className = 'day-header' + (isToday ? ' today' : '');
-        const countHtml = dayCountHtml(entries.length);
+        const countHtml = dayCountHtml(entries);
 
         if (isToday) {
           header.innerHTML = `
@@ -2770,6 +2796,7 @@
         bodyEl.innerHTML = formatEntryText(newText);
         bodyEl.classList.toggle('emphasis', hasEmphasis(newText));
         bodyEl.classList.toggle('struck', hasStrike(newText));
+        refreshDayCount(entry.date);
       };
 
       bodyEl.onblur = finish;
@@ -3135,6 +3162,27 @@
       searchOpen = false;
       searchQuery = '';
       render();
+    });
+
+    document.getElementById('menu-clear-except-today').addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (!window.confirm('Delete all journal entries except Today?\n\nQuick adds and notes are kept. This cannot be undone.')) return;
+      const today = todayISO();
+      const before = journal.length;
+      journal = journal.filter(entry => entry.date === today);
+      Object.keys(dayStars).forEach(d => {
+        if (d !== today) delete dayStars[d];
+      });
+      saveJournal();
+      saveDayStars();
+      persist(KEYS.seeded, '1');
+      const removed = before - journal.length;
+      searchOpen = false;
+      searchQuery = '';
+      render();
+      if (removed === 0) {
+        alert('Nothing to clear — only Today has entries.');
+      }
     });
 
     document.getElementById('menu-clear-old').addEventListener('click', (e) => {
