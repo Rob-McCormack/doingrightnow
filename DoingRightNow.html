@@ -2384,8 +2384,67 @@
       }
     }
 
+    function isSearchTag(token) {
+      return /^[@#*][\w-]+$/i.test(token);
+    }
+
+    function parseSearchQuery(raw) {
+      const q = String(raw || '').trim();
+      if (!q) return { empty: true, clauses: [] };
+
+      const clauses = [];
+      const quoted = [];
+      const unquoted = q.replace(/"([^"]*)"/g, (_, inner) => {
+        quoted.push(inner);
+        return ' ';
+      }).replace(/\s+/g, ' ').trim();
+
+      quoted.forEach(inner => {
+        const tags = inner.match(/[@#*][\w-]+/g) || [];
+        const leftover = inner.replace(/[@#*][\w-]+/g, ' ').replace(/\s+/g, ' ').trim();
+        if (tags.length >= 2) {
+          clauses.push({ type: 'and-tags', values: tags.map(t => t.toLowerCase()) });
+          if (leftover) clauses.push({ type: 'phrase', value: leftover.toLowerCase() });
+        } else if (inner.trim()) {
+          clauses.push({ type: 'phrase', value: inner.trim().toLowerCase() });
+        }
+      });
+
+      if (unquoted) {
+        const tokens = unquoted.split(' ').filter(Boolean);
+        const tags = tokens.filter(isSearchTag);
+        const words = tokens.filter(t => !isSearchTag(t));
+        if (tags.length >= 2) {
+          clauses.push({ type: 'or-tags', values: tags.map(t => t.toLowerCase()) });
+          if (words.length) clauses.push({ type: 'contains', value: words.join(' ').toLowerCase() });
+        } else {
+          clauses.push({ type: 'contains', value: unquoted.toLowerCase() });
+        }
+      }
+
+      return { empty: false, clauses };
+    }
+
+    function entryMatchesSearch(haystack, rawQuery) {
+      const parsed = parseSearchQuery(rawQuery);
+      if (parsed.empty) return true;
+      const hay = String(haystack || '').toLowerCase();
+      return parsed.clauses.every(clause => {
+        if (clause.type === 'phrase' || clause.type === 'contains') {
+          return hay.includes(clause.value);
+        }
+        if (clause.type === 'and-tags') {
+          return clause.values.every(tag => hay.includes(tag));
+        }
+        if (clause.type === 'or-tags') {
+          return clause.values.some(tag => hay.includes(tag));
+        }
+        return true;
+      });
+    }
+
     function applySearchFilter() {
-      const q = searchQuery.trim().toLowerCase();
+      const q = searchQuery.trim();
       let hits = 0;
 
       document.querySelectorAll('.day-group').forEach(group => {
@@ -2394,8 +2453,8 @@
 
         entries.forEach(el => {
           const body = el.querySelector('.entry-body');
-          const text = (body ? body.textContent : '').toLowerCase();
-          const match = !q || text.includes(q);
+          const text = body ? body.textContent : '';
+          const match = entryMatchesSearch(text, q);
           el.classList.toggle('search-hidden', !match);
           if (match) {
             visibleInDay++;
@@ -2878,14 +2937,13 @@
     }
 
     function matchingSearchEntries() {
-      const q = searchQuery.trim().toLowerCase();
+      const q = searchQuery.trim();
       return journal.filter(entry => {
         if (searchRange !== 'all') {
           const days = daysAgo(entry.date);
           if (days < 0 || days >= Number(searchRange)) return false;
         }
-        if (q && !entry.text.toLowerCase().includes(q)) return false;
-        return true;
+        return entryMatchesSearch(entry.text, q);
       });
     }
 
@@ -2958,9 +3016,8 @@
       out += 'Generated: ' + new Date().toLocaleString() + '\n';
       out += '========================================\n\n';
       out += formatGroupedEntries(entries);
-      out += formatNotesAndQuickAdds();
 
-      const slug = q.replace(/[^\w@#-]+/g, '_').replace(/^_+|_+$/g, '').slice(0, 40);
+      const slug = q.replace(/[^\w@#*-]+/g, '_').replace(/^_+|_+$/g, '').slice(0, 40);
       const fname = slug
         ? 'DoingRightNow_' + slug + '_' + exportStamp() + '.txt'
         : 'DoingRightNow_Search_' + exportStamp() + '.txt';
