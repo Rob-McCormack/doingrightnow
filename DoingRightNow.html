@@ -1264,6 +1264,15 @@
       border-top: 1px solid var(--border);
     }
 
+    .app-version {
+      margin: 18px 4px 0;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--text-muted);
+    }
+
     .menu-item {
       display: flex;
       align-items: center;
@@ -1833,6 +1842,8 @@
           </ul>
         </div>
       </div>
+
+      <p class="app-version" id="app-version"></p>
     </div>
   </div>
 
@@ -1840,6 +1851,8 @@
     // ─────────────────────────────────────────────
     // State & Storage
     // ─────────────────────────────────────────────
+
+    const APP_VERSION = '1.0.0';
 
     // Inline Lucide-style icons (no CDN)
     const ICON_PATHS = {
@@ -3400,6 +3413,8 @@
     // ─────────────────────────────────────────────
     load();
     paintStaticIcons();
+    const versionEl = document.getElementById('app-version');
+    if (versionEl) versionEl.textContent = 'v' + APP_VERSION;
     const trophyInput = document.getElementById('trophy-threshold');
     if (trophyInput) trophyInput.value = trophyThreshold;
     lastRenderedToday = todayISO();
