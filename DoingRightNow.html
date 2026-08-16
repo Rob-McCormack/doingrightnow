@@ -3129,10 +3129,16 @@
     // ─────────────────────────────────────────────
     // Quick Adds
     // ─────────────────────────────────────────────
+    function sortedQuickAdds() {
+      return quickAdds.slice().sort((a, b) =>
+        a.text.localeCompare(b.text, undefined, { sensitivity: 'base' })
+      );
+    }
+
     function renderTemplates() {
       const list = document.getElementById('template-list');
       list.innerHTML = '';
-      quickAdds.forEach(t => {
+      sortedQuickAdds().forEach(t => {
         const item = document.createElement('div');
         item.className = 'template-item';
         item.innerHTML = `
@@ -3285,7 +3291,7 @@
         out += '========================================\n';
         out += 'QUICK ADD\n';
         out += '----------------------------------------\n';
-        quickAdds.forEach(t => {
+        sortedQuickAdds().forEach(t => {
           out += t.text + '\n';
         });
       }
