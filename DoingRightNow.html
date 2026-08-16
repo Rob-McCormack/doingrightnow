@@ -1262,7 +1262,43 @@
     #bottom-menu {
       margin-top: 32px;
       padding-top: 16px;
+      padding-bottom: max(140px, 28vh);
       border-top: 1px solid var(--border);
+    }
+
+    .menu-divide {
+      height: 1px;
+      background: var(--border);
+      margin: 10px 4px 14px;
+    }
+
+    .menu-heading {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 4px 14px;
+      padding-top: 4px;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--today-heading);
+      scroll-margin-top: 16px;
+    }
+
+    .menu-heading-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      color: var(--today);
+      flex-shrink: 0;
+    }
+
+    .menu-heading-icon svg {
+      width: 22px;
+      height: 22px;
+      color: var(--today);
     }
 
     .app-version {
@@ -1456,6 +1492,12 @@
     .fold-panel .settings-row.static-row:hover {
       background: transparent;
       color: var(--text-soft);
+    }
+
+    .settings-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 8px 6px;
     }
 
     .theme-picker-name {
@@ -1728,6 +1770,11 @@
     <div id="feed"></div>
 
     <div id="bottom-menu">
+      <h2 class="menu-heading" id="settings-heading">
+        <span class="menu-heading-icon" data-icon="settings"></span>
+        Settings
+      </h2>
+
       <div class="brand-sep">
         <span class="brand-sep-line"></span>
         <a href="https://doingrightnow.com/">DoingRightNow.com</a>
@@ -1746,6 +1793,8 @@
           <button type="button" class="view-btn" data-range="all">All</button>
         </div>
       </div>
+
+      <div class="menu-divide" role="separator"></div>
 
       <!-- Theme -->
       <button type="button" class="menu-item menu-fold" id="menu-theme-panel" aria-expanded="false" aria-controls="panel-theme">
@@ -1782,10 +1831,12 @@
           <input type="number" id="trophy-threshold" min="1" max="99" value="6" />
           <span class="row-label" style="flex:0;">entries</span>
         </div>
+        <div class="settings-divider" role="separator"></div>
         <button type="button" class="settings-row" id="menu-export">
           <span class="row-icon" data-icon="download"></span>
           <span class="row-label">Export Data<span class="row-hint">Your backup — this journal lives only in this browser</span></span>
         </button>
+        <div class="settings-divider" role="separator"></div>
         <button type="button" class="settings-row" id="menu-clear">
           <span class="row-icon" data-icon="trash-2"></span>
           <span class="row-label">Clear All Data</span>
@@ -2495,9 +2546,9 @@
         scrollBtn.onclick = (e) => {
           e.preventDefault();
           e.stopPropagation();
-          const target = document.getElementById('bottom-menu');
+          const target = document.getElementById('settings-heading');
           if (target) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'end' });
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
           } else {
             const top = Math.max(
               document.body.scrollHeight,
