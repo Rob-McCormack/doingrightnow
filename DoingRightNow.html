@@ -2,7 +2,7 @@
 <html lang="en" data-color="green">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#ffffff" />
   <script>
     try {
@@ -596,6 +596,32 @@
       height: 20px;
     }
 
+    .scroll-top-btn:focus-visible,
+    .scroll-bottom-btn:focus-visible,
+    .search-toggle:focus-visible,
+    #search-close:focus-visible {
+      outline: 2px solid var(--today);
+      outline-offset: 2px;
+    }
+
+    @media (pointer: coarse) {
+      .scroll-top-btn,
+      .scroll-bottom-btn,
+      .search-toggle,
+      #search-close {
+        min-width: 44px;
+        min-height: 44px;
+        padding: 10px;
+      }
+
+      #today-input,
+      #search-input,
+      #notes-area,
+      #quickadd-input {
+        font-size: 16px;
+      }
+    }
+
     #search-panel {
       display: none;
       margin-bottom: 12px;
@@ -1137,6 +1163,17 @@
       z-index: 1;
       color: white;
       cursor: pointer;
+      border: none;
+      padding: 0;
+      font: inherit;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .entry-delete:focus-visible,
+    .entry-bring:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: -4px;
     }
 
     .entry-delete svg {
@@ -1158,6 +1195,11 @@
       z-index: 1;
       color: var(--today-ink);
       cursor: pointer;
+      border: none;
+      padding: 0;
+      font: inherit;
+      appearance: none;
+      -webkit-appearance: none;
     }
 
     .entry-bring svg {
@@ -1387,6 +1429,14 @@
     .fold-panel .settings-row .row-label {
       flex: 1;
       line-height: 1.3;
+    }
+
+    .fold-panel .settings-row .row-hint {
+      display: block;
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 400;
+      margin-top: 2px;
     }
 
     .fold-panel .settings-row.static-row {
@@ -1724,7 +1774,7 @@
         </div>
         <button type="button" class="settings-row" id="menu-export">
           <span class="row-icon" data-icon="download"></span>
-          <span class="row-label">Export Data</span>
+          <span class="row-label">Export Data<span class="row-hint">Your backup — this journal lives only in this browser</span></span>
         </button>
         <button type="button" class="settings-row" id="menu-clear">
           <span class="row-icon" data-icon="trash-2"></span>
@@ -1758,15 +1808,15 @@
           <ul>
             <li>Type a line under Today and press Enter.</li>
             <li>Tap a line to edit the words. You can’t change the time or reorder the day.</li>
-            <li>Swipe left to delete. On a computer, hover the line and use the trash icon.</li>
-            <li>Swipe right to copy a line into Today. The original stays. On a computer, hover and use the calendar icon.</li>
+            <li>Swipe left to reveal delete, then tap. On a computer, hover the line and use the trash icon.</li>
+            <li>Swipe right to reveal copy to Today, then tap. The original stays. On a computer, hover and use the calendar icon.</li>
             <li>Search is in the Today header. Two tags find either one; quote them to require both.</li>
             <li>View Today, 2d, 3d, 7d, or All.</li>
             <li>Theme (above Settings) is light or dark, plus a color. Settings has font size, trophy, and export.</li>
             <li>On a past day, click the date to rate it with stars.</li>
-            <li>Your journal stays on this device.</li>
+            <li>Your journal stays on this device. Export from Settings is your backup — a new phone or a cleared browser won’t have it.</li>
           </ul>
-          <div class="tip">Optional: <em>@person</em> · <em>#location</em> · <em>*project</em> · any <strong>!</strong> makes the line bold and red · <strong>xx</strong> strikes it out.</div>
+          <div class="tip">Optional: <em>@person</em> · <em>#location</em> · <em>*project</em> · any <strong>!</strong> makes the line bold and red · <strong>xx</strong> as its own word strikes it out.</div>
           <h3>Notes and Quick Add</h3>
           <h4>Notes</h4>
           <p>Some things don’t belong on a timestamped line — a URL, a thought for after this, a reminder before bed. Notes is a scratchpad for that. It sits under Today and auto-saves.</p>
@@ -2281,7 +2331,7 @@
                 <button type="button" class="today-jump" id="today-jump" title="Show only Today" aria-label="Show only Today">${label}</button>
               </div>
               <div class="today-header-center">
-                <button type="button" class="search-toggle${searchOpen ? ' active' : ''}" id="search-toggle" title="Search">
+                <button type="button" class="search-toggle${searchOpen ? ' active' : ''}" id="search-toggle" title="Search" aria-label="Search">
                   ${icon('search')}
                 </button>
               </div>
@@ -2317,7 +2367,7 @@
           searchPanel.innerHTML = `
             <div class="search-box-row">
               <input type="text" id="search-input" placeholder="Search for text or tags" autocomplete="off" value="${escapeHtml(searchQuery)}" />
-              <button type="button" id="search-close" title="Close search">${icon('x')}</button>
+              <button type="button" id="search-close" title="Close search" aria-label="Close search">${icon('x')}</button>
             </div>
             <div class="search-meta">
               <div class="search-range-btns">
@@ -2724,19 +2774,19 @@
       const emphasisClass = hasEmphasis(entry.text) ? ' emphasis' : '';
       const strikeClass = hasStrike(entry.text) ? ' struck' : '';
       el.innerHTML = `
-        <div class="entry-bring" data-id="${entry.id}" title="Bring to Today">
+        <button type="button" class="entry-bring" data-id="${entry.id}" title="Bring to Today" aria-label="Bring to Today">
           ${icon('calendar-plus')}
-        </div>
-        <div class="entry-delete" data-id="${entry.id}">
+        </button>
+        <button type="button" class="entry-delete" data-id="${entry.id}" title="Delete" aria-label="Delete">
           ${icon('trash-2')}
-        </div>
+        </button>
         <div class="entry-inner">
           <div class="entry-time">${formatTimeHtml(entry.time)}</div>
           <span class="latest-loader" aria-hidden="true"></span>
           <div class="entry-body${emphasisClass}${strikeClass}" data-id="${entry.id}">${formatEntryText(entry.text)}</div>
           <div class="entry-actions">
-            <button type="button" class="entry-action-btn bring" data-id="${entry.id}" title="Bring to Today">${icon('calendar-plus')}</button>
-            <button type="button" class="entry-action-btn del" data-id="${entry.id}" title="Delete">${icon('trash-2')}</button>
+            <button type="button" class="entry-action-btn bring" data-id="${entry.id}" title="Bring to Today" aria-label="Bring to Today">${icon('calendar-plus')}</button>
+            <button type="button" class="entry-action-btn del" data-id="${entry.id}" title="Delete" aria-label="Delete">${icon('trash-2')}</button>
           </div>
         </div>
       `;
@@ -2796,7 +2846,7 @@
     // #place → location (teal, italic)
     // *project → project (amber, italic)
     // any !  → whole entry bold
-    // xx     → whole entry struck out (case insensitive)
+    // xx     → whole entry struck out (standalone marker, case insensitive)
     function formatEntryText(raw) {
       let html = escapeHtml(raw);
 
@@ -2817,7 +2867,7 @@
     }
 
     function hasStrike(raw) {
-      return /xx/i.test(raw);
+      return /\bxx\b/i.test(raw);
     }
 
     // ─────────────────────────────────────────────
