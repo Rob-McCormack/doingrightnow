@@ -2131,7 +2131,7 @@
     function dayCountLabel(entries) {
       const total = entries.length;
       const done = entries.filter(e => hasStrike(e.text)).length;
-      return done > 0 ? `${done}/${total}` : String(total);
+      return total === 0 ? '0' : `${done}/${total}`;
     }
 
     function dayCountHtml(entries) {
