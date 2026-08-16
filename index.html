@@ -367,6 +367,18 @@
       color: var(--text-muted);
     }
 
+    .closing {
+      text-align: center;
+      margin: 48px auto 0;
+    }
+
+    .closing p {
+      max-width: 42ch;
+      margin: 0 auto 20px;
+      font-size: 15px;
+      color: var(--text-soft);
+    }
+
     footer {
       display: flex;
       flex-direction: column;
@@ -409,6 +421,7 @@
       .points p,
       .why p,
       .extras p,
+      .closing p,
       .works {
         font-size: 16px;
       }
@@ -456,14 +469,14 @@
         <h1>Don’t plan your entire day.<br>Just start with what’s right in front of you.</h1>
         <p class="lede">Not a planner, to-do list, or habit tracker. Write one timestamped line — what you just did, or the tiny next step — and do that.</p>
         <a class="cta" href="https://doingrightnow.com/DoingRightNow.html">Start Doing Right Now</a>
-        <p class="note">No sign up required, no login, no passwords, no ads and no tracking. Your data stays on your device.</p>
+        <p class="note">No sign up, login, passwords, ads or tracking. Your journal stays on your device.</p>
       </section>
 
       <figure class="shot">
         <img src="images/screenshot.png" alt="Doing Right Now journal showing today’s timestamped entries" width="840" height="1720" />
       </figure>
 
-      <p class="idea">Each line lowers the bar for the next one. If you drift, the last line is exactly where you left off.</p>
+      <p class="idea">Each line lowers the bar for the next one. If you drift, the last line is exactly where you left off. By the end of the day you have a record of what you actually did — not a list of things you meant to do.</p>
 
       <section class="points">
         <div>
@@ -494,17 +507,23 @@
       <section class="extras">
         <h2>If you want them</h2>
         <p>Search when you need to look back, and export just those matches. A full copy is always in Settings. Notes is a scratchpad; Quick Add saves lines you reuse. Any past entry can be brought into Today — the original stays where it was.</p>
-        <p>You can also tag a line with <span class="tag tag-person">@person</span>, <span class="tag tag-location">#location</span>, or <span class="tag tag-project">*project</span> — a <span class="bang">!</span> makes it stand out, and <span class="struck-sample">xx</span> strikes it out.</p>
+        <p>You can also tag a line with <span class="tag tag-person">@person</span>, <span class="tag tag-location">#location</span>, or <span class="tag tag-project">*project</span> — a <span class="bang">!</span> makes it stand out, and <span class="struck-sample">xx</span> strikes it out. Example: <em>review checkout flow <span class="tag tag-project">*Website</span></em> — search that later if you want the history.</p>
+        <p>This doesn’t need to replace your planner. Those tools can hold the plan. This one is for the part you’re actually doing.</p>
       </section>
 
       <figure class="art">
         <img src="images/Schedule-bro.png" alt="" width="800" height="800" />
         <figcaption>No planning · No streaks · No pressure to finish</figcaption>
       </figure>
+
+      <section class="closing">
+        <p>You don’t have to organize your life before you begin. Write one line. Do that.</p>
+        <a class="cta" href="https://doingrightnow.com/DoingRightNow.html">Start Doing Right Now</a>
+      </section>
     </main>
 
     <footer>
-      <a href="https://github.com/Rob-McCormack/doingrightnow">GitHub</a>
+      <a href="https://github.com/Rob-McCormack/doingrightnow">Open source on GitHub</a>
       <a href="https://simplertasks.com">Designed by SimplerTasks</a>
       <a class="credits" href="https://storyset.com/event">Event illustrations by Storyset</a>
     </footer>
