@@ -758,6 +758,46 @@
       gap: 5px;
     }
 
+    .day-rate {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 6px 4px 0;
+      margin: 0;
+      border: none;
+      background: none;
+      font: inherit;
+      color: inherit;
+      cursor: pointer;
+      text-align: left;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .day-rate:focus-visible {
+      outline: 2px solid var(--today);
+      outline-offset: 2px;
+    }
+
+    .day-stars {
+      display: inline-flex;
+      align-items: center;
+      gap: 1px;
+    }
+
+    .star-icon {
+      width: 11px;
+      height: 11px;
+      color: #d4a017;
+      stroke: #d4a017;
+      flex-shrink: 0;
+      pointer-events: none;
+    }
+
+    svg.icon.star-icon.filled {
+      fill: #d4a017;
+    }
+
     .trophy-icon {
       width: 15px;
       height: 15px;
@@ -1625,7 +1665,8 @@
           <h3>Don’t plan your entire day. Just start with what’s right in front of you.</h3>
           <p>A journal built for getting unstuck. When a task feels too big to start, don’t plan it — just write down the tiny next step and do that. Jot the time and one line: what you just did, or the small thing you’re about to do. Each entry lowers the bar to starting the next one, and your last line always shows exactly where you left off if you drift and come back. No planning, no streaks, no pressure to finish — just a trail of small starts that add up.</p>
           <div class="tip">💡 Tip: Swipe left to delete · Swipe right to bring an entry into Today (keeps the original). On desktop, hover an entry for action buttons.<br>
-          Optional: <em>@person</em> · <em>#location</em> · <em>*project</em> · any <strong>!</strong> makes the line bold and red · <strong>xx</strong> strikes it out.</div>
+          Optional: <em>@person</em> · <em>#location</em> · <em>*project</em> · any <strong>!</strong> makes the line bold and red · <strong>xx</strong> strikes it out.<br>
+          On a past day, click the date to rate it with 1–5 stars.</div>
         </div>
       </div>
     </div>
@@ -1660,7 +1701,8 @@
       'chevron-up': '<polyline points="18 15 12 9 6 15"/>',
       'type': '<polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/>',
       'palette': '<circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>',
-      'check': '<polyline points="20 6 9 17 4 12"/>'
+      'check': '<polyline points="20 6 9 17 4 12"/>',
+      'star': '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>'
     };
 
     function icon(name, extraClass = '') {
@@ -1684,7 +1726,8 @@
       color: 'doingrightnow_color',
       font: 'doingrightnow_font',
       seeded: 'doingrightnow_seeded',
-      trophy: 'doingrightnow_trophy'
+      trophy: 'doingrightnow_trophy',
+      daystars: 'doingrightnow_daystars'
     };
 
     const COLOR_THEMES = [
@@ -1720,6 +1763,7 @@
     let searchRange = 7; // default 7 days when searching
     let searchTimeout = null;
     let trophyThreshold = 6; // show gold trophy on day headers at this count
+    let dayStars = {}; // ISO date → 0–5 (0 = unrated outline star)
     let lastRenderedToday = null; // ISO date of the last render's "today"
 
     // Touch swipe state
@@ -1835,6 +1879,11 @@
         applyFont(font);
         const t = parseInt(localStorage.getItem(KEYS.trophy) || '6', 10);
         trophyThreshold = (isNaN(t) || t < 1) ? 6 : t;
+        try {
+          dayStars = JSON.parse(localStorage.getItem(KEYS.daystars) || '{}') || {};
+        } catch (err) {
+          dayStars = {};
+        }
       } catch (e) {
         journal = [];
         quickAdds = [];
@@ -2002,6 +2051,32 @@
     // ─────────────────────────────────────────────
     // Render
     // ─────────────────────────────────────────────
+    function starSvg(filled) {
+      const cls = filled ? 'icon star-icon filled' : 'icon star-icon';
+      return `<svg class="${cls}" viewBox="0 0 24 24" width="11" height="11" aria-hidden="true">${ICON_PATHS.star}</svg>`;
+    }
+
+    function dayStarsHtml(n) {
+      const count = Number(n) || 0;
+      if (count < 1) return `<span class="day-stars">${starSvg(false)}</span>`;
+      let out = '<span class="day-stars">';
+      for (let i = 0; i < count; i++) out += starSvg(true);
+      return out + '</span>';
+    }
+
+    function saveDayStars() {
+      persist(KEYS.daystars, JSON.stringify(dayStars));
+    }
+
+    function cycleDayStars(date) {
+      const current = Number(dayStars[date]) || 0;
+      const next = current >= 5 ? 0 : current + 1;
+      if (next === 0) delete dayStars[date];
+      else dayStars[date] = next;
+      saveDayStars();
+      return next;
+    }
+
     function dayCountHtml(count) {
       const trophy = count >= trophyThreshold
         ? icon('trophy', 'trophy-icon')
@@ -2081,7 +2156,18 @@
             </div>
           `;
         } else {
-          header.innerHTML = `<span>${label}</span>${countHtml}`;
+          const rating = Number(dayStars[date]) || 0;
+          header.innerHTML = `<button type="button" class="day-rate" data-date="${date}" title="Rate this day" aria-label="Rate this day">${label}${dayStarsHtml(rating)}</button>${countHtml}`;
+          const rateBtn = header.querySelector('.day-rate');
+          if (rateBtn) {
+            rateBtn.addEventListener('click', (e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              const next = cycleDayStars(date);
+              const stars = rateBtn.querySelector('.day-stars');
+              if (stars) stars.outerHTML = dayStarsHtml(next);
+            });
+          }
         }
         group.appendChild(header);
 
@@ -2942,9 +3028,11 @@
       journal = [];
       quickAdds = [];
       notes = '';
+      dayStars = {};
       saveJournal();
       saveQuickAdds();
       saveNotes();
+      saveDayStars();
       persist(KEYS.seeded, '1'); // prevent auto re-seed on reload
       searchOpen = false;
       searchQuery = '';
@@ -2959,7 +3047,11 @@
       const cutoffISO = cutoff.getFullYear() + '-' + String(cutoff.getMonth() + 1).padStart(2, '0') + '-' + String(cutoff.getDate()).padStart(2, '0');
       const before = journal.length;
       journal = journal.filter(entry => entry.date >= cutoffISO);
+      Object.keys(dayStars).forEach(d => {
+        if (d < cutoffISO) delete dayStars[d];
+      });
       saveJournal();
+      saveDayStars();
       persist(KEYS.seeded, '1');
       const removed = before - journal.length;
       searchOpen = false;
@@ -2976,9 +3068,11 @@
       journal = [];
       quickAdds = [];
       notes = '';
+      dayStars = {};
       saveJournal();
       saveQuickAdds();
       saveNotes();
+      saveDayStars();
       seedDummyData();
       searchOpen = false;
       searchQuery = '';
