@@ -218,6 +218,11 @@
       color: var(--text-muted);
     }
 
+    .note strong {
+      color: var(--today);
+      font-weight: 700;
+    }
+
     .shot {
       margin: 40px auto 0;
       max-width: 340px;
@@ -373,12 +378,16 @@
 
     .art {
       margin: 40px auto 0;
-      max-width: 420px;
+      max-width: 600px;
     }
 
     .art img {
+      display: block;
       width: 100%;
       height: auto;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      box-shadow: 0 12px 32px var(--shadow);
     }
 
     .art figcaption {
@@ -563,7 +572,7 @@
       </section>
 
       <figure class="art">
-        <img src="images/Schedule-bro.png" alt="" width="800" height="800" />
+        <img src="images/superpowers.jpg" alt="The Tiny Journal App with Superpowers — stop managing your whole day; do what’s right in front of you" width="600" height="386" />
         <figcaption>No planning · No streaks · No pressure to finish</figcaption>
       </figure>
 
