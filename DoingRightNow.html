@@ -985,9 +985,9 @@
       min-height: 48px;
       padding: 14px 14px 14px 42px;
       font-size: 16px;
-      border: 2px dashed var(--today);
+      border: 2px dashed color-mix(in srgb, var(--today) 40%, var(--border));
       border-radius: 8px;
-      background: var(--today-soft);
+      background: color-mix(in srgb, var(--today-soft) 32%, var(--input-bg));
       color: var(--text);
       outline: none;
       transition: border-color 0.15s, background 0.15s, border-style 0.15s;
@@ -995,12 +995,13 @@
 
     #today-input:focus {
       border-style: solid;
-      background: var(--today-soft);
+      border-color: color-mix(in srgb, var(--today) 55%, var(--border));
+      background: color-mix(in srgb, var(--today-soft) 42%, var(--input-bg));
     }
 
     #today-input::placeholder {
-      color: var(--today-heading);
-      opacity: 0.7;
+      color: var(--text-muted);
+      opacity: 0.9;
     }
 
     /* Entry */
