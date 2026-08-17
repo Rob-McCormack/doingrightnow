@@ -2,7 +2,7 @@
 <html lang="en" data-color="green">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#ffffff" />
   <script>
     try {
@@ -356,11 +356,12 @@
 
     html, body {
       min-height: 100%;
+      max-width: 100%;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       background-color: var(--bg);
       color: var(--text);
       line-height: 1.45;
-      overflow-x: hidden;
+      overflow-x: clip;
     }
 
     body {
@@ -369,13 +370,16 @@
     }
 
     #app {
+      width: 100%;
       max-width: 560px;
       margin: 0 auto;
       min-height: 100vh;
+      min-width: 0;
       display: flex;
       flex-direction: column;
       padding: 0 16px 40px;
       position: relative;
+      overflow-x: clip;
     }
 
     /* View range switcher */
@@ -533,9 +537,10 @@
     /* Search */
     .today-header-row {
       display: grid;
-      grid-template-columns: 1fr auto 1fr;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
       align-items: center;
       width: 100%;
+      min-width: 0;
       gap: 8px;
     }
 
@@ -651,12 +656,14 @@
       display: flex;
       gap: 8px;
       align-items: center;
+      min-width: 0;
     }
 
     #search-input {
       flex: 1;
+      min-width: 0;
       padding: 10px 12px;
-      font-size: 14px;
+      font-size: 16px;
       border: 1.5px solid var(--border);
       border-radius: 8px;
       background: var(--input-bg);
@@ -690,19 +697,21 @@
 
     .search-meta {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
+      flex-direction: column;
+      align-items: stretch;
       margin-top: 8px;
       font-size: 12px;
       color: var(--text-muted);
       gap: 8px;
-      flex-wrap: wrap;
+      min-width: 0;
     }
 
     .search-range-btns {
       display: flex;
+      flex-wrap: wrap;
       gap: 4px;
       align-items: center;
+      min-width: 0;
     }
 
     .search-range-btns .view-btn {
@@ -712,12 +721,19 @@
 
     .search-hit-count {
       font-weight: 500;
+      min-height: 1.2em;
+    }
+
+    .search-hit-count:empty {
+      display: none;
     }
 
     .search-meta-right {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 8px;
+      min-width: 0;
     }
 
     #search-export {
@@ -737,10 +753,15 @@
     #feed {
       flex: 1;
       padding-top: 12px;
+      min-width: 0;
+      width: 100%;
+      overflow-x: clip;
     }
 
     .day-group {
       margin-bottom: 28px;
+      min-width: 0;
+      max-width: 100%;
     }
 
     .day-header {
@@ -988,12 +1009,14 @@
       border-radius: 0;
       overflow: hidden;
       user-select: none;
-      touch-action: pan-y;
+      touch-action: pan-y pinch-zoom;
+      max-width: 100%;
     }
 
       .entry-inner {
       display: flex;
       width: 100%;
+      min-width: 0;
       padding: 9px 10px 9px 0;
       background: var(--card);
       transform: translateX(0);
@@ -1011,7 +1034,8 @@
     }
 
     .entry.latest {
-      overflow: visible;
+      overflow-x: hidden;
+      overflow-y: visible;
       z-index: 3;
       margin: 6px 0;
     }
@@ -1146,6 +1170,7 @@
 
     .entry-body {
       flex: 1;
+      min-width: 0;
       border-left: 2px solid var(--border);
       padding-left: 12px;
       font-size: 15px;
@@ -1153,6 +1178,7 @@
       line-height: 1.4;
       min-height: 20px;
       word-break: break-word;
+      overflow-wrap: anywhere;
       user-select: text;
       -webkit-user-select: text;
     }
@@ -1387,6 +1413,21 @@
       font-weight: 500;
       letter-spacing: 0.02em;
       color: var(--text-muted);
+    }
+
+    .menu-item,
+    .view-btn,
+    .today-tool-btn,
+    .today-jump,
+    .day-rate,
+    .scroll-top-btn,
+    .scroll-bottom-btn,
+    .search-toggle,
+    #search-close,
+    .settings-row,
+    .theme-swatch,
+    .entry-action-btn {
+      touch-action: manipulation;
     }
 
     .menu-item {
@@ -1633,7 +1674,7 @@
     #trophy-threshold {
       width: 48px;
       padding: 5px 6px;
-      font-size: 14px;
+      font-size: 16px;
       border: 1px solid var(--border);
       border-radius: 6px;
       background: var(--input-bg);
@@ -1655,7 +1696,7 @@
     #quickadd-input {
       width: 100%;
       padding: 10px 12px;
-      font-size: 14px;
+      font-size: 16px;
       border: 1px solid var(--border);
       border-radius: 8px;
       background: var(--input-bg);
@@ -1727,7 +1768,7 @@
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
       overscroll-behavior: contain;
-      touch-action: pan-y;
+      touch-action: pan-y pinch-zoom;
       border: 1px solid var(--border);
       border-radius: 8px;
       background: var(--input-bg);
@@ -1752,15 +1793,17 @@
     #notes-area {
       display: block;
       width: 100%;
+      max-width: 100%;
       min-height: 160px;
       padding: 12px;
-      font-size: 14px;
+      font-size: 16px;
       border: none;
       border-radius: 8px;
       background: transparent;
       color: var(--text);
       resize: none;
       overflow: hidden;
+      overflow-wrap: anywhere;
       outline: none;
       font-family: inherit;
       line-height: 1.5;
@@ -2198,6 +2241,10 @@
       const el = document.querySelector('.entry.latest .entry-elapsed');
       if (!el || el.classList.contains('elapsed-over')) return;
       elapsedTimer = setInterval(paintElapsed, 1000);
+    }
+
+    function containViewport() {
+      if (window.scrollX) window.scrollTo({ left: 0 });
     }
 
     function parseISODate(iso) {
@@ -2678,6 +2725,7 @@
         });
         todayInput.addEventListener('blur', () => {
           setTimeout(commitTodayInput, 120);
+          setTimeout(containViewport, 300);
         });
       }
 
@@ -2759,6 +2807,7 @@
             applySearchFilter();
           }, 200);
         };
+        input.addEventListener('blur', () => setTimeout(containViewport, 300));
         input.onkeydown = (e) => {
           if (e.key === 'Escape') {
             clearTimeout(searchTimeout);
@@ -2944,6 +2993,7 @@
           saveNotes();
           fitNotesArea();
         };
+        notesArea.addEventListener('blur', () => setTimeout(containViewport, 300));
         if (notesScroll) {
           notesScroll.addEventListener('touchstart', (e) => e.stopPropagation(), { passive: true });
           notesScroll.addEventListener('touchmove', (e) => e.stopPropagation(), { passive: true });
