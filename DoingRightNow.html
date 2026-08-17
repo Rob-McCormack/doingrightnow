@@ -1994,7 +1994,7 @@
         </button>
         <button type="button" class="settings-row" id="menu-reset-sample">
           <span class="row-icon" data-icon="refresh-cw"></span>
-          <span class="row-label">Clear All, Add Sample Data</span>
+          <span class="row-label">Clear All, Start Fresh</span>
         </button>
       </div>
 
@@ -2434,79 +2434,24 @@
       else stopElapsedTimer();
     }
 
-    // ─────────────────────────────────────────────
-    // Dummy data (first launch)
+    // First launch / start fresh
     // ─────────────────────────────────────────────
     function seedDummyData() {
-      const samples = [
-        'Opened the laptop and sat down at #desk',
-        'Wrote the first sentence of the email to @sam',
-        'Made coffee at #kitchen',
-        'Reviewed the open tabs',
-        'Closed three unnecessary tabs',
-        'Texted @rob about *renovations!',
-        'Started the laundry at #home',
-        'Put the kettle on',
-        'Replied to one message from @maya',
-        'Took a short walk around the block',
-        'Opened the *budget spreadsheet I was avoiding',
-        'Wrote three bullet points for *proposal',
-        'Stretched for two minutes',
-        'Cleared the kitchen counter at #home',
-        'Named the next tiny step',
-        'Called @alex about the *website redesign',
-        'Picked up paint samples for *renovations at #hardware',
-        'Quick standup note with @team',
-        'Filed receipts from #office',
-        'Drafted intro paragraph for *proposal!',
-        'Watered plants at #home',
-        'Sent calendar invite to @sam and @maya',
-        'Measured the wall for *renovations',
-        'Inbox zero — deleted six old threads',
-        'Sketched wireframe for *website',
-        'Packed lunch at #kitchen',
-        'Followed up with @rob on materials!',
-        'Read two pages of the brief',
-        'Moved one box to #garage',
-        'Logged a small win on *budget'
-      ];
-
       const now = new Date();
-      const entries = [];
-      // Spread across the last 14 days but NEVER put sample data on Today
-      // (avoids fake "future" times on the current day and keeps Today empty for the user)
-      const spanDays = 14;
-
-      for (let i = 0; i < samples.length; i++) {
-        // dayOffset 1..14 → yesterday through two weeks ago
-        const dayOffset = 1 + Math.floor(i * spanDays / samples.length);
-        const d = new Date(now);
-        d.setDate(d.getDate() - dayOffset);
-        d.setHours(7 + (i % 12), (i * 11) % 60, 0, 0);
-
-        const iso = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
-        entries.push({
-          id: uid(),
-          date: iso,
-          time: formatTime(d),
-          text: samples[i]
-        });
-      }
-
-      journal = entries.sort((a, b) => {
-        if (a.date !== b.date) return b.date.localeCompare(a.date);
-        return timeToMinutes(b.time) - timeToMinutes(a.time);
-      });
-
-      // A few sample quick-add templates
-      quickAdds = [
-        { id: uid(), text: 'Quick stretch break' },
-        { id: uid(), text: 'Check in with @rob' },
-        { id: uid(), text: 'One step on *renovations' }
-      ];
-
+      journal = [{
+        id: uid(),
+        date: todayISO(),
+        time: formatTime(now),
+        startedAt: now.getTime(),
+        text: 'Try our Doing Right Now app — be sure to watch the 2 minute video to master the software.'
+      }];
+      quickAdds = [];
+      notes = '';
+      dayStars = {};
       saveJournal();
       saveQuickAdds();
+      saveNotes();
+      saveDayStars();
       persist(KEYS.seeded, '1');
     }
 
@@ -3678,7 +3623,7 @@
 
     document.getElementById('menu-reset-sample').addEventListener('click', (e) => {
       e.stopPropagation();
-      if (!window.confirm('Clear everything and load sample data?\n\nYour current journal, quick adds, and notes will be replaced.')) return;
+      if (!window.confirm('Clear everything and start fresh with one welcome line?\n\nYour current journal, quick adds, and notes will be replaced.')) return;
       journal = [];
       quickAdds = [];
       notes = '';
