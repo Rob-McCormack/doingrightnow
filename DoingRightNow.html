@@ -881,7 +881,23 @@
 
     /* Permanent input under Today */
     #today-input-wrap {
+      position: relative;
       margin-bottom: 10px;
+    }
+
+    .today-input-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      color: var(--today);
+      pointer-events: none;
+    }
+
+    .today-input-icon svg {
+      width: 18px;
+      height: 18px;
     }
 
     /* Compact tools inside Today */
@@ -941,14 +957,15 @@
 
     #today-input {
       width: 100%;
-      padding: 12px 14px;
-      font-size: 15px;
-      border: 1.5px dashed var(--border);
+      min-height: 48px;
+      padding: 14px 14px 14px 42px;
+      font-size: 16px;
+      border: 2px dashed var(--today);
       border-radius: 8px;
-      background: var(--input-bg);
+      background: var(--today-soft);
       color: var(--text);
       outline: none;
-      transition: border-color 0.15s, background 0.15s;
+      transition: border-color 0.15s, background 0.15s, border-style 0.15s;
     }
 
     #today-input:focus {
@@ -957,8 +974,8 @@
     }
 
     #today-input::placeholder {
-      color: var(--text-muted);
-      opacity: 0.8;
+      color: var(--today-heading);
+      opacity: 0.7;
     }
 
     /* Entry */
@@ -1925,9 +1942,10 @@
       </div>
 
       <!-- Help -->
-      <button type="button" class="menu-item" id="menu-help" aria-expanded="false" aria-controls="panel-help">
+      <button type="button" class="menu-item menu-fold" id="menu-help" aria-expanded="false" aria-controls="panel-help">
         <span class="menu-icon" data-icon="help-circle"></span>
-        <span>Help</span>
+        <span class="settings-label">Help</span>
+        <span class="settings-chevron" id="help-chevron" data-icon="chevron-down"></span>
       </button>
       <div class="panel" id="panel-help">
         <div class="help-content">
@@ -2001,6 +2019,7 @@
       'chevron-down': '<polyline points="6 9 12 15 18 9"/>',
       'chevron-up': '<polyline points="18 15 12 9 6 15"/>',
       'type': '<polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/>',
+      'pencil': '<path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>',
       'palette': '<circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>',
       'check': '<polyline points="20 6 9 17 4 12"/>',
       'star': '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>'
@@ -2595,7 +2614,7 @@
 
           const inputWrap = document.createElement('div');
           inputWrap.id = 'today-input-wrap';
-          inputWrap.innerHTML = `<input type="text" id="today-input" placeholder="What are you doing right now?" autocomplete="off" />`;
+          inputWrap.innerHTML = `<span class="today-input-icon" aria-hidden="true">${icon('pencil')}</span><input type="text" id="today-input" placeholder="What are you doing right now?" autocomplete="off" />`;
           group.appendChild(inputWrap);
 
           // Compact tools row
@@ -3304,18 +3323,15 @@
     // ─────────────────────────────────────────────
     // Menu actions
     // ─────────────────────────────────────────────
-    function togglePanel(id) {
-      const panel = document.getElementById(id);
-      if (!panel) return;
-      const isOpen = panel.classList.contains('open');
+    function closeAllPanels() {
       document.querySelectorAll('.panel').forEach(p => p.classList.remove('open'));
       openPanel = null;
-
       const settingsBtn = document.getElementById('menu-settings');
       const themeBtn = document.getElementById('menu-theme-panel');
       const helpBtn = document.getElementById('menu-help');
       const settingsChevron = document.getElementById('settings-chevron');
       const themeChevron = document.getElementById('theme-chevron');
+      const helpChevron = document.getElementById('help-chevron');
       if (settingsBtn) {
         settingsBtn.classList.remove('open-fold');
         settingsBtn.setAttribute('aria-expanded', 'false');
@@ -3324,9 +3340,27 @@
         themeBtn.classList.remove('open-fold');
         themeBtn.setAttribute('aria-expanded', 'false');
       }
-      if (helpBtn) helpBtn.setAttribute('aria-expanded', 'false');
+      if (helpBtn) {
+        helpBtn.classList.remove('open-fold');
+        helpBtn.setAttribute('aria-expanded', 'false');
+      }
       if (settingsChevron) settingsChevron.innerHTML = icon('chevron-down');
       if (themeChevron) themeChevron.innerHTML = icon('chevron-down');
+      if (helpChevron) helpChevron.innerHTML = icon('chevron-down');
+    }
+
+    function togglePanel(id) {
+      const panel = document.getElementById(id);
+      if (!panel) return;
+      const isOpen = panel.classList.contains('open');
+      closeAllPanels();
+
+      const settingsBtn = document.getElementById('menu-settings');
+      const themeBtn = document.getElementById('menu-theme-panel');
+      const helpBtn = document.getElementById('menu-help');
+      const settingsChevron = document.getElementById('settings-chevron');
+      const themeChevron = document.getElementById('theme-chevron');
+      const helpChevron = document.getElementById('help-chevron');
 
       if (!isOpen) {
         panel.classList.add('open');
@@ -3347,8 +3381,12 @@
           }
           if (themeChevron) themeChevron.innerHTML = icon('chevron-up');
         }
-        if (id === 'panel-help' && helpBtn) {
-          helpBtn.setAttribute('aria-expanded', 'true');
+        if (id === 'panel-help') {
+          if (helpBtn) {
+            helpBtn.classList.add('open-fold');
+            helpBtn.setAttribute('aria-expanded', 'true');
+          }
+          if (helpChevron) helpChevron.innerHTML = icon('chevron-up');
         }
       }
     }
@@ -3484,6 +3522,7 @@
     });
 
     document.getElementById('scroll-top-btn').addEventListener('click', () => {
+      closeAllPanels();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
