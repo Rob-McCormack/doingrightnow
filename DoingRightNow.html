@@ -22,6 +22,10 @@
   <link rel="apple-touch-icon" sizes="180x180" href="images/favicon-180x180.png">
   <link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192x192.png">
   <link rel="icon" type="image/png" sizes="512x512" href="images/favicon-512x512.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Doing Right Now">
   <style>
     :root {
       --bg: #ffffff;
@@ -2006,6 +2010,7 @@
             <li>Theme (above Settings) is light or dark, plus a color. Settings has font size, trophy, timer, and export.</li>
             <li>On a past day, click the date to rate it with stars.</li>
             <li>Your journal stays on this device. Export from Settings is your backup — a new phone or a cleared browser won’t have it.</li>
+            <li>On a phone, Add to Home Screen for an app icon. The journal still lives on this device.</li>
           </ul>
           <div class="tip">Optional: <em>@person</em> · <em>#location</em> · <em>*project</em> · any <strong>!</strong> makes the line bold and red · <strong>xx</strong> as its own word strikes it out.</div>
           <h3>Notes and Quick Add</h3>
@@ -2034,7 +2039,7 @@
     // State & Storage
     // ─────────────────────────────────────────────
 
-    const APP_VERSION = '1.0.0';
+    const APP_VERSION = '1.1.0';
 
     // Inline Lucide-style icons (no CDN)
     const ICON_PATHS = {
@@ -3731,6 +3736,14 @@
     if (trophyInput) trophyInput.value = trophyThreshold;
     lastRenderedToday = todayISO();
     render();
+
+    if ('serviceWorker' in navigator) {
+      const host = location.hostname;
+      const allowed = location.protocol === 'https:' || host === 'localhost' || host === '127.0.0.1';
+      if (allowed) {
+        navigator.serviceWorker.register('sw.js').catch(function () {});
+      }
+    }
   </script>
 </body>
 </html>
