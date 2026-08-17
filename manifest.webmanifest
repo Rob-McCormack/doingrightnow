@@ -3,7 +3,7 @@
   "name": "Doing Right Now",
   "short_name": "Right Now",
   "description": "A journal for getting unstuck. One timestamped line at a time.",
-  "start_url": "./DoingRightNow.html",
+  "start_url": "./DoingRightNow",
   "scope": "./",
   "display": "standalone",
   "background_color": "#ffffff",
