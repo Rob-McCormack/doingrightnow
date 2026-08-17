@@ -3,7 +3,7 @@
    Icons: cache-first
    Journal data stays in localStorage — this file never touches it.
 */
-const CACHE = 'doingrightnow-v1';
+const CACHE = 'doingrightnow-v2';
 const PRECACHE = [
   './DoingRightNow.html',
   './favicon.svg',
@@ -47,7 +47,16 @@ async function networkFirst(request) {
   const cache = await caches.open(CACHE);
   try {
     const fresh = await fetch(request);
-    if (fresh && fresh.ok) cache.put(request, fresh.clone());
+    if (fresh && fresh.ok) {
+      cache.put(request, fresh.clone());
+      return fresh;
+    }
+    const cached = await cache.match(request);
+    if (cached) return cached;
+    if (request.mode === 'navigate') {
+      const fallback = await cache.match('./DoingRightNow.html');
+      if (fallback) return fallback;
+    }
     return fresh;
   } catch (err) {
     const cached = await cache.match(request);
