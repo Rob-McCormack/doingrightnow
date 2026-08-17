@@ -1066,11 +1066,58 @@
       font-variant-numeric: tabular-nums;
       line-height: 1.4;
       padding-top: 1px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
     }
 
-    .entry.latest .entry-time {
+    .entry.latest .entry-clock {
       color: var(--today);
       font-weight: 600;
+    }
+
+    .entry-elapsed {
+      display: none;
+      font-size: 15px;
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+      line-height: 1.2;
+      margin-top: 3px;
+      letter-spacing: -0.02em;
+    }
+
+    .entry.latest .entry-elapsed {
+      display: block;
+    }
+
+    html.elapsed-off .entry.latest .entry-elapsed {
+      display: none;
+    }
+
+    .entry-elapsed.elapsed-ok {
+      color: #3da45a;
+    }
+
+    .entry-elapsed.elapsed-warn {
+      color: #d4a017;
+    }
+
+    .entry-elapsed.elapsed-over {
+      color: var(--danger);
+    }
+
+    html.dark .entry-elapsed.elapsed-ok {
+      color: #4ecf6a;
+    }
+
+    html.dark .entry-elapsed.elapsed-warn {
+      color: #f0c14a;
+    }
+
+    .entry-elapsed .elapsed-plus {
+      font-size: 0.62em;
+      font-weight: 700;
+      margin-left: 1px;
     }
 
     .entry-time .ampm {
@@ -1847,6 +1894,12 @@
           <input type="number" id="trophy-threshold" min="1" max="99" value="6" />
           <span class="row-label" style="flex:0;">entries</span>
         </div>
+        <div class="settings-row static-row">
+          <span class="row-icon" data-icon="clock"></span>
+          <span class="row-label">Timer on current line</span>
+          <button type="button" class="view-btn elapsed-btn active" data-elapsed="on">On</button>
+          <button type="button" class="view-btn elapsed-btn" data-elapsed="off">Off</button>
+        </div>
         <div class="settings-divider" role="separator"></div>
         <button type="button" class="settings-row" id="menu-export">
           <span class="row-icon" data-icon="download"></span>
@@ -1889,7 +1942,7 @@
             <li>Swipe right to reveal copy to Today, then tap. The original stays. On a computer, hover and use the calendar icon.</li>
             <li>Search is in the Today header. Two tags find either one; quote them to require both.</li>
             <li>View Today, 2d, 3d, 7d, or All.</li>
-            <li>Theme (above Settings) is light or dark, plus a color. Settings has font size, trophy, and export.</li>
+            <li>Theme (above Settings) is light or dark, plus a color. Settings has font size, trophy, timer, and export.</li>
             <li>On a past day, click the date to rate it with stars.</li>
             <li>Your journal stays on this device. Export from Settings is your backup — a new phone or a cleared browser won’t have it.</li>
           </ul>
@@ -1944,6 +1997,7 @@
       'sticky-note': '<path d="M15.5 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8.5L15.5 3z"/><polyline points="15 3 15 9 21 9"/>',
       'calendar-plus': '<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="12" y1="14" x2="12" y2="18"/><line x1="10" y1="16" x2="14" y2="16"/>',
       'trophy': '<path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>',
+      'clock': '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
       'chevron-down': '<polyline points="6 9 12 15 18 9"/>',
       'chevron-up': '<polyline points="18 15 12 9 6 15"/>',
       'type': '<polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/>',
@@ -1974,6 +2028,7 @@
       font: 'doingrightnow_font',
       seeded: 'doingrightnow_seeded',
       trophy: 'doingrightnow_trophy',
+      elapsed: 'doingrightnow_elapsed',
       daystars: 'doingrightnow_daystars'
     };
 
@@ -2010,8 +2065,10 @@
     let searchRange = 7; // default 7 days when searching
     let searchTimeout = null;
     let trophyThreshold = 6; // show gold trophy on day headers at this count
+    let showElapsed = true; // timer under the current line
     let dayStars = {}; // ISO date → 0–5 (0 = unrated outline star)
     let lastRenderedToday = null; // ISO date of the last render's "today"
+    let elapsedTimer = null;
 
     // Touch swipe state
     let touchStartX = 0;
@@ -2067,6 +2124,61 @@
       if (isPM && h !== 12) h += 12;
       if (isAM && h === 12) h = 0;
       return h * 60 + m;
+    }
+
+    function entryStartMs(entry) {
+      const n = Number(entry.startedAt);
+      if (n > 0) return n;
+      const d = parseISODate(entry.date);
+      const mins = timeToMinutes(entry.time);
+      d.setHours(Math.floor(mins / 60), mins % 60, 0, 0);
+      return d.getTime();
+    }
+
+    function elapsedView(startMs) {
+      const elapsed = Math.max(0, Date.now() - startMs);
+      if (elapsed >= 3600000) {
+        return { html: '1hr<sup class="elapsed-plus">+</sup>', phase: 'over', done: true };
+      }
+      const totalSec = Math.floor(elapsed / 1000);
+      const m = Math.floor(totalSec / 60);
+      const s = totalSec % 60;
+      const phase = elapsed >= 1800000 ? 'warn' : 'ok';
+      return { html: m + ':' + String(s).padStart(2, '0'), phase, done: false };
+    }
+
+    function paintElapsed() {
+      const el = document.querySelector('.entry.latest .entry-elapsed');
+      if (!el) {
+        stopElapsedTimer();
+        return;
+      }
+      const startMs = Number(el.dataset.started);
+      if (!startMs) {
+        stopElapsedTimer();
+        return;
+      }
+      const view = elapsedView(startMs);
+      el.innerHTML = view.html;
+      el.classList.remove('elapsed-ok', 'elapsed-warn', 'elapsed-over');
+      el.classList.add('elapsed-' + view.phase);
+      if (view.done) stopElapsedTimer();
+    }
+
+    function stopElapsedTimer() {
+      if (elapsedTimer) {
+        clearInterval(elapsedTimer);
+        elapsedTimer = null;
+      }
+    }
+
+    function startElapsedTimer() {
+      stopElapsedTimer();
+      if (!showElapsed) return;
+      paintElapsed();
+      const el = document.querySelector('.entry.latest .entry-elapsed');
+      if (!el || el.classList.contains('elapsed-over')) return;
+      elapsedTimer = setInterval(paintElapsed, 1000);
     }
 
     function parseISODate(iso) {
@@ -2126,6 +2238,7 @@
         applyFont(font);
         const t = parseInt(localStorage.getItem(KEYS.trophy) || '6', 10);
         trophyThreshold = (isNaN(t) || t < 1) ? 6 : t;
+        applyElapsed(localStorage.getItem(KEYS.elapsed) !== '0');
         try {
           dayStars = JSON.parse(localStorage.getItem(KEYS.daystars) || '{}') || {};
         } catch (err) {
@@ -2224,6 +2337,18 @@
       document.querySelectorAll('.font-btn').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.font === size);
       });
+    }
+
+    function applyElapsed(on) {
+      showElapsed = !!on;
+      persist(KEYS.elapsed, showElapsed ? '1' : '0');
+      document.documentElement.classList.toggle('elapsed-off', !showElapsed);
+      document.querySelectorAll('.elapsed-btn').forEach(btn => {
+        const isOn = btn.dataset.elapsed === 'on';
+        btn.classList.toggle('active', showElapsed ? isOn : !isOn);
+      });
+      if (showElapsed) startElapsedTimer();
+      else stopElapsedTimer();
     }
 
     // ─────────────────────────────────────────────
@@ -2551,6 +2676,7 @@
       if (searchOpen && searchQuery.trim()) {
         applySearchFilter();
       }
+      startElapsedTimer();
     }
 
     function bindSearch() {
@@ -2752,6 +2878,7 @@
           hitEl.textContent = hits === 1 ? '1 match' : `${hits} matches`;
         }
       }
+      startElapsedTimer();
     }
 
     function showOnlyToday() {
@@ -2863,7 +2990,10 @@
           ${icon('trash-2')}
         </button>
         <div class="entry-inner">
-          <div class="entry-time">${formatTimeHtml(entry.time)}</div>
+          <div class="entry-time">
+            <span class="entry-clock">${formatTimeHtml(entry.time)}</span>
+            ${isToday ? `<span class="entry-elapsed" data-started="${entryStartMs(entry)}"></span>` : ''}
+          </div>
           <span class="latest-loader" aria-hidden="true"></span>
           <div class="entry-body${emphasisClass}${strikeClass}" data-id="${entry.id}">${formatEntryText(entry.text)}</div>
           <div class="entry-actions">
@@ -2968,6 +3098,7 @@
         id: uid(),
         date: todayISO(),
         time: formatTime(),
+        startedAt: Date.now(),
         text
       };
       journal.unshift(entry);
@@ -3109,6 +3240,7 @@
         id: uid(),
         date: todayISO(),
         time: formatTime(),
+        startedAt: Date.now(),
         text: entry.text
       };
       journal.unshift(copy);
@@ -3151,6 +3283,7 @@
             id: uid(),
             date: todayISO(),
             time: formatTime(),
+            startedAt: Date.now(),
             text: t.text
           };
           journal.unshift(entry);
@@ -3457,10 +3590,17 @@
 
     // Font size buttons live inside Settings panel
     document.getElementById('panel-settings').addEventListener('click', (e) => {
-      const btn = e.target.closest('.font-btn');
-      if (!btn) return;
-      e.stopPropagation();
-      applyFont(btn.dataset.font);
+      const fontBtn = e.target.closest('.font-btn');
+      if (fontBtn) {
+        e.stopPropagation();
+        applyFont(fontBtn.dataset.font);
+        return;
+      }
+      const elapsedBtn = e.target.closest('.elapsed-btn');
+      if (elapsedBtn) {
+        e.stopPropagation();
+        applyElapsed(elapsedBtn.dataset.elapsed === 'on');
+      }
     });
 
     document.getElementById('trophy-threshold').addEventListener('change', (e) => {
@@ -3480,9 +3620,17 @@
     // ─────────────────────────────────────────────
     // When returning to the tab/app after midnight, fix the Today boundary
     document.addEventListener('visibilitychange', () => {
-      if (document.visibilityState === 'visible') ensureCorrectDay();
+      if (document.visibilityState === 'visible') {
+        ensureCorrectDay();
+        startElapsedTimer();
+      } else {
+        stopElapsedTimer();
+      }
     });
-    window.addEventListener('focus', () => ensureCorrectDay());
+    window.addEventListener('focus', () => {
+      ensureCorrectDay();
+      startElapsedTimer();
+    });
 
     // Init
     // ─────────────────────────────────────────────
