@@ -2353,8 +2353,35 @@
     }
 
     let storageReloadPending = false;
+    let storageReloadTimer = null;
+    let lastStorageSnapshot = '';
+    const TAB_ID = Math.random().toString(36).slice(2, 9);
+    let syncChannel = null;
+    try {
+      syncChannel = new BroadcastChannel('doingrightnow_sync');
+      syncChannel.onmessage = (e) => {
+        if (e.data && e.data.tabId === TAB_ID) return;
+        scheduleStorageReload();
+      };
+    } catch (err) {}
+
+    function storageSnapshot() {
+      return JSON.stringify({
+        j: localStorage.getItem(KEYS.journal),
+        q: localStorage.getItem(KEYS.quickadds),
+        n: localStorage.getItem(KEYS.notes),
+        d: localStorage.getItem(KEYS.daystars),
+        t: localStorage.getItem(KEYS.theme),
+        c: localStorage.getItem(KEYS.color),
+        f: localStorage.getItem(KEYS.font),
+        tr: localStorage.getItem(KEYS.trophy),
+        e: localStorage.getItem(KEYS.elapsed)
+      });
+    }
 
     function storageSyncBlocked() {
+      // Background tab — always sync (activeElement can linger after switching away)
+      if (!document.hasFocus()) return false;
       if (document.querySelector('.entry-body[contenteditable="true"]')) return true;
       const input = document.getElementById('today-input');
       if (input && document.activeElement === input && input.value.trim()) return true;
@@ -2363,30 +2390,47 @@
 
     function reloadFromStorage() {
       readStorage();
+      lastStorageSnapshot = storageSnapshot();
       render();
       const trophyInput = document.getElementById('trophy-threshold');
       if (trophyInput) trophyInput.value = trophyThreshold;
       startElapsedTimer();
     }
 
-    function requestStorageReload() {
-      if (storageSyncBlocked()) {
-        storageReloadPending = true;
-        return;
-      }
-      storageReloadPending = false;
-      reloadFromStorage();
+    function scheduleStorageReload() {
+      clearTimeout(storageReloadTimer);
+      storageReloadTimer = setTimeout(() => {
+        if (storageSyncBlocked()) {
+          storageReloadPending = true;
+          return;
+        }
+        storageReloadPending = false;
+        if (storageSnapshot() === lastStorageSnapshot) return;
+        reloadFromStorage();
+      }, 80);
     }
 
     function flushStorageReload() {
-      if (!storageReloadPending || storageSyncBlocked()) return;
+      if (storageSyncBlocked()) return;
       storageReloadPending = false;
+      if (storageSnapshot() === lastStorageSnapshot) return;
       reloadFromStorage();
+    }
+
+    function syncWhenVisible() {
+      if (document.visibilityState !== 'visible') return;
+      ensureCorrectDay();
+      startElapsedTimer();
+      if (storageSnapshot() !== lastStorageSnapshot) {
+        scheduleStorageReload();
+      } else {
+        flushStorageReload();
+      }
     }
 
     window.addEventListener('storage', (e) => {
       if (e.key !== null && !Object.values(KEYS).includes(e.key)) return;
-      requestStorageReload();
+      scheduleStorageReload();
     });
 
     let saveWarned = false;
@@ -2394,6 +2438,8 @@
     function persist(key, value) {
       try {
         localStorage.setItem(key, value);
+        lastStorageSnapshot = storageSnapshot();
+        if (syncChannel) syncChannel.postMessage({ tabId: TAB_ID, key });
       } catch (e) {
         if (!saveWarned) {
           saveWarned = true;
@@ -2831,7 +2877,10 @@
           }
         });
         todayInput.addEventListener('blur', () => {
-          setTimeout(commitTodayInput, 120);
+          setTimeout(() => {
+            commitTodayInput();
+            flushStorageReload();
+          }, 120);
           setTimeout(containViewport, 300);
         });
       }
@@ -3818,21 +3867,17 @@
     // When returning to the tab/app after midnight, fix the Today boundary
     document.addEventListener('visibilitychange', () => {
       if (document.visibilityState === 'visible') {
-        ensureCorrectDay();
-        startElapsedTimer();
+        syncWhenVisible();
       } else {
         stopElapsedTimer();
       }
     });
-    window.addEventListener('focus', () => {
-      ensureCorrectDay();
-      startElapsedTimer();
-      flushStorageReload();
-    });
+    window.addEventListener('focus', syncWhenVisible);
 
     // Init
     // ─────────────────────────────────────────────
     load();
+    lastStorageSnapshot = storageSnapshot();
     paintStaticIcons();
     const versionEl = document.getElementById('app-version');
     if (versionEl) versionEl.textContent = 'v' + APP_VERSION;
