@@ -2311,7 +2311,7 @@
       return result;
     }
 
-    function load() {
+    function readStorage() {
       try {
         journal = JSON.parse(localStorage.getItem(KEYS.journal) || '[]');
         quickAdds = JSON.parse(localStorage.getItem(KEYS.quickadds) || '[]');
@@ -2335,6 +2335,10 @@
         notes = '';
         applyColorTheme('green');
       }
+    }
+
+    function load() {
+      readStorage();
 
       // Only auto-seed on true first visit, not after user clears data
       if (journal.length === 0 && !localStorage.getItem(KEYS.seeded)) {
@@ -2342,6 +2346,43 @@
         persist(KEYS.seeded, '1');
       }
     }
+
+    let storageReloadPending = false;
+
+    function storageSyncBlocked() {
+      if (document.querySelector('.entry-body[contenteditable="true"]')) return true;
+      const input = document.getElementById('today-input');
+      if (input && document.activeElement === input && input.value.trim()) return true;
+      return false;
+    }
+
+    function reloadFromStorage() {
+      readStorage();
+      render();
+      const trophyInput = document.getElementById('trophy-threshold');
+      if (trophyInput) trophyInput.value = trophyThreshold;
+      startElapsedTimer();
+    }
+
+    function requestStorageReload() {
+      if (storageSyncBlocked()) {
+        storageReloadPending = true;
+        return;
+      }
+      storageReloadPending = false;
+      reloadFromStorage();
+    }
+
+    function flushStorageReload() {
+      if (!storageReloadPending || storageSyncBlocked()) return;
+      storageReloadPending = false;
+      reloadFromStorage();
+    }
+
+    window.addEventListener('storage', (e) => {
+      if (e.key !== null && !Object.values(KEYS).includes(e.key)) return;
+      requestStorageReload();
+    });
 
     let saveWarned = false;
 
@@ -3281,6 +3322,7 @@
         bodyEl.classList.toggle('emphasis', hasEmphasis(newText));
         bodyEl.classList.toggle('struck', hasStrike(newText));
         refreshDayCount(entry.date);
+        flushStorageReload();
       };
 
       bodyEl.onblur = finish;
@@ -3780,6 +3822,7 @@
     window.addEventListener('focus', () => {
       ensureCorrectDay();
       startElapsedTimer();
+      flushStorageReload();
     });
 
     // Init
