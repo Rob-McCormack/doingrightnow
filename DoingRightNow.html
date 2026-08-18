@@ -978,6 +978,23 @@
 
     .today-panel.open {
       display: block;
+      position: relative;
+      z-index: 2;
+    }
+
+    #feed.today-panel-open .today-tools {
+      position: relative;
+      z-index: 2;
+    }
+
+    #feed.today-panel-open .today-group .entry,
+    #feed.today-panel-open .day-group:not(.today-group) {
+      opacity: 0.48;
+    }
+
+    .today-group .entry,
+    .day-group {
+      transition: opacity 0.18s ease;
     }
 
     #today-input {
@@ -2899,6 +2916,7 @@
       if (searchOpen && searchQuery.trim()) {
         applySearchFilter();
       }
+      syncTodayPanelDim();
       startElapsedTimer();
     }
 
@@ -3160,6 +3178,12 @@
       renderTemplates();
     }
 
+    function syncTodayPanelDim() {
+      const feed = document.getElementById('feed');
+      if (!feed) return;
+      feed.classList.toggle('today-panel-open', !!document.querySelector('.today-panel.open'));
+    }
+
     function toggleTodayPanel(id, btn) {
       const panel = document.getElementById(id);
       if (!panel) return;
@@ -3198,6 +3222,7 @@
           }, 40);
         }
       }
+      syncTodayPanelDim();
     }
 
     function createEntryEl(entry, isToday, isLatest) {
