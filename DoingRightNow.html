@@ -391,7 +391,7 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      padding: 18px 4px 8px;
+      padding: 24px 4px 0;
       color: var(--text-muted);
       font-size: 13px;
       font-weight: 600;
@@ -1386,6 +1386,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
+      width: 100%;
       margin: 0 4px 12px;
       padding-top: 4px;
       font-size: 16px;
@@ -1393,6 +1394,10 @@
       letter-spacing: -0.02em;
       color: var(--today-heading);
       scroll-margin-top: 16px;
+    }
+
+    .menu-heading .scroll-top-btn {
+      margin-left: auto;
     }
 
     .menu-heading-icon {
@@ -1412,7 +1417,7 @@
     }
 
     .app-version {
-      margin: 18px 4px 0;
+      margin: 10px 4px 0;
       text-align: center;
       font-size: 12px;
       font-weight: 500;
@@ -1910,14 +1915,8 @@
       <h2 class="menu-heading" id="settings-heading">
         <span class="menu-heading-icon" data-icon="settings"></span>
         Settings
-      </h2>
-
-      <div class="brand-sep">
-        <span class="brand-sep-line"></span>
-        <a href="https://doingrightnow.com/">DoingRightNow.com</a>
-        <span class="brand-sep-line"></span>
         <button type="button" class="scroll-top-btn" id="scroll-top-btn" title="Jump to top" aria-label="Jump to top" data-icon="arrow-up"></button>
-      </div>
+      </h2>
 
       <!-- View range switcher -->
       <div class="view-switcher" id="view-switcher">
@@ -2041,6 +2040,12 @@
           <h3>Credit</h3>
           <p>Doing Right Now was inspired by Novie by the Sea’s video <a href="https://youtu.be/UFidZJhxz84" target="_blank" rel="noopener noreferrer">The BEST Productivity Method Ever for ADHD | Interstitial Journaling</a>. The talk is aimed at ADHD. What she says may well apply to most people.</p>
         </div>
+      </div>
+
+      <div class="brand-sep">
+        <span class="brand-sep-line"></span>
+        <a href="https://doingrightnow.com/">DoingRightNow.com</a>
+        <span class="brand-sep-line"></span>
       </div>
 
       <p class="app-version" id="app-version"></p>
