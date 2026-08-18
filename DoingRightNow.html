@@ -943,10 +943,10 @@
       font-weight: 500;
       color: var(--today);
       background: var(--today-soft);
-      border: none;
+      border: 2px solid transparent;
       border-radius: 8px;
       cursor: pointer;
-      transition: background 0.12s;
+      transition: background 0.15s, border-color 0.15s, box-shadow 0.15s, color 0.15s;
     }
 
     .today-tool-btn .tool-chevron {
@@ -965,23 +965,36 @@
     }
 
     .today-tool-btn.active {
-      background: color-mix(in srgb, var(--today-soft) 65%, var(--input-bg));
-      box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--today) 38%, var(--border));
+      background: color-mix(in srgb, var(--today-soft) 55%, var(--today) 18%);
+      border-color: var(--today);
+      box-shadow: 0 0 0 1px color-mix(in srgb, var(--today) 25%, transparent);
+      color: color-mix(in srgb, var(--today-heading) 80%, #000);
     }
 
     .today-tool-btn.active .tool-label {
-      font-weight: 700;
-      font-size: 14px;
-      color: var(--today-heading);
-      letter-spacing: -0.01em;
+      font-weight: 800;
+      font-size: 16px;
+      color: inherit;
+      letter-spacing: -0.02em;
     }
 
     .today-tool-btn.active svg {
-      stroke-width: 2.25;
+      width: 17px;
+      height: 17px;
+      stroke-width: 2.5;
+      color: inherit;
+      stroke: currentColor;
     }
 
     .today-tool-btn.active .tool-chevron {
       opacity: 1;
+    }
+
+    html.dark .today-tool-btn.active {
+      background: color-mix(in srgb, var(--today) 42%, var(--input-bg));
+      border-color: color-mix(in srgb, var(--today-heading) 65%, #fff);
+      box-shadow: 0 0 12px color-mix(in srgb, var(--today-heading) 35%, transparent);
+      color: color-mix(in srgb, var(--today-heading) 50%, #fff);
     }
 
     .today-tool-btn svg {
