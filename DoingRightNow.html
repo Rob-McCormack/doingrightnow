@@ -570,7 +570,8 @@
       gap: 6px;
     }
 
-    .scroll-bottom-btn {
+    .scroll-bottom-btn,
+    .scroll-help-btn {
       background: none;
       border: none;
       color: var(--today);
@@ -584,12 +585,14 @@
       transition: background 0.12s, opacity 0.12s;
     }
 
-    .scroll-bottom-btn:hover {
+    .scroll-bottom-btn:hover,
+    .scroll-help-btn:hover {
       background: var(--today-soft);
       opacity: 1;
     }
 
-    .scroll-bottom-btn svg {
+    .scroll-bottom-btn svg,
+    .scroll-help-btn svg {
       width: 20px;
       height: 20px;
     }
@@ -622,6 +625,7 @@
 
     .scroll-top-btn:focus-visible,
     .scroll-bottom-btn:focus-visible,
+    .scroll-help-btn:focus-visible,
     .search-toggle:focus-visible,
     #search-close:focus-visible {
       outline: 2px solid var(--today);
@@ -631,6 +635,7 @@
     @media (pointer: coarse) {
       .scroll-top-btn,
       .scroll-bottom-btn,
+      .scroll-help-btn,
       .search-toggle,
       #search-close {
         min-width: 44px;
@@ -1445,6 +1450,10 @@
       scroll-margin-top: 16px;
     }
 
+    #menu-help {
+      scroll-margin-top: 16px;
+    }
+
     .menu-heading .scroll-top-btn {
       margin-left: auto;
     }
@@ -1481,6 +1490,7 @@
     .day-rate,
     .scroll-top-btn,
     .scroll-bottom-btn,
+    .scroll-help-btn,
     .search-toggle,
     #search-close,
     .settings-row,
@@ -2848,6 +2858,9 @@
                 </button>
               </div>
               <div class="today-header-right">
+                <button type="button" class="scroll-help-btn" id="scroll-help-btn" title="Help" aria-label="Help">
+                  ${icon('help-circle')}
+                </button>
                 <button type="button" class="scroll-bottom-btn" id="scroll-bottom-btn" title="Settings" aria-label="Settings">
                   ${icon('settings')}
                 </button>
@@ -2956,6 +2969,7 @@
       // Re-bind today input + tools
       const todayInput = document.getElementById('today-input');
       if (todayInput) {
+        todayInput.addEventListener('focus', closeTodayPanels);
         todayInput.addEventListener('keydown', e => {
           if (e.key === 'Enter') {
             e.preventDefault();
@@ -2994,6 +3008,15 @@
       const closeBtn = document.getElementById('search-close');
       const input = document.getElementById('search-input');
       const scrollBtn = document.getElementById('scroll-bottom-btn');
+      const helpScrollBtn = document.getElementById('scroll-help-btn');
+
+      if (helpScrollBtn) {
+        helpScrollBtn.onclick = (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          openHelpPanel();
+        };
+      }
 
       if (scrollBtn) {
         scrollBtn.onclick = (e) => {
@@ -3254,12 +3277,7 @@
       feed.classList.toggle('today-panel-open', !!document.querySelector('.today-panel.open'));
     }
 
-    function toggleTodayPanel(id, btn) {
-      const panel = document.getElementById(id);
-      if (!panel) return;
-      const isOpen = panel.classList.contains('open');
-
-      // Close both
+    function closeTodayPanels() {
       document.querySelectorAll('.today-panel').forEach(p => p.classList.remove('open'));
       document.querySelectorAll('.today-tool-btn').forEach(b => {
         b.classList.remove('active');
@@ -3267,6 +3285,28 @@
         const ch = b.querySelector('.tool-chevron');
         if (ch) ch.innerHTML = icon('chevron-down');
       });
+      syncTodayPanelDim();
+    }
+
+    function openHelpPanel() {
+      dismissKeyboard();
+      closeTodayPanels();
+      const helpMenuBtn = document.getElementById('menu-help');
+      if (helpMenuBtn) {
+        helpMenuBtn.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      const panel = document.getElementById('panel-help');
+      if (panel && !panel.classList.contains('open')) {
+        togglePanel('panel-help');
+      }
+    }
+
+    function toggleTodayPanel(id, btn) {
+      const panel = document.getElementById(id);
+      if (!panel) return;
+      const isOpen = panel.classList.contains('open');
+
+      closeTodayPanels();
 
       if (!isOpen) {
         panel.classList.add('open');
