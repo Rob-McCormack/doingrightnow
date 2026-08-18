@@ -1924,8 +1924,8 @@
         <div class="view-row" id="view-range-row">
           <span class="view-icon" data-icon="eye"></span>
           <span class="view-label">View:</span>
-          <button type="button" class="view-btn active" data-range="1">Today</button>
-          <button type="button" class="view-btn" data-range="2">2d</button>
+          <button type="button" class="view-btn" data-range="1">Today</button>
+          <button type="button" class="view-btn active" data-range="2">2d</button>
           <button type="button" class="view-btn" data-range="3">3d</button>
           <button type="button" class="view-btn" data-range="7">7d</button>
           <button type="button" class="view-btn" data-range="all">All</button>
@@ -2138,7 +2138,7 @@
     let journal = [];
     let quickAdds = [];
     let notes = '';
-    let viewRange = 1; // 1 | 2 | 3 | 7 | 'all' — always start on Today
+    let viewRange = 2; // 1 | 2 | 3 | 7 | 'all' — default 2d so yesterday stays visible after midnight
     let openPanel = null;
     let searchOpen = false;
     let searchQuery = '';
@@ -2173,6 +2173,7 @@
       const now = todayISO();
       if (lastRenderedToday && lastRenderedToday !== now) {
         lastRenderedToday = now;
+        viewRange = 2;
         render();
         return true;
       }
@@ -3733,7 +3734,7 @@
       seedDummyData();
       searchOpen = false;
       searchQuery = '';
-      viewRange = 1;
+      viewRange = 2;
       render();
     });
 
