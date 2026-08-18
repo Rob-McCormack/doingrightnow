@@ -2288,6 +2288,43 @@
       if (window.scrollX) window.scrollTo({ left: 0 });
     }
 
+    function isTextInputFocused() {
+      const el = document.activeElement;
+      return !!el && el.matches('#today-input, #quickadd-input, #notes-area, #search-input, .entry-body[contenteditable="true"]');
+    }
+
+    function dismissKeyboard() {
+      const el = document.activeElement;
+      if (!el || typeof el.blur !== 'function') return;
+      if (el.matches('#today-input, #quickadd-input, #notes-area, #search-input, .entry-body[contenteditable="true"]')) {
+        el.blur();
+      }
+    }
+
+    function keyboardDismissTargetInside(target) {
+      return target.closest(
+        '#today-input, #quickadd-input, #notes-area, #search-input, .entry-body[contenteditable="true"], #today-input-wrap, .today-panel, .today-tools, #search-panel'
+      );
+    }
+
+    function bindKeyboardDismiss() {
+      const app = document.getElementById('app');
+      if (!app || app.dataset.keyboardDismissBound) return;
+      app.dataset.keyboardDismissBound = '1';
+
+      app.addEventListener('touchstart', (e) => {
+        if (!isTextInputFocused()) return;
+        if (keyboardDismissTargetInside(e.target)) return;
+        dismissKeyboard();
+      }, { passive: true });
+
+      app.addEventListener('mousedown', (e) => {
+        if (!isTextInputFocused()) return;
+        if (keyboardDismissTargetInside(e.target)) return;
+        dismissKeyboard();
+      });
+    }
+
     function parseISODate(iso) {
       const [y, m, d] = iso.split('-').map(Number);
       return new Date(y, m - 1, d);
@@ -3124,6 +3161,7 @@
     }
 
     function showOnlyToday() {
+      dismissKeyboard();
       viewRange = 1;
       if (searchOpen) searchRange = 1;
       render();
@@ -3903,6 +3941,7 @@
     // ─────────────────────────────────────────────
     load();
     lastStorageSnapshot = storageSnapshot();
+    bindKeyboardDismiss();
     paintStaticIcons();
     const versionEl = document.getElementById('app-version');
     if (versionEl) versionEl.textContent = 'v' + APP_VERSION;
