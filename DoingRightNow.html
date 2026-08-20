@@ -763,6 +763,45 @@
       font-size: 12px;
     }
 
+    .search-tips {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    .search-tips.search-tips-hidden {
+      display: none;
+    }
+
+    .search-tips-heading {
+      margin: 0 0 6px;
+      font-size: 13px;
+      font-weight: 650;
+      color: var(--text-soft);
+      letter-spacing: -0.01em;
+    }
+
+    .search-tips p {
+      margin: 0 0 8px;
+    }
+
+    .search-tips ul {
+      margin: 0;
+      padding-left: 1.1em;
+    }
+
+    .search-tips li + li {
+      margin-top: 4px;
+    }
+
+    .search-tips strong {
+      font-weight: 650;
+      color: var(--text-soft);
+    }
+
     .entry.search-hidden {
       display: none !important;
     }
@@ -2146,7 +2185,7 @@
             <li>Tap a line to edit the words. Very long lines truncate — tap once to expand, tap again to edit. You can’t change the time or reorder the day.</li>
             <li>Swipe left to reveal delete, then tap. On a computer, hover the line and use the trash icon.</li>
             <li>Swipe right to reveal copy to Today, then tap. The original stays. On a computer, hover and use the calendar icon.</li>
-            <li>Search is in the Today header. Two tags find either one; quote them to require both.</li>
+            <li>Search is in the Today header. Two tags find either one; quote them to require both. A single emoji works too — try 🤡 or ✅.</li>
             <li>View Today, 2d, 3d, 7d, or All.</li>
             <li>Theme (above Settings): light or dark, then pick an accent from the swatches. Green is the default.</li>
             <li>Settings has font size, trophy threshold, and export. Optional: Timer on current line shows elapsed time on today’s latest entry — a nudge, not a timesheet.</li>
@@ -2983,6 +3022,14 @@
                 <button type="button" class="view-btn" id="search-export">Export</button>
               </div>
             </div>
+            <div class="search-tips${searchQuery.trim() ? ' search-tips-hidden' : ''}" id="search-tips">
+              <h4 class="search-tips-heading">Calling all clowns 🤡</h4>
+              <p>Search is plain text — a single emoji works on any device. Type or paste one character to find every line that used it.</p>
+              <ul>
+                <li><strong>🤡</strong> — mark a distraction or rabbit hole; it jumps out when you scroll back</li>
+                <li><strong>✅</strong> — tag a small win; one tap from the emoji keyboard, easy to spot in the feed</li>
+              </ul>
+            </div>
           `;
           group.appendChild(searchPanel);
 
@@ -3291,6 +3338,8 @@
           hitEl.textContent = hits === 1 ? '1 match' : `${hits} matches`;
         }
       }
+      const tipsEl = document.getElementById('search-tips');
+      if (tipsEl) tipsEl.classList.toggle('search-tips-hidden', !!q);
       startElapsedTimer();
     }
 
