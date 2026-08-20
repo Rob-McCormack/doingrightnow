@@ -1246,6 +1246,10 @@
       border-left-color: var(--border);
     }
 
+    .entry-body.entry-truncated {
+      cursor: pointer;
+    }
+
     .entry-body[contenteditable="true"] {
       outline: none;
       background: var(--today-soft);
@@ -1456,6 +1460,21 @@
 
     .menu-heading .scroll-top-btn {
       margin-left: auto;
+      padding: 12px 14px;
+      min-width: 52px;
+      min-height: 52px;
+      border-radius: 10px;
+      background: var(--today-soft);
+      opacity: 1;
+    }
+
+    .menu-heading .scroll-top-btn svg {
+      width: 26px;
+      height: 26px;
+    }
+
+    .menu-heading .scroll-top-btn:hover {
+      background: color-mix(in srgb, var(--today-soft) 70%, var(--today) 15%);
     }
 
     .menu-heading-icon {
@@ -2199,7 +2218,9 @@
       { id: 'slate', name: 'Slate', swatch: '#525f7a' }
     ];
 
-    let journal = [];
+    let expandedEntryIds = new Set();
+    const ENTRY_PREVIEW_LEN = 200;
+
     let quickAdds = [];
     let notes = '';
     let viewRange = 2; // 1 | 2 | 3 | 7 | 'all' — default 2d so yesterday stays visible after midnight
@@ -3342,6 +3363,7 @@
 
       const emphasisClass = hasEmphasis(entry.text) ? ' emphasis' : '';
       const strikeClass = hasStrike(entry.text) ? ' struck' : '';
+      const truncated = isEntryTruncated(entry);
       el.innerHTML = `
         <button type="button" class="entry-bring" data-id="${entry.id}" title="Bring to Today" aria-label="Bring to Today">
           ${icon('calendar-plus')}
@@ -3355,7 +3377,7 @@
             ${isToday ? `<span class="entry-elapsed" data-started="${entryStartMs(entry)}"></span>` : ''}
           </div>
           <span class="latest-loader" aria-hidden="true"></span>
-          <div class="entry-body${emphasisClass}${strikeClass}" data-id="${entry.id}">${formatEntryText(entry.text)}</div>
+          <div class="entry-body${emphasisClass}${strikeClass}${truncated ? ' entry-truncated' : ''}" data-id="${entry.id}">${formatEntryText(entryDisplayText(entry))}</div>
           <div class="entry-actions">
             <button type="button" class="entry-action-btn bring" data-id="${entry.id}" title="Bring to Today" aria-label="Bring to Today">${icon('calendar-plus')}</button>
             <button type="button" class="entry-action-btn del" data-id="${entry.id}" title="Delete" aria-label="Delete">${icon('trash-2')}</button>
@@ -3367,6 +3389,10 @@
       const body = el.querySelector('.entry-body');
       body.addEventListener('click', (e) => {
         if (el.classList.contains('swiped-left') || el.classList.contains('swiped-right')) return;
+        if (isEntryTruncated(entry)) {
+          expandEntry(entry, body);
+          return;
+        }
         startEdit(body, entry);
       });
 
@@ -3403,6 +3429,33 @@
       inner.addEventListener('touchend', onTouchEnd, { passive: true });
 
       return el;
+    }
+
+    function truncateEntryText(raw, max = ENTRY_PREVIEW_LEN) {
+      if (raw.length <= max) return raw;
+      let cut = raw.slice(0, max);
+      const lastSpace = cut.lastIndexOf(' ');
+      if (lastSpace > max * 0.55) cut = cut.slice(0, lastSpace);
+      return cut.trimEnd() + '…';
+    }
+
+    function entryDisplayText(entry) {
+      if (entry.text.length <= ENTRY_PREVIEW_LEN || expandedEntryIds.has(entry.id)) {
+        return entry.text;
+      }
+      return truncateEntryText(entry.text);
+    }
+
+    function isEntryTruncated(entry) {
+      return entry.text.length > ENTRY_PREVIEW_LEN && !expandedEntryIds.has(entry.id);
+    }
+
+    function expandEntry(entry, bodyEl) {
+      expandedEntryIds.add(entry.id);
+      bodyEl.classList.remove('entry-truncated');
+      bodyEl.innerHTML = formatEntryText(entry.text);
+      bodyEl.classList.toggle('emphasis', hasEmphasis(entry.text));
+      bodyEl.classList.toggle('struck', hasStrike(entry.text));
     }
 
     function escapeHtml(str) {
@@ -3510,6 +3563,7 @@
         bodyEl.innerHTML = formatEntryText(newText);
         bodyEl.classList.toggle('emphasis', hasEmphasis(newText));
         bodyEl.classList.toggle('struck', hasStrike(newText));
+        if (newText.length > ENTRY_PREVIEW_LEN) expandedEntryIds.add(entry.id);
         refreshDayCount(entry.date);
         flushStorageReload();
       };
