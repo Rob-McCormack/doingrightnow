@@ -687,21 +687,28 @@
     #search-close {
       background: none;
       border: none;
-      color: var(--text-muted);
+      color: var(--danger);
       cursor: pointer;
-      padding: 6px;
+      padding: 8px;
       display: flex;
-      border-radius: 6px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      flex-shrink: 0;
+      opacity: 0.92;
+      transition: background 0.12s, opacity 0.12s, color 0.12s;
     }
 
     #search-close:hover {
-      color: var(--text);
-      background: var(--bg-secondary);
+      color: var(--danger);
+      background: color-mix(in srgb, var(--danger) 14%, transparent);
+      opacity: 1;
     }
 
     #search-close svg {
-      width: 18px;
-      height: 18px;
+      width: 24px;
+      height: 24px;
+      stroke-width: 2.5;
     }
 
     .search-meta {
@@ -1025,13 +1032,46 @@
     }
 
     #feed.today-panel-open .today-group .entry,
-    #feed.today-panel-open .day-group:not(.today-group) {
+    #feed.today-panel-open .day-group:not(.today-group),
+    #feed.today-input-active .today-group .entry,
+    #feed.today-input-active .day-group:not(.today-group) {
       opacity: 0.48;
+    }
+
+    #feed.today-panel-open .today-tools,
+    #feed.today-input-active #today-input-wrap,
+    #feed.today-input-active .today-tools {
+      position: relative;
+      z-index: 2;
     }
 
     .today-group .entry,
     .day-group {
       transition: opacity 0.18s ease;
+    }
+
+    #today-input-wrap.today-input-active {
+      position: relative;
+      z-index: 2;
+    }
+
+    #today-input-wrap.today-input-active #today-input {
+      border-style: solid;
+      border-color: var(--today);
+      background: color-mix(in srgb, var(--today-soft) 55%, var(--today) 18%);
+      box-shadow: 0 0 0 1px color-mix(in srgb, var(--today) 25%, transparent);
+    }
+
+    #today-input-wrap.today-input-active .today-input-icon svg {
+      width: 20px;
+      height: 20px;
+      stroke-width: 2.5;
+    }
+
+    html.dark #today-input-wrap.today-input-active #today-input {
+      background: color-mix(in srgb, var(--today) 42%, var(--input-bg));
+      border-color: color-mix(in srgb, var(--today-heading) 65%, #fff);
+      box-shadow: 0 0 12px color-mix(in srgb, var(--today-heading) 35%, transparent);
     }
 
     #today-input {
@@ -1049,8 +1089,15 @@
 
     #today-input:focus {
       border-style: solid;
-      border-color: color-mix(in srgb, var(--today) 55%, var(--border));
-      background: color-mix(in srgb, var(--today-soft) 42%, var(--input-bg));
+      border-color: var(--today);
+      background: color-mix(in srgb, var(--today-soft) 55%, var(--today) 18%);
+      box-shadow: 0 0 0 1px color-mix(in srgb, var(--today) 25%, transparent);
+    }
+
+    html.dark #today-input:focus {
+      background: color-mix(in srgb, var(--today) 42%, var(--input-bg));
+      border-color: color-mix(in srgb, var(--today-heading) 65%, #fff);
+      box-shadow: 0 0 12px color-mix(in srgb, var(--today-heading) 35%, transparent);
     }
 
     #today-input::placeholder {
@@ -2991,7 +3038,10 @@
       // Re-bind today input + tools
       const todayInput = document.getElementById('today-input');
       if (todayInput) {
-        todayInput.addEventListener('focus', closeTodayPanels);
+        todayInput.addEventListener('focus', () => {
+          closeTodayPanels();
+          syncTodayPanelDim();
+        });
         todayInput.addEventListener('keydown', e => {
           if (e.key === 'Enter') {
             e.preventDefault();
@@ -3002,6 +3052,7 @@
           setTimeout(() => {
             commitTodayInput();
             flushStorageReload();
+            syncTodayPanelDim();
           }, 120);
           setTimeout(containViewport, 300);
         });
@@ -3297,6 +3348,11 @@
       const feed = document.getElementById('feed');
       if (!feed) return;
       feed.classList.toggle('today-panel-open', !!document.querySelector('.today-panel.open'));
+      const input = document.getElementById('today-input');
+      const inputActive = !!(input && document.activeElement === input);
+      feed.classList.toggle('today-input-active', inputActive);
+      const wrap = document.getElementById('today-input-wrap');
+      if (wrap) wrap.classList.toggle('today-input-active', inputActive);
     }
 
     function closeTodayPanels() {
