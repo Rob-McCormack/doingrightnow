@@ -661,6 +661,12 @@
       display: block;
     }
 
+    #feed.search-open #today-input-wrap,
+    #feed.search-open .today-tools,
+    #feed.search-open .today-panel {
+      display: none;
+    }
+
     .search-box-row {
       display: flex;
       gap: 8px;
@@ -3347,6 +3353,7 @@
     function syncTodayPanelDim() {
       const feed = document.getElementById('feed');
       if (!feed) return;
+      feed.classList.toggle('search-open', searchOpen);
       feed.classList.toggle('today-panel-open', !!document.querySelector('.today-panel.open'));
       const input = document.getElementById('today-input');
       const inputActive = !!(input && document.activeElement === input);
