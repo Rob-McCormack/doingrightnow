@@ -2010,6 +2010,200 @@
       }
     }
 
+    /* Export preview sheet */
+    .export-sheet {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 0;
+    }
+
+    .export-sheet.open {
+      display: flex;
+    }
+
+    .export-sheet-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.42);
+    }
+
+    html.dark .export-sheet-backdrop {
+      background: rgba(0, 0, 0, 0.62);
+    }
+
+    .export-sheet-panel {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 640px;
+      max-height: min(88vh, 720px);
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px 14px 0 0;
+      box-shadow: 0 -8px 40px var(--shadow);
+      overflow: hidden;
+    }
+
+    @media (min-width: 640px) {
+      .export-sheet {
+        align-items: center;
+        padding: 24px;
+      }
+
+      .export-sheet-panel {
+        border-radius: 14px;
+        max-height: min(82vh, 720px);
+        box-shadow: 0 20px 50px var(--shadow);
+      }
+    }
+
+    .export-sheet-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 12px 10px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .export-sheet-title {
+      font-size: 14px;
+      font-weight: 650;
+      color: var(--today-heading);
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+      margin-right: auto;
+    }
+
+    .export-sheet-actions {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .export-action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 7px 10px;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--today);
+      background: var(--today-soft);
+      border: 1px solid color-mix(in srgb, var(--today) 22%, transparent);
+      border-radius: 8px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .export-action-btn svg {
+      width: 15px;
+      height: 15px;
+      flex-shrink: 0;
+    }
+
+    .export-action-btn:hover:not(:disabled) {
+      background: color-mix(in srgb, var(--today-soft) 70%, var(--today) 12%);
+    }
+
+    .export-action-btn:disabled {
+      opacity: 0.38;
+      cursor: not-allowed;
+    }
+
+    .export-sheet-close {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      padding: 0;
+      margin-left: 2px;
+      border: none;
+      border-radius: 8px;
+      background: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .export-sheet-close:hover {
+      color: var(--danger);
+      background: color-mix(in srgb, var(--danger) 12%, transparent);
+    }
+
+    .export-sheet-close svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .export-sheet-empty {
+      padding: 28px 20px;
+      text-align: center;
+      font-size: 15px;
+      color: var(--text-muted);
+    }
+
+    .export-sheet-preview {
+      flex: 1;
+      min-height: 0;
+      margin: 0;
+      padding: 14px 16px 18px;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 12.5px;
+      line-height: 1.45;
+      color: var(--text);
+      background: var(--input-bg);
+      border: none;
+      white-space: pre-wrap;
+      word-break: break-word;
+      tab-size: 2;
+    }
+
+    .export-sheet-toast {
+      position: absolute;
+      left: 50%;
+      bottom: 16px;
+      transform: translateX(-50%);
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--today-heading);
+      background: var(--today-soft);
+      border: 1px solid color-mix(in srgb, var(--today) 25%, transparent);
+      border-radius: 8px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.18s ease;
+    }
+
+    .export-sheet-toast.show {
+      opacity: 1;
+    }
+
+    .export-sheet-hint {
+      padding: 0 14px 10px;
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .export-sheet-hint:empty {
+      display: none;
+    }
+
     /* Help panel */
     .help-content {
       font-size: 14px;
@@ -2227,6 +2421,33 @@
     </div>
   </div>
 
+  <div id="export-sheet" class="export-sheet" aria-hidden="true">
+    <div class="export-sheet-backdrop" id="export-sheet-backdrop"></div>
+    <div class="export-sheet-panel" role="dialog" aria-modal="true" aria-labelledby="export-sheet-title">
+      <div class="export-sheet-toolbar">
+        <span class="export-sheet-title" id="export-sheet-title">Export</span>
+        <div class="export-sheet-actions">
+          <button type="button" class="export-action-btn" id="export-copy-btn" title="Copy plain text" aria-label="Copy">
+            <span data-icon="copy"></span><span class="export-action-label">Copy</span>
+          </button>
+          <button type="button" class="export-action-btn" id="export-email-btn" title="Open in email app" aria-label="Email">
+            <span data-icon="mail"></span><span class="export-action-label">Email</span>
+          </button>
+          <button type="button" class="export-action-btn" id="export-download-btn" title="Download .txt file" aria-label="Download">
+            <span data-icon="download"></span><span class="export-action-label">Download</span>
+          </button>
+        </div>
+        <button type="button" class="export-sheet-close" id="export-close-btn" title="Close" aria-label="Close">
+          <span data-icon="x"></span>
+        </button>
+      </div>
+      <p class="export-sheet-hint" id="export-sheet-hint"></p>
+      <div class="export-sheet-empty" id="export-sheet-empty" hidden>No matching entries.</div>
+      <pre class="export-sheet-preview" id="export-sheet-preview"></pre>
+      <p class="export-sheet-toast" id="export-sheet-toast" aria-live="polite"></p>
+    </div>
+  </div>
+
   <script>
     // ─────────────────────────────────────────────
     // State & Storage
@@ -2263,7 +2484,9 @@
       'pencil': '<path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>',
       'palette': '<circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>',
       'check': '<polyline points="20 6 9 17 4 12"/>',
-      'star': '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>'
+      'star': '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>',
+      'copy': '<rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>',
+      'mail': '<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>'
     };
 
     function icon(name, extraClass = '') {
@@ -2317,6 +2540,10 @@
 
     let expandedEntryIds = new Set();
     const ENTRY_PREVIEW_LEN = 200;
+    const EXPORT_EMAIL_URL_MAX = 1900;
+
+    let exportSheetState = { text: '', filename: '', emailSubject: '', empty: false };
+    let exportToastTimer = null;
 
     let quickAdds = [];
     let notes = '';
@@ -3229,7 +3456,7 @@
         exportBtn.onclick = (e) => {
           e.preventDefault();
           e.stopPropagation();
-          exportSearchResults();
+          openSearchExportPreview();
         };
       }
     }
@@ -3951,6 +4178,227 @@
       return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
     }
 
+    function buildFullExportText() {
+      let out = 'Doing Right Now - Export\n';
+      out += 'Generated: ' + new Date().toLocaleString() + '\n';
+      out += '========================================\n\n';
+      out += formatGroupedEntries(journal);
+      out += formatNotesAndQuickAdds();
+      return out;
+    }
+
+    function buildSearchExportText() {
+      const entries = matchingSearchEntries();
+      const q = searchQuery.trim();
+      const rangeLabel = searchRange === 'all' ? 'All' : (Number(searchRange) === 1 ? 'Today' : searchRange + 'd');
+      let out = 'Doing Right Now - Search export\n';
+      out += 'Query: ' + (q || '(all)') + '\n';
+      out += 'Range: ' + rangeLabel + '\n';
+      out += 'Generated: ' + new Date().toLocaleString() + '\n';
+      out += '========================================\n\n';
+      out += formatGroupedEntries(entries);
+      return out;
+    }
+
+    function searchExportFilename() {
+      const q = searchQuery.trim();
+      const slug = q.replace(/[^\w@#*-]+/g, '_').replace(/^_+|_+$/g, '').slice(0, 40);
+      return slug
+        ? 'DoingRightNow_' + slug + '_' + exportStamp() + '.txt'
+        : 'DoingRightNow_Search_' + exportStamp() + '.txt';
+    }
+
+    function searchExportEmailSubject() {
+      const q = searchQuery.trim();
+      const label = q ? q.slice(0, 80) : 'all matches';
+      return 'Doing Right Now search: ' + label;
+    }
+
+    function exportMailtoUrl(subject, body) {
+      return 'mailto:?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    }
+
+    function canEmailExport(text, subject) {
+      return exportMailtoUrl(subject, text).length <= EXPORT_EMAIL_URL_MAX;
+    }
+
+    function showExportToast(message) {
+      const el = document.getElementById('export-sheet-toast');
+      if (!el) return;
+      clearTimeout(exportToastTimer);
+      el.textContent = message;
+      el.classList.add('show');
+      exportToastTimer = setTimeout(() => el.classList.remove('show'), 2200);
+    }
+
+    function updateExportSheetActions() {
+      const { text, emailSubject, empty } = exportSheetState;
+      const copyBtn = document.getElementById('export-copy-btn');
+      const emailBtn = document.getElementById('export-email-btn');
+      const downloadBtn = document.getElementById('export-download-btn');
+      const hintEl = document.getElementById('export-sheet-hint');
+      const emailOk = !empty && canEmailExport(text, emailSubject);
+
+      if (copyBtn) copyBtn.disabled = empty;
+      if (downloadBtn) downloadBtn.disabled = empty;
+      if (emailBtn) {
+        emailBtn.disabled = empty || !emailOk;
+        emailBtn.title = empty
+          ? 'Nothing to email'
+          : (emailOk ? 'Open in your email app — add any recipient' : 'Too long for email — use Copy or Download');
+      }
+      if (hintEl) {
+        hintEl.textContent = (!empty && !emailOk)
+          ? 'Plain text only — email works for shorter exports; use Copy or Download for the full journal.'
+          : '';
+      }
+    }
+
+    function openExportSheet(opts) {
+      dismissKeyboard();
+      exportSheetState = {
+        text: opts.text || '',
+        filename: opts.filename || 'DoingRightNow_Export.txt',
+        emailSubject: opts.emailSubject || 'Doing Right Now export',
+        empty: !!opts.empty
+      };
+
+      const sheet = document.getElementById('export-sheet');
+      const titleEl = document.getElementById('export-sheet-title');
+      const previewEl = document.getElementById('export-sheet-preview');
+      const emptyEl = document.getElementById('export-sheet-empty');
+      const toastEl = document.getElementById('export-sheet-toast');
+
+      if (titleEl) titleEl.textContent = opts.title || 'Export';
+      if (toastEl) {
+        toastEl.textContent = '';
+        toastEl.classList.remove('show');
+      }
+      if (emptyEl) {
+        emptyEl.hidden = !opts.empty;
+        emptyEl.textContent = opts.emptyMessage || 'Nothing to export.';
+      }
+      if (previewEl) {
+        previewEl.hidden = !!opts.empty;
+        previewEl.textContent = opts.empty ? '' : opts.text;
+      }
+
+      updateExportSheetActions();
+      paintStaticIcons();
+
+      if (sheet) {
+        sheet.classList.add('open');
+        sheet.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+
+      if (!opts.empty) {
+        setTimeout(() => {
+          const closeBtn = document.getElementById('export-close-btn');
+          if (closeBtn) closeBtn.focus();
+        }, 30);
+      }
+    }
+
+    function closeExportSheet() {
+      const sheet = document.getElementById('export-sheet');
+      if (sheet) {
+        sheet.classList.remove('open');
+        sheet.setAttribute('aria-hidden', 'true');
+      }
+      document.body.style.overflow = '';
+      clearTimeout(exportToastTimer);
+      const toastEl = document.getElementById('export-sheet-toast');
+      if (toastEl) toastEl.classList.remove('show');
+    }
+
+    async function copyExportText() {
+      if (exportSheetState.empty) return;
+      const text = exportSheetState.text;
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(text);
+          showExportToast('Copied');
+          return;
+        }
+      } catch (err) {}
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        showExportToast('Copied');
+      } catch (err) {
+        showExportToast('Copy failed');
+      }
+      document.body.removeChild(ta);
+    }
+
+    function emailExportText() {
+      if (exportSheetState.empty) return;
+      const { text, emailSubject } = exportSheetState;
+      if (!canEmailExport(text, emailSubject)) {
+        showExportToast('Too long for email');
+        return;
+      }
+      window.location.href = exportMailtoUrl(emailSubject, text);
+    }
+
+    function downloadExportText() {
+      if (exportSheetState.empty) return;
+      downloadTextFile(exportSheetState.filename, exportSheetState.text);
+      showExportToast('Downloaded');
+    }
+
+    function bindExportSheet() {
+      document.getElementById('export-copy-btn')?.addEventListener('click', copyExportText);
+      document.getElementById('export-email-btn')?.addEventListener('click', emailExportText);
+      document.getElementById('export-download-btn')?.addEventListener('click', downloadExportText);
+      document.getElementById('export-close-btn')?.addEventListener('click', closeExportSheet);
+      document.getElementById('export-sheet-backdrop')?.addEventListener('click', closeExportSheet);
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && document.getElementById('export-sheet')?.classList.contains('open')) {
+          closeExportSheet();
+        }
+      });
+    }
+
+    function openFullExportPreview() {
+      openExportSheet({
+        title: 'Journal export',
+        text: buildFullExportText(),
+        filename: 'DoingRightNow_Export_' + exportStamp() + '.txt',
+        emailSubject: 'Doing Right Now journal export — ' + exportStamp(),
+        empty: false
+      });
+    }
+
+    function openSearchExportPreview() {
+      const entries = matchingSearchEntries();
+      if (entries.length === 0) {
+        openExportSheet({
+          title: 'Search export',
+          text: '',
+          filename: '',
+          emailSubject: '',
+          empty: true,
+          emptyMessage: 'No matching entries to export.'
+        });
+        return;
+      }
+      openExportSheet({
+        title: 'Search export',
+        text: buildSearchExportText(),
+        filename: searchExportFilename(),
+        emailSubject: searchExportEmailSubject(),
+        empty: false
+      });
+    }
+
     function formatGroupedEntries(entries) {
       const groups = {};
       entries.forEach(e => {
@@ -3988,39 +4436,6 @@
         });
       }
       return out;
-    }
-
-    function exportSearchResults() {
-      const entries = matchingSearchEntries();
-      if (entries.length === 0) {
-        window.alert('No matching entries to export.');
-        return;
-      }
-
-      const q = searchQuery.trim();
-      const rangeLabel = searchRange === 'all' ? 'All' : (Number(searchRange) === 1 ? 'Today' : searchRange + 'd');
-      let out = 'Doing Right Now - Search export\n';
-      out += 'Query: ' + (q || '(all)') + '\n';
-      out += 'Range: ' + rangeLabel + '\n';
-      out += 'Generated: ' + new Date().toLocaleString() + '\n';
-      out += '========================================\n\n';
-      out += formatGroupedEntries(entries);
-
-      const slug = q.replace(/[^\w@#*-]+/g, '_').replace(/^_+|_+$/g, '').slice(0, 40);
-      const fname = slug
-        ? 'DoingRightNow_' + slug + '_' + exportStamp() + '.txt'
-        : 'DoingRightNow_Search_' + exportStamp() + '.txt';
-      downloadTextFile(fname, out);
-    }
-
-    function exportData() {
-      let out = 'Doing Right Now - Export\n';
-      out += 'Generated: ' + new Date().toLocaleString() + '\n';
-      out += '========================================\n\n';
-      out += formatGroupedEntries(journal);
-      out += formatNotesAndQuickAdds();
-
-      downloadTextFile('DoingRightNow_Export_' + exportStamp() + '.txt', out);
     }
 
     // ─────────────────────────────────────────────
@@ -4066,7 +4481,7 @@
 
     document.getElementById('menu-export').addEventListener('click', (e) => {
       e.stopPropagation();
-      exportData();
+      openFullExportPreview();
     });
 
     document.getElementById('menu-clear').addEventListener('click', (e) => {
@@ -4193,6 +4608,7 @@
     load();
     lastStorageSnapshot = storageSnapshot();
     bindKeyboardDismiss();
+    bindExportSheet();
     paintStaticIcons();
     const versionEl = document.getElementById('app-version');
     if (versionEl) versionEl.textContent = 'v' + APP_VERSION;
