@@ -475,6 +475,13 @@
       font-weight: 500;
     }
 
+    .export-range-hint {
+      margin: 2px 0 0 26px;
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.35;
+    }
+
     .view-btn {
       background: none;
       border: none;
@@ -2280,6 +2287,19 @@
         </div>
       </div>
 
+      <div class="view-switcher" id="export-switcher">
+        <div class="view-row" id="export-range-row">
+          <span class="view-icon" data-icon="download"></span>
+          <span class="view-label">Export:</span>
+          <button type="button" class="view-btn export-range-btn" data-export-range="1">Today</button>
+          <button type="button" class="view-btn export-range-btn active" data-export-range="2">2d</button>
+          <button type="button" class="view-btn export-range-btn" data-export-range="3">3d</button>
+          <button type="button" class="view-btn export-range-btn" data-export-range="7">7d</button>
+          <button type="button" class="view-btn export-range-btn" data-export-range="all">All</button>
+        </div>
+        <p class="export-range-hint">All includes Notes &amp; Quick Add — your full backup.</p>
+      </div>
+
       <div class="menu-divide" role="separator"></div>
 
       <!-- Theme -->
@@ -2324,11 +2344,6 @@
           <button type="button" class="view-btn elapsed-btn" data-elapsed="off">Off</button>
         </div>
         <div class="settings-divider" role="separator"></div>
-        <button type="button" class="settings-row" id="menu-export">
-          <span class="row-icon" data-icon="download"></span>
-          <span class="row-label">Export Data<span class="row-hint">Your backup — this journal lives only in this browser</span></span>
-        </button>
-        <div class="settings-divider" role="separator"></div>
         <button type="button" class="settings-row" id="menu-clear">
           <span class="row-icon" data-icon="trash-2"></span>
           <span class="row-label">Clear All Data</span>
@@ -2365,18 +2380,18 @@
             <li>Swipe left to reveal delete, then tap. On a computer, hover the line and use the trash icon.</li>
             <li>Swipe right to reveal copy to Today, then tap. The original stays. On a computer, hover and use the calendar icon.</li>
             <li>Search is in the Today header. Two tags find either one; quote them to require both. A single emoji works too — try 🤡 or ✅.</li>
-            <li>View Today, 2d, 3d, 7d, or All.</li>
+            <li>View Today, 2d, 3d, 7d, or All. Export uses the same ranges — tap one below View.</li>
             <li>Theme (above Settings): light or dark, then pick an accent from the swatches. Green is the default.</li>
-            <li>Settings has font size, trophy threshold, and export. Optional: Timer on current line shows elapsed time on today’s latest entry — a nudge, not a timesheet.</li>
+            <li>Settings has font size, trophy threshold, and clear options. Optional: Timer on current line shows elapsed time on today’s latest entry — a nudge, not a timesheet.</li>
             <li>On a past day, click the date to rate it with stars.</li>
-            <li>Your journal stays on this device. Export from Settings is your backup — a new phone or a cleared browser won’t have it.</li>
+            <li>Your journal stays on this device. Export All for a full backup — a new phone or a cleared browser won’t have it.</li>
             <li>On a phone, Add to Home Screen for an app icon. The journal still lives on this device.</li>
           </ul>
           <div class="tip">Optional: <em>@person</em> · <em>#location</em> · <em>*project</em> · any <strong>!</strong> makes the line bold and red · <strong>xx</strong> as its own word strikes it out.</div>
           <h3>Notes and Quick Add</h3>
           <h4>Notes</h4>
           <p>Some things don’t belong on a timestamped line — a URL, a thought for after this, a reminder before bed. Notes is a scratchpad for that. It sits under Today and auto-saves.</p>
-          <p>Notes is one overall pad, not a note for each day. You won’t see Notes under Monday or Tuesday. A full export from Settings puts Notes once at the bottom, not beside each day. Search export leaves Notes out.</p>
+          <p>Notes is one overall pad, not a note for each day. You won’t see Notes under Monday or Tuesday. Export All puts Notes once at the bottom, not beside each day. Search export leaves Notes out.</p>
           <p>Don’t turn it into a second planner. You can ignore Notes. The journal still works.</p>
           <p>You can’t change a time or reorder the day. You can edit the words of any line — handy if you later add @Bill or #home for search.</p>
           <h4>Quick Add</h4>
@@ -2524,6 +2539,7 @@
     let quickAdds = [];
     let notes = '';
     let viewRange = 2; // 1 | 2 | 3 | 7 | 'all' — default 2d so yesterday stays visible after midnight
+    let exportRange = 2;
     let openPanel = null;
     let searchOpen = false;
     let searchQuery = '';
@@ -2860,7 +2876,7 @@
       } catch (e) {
         if (!saveWarned) {
           saveWarned = true;
-          window.alert("Couldn't save — export a copy from Settings, then free some browser storage.");
+          window.alert("Couldn't save — export a copy below View, then free some browser storage.");
         }
       }
     }
@@ -3325,6 +3341,12 @@
       document.querySelectorAll('#view-range-row .view-btn').forEach(btn => {
         const r = btn.dataset.range;
         const active = (r === 'all' && viewRange === 'all') || (r !== 'all' && Number(r) === viewRange);
+        btn.classList.toggle('active', active);
+      });
+
+      document.querySelectorAll('#export-range-row .export-range-btn').forEach(btn => {
+        const r = btn.dataset.exportRange;
+        const active = (r === 'all' && exportRange === 'all') || (r !== 'all' && Number(r) === exportRange);
         btn.classList.toggle('active', active);
       });
 
@@ -4154,13 +4176,45 @@
       return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
     }
 
-    function buildFullExportText() {
+    function exportRangeLabel(range) {
+      return range === 'all' ? 'All' : (Number(range) === 1 ? 'Today' : range + 'd');
+    }
+
+    function exportDateWindow(range) {
+      const today = todayISO();
+      if (range === 'all') {
+        const existing = journal.map(e => e.date);
+        let oldest = today;
+        if (existing.length > 0) {
+          oldest = existing.sort((a, b) => a.localeCompare(b))[0];
+        }
+        return dateRange(oldest, today);
+      }
+      const days = Number(range);
+      const cutoff = new Date();
+      cutoff.setDate(cutoff.getDate() - (days - 1));
+      const cutoffISO = cutoff.getFullYear() + '-' + String(cutoff.getMonth() + 1).padStart(2, '0') + '-' + String(cutoff.getDate()).padStart(2, '0');
+      return dateRange(cutoffISO, today);
+    }
+
+    function entriesForExportRange(range) {
+      const allowed = new Set(exportDateWindow(range));
+      return journal.filter(entry => allowed.has(entry.date));
+    }
+
+    function buildJournalExportText(range) {
+      const entries = entriesForExportRange(range);
       let out = 'Doing Right Now - Export\n';
+      out += 'Range: ' + exportRangeLabel(range) + '\n';
       out += 'Generated: ' + new Date().toLocaleString() + '\n';
       out += '========================================\n\n';
-      out += formatGroupedEntries(journal);
-      out += formatNotesAndQuickAdds();
+      out += formatGroupedEntries(entries);
+      if (range === 'all') out += formatNotesAndQuickAdds();
       return out;
+    }
+
+    function exportFilenameForRange(range) {
+      return 'DoingRightNow_Export_' + exportRangeLabel(range) + '_' + exportStamp() + '.txt';
     }
 
     function buildSearchExportText() {
@@ -4328,12 +4382,16 @@
       });
     }
 
-    function openFullExportPreview() {
+    function openJournalExportPreview() {
+      const entries = entriesForExportRange(exportRange);
+      const hasNotesOrQuickAdds = exportRange === 'all' && (!!notes.trim() || quickAdds.length > 0);
+      const empty = entries.length === 0 && !hasNotesOrQuickAdds;
       openExportSheet({
-        title: 'Journal export',
-        text: buildFullExportText(),
-        filename: 'DoingRightNow_Export_' + exportStamp() + '.txt',
-        empty: false
+        title: 'Export — ' + exportRangeLabel(exportRange),
+        text: buildJournalExportText(exportRange),
+        filename: exportFilenameForRange(exportRange),
+        empty,
+        emptyMessage: 'Nothing to export in this range.'
       });
     }
 
@@ -4400,7 +4458,7 @@
     // Event bindings
     // ─────────────────────────────────────────────
     document.getElementById('view-switcher').addEventListener('click', (e) => {
-      const btn = e.target.closest('.view-btn');
+      const btn = e.target.closest('#view-range-row .view-btn');
       if (!btn) return;
 
       if (btn.classList.contains('font-btn')) {
@@ -4413,6 +4471,18 @@
       viewRange = r === 'all' ? 'all' : Number(r);
       render();
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    document.getElementById('export-switcher').addEventListener('click', (e) => {
+      const btn = e.target.closest('.export-range-btn');
+      if (!btn) return;
+      const r = btn.dataset.exportRange;
+      if (!r) return;
+      exportRange = r === 'all' ? 'all' : Number(r);
+      document.querySelectorAll('#export-range-row .export-range-btn').forEach(b => {
+        b.classList.toggle('active', b === btn);
+      });
+      openJournalExportPreview();
     });
 
     document.getElementById('scroll-top-btn').addEventListener('click', () => {
@@ -4435,11 +4505,6 @@
       if (!btn) return;
       e.stopPropagation();
       applyColorTheme(btn.dataset.color);
-    });
-
-    document.getElementById('menu-export').addEventListener('click', (e) => {
-      e.stopPropagation();
-      openFullExportPreview();
     });
 
     document.getElementById('menu-clear').addEventListener('click', (e) => {
