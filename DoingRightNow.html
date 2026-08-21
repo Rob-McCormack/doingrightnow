@@ -520,7 +520,7 @@
       margin: 0 6px;
     }
 
-    /* Font size scale — Small is the current default */
+    /* Font size scale — Medium is the default */
     html.font-medium {
       font-size: 17px;
     }
@@ -528,6 +528,8 @@
     html.font-medium .day-header.today { font-size: 28px; }
     html.font-medium .entry-body { font-size: 16px; }
     html.font-medium #today-input { font-size: 16px; }
+    html.font-medium .template-item,
+    html.font-medium #quickadd-input { font-size: 16px; }
 
     html.font-large {
       font-size: 19px;
@@ -536,6 +538,8 @@
     html.font-large .day-header.today { font-size: 30px; }
     html.font-large .entry-body { font-size: 18px; }
     html.font-large #today-input { font-size: 17px; }
+    html.font-large .template-item,
+    html.font-large #quickadd-input { font-size: 18px; }
     html.font-large .entry-time { font-size: 14px; width: 86px; }
 
     /* Search */
@@ -1902,7 +1906,7 @@
       padding: 9px 10px;
       background: var(--bg-secondary);
       border-radius: 6px;
-      font-size: 14px;
+      font-size: 15px;
       cursor: pointer;
       transition: background 0.12s;
     }
@@ -2128,8 +2132,8 @@
         <div class="settings-row static-row">
           <span class="row-icon" data-icon="type"></span>
           <span class="row-label">Size</span>
-          <button type="button" class="view-btn font-btn active" data-font="small">S</button>
-          <button type="button" class="view-btn font-btn" data-font="medium">M</button>
+          <button type="button" class="view-btn font-btn" data-font="small">S</button>
+          <button type="button" class="view-btn font-btn active" data-font="medium">M</button>
           <button type="button" class="view-btn font-btn" data-font="large">L</button>
         </div>
         <div class="settings-row static-row">
@@ -2534,7 +2538,7 @@
         const theme = localStorage.getItem(KEYS.theme) || 'light';
         applyTheme(theme);
         applyColorTheme(localStorage.getItem(KEYS.color) || 'green');
-        const font = localStorage.getItem(KEYS.font) || 'small';
+        const font = localStorage.getItem(KEYS.font) || 'medium';
         applyFont(font);
         const t = parseInt(localStorage.getItem(KEYS.trophy) || '6', 10);
         trophyThreshold = (isNaN(t) || t < 1) ? 6 : t;
@@ -3183,12 +3187,7 @@
       }
 
       if (closeBtn) {
-        closeBtn.onclick = () => {
-          clearTimeout(searchTimeout);
-          searchOpen = false;
-          searchQuery = '';
-          render();
-        };
+        closeBtn.onclick = () => closeSearch();
       }
 
       if (input) {
@@ -3201,12 +3200,7 @@
         };
         input.addEventListener('blur', () => setTimeout(containViewport, 300));
         input.onkeydown = (e) => {
-          if (e.key === 'Escape') {
-            clearTimeout(searchTimeout);
-            searchOpen = false;
-            searchQuery = '';
-            render();
-          }
+          if (e.key === 'Escape') closeSearch();
         };
         // Restore cursor position after re-renders if needed
         if (searchOpen && searchQuery) {
@@ -3371,6 +3365,7 @@
             const text = e.target.value.trim();
             if (!text) return;
             quickAdds.push({ id: uid(), text });
+            quickAdds.sort(compareQuickAdds);
             saveQuickAdds();
             e.target.value = '';
             renderTemplates();
@@ -3502,6 +3497,10 @@
       const body = el.querySelector('.entry-body');
       body.addEventListener('click', (e) => {
         if (el.classList.contains('swiped-left') || el.classList.contains('swiped-right')) return;
+        if (searchOpen) {
+          closeSearch();
+          return;
+        }
         if (isEntryTruncated(entry)) {
           expandEntry(entry, body);
           return;
@@ -3569,6 +3568,15 @@
       bodyEl.innerHTML = formatEntryText(entry.text);
       bodyEl.classList.toggle('emphasis', hasEmphasis(entry.text));
       bodyEl.classList.toggle('struck', hasStrike(entry.text));
+    }
+
+    function applyEntryBodyDisplay(bodyEl, entry) {
+      expandedEntryIds.delete(entry.id);
+      const truncated = isEntryTruncated(entry);
+      bodyEl.innerHTML = formatEntryText(entryDisplayText(entry));
+      bodyEl.classList.toggle('emphasis', hasEmphasis(entry.text));
+      bodyEl.classList.toggle('struck', hasStrike(entry.text));
+      bodyEl.classList.toggle('entry-truncated', truncated);
     }
 
     function escapeHtml(str) {
@@ -3659,9 +3667,7 @@
         bodyEl.contentEditable = 'false';
         const newText = bodyEl.textContent.trim();
         if (!newText) {
-          bodyEl.innerHTML = formatEntryText(entry.text);
-          bodyEl.classList.toggle('emphasis', hasEmphasis(entry.text));
-          bodyEl.classList.toggle('struck', hasStrike(entry.text));
+          applyEntryBodyDisplay(bodyEl, entry);
           return;
         }
         if (newText !== entry.text) {
@@ -3672,11 +3678,7 @@
             saveJournal();
           }
         }
-        // Re-apply formatting
-        bodyEl.innerHTML = formatEntryText(newText);
-        bodyEl.classList.toggle('emphasis', hasEmphasis(newText));
-        bodyEl.classList.toggle('struck', hasStrike(newText));
-        if (newText.length > ENTRY_PREVIEW_LEN) expandedEntryIds.add(entry.id);
+        applyEntryBodyDisplay(bodyEl, entry);
         refreshDayCount(entry.date);
         flushStorageReload();
       };
@@ -3789,10 +3791,20 @@
     // ─────────────────────────────────────────────
     // Quick Adds
     // ─────────────────────────────────────────────
+    function compareQuickAdds(a, b) {
+      return a.text.localeCompare(b.text, undefined, { sensitivity: 'base' });
+    }
+
     function sortedQuickAdds() {
-      return quickAdds.slice().sort((a, b) =>
-        a.text.localeCompare(b.text, undefined, { sensitivity: 'base' })
-      );
+      return quickAdds.slice().sort(compareQuickAdds);
+    }
+
+    function closeSearch() {
+      if (!searchOpen) return;
+      clearTimeout(searchTimeout);
+      searchOpen = false;
+      searchQuery = '';
+      render();
     }
 
     function renderTemplates() {
