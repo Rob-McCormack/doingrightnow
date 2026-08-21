@@ -246,7 +246,14 @@
       font-size: 14px;
     }
 
+    .guide-link + .guide-link {
+      margin-top: 10px;
+    }
+
     .guide-link a {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
       color: var(--text-soft);
       text-decoration: none;
       font-weight: 500;
@@ -255,6 +262,17 @@
     .guide-link a:hover {
       color: var(--today);
       text-decoration: underline;
+    }
+
+    .guide-link-icon {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
     .shot {
@@ -536,8 +554,8 @@
         <p class="lede">Not what you should do tomorrow — one grounding question: <strong>What are you doing right now?</strong> Write the answer. Timestamp it. When it changes, write the next line. Not a planner, to-do list, or habit tracker.</p>
         <a class="cta" href="https://doingrightnow.com/DoingRightNow">Open the journal</a>
         <p class="note"><strong>Free!</strong> No sign up, login, passwords, ads or tracking. Your journal stays on your device.</p>
-        <p class="guide-link"><a href="guide.html">Getting the most out of Doing Right Now →</a></p>
-        <p class="guide-link"><a href="help.html">Help &amp; documentation →</a></p>
+        <p class="guide-link"><a href="guide.html"><svg class="guide-link-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>Getting the most out of Doing Right Now →</a></p>
+        <p class="guide-link"><a href="help.html"><svg class="guide-link-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>Help &amp; documentation →</a></p>
       </section>
 
       <figure class="shot">
