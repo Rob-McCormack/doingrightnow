@@ -61,8 +61,6 @@ Everything lives in this browser’s `localStorage`. No accounts, no cloud, no t
 
 ## Credits
 
-- [Event illustrations by Storyset](https://storyset.com/event)
-
 Made by [Simpler Tasks](https://simplertasks.com).
 
 ## License
