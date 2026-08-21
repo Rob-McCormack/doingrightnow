@@ -370,11 +370,25 @@
     }
 
     .chapter h3 {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
       font-size: 18px;
       font-weight: 650;
       letter-spacing: -0.02em;
       color: var(--heading);
       margin: 22px 0 8px;
+    }
+
+    .chapter-icon {
+      width: 17px;
+      height: 17px;
+      flex-shrink: 0;
+      stroke: var(--today);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
     .chapter p {
@@ -601,7 +615,7 @@
 
       <section class="chapter">
         <h2>Notes and Quick Add</h2>
-        <h3>Notes</h3>
+        <h3><svg class="chapter-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8.5L15.5 3z"/><polyline points="15 3 15 9 21 9"/></svg>Notes</h3>
         <p>The journal is one timestamped line at a time. Some things don’t belong there — a URL, a thought for after this, a reminder before bed. Notes is a scratchpad for that. It sits under Today. It auto-saves.</p>
         <p>Notes is one overall pad, not a note for each day. Don’t expect a Notes section under Monday or Tuesday. Export All puts Notes once at the bottom, not beside each day. Search export leaves Notes out.</p>
         <p>Don’t turn it into a second planner. You already have tools for that, and copying the same list into two places becomes the job.</p>
@@ -615,7 +629,7 @@
           <li>a sentence that isn’t what you’re doing right now</li>
         </ul>
         <p>You can ignore Notes. The journal still works.</p>
-        <h3>Quick Add</h3>
+        <h3><svg class="chapter-icon" viewBox="0 0 24 24" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>Quick Add</h3>
         <p>If you type the same line often, save it once. Open Quick Add, type the line, press Enter. Tap it later to log it now, with a new timestamp.</p>
         <p>Tags work here too, so the saved line can already include @Bill, #home, or *Website.</p>
         <ul>
