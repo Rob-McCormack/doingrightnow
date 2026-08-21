@@ -73,8 +73,10 @@ Tap the search icon in the Today header.
 
 - Plain text finds any line containing it.
 - A single tag (`@Bill`) finds every line with that tag.
+- **Mention vs marker:** `gym` finds any line with that word (*went to the gym*); `#gym` finds only lines you tagged with `#gym`. Same idea for `@` and `*` — the prefix means "I tagged this on purpose."
 - **Two tags, unquoted** (`@Bill #home`) → matches lines with **either** tag (OR).
 - **Two tags, quoted** (`"@Bill #home"`) → matches lines with **both** tags (AND).
+- Search `xx` to pull up completed lines — handy for a quick "what I finished" report.
 - Search has its own date range (Today / 2d / 3d / 7d / All), separate from the main view range.
 - Tap **Export** inside search to export just the matching lines.
 
@@ -112,6 +114,7 @@ A scratchpad under Today, for anything that isn't a timestamped line — a URL, 
 - **View** (Today / 2d / 3d / 7d / All) controls how many days show in your feed.
 - **Export** uses the same ranges. Tap a range, then **Export** opens a preview you can **Copy** or **Download** as a `.txt` file.
 - **Export All** is the only option that also includes your Notes and Quick Add templates — treat it as your full backup.
+- Exports are for reading and backup only — there is no import. You can't load a `.txt` file back into the app.
 
 ![Screenshot placeholder: the export preview sheet, showing an editable text preview with Copy and Download buttons at the top.](placeholder-export.png)
 
@@ -151,8 +154,10 @@ An optional small elapsed-time readout next to today's newest entry — how long
 
 - Everything lives in your browser on this device only. There is no account and nothing is sent anywhere.
 - **Add to Home Screen** (on phone) gives you an app icon — the journal still lives on this device only, not "in the cloud."
-- If you open the app in two tabs or windows at once, they stay in sync automatically.
+- If you open the app in two tabs or windows at once, they stay in sync automatically — but only in the **same browser on the same device**.
+- **Different device or different browser = different journal.** Only tabs/windows in the same browser share one copy. Your phone and laptop do not sync.
 - **Export All** regularly if you want a backup — a new phone or a cleared browser will not have your history otherwise.
+- Clearing site data, cache, or browsing history from your browser settings can delete the journal too — not just the in-app Clear options. **Export All first** if you're about to clean up.
 
 In **Settings**, you can:
 - **Clear All Data** — wipes everything.

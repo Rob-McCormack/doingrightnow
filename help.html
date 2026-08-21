@@ -527,8 +527,10 @@
         <ul>
           <li>Plain text finds any line containing it.</li>
           <li>A single tag (<code>@Bill</code>) finds every line with that tag.</li>
+          <li><strong>Mention vs marker:</strong> <code>gym</code> finds any line with that word (<em>went to the gym</em>); <code>#gym</code> finds only lines you tagged with <code>#gym</code>. Same idea for <code>@</code> and <code>*</code> — the prefix means “I tagged this on purpose.”</li>
           <li><strong>Two tags, unquoted</strong> (<code>@Bill #home</code>) → matches lines with <strong>either</strong> tag (OR).</li>
           <li><strong>Two tags, quoted</strong> (<code>"@Bill #home"</code>) → matches lines with <strong>both</strong> tags (AND).</li>
+          <li>Search <code>xx</code> to pull up completed lines — handy for a quick “what I finished” report.</li>
           <li>Search has its own date range (Today / 2d / 3d / 7d / All), separate from the main view range.</li>
           <li>Tap <strong>Export</strong> inside search to export just the matching lines.</li>
         </ul>
@@ -564,6 +566,7 @@
           <li><strong>View</strong> (Today / 2d / 3d / 7d / All) controls how many days show in your feed.</li>
           <li><strong>Export</strong> uses the same ranges. Tap a range to open a preview you can <strong>Copy</strong> or <strong>Download</strong> as a <code>.txt</code> file.</li>
           <li><strong>Export All</strong> is the only option that also includes your Notes and Quick Add templates — treat it as your full backup.</li>
+          <li>Exports are for reading and backup only — there is no import. You can't load a <code>.txt</code> file back into the app.</li>
         </ul>
         <figure class="help-figure">
           <div class="help-figure-placeholder" aria-hidden="true">Screenshot coming soon</div>
@@ -604,8 +607,10 @@
         <ul>
           <li>Everything lives in your browser on this device only. There is no account and nothing is sent anywhere.</li>
           <li><strong>Add to Home Screen</strong> (on phone) gives you an app icon — the journal still lives on this device only, not "in the cloud."</li>
-          <li>If you open the app in two tabs or windows at once, they stay in sync automatically.</li>
+          <li>If you open the app in two tabs or windows at once, they stay in sync automatically — but only in the <strong>same browser on the same device</strong>.</li>
+          <li><strong>Different device or different browser = different journal.</strong> Only tabs/windows in the same browser share one copy. Your phone and laptop do not sync.</li>
           <li><strong>Export All</strong> regularly if you want a backup — a new phone or a cleared browser will not have your history otherwise.</li>
+          <li>Clearing site data, cache, or browsing history from your browser settings can delete the journal too — not just the in-app Clear options. <strong>Export All first</strong> if you're about to clean up.</li>
         </ul>
         <p>In <strong>Settings</strong>, you can:</p>
         <ul>
