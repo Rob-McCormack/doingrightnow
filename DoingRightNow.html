@@ -2172,10 +2172,28 @@
     }
 
     .help-content h4 {
+      display: flex;
+      align-items: center;
+      gap: 7px;
       font-size: 14px;
       color: var(--text);
       margin: 16px 0 6px;
       font-weight: 600;
+    }
+
+    .help-heading-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      color: var(--accent);
+    }
+
+    .help-heading-icon svg {
+      width: 16px;
+      height: 16px;
     }
 
     .help-content ul {
@@ -2371,12 +2389,12 @@
             <li><strong>✅</strong> — tag a small win; one tap from the emoji keyboard, easy to spot in the feed</li>
           </ul>
           <h3>Notes and Quick Add</h3>
-          <h4>Notes</h4>
+          <h4><span class="help-heading-icon" data-icon="sticky-note" aria-hidden="true"></span>Notes</h4>
           <p>Some things don’t belong on a timestamped line — a URL, a thought for after this, a reminder before bed. Notes is a scratchpad for that. It sits under Today and auto-saves.</p>
           <p>Notes is one overall pad, not a note for each day. You won’t see Notes under Monday or Tuesday. Export All puts Notes once at the bottom, not beside each day. Search export leaves Notes out.</p>
           <p>Don’t turn it into a second planner. You can ignore Notes. The journal still works.</p>
           <p>You can’t change a time or reorder the day. You can edit the words of any line — handy if you later add @Bill or #home for search.</p>
-          <h4>Quick Add</h4>
+          <h4><span class="help-heading-icon" data-icon="zap" aria-hidden="true"></span>Quick Add</h4>
           <p>If you type the same line often, save it once. Open Quick Add, type the line, press Enter. Tap it later to log it now, with a new timestamp. Tags work here too.</p>
           <ul>
             <li>open the document *Report</li>
