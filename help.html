@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#ffffff" />
+  <script>
+    try {
+      if (localStorage.getItem('doingrightnow_theme') === 'dark') {
+        document.documentElement.classList.add('dark');
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#13171e');
+      }
+    } catch (e) {}
+  </script>
+  <meta name="description" content="Help for Doing Right Now — how to journal, search, export, tag entries, and back up your data on this device." />
+  <link rel="canonical" href="https://doingrightnow.com/help.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Doing Right Now — Help" />
+  <meta property="og:description" content="Everything you need to know about the journal — optional reading, because the app is built so you never have to learn it." />
+  <meta property="og:url" content="https://doingrightnow.com/help.html" />
+  <meta property="og:image" content="https://doingrightnow.com/images/screenshot.png" />
+  <title>Doing Right Now — Help</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-secondary: #f4f5f7;
+      --text: #373c44;
+      --heading: #1f2329;
+      --text-muted: #646b79;
+      --text-soft: #4d5461;
+      --border: #e7eaef;
+      --today: #398712;
+      --today-hover: #33790f;
+      --today-soft: #d7fbc1;
+      --shadow: rgba(0, 0, 0, 0.08);
+      --dot: rgba(0, 0, 0, 0.04);
+      --tag-person: #7c6bc4;
+      --tag-location: #2a9d8f;
+      --tag-project: #e9a825;
+      --urgent: #c0392b;
+    }
+
+    html.dark {
+      --bg: #13171e;
+      --bg-secondary: #181c25;
+      --text: #c2c7d0;
+      --heading: #eef1f5;
+      --text-muted: #7b8495;
+      --text-soft: #9aa3b2;
+      --border: #202632;
+      --today: #398712;
+      --today-hover: #409614;
+      --today-soft: rgba(57, 135, 18, 0.22);
+      --shadow: rgba(0, 0, 0, 0.45);
+      --dot: rgba(255, 255, 255, 0.04);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      min-height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    body {
+      background-image: radial-gradient(var(--dot) 1px, transparent 1px);
+      background-size: 18px 18px;
+    }
+
+    .page {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 28px 24px 40px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .brand a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .brand a:hover { color: var(--today); }
+
+    .theme-btn {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      border: none;
+      border-radius: 8px;
+      background: none;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    .theme-btn:hover {
+      color: var(--text);
+      background: var(--bg-secondary);
+    }
+
+    .theme-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .brand-mark svg {
+      width: 32px;
+      height: 32px;
+      stroke: #4ba764;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .help-hero {
+      padding: 36px 0 8px;
+    }
+
+    .help-label {
+      font-size: 13px;
+      font-weight: 650;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--today);
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: clamp(26px, 4.5vw, 36px);
+      font-weight: 650;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      color: var(--heading);
+      margin-bottom: 20px;
+    }
+
+    .help-intro p {
+      font-size: 17px;
+      color: var(--text-soft);
+      margin-bottom: 14px;
+    }
+
+    article h2 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--heading);
+      margin: 40px 0 14px;
+      scroll-margin-top: 20px;
+    }
+
+    article p {
+      font-size: 16px;
+      color: var(--text-soft);
+      margin-bottom: 14px;
+    }
+
+    article ul, article ol {
+      margin: 0 0 16px 1.25em;
+      font-size: 16px;
+      color: var(--text-soft);
+    }
+
+    article li { margin-bottom: 8px; }
+    article li:last-child { margin-bottom: 0; }
+
+    article p:last-child { margin-bottom: 0; }
+
+    .compare-table-wrap {
+      overflow-x: auto;
+      margin: 20px 0 8px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--bg-secondary);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 15px;
+    }
+
+    th, td {
+      padding: 12px 14px;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid var(--border);
+    }
+
+    tr:last-child th,
+    tr:last-child td { border-bottom: none; }
+
+    th {
+      font-weight: 650;
+      color: var(--heading);
+      background: color-mix(in srgb, var(--bg-secondary) 70%, var(--border));
+    }
+
+    td { color: var(--text-soft); }
+
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.92em;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.1em 0.35em;
+    }
+
+    .example-line {
+      margin: 16px 0;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg-secondary);
+      font-size: 16px;
+      color: var(--text);
+    }
+
+    .tag-person { color: var(--tag-person); font-style: italic; }
+    .tag-location { color: var(--tag-location); font-style: italic; }
+    .tag-project { color: var(--tag-project); font-style: italic; }
+    .line-done { text-decoration: line-through; opacity: 0.75; }
+
+    .steps {
+      list-style: none;
+      margin: 16px 0 0;
+      padding: 0;
+      counter-reset: step;
+    }
+
+    .steps li {
+      counter-increment: step;
+      margin-bottom: 14px;
+      padding-left: 2.2em;
+      position: relative;
+      font-size: 16px;
+      color: var(--text-soft);
+    }
+
+    .steps li::before {
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: 0.05em;
+      width: 1.5em;
+      height: 1.5em;
+      border-radius: 50%;
+      background: var(--today-soft);
+      color: var(--today);
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .help-figure {
+      margin: 22px 0;
+    }
+
+    .help-figure-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 140px;
+      border: 1px dashed var(--border);
+      border-radius: 10px;
+      background: var(--bg-secondary);
+      color: var(--text-muted);
+      font-size: 14px;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .help-figure figcaption {
+      margin-top: 8px;
+      font-size: 14px;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 36px 0;
+    }
+
+    .note {
+      margin: 18px 0;
+      padding: 14px 16px;
+      border-left: 3px solid var(--today);
+      border-radius: 0 8px 8px 0;
+      background: var(--bg-secondary);
+      font-size: 16px;
+      color: var(--text-soft);
+    }
+
+    .closing {
+      margin: 44px 0 0;
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+      font-size: 15px;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .cta-row {
+      text-align: center;
+      margin: 36px 0 0;
+    }
+
+    .cta {
+      display: inline-flex;
+      background: var(--today);
+      color: #fff;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 12px 22px;
+      border-radius: 8px;
+      transition: background 0.15s;
+    }
+
+    .cta:hover { background: var(--today-hover); }
+
+    .text-link {
+      color: var(--today);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .text-link:hover { text-decoration: underline; }
+
+    footer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-top: 48px;
+      padding-top: 22px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    footer a:hover { color: var(--text); }
+
+    @media (max-width: 640px) {
+      .page { padding: 20px 18px 32px; }
+      .help-intro p,
+      article p,
+      article ul,
+      article ol,
+      .steps li { font-size: 17px; }
+      th, td { font-size: 15px; padding: 10px 12px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="brand">
+      <a class="brand-mark" href="index.html">
+        <svg viewBox="0 0 24 24" width="32" height="32" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="18" rx="2"/>
+          <line x1="16" y1="2" x2="16" y2="6"/>
+          <line x1="8" y1="2" x2="8" y2="6"/>
+          <line x1="3" y1="10" x2="21" y2="10"/>
+          <path d="m9 16 2 2 4-4"/>
+        </svg>
+        <span>DoingRightNow.com</span>
+      </a>
+      <button type="button" class="theme-btn" id="theme-btn" aria-label="Dark Mode">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+    </header>
+
+    <main>
+      <header class="help-hero">
+        <p class="help-label">Help</p>
+        <h1>Doing Right Now — Help</h1>
+        <div class="help-intro">
+          <p>A journal for getting unstuck. Write one line for what you're doing right now, timestamp it automatically, and move on. No planning, no streaks, no pressure to finish.</p>
+        </div>
+      </header>
+
+      <article>
+        <h2 id="quick-start">Quick Start</h2>
+        <ol class="steps">
+          <li>Open the journal — you land on <strong>Today</strong>.</li>
+          <li>Type what you're doing right now in the box at the top and press <strong>Enter</strong>.</li>
+          <li>When what you're doing changes, write the next line. That's the whole app.</li>
+          <li>Everything you write stays on this device — no sign-up, no cloud.</li>
+        </ol>
+        <figure class="help-figure">
+          <div class="help-figure-placeholder" aria-hidden="true">Screenshot coming soon</div>
+          <figcaption>The Today view with the input box at top and a few timestamped entries below it, showing the elapsed timer next to the newest line.</figcaption>
+        </figure>
+        <p class="note">That's enough to start. Everything below is optional — the app is built so you never <em>have</em> to learn it.</p>
+
+        <hr />
+
+        <h2 id="the-journal">The Journal</h2>
+        <ul>
+          <li>Type a line, press <strong>Enter</strong>. It's saved instantly with the current time.</li>
+          <li>Entries can't be reordered, and you can't change a line's timestamp. This is deliberate: the journal is a record of what actually happened, not a plan you can rearrange.</li>
+          <li>You <em>can</em> edit the words of any line at any time — see <a class="text-link" href="#editing-a-line">Editing a Line</a>.</li>
+        </ul>
+
+        <h2 id="editing-a-line">Editing a Line</h2>
+        <ul>
+          <li><strong>Tap a line</strong> to edit its text in place. Press <strong>Enter</strong> or tap elsewhere to save; press <strong>Escape</strong> to cancel.</li>
+          <li>Long lines (over ~200 characters) show truncated with <code>…</code>. <strong>Tap once to expand</strong>, tap again to edit.</li>
+        </ul>
+        <figure class="help-figure">
+          <div class="help-figure-placeholder" aria-hidden="true">Screenshot coming soon</div>
+          <figcaption>A single entry mid-edit, showing the text cursor active inside the line with no timestamp change.</figcaption>
+        </figure>
+
+        <h2 id="deleting-or-reusing">Deleting or Reusing a Line</h2>
+        <div class="compare-table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Action</th>
+                <th scope="col">On phone</th>
+                <th scope="col">On computer</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Delete</td>
+                <td>Swipe the line <strong>left</strong>, tap the trash icon</td>
+                <td>Hover the line, click the trash icon</td>
+              </tr>
+              <tr>
+                <td>Copy to Today</td>
+                <td>Swipe the line <strong>right</strong>, tap the calendar icon</td>
+                <td>Hover the line, click the calendar icon</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>"Copy to Today" duplicates the line with a <strong>new</strong> timestamp at the current time — the original entry stays exactly where it was. Useful for a task you keep returning to.</p>
+        <figure class="help-figure">
+          <div class="help-figure-placeholder" aria-hidden="true">Screenshot coming soon</div>
+          <figcaption>An entry swiped left on mobile, revealing the delete icon underneath.</figcaption>
+        </figure>
+
+        <h2 id="tags-formatting">Tags &amp; Formatting</h2>
+        <p>Optional shorthand you can drop into any line:</p>
+        <div class="compare-table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Type this</th>
+                <th scope="col">Result</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>@name</code></td>
+                <td>Tags a person (shown in violet)</td>
+              </tr>
+              <tr>
+                <td><code>#place</code></td>
+                <td>Tags a location (shown in teal)</td>
+              </tr>
+              <tr>
+                <td><code>*project</code></td>
+                <td>Tags a project (shown in amber)</td>
+              </tr>
+              <tr>
+                <td><code>!</code> anywhere in the line</td>
+                <td>Makes the whole line <strong style="color: var(--urgent);">bold and red</strong></td>
+              </tr>
+              <tr>
+                <td><code>xx</code> as its own word</td>
+                <td>Strikes the whole line through, marks it done</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p><strong>Example:</strong></p>
+        <p class="example-line"><span class="line-done">email <span class="tag-person">@Bill</span> about <span class="tag-project">*Website</span> xx</span> — done, tagged to Bill and the Website project, and searchable by either tag later.</p>
+        <p>Two more work anywhere, including from an emoji keyboard:</p>
+        <ul>
+          <li><strong>🤡</strong> — flag a distraction or rabbit hole, so it's easy to spot scrolling back</li>
+          <li><strong>✅</strong> — flag a small win</li>
+        </ul>
+
+        <h2 id="search">Search</h2>
+        <p>Tap the search icon in the Today header.</p>
+        <ul>
+          <li>Plain text finds any line containing it.</li>
+          <li>A single tag (<code>@Bill</code>) finds every line with that tag.</li>
+          <li><strong>Two tags, unquoted</strong> (<code>@Bill #home</code>) → matches lines with <strong>either</strong> tag (OR).</li>
+          <li><strong>Two tags, quoted</strong> (<code>"@Bill #home"</code>) → matches lines with <strong>both</strong> tags (AND).</li>
+          <li>Search has its own date range (Today / 2d / 3d / 7d / All), separate from the main view range.</li>
+          <li>Tap <strong>Export</strong> inside search to export just the matching lines.</li>
+        </ul>
+        <figure class="help-figure">
+          <div class="help-figure-placeholder" aria-hidden="true">Screenshot coming soon</div>
+          <figcaption>The search panel open, showing the search box, date-range buttons, and a match count.</figcaption>
+        </figure>
+
+        <h2 id="quick-add">Quick Add</h2>
+        <p>For lines you type often.</p>
+        <ol class="steps">
+          <li>Tap <strong>Quick Add</strong> under Today, type a line, press <strong>Enter</strong> to save it as a reusable template.</li>
+          <li>Tap a saved template any time to log it <strong>now</strong>, with a fresh timestamp.</li>
+          <li>Tap the <strong>×</strong> next to a template to remove it.</li>
+        </ol>
+        <p>Tags work in templates too — e.g. save <code>standup *Website</code> once, then tap it every morning.</p>
+        <figure class="help-figure">
+          <div class="help-figure-placeholder" aria-hidden="true">Screenshot coming soon</div>
+          <figcaption>The Quick Add panel expanded, showing a short list of saved templates with an × to remove each.</figcaption>
+        </figure>
+
+        <h2 id="notes">Notes</h2>
+        <p>A scratchpad under Today, for anything that isn't a timestamped line — a URL, a reminder, a thought for later.</p>
+        <ul>
+          <li>Auto-saves as you type.</li>
+          <li>One shared pad, not one per day — it won't show up under Monday or Tuesday specifically.</li>
+          <li>Left out of Search Export; included once, at the bottom, in a full <strong>Export All</strong>.</li>
+          <li>Entirely optional — ignore it and the journal still works exactly the same.</li>
+        </ul>
+
+        <h2 id="viewing-exporting">Viewing &amp; Exporting</h2>
+        <ul>
+          <li><strong>View</strong> (Today / 2d / 3d / 7d / All) controls how many days show in your feed.</li>
+          <li><strong>Export</strong> uses the same ranges. Tap a range to open a preview you can <strong>Copy</strong> or <strong>Download</strong> as a <code>.txt</code> file.</li>
+          <li><strong>Export All</strong> is the only option that also includes your Notes and Quick Add templates — treat it as your full backup.</li>
+        </ul>
+        <figure class="help-figure">
+          <div class="help-figure-placeholder" aria-hidden="true">Screenshot coming soon</div>
+          <figcaption>The export preview sheet, showing an editable text preview with Copy and Download buttons at the top.</figcaption>
+        </figure>
+
+        <h2 id="day-ratings">Day Ratings &amp; Counts</h2>
+        <ul>
+          <li>On any <strong>past</strong> day, tap the date to cycle a star rating from 0 to 5.</li>
+          <li>Every day header shows a small <strong>done/total</strong> count — "done" meaning lines you've marked with <code>xx</code>.</li>
+          <li>Once a day reaches your trophy threshold (default 6 entries, set in Settings), a small trophy icon appears next to the count. It's a nudge, not a target — there's no penalty for not hitting it.</li>
+        </ul>
+        <figure class="help-figure">
+          <div class="help-figure-placeholder" aria-hidden="true">Screenshot coming soon</div>
+          <figcaption>A past day's header showing the date, a 3-star rating, and a "4/6" count badge.</figcaption>
+        </figure>
+
+        <h2 id="timer">Timer on the Current Line</h2>
+        <p>An optional small elapsed-time readout next to today's newest entry — how long you've been on this one thing.</p>
+        <ul>
+          <li>Counts up normally for the first 30 minutes.</li>
+          <li>Turns a warning color between 30–60 minutes.</li>
+          <li>Shows <strong>"1hr+"</strong> and stops counting after an hour.</li>
+          <li>Toggle it on/off in <strong>Settings</strong>. It's a gentle nudge, not a timesheet — nothing is logged or reported anywhere.</li>
+        </ul>
+
+        <h2 id="theme">Theme &amp; Appearance</h2>
+        <ul>
+          <li><strong>Theme</strong> panel: toggle light/dark, then pick from 20 accent colors.</li>
+          <li><strong>Settings</strong> panel: font size (S/M/L).</li>
+        </ul>
+        <figure class="help-figure">
+          <div class="help-figure-placeholder" aria-hidden="true">Screenshot coming soon</div>
+          <figcaption>The Theme panel open, showing the light/dark toggle above a grid of color swatches.</figcaption>
+        </figure>
+
+        <h2 id="your-data">Your Data</h2>
+        <ul>
+          <li>Everything lives in your browser on this device only. There is no account and nothing is sent anywhere.</li>
+          <li><strong>Add to Home Screen</strong> (on phone) gives you an app icon — the journal still lives on this device only, not "in the cloud."</li>
+          <li>If you open the app in two tabs or windows at once, they stay in sync automatically.</li>
+          <li><strong>Export All</strong> regularly if you want a backup — a new phone or a cleared browser will not have your history otherwise.</li>
+        </ul>
+        <p>In <strong>Settings</strong>, you can:</p>
+        <ul>
+          <li><strong>Clear All Data</strong> — wipes everything.</li>
+          <li><strong>Clear All Except Today</strong> — keeps only today's entries.</li>
+          <li><strong>Clear Data Older Than 30 Days</strong> — trims old entries, keeps recent ones, keeps Notes and Quick Add.</li>
+          <li><strong>Clear All, Add Sample Data</strong> — resets and loads example entries, useful for a demo or a fresh look at the layout.</li>
+        </ul>
+        <p>All of these ask for confirmation first and cannot be undone once confirmed.</p>
+
+        <h2 id="advanced-tips">Advanced Tips</h2>
+        <ul>
+          <li><strong><code>xx</code> doubles as a lightweight checkbox.</strong> Since it strikes the line and counts toward the day's "done" total, you can use short entries as quick to-do-in-the-moment items: write the task, come back and add <code>xx</code> when it's done.</li>
+          <li><strong>Quote tags to narrow, leave unquoted to widen.</strong> <code>@Bill #home</code> casts a wide net (either tag); <code>"@Bill #home"</code> narrows to lines tagged with both — handy once your tag vocabulary grows.</li>
+          <li><strong>Emoji as tags work in search too.</strong> Paste 🤡 into search to instantly pull up every rabbit hole you flagged this week.</li>
+          <li><strong>Tune the trophy threshold to match your day, not a generic number.</strong> If your entries are naturally longer or shorter than average, adjust it in Settings so the trophy actually reflects a good day for you.</li>
+          <li><strong>The un-editable timestamp is a feature, not a limitation.</strong> If you want to reconstruct what you were doing at a specific time, the journal is more trustworthy than a to-do list precisely because you can't quietly rewrite history.</li>
+          <li><strong>Notes is not a second inbox.</strong> If you catch yourself building a running list of tasks in Notes, that's a sign to move it to whatever planner you already use — Notes is meant for one-off scraps, not a parallel system.</li>
+          <li><strong>Star ratings are for your own pattern-spotting</strong>, not a metric to optimize — there's no aggregate score anywhere in the app by design.</li>
+          <li><strong>Export before switching devices or clearing your browser.</strong> There is no account recovery — the exported <code>.txt</code> file is your only portable copy.</li>
+        </ul>
+
+        <p class="closing">Doing Right Now was inspired by Novie by the Sea's talk on <a class="text-link" href="https://youtu.be/UFidZJhxz84" target="_blank" rel="noopener noreferrer">interstitial journaling</a> — timestamped lines between tasks, one moment at a time.</p>
+
+        <div class="cta-row">
+          <a class="cta" href="DoingRightNow.html">Open the journal</a>
+        </div>
+      </article>
+    </main>
+
+    <footer>
+      <a href="DoingRightNow.html">Open journal</a>
+      <a href="guide.html">Getting the most out of DRN</a>
+      <a href="index.html">Home</a>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      const btn = document.getElementById('theme-btn');
+      const root = document.documentElement;
+      const meta = document.querySelector('meta[name="theme-color"]');
+
+      function applyDark(dark) {
+        root.classList.toggle('dark', dark);
+        meta.setAttribute('content', dark ? '#13171e' : '#ffffff');
+        btn.setAttribute('aria-label', dark ? 'Light Mode' : 'Dark Mode');
+        try { localStorage.setItem('doingrightnow_theme', dark ? 'dark' : 'light'); } catch (e) {}
+      }
+
+      btn.addEventListener('click', function () {
+        applyDark(!root.classList.contains('dark'));
+      });
+    })();
+  </script>
+</body>
+</html>
