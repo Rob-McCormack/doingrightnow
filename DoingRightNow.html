@@ -12,6 +12,9 @@
       }
       var color = localStorage.getItem('doingrightnow_color');
       if (color) document.documentElement.setAttribute('data-color', color);
+      if (localStorage.getItem('doingrightnow_mono') === '1') {
+        document.documentElement.classList.add('mono');
+      }
     } catch (e) {}
   </script>
   <title>Doing Right Now</title>
@@ -349,6 +352,47 @@
       --today-heading: #909ebe;
       --today-soft: rgba(82, 95, 122, 0.22);
       --today-ink: #fff;
+    }
+
+    /* Monochrome — calm neutral accents; overrides color swatch */
+    html.mono {
+      --accent: #5c6370;
+      --today: #4d5461;
+      --today-heading: #4d5461;
+      --today-soft: #eef0f3;
+      --today-ink: #fff;
+    }
+
+    html.dark.mono {
+      --accent: #9aa3b2;
+      --today: #8b95a5;
+      --today-heading: #c2c7d0;
+      --today-soft: rgba(154, 163, 178, 0.16);
+      --today-ink: #13171e;
+    }
+
+    html.mono .tag-person,
+    html.mono .tag-location,
+    html.mono .tag-project {
+      color: var(--text-muted);
+    }
+
+    html.mono .entry-elapsed.elapsed-ok,
+    html.mono .entry-elapsed.elapsed-warn {
+      color: var(--text-muted);
+    }
+
+    html.mono .entry-elapsed.elapsed-over {
+      color: var(--text);
+    }
+
+    html.mono .strike-check {
+      color: var(--text-muted);
+    }
+
+    html.mono #theme-color-picker {
+      opacity: 0.38;
+      pointer-events: none;
     }
 
     * {
@@ -2329,8 +2373,16 @@
           <span class="row-icon" id="theme-icon" data-icon="moon"></span>
           <span class="row-label" id="theme-label">Dark Mode</span>
         </button>
-        <div class="theme-picker-name" id="theme-color-name">Green</div>
-        <div class="theme-swatches" id="theme-swatches" role="listbox" aria-label="Color theme"></div>
+        <div class="settings-row static-row">
+          <span class="row-icon" data-icon="contrast"></span>
+          <span class="row-label">Monochrome</span>
+          <button type="button" class="view-btn mono-btn" data-mono="on">On</button>
+          <button type="button" class="view-btn mono-btn active" data-mono="off">Off</button>
+        </div>
+        <div id="theme-color-picker">
+          <div class="theme-picker-name" id="theme-color-name">Green</div>
+          <div class="theme-swatches" id="theme-swatches" role="listbox" aria-label="Color theme"></div>
+        </div>
       </div>
 
       <!-- Settings -->
@@ -2497,6 +2549,7 @@
       'type': '<polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/>',
       'pencil': '<path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>',
       'palette': '<circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>',
+      'contrast': '<circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 0 0 20"/>',
       'check': '<polyline points="20 6 9 17 4 12"/>',
       'star': '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>',
       'copy': '<rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>',
@@ -2522,6 +2575,7 @@
       notes: 'doingrightnow_usernotes',
       theme: 'doingrightnow_theme',
       color: 'doingrightnow_color',
+      mono: 'doingrightnow_mono',
       font: 'doingrightnow_font',
       seeded: 'doingrightnow_seeded',
       trophy: 'doingrightnow_trophy',
@@ -2570,6 +2624,7 @@
     let searchTimeout = null;
     let trophyThreshold = 6; // show gold trophy on day headers at this count
     let showElapsed = true; // timer under the current line
+    let monoOn = false;
     let dayStars = {}; // ISO date → 0–5 (0 = unrated outline star)
     let lastRenderedToday = null; // ISO date of the last render's "today"
     let elapsedTimer = null;
@@ -2785,6 +2840,7 @@
         const t = parseInt(localStorage.getItem(KEYS.trophy) || '6', 10);
         trophyThreshold = (isNaN(t) || t < 1) ? 6 : t;
         applyElapsed(localStorage.getItem(KEYS.elapsed) !== '0');
+        applyMono(localStorage.getItem(KEYS.mono) === '1');
         try {
           dayStars = JSON.parse(localStorage.getItem(KEYS.daystars) || '{}') || {};
         } catch (err) {
@@ -2947,12 +3003,34 @@
       persist(KEYS.theme, mode);
     }
 
+    function updateThemeColorLabel() {
+      const nameEl = document.getElementById('theme-color-name');
+      if (!nameEl) return;
+      if (monoOn) {
+        nameEl.textContent = 'Monochrome';
+        return;
+      }
+      const id = document.documentElement.getAttribute('data-color') || 'green';
+      const theme = COLOR_THEMES.find(t => t.id === id) || COLOR_THEMES.find(t => t.id === 'green');
+      nameEl.textContent = theme.name;
+    }
+
+    function applyMono(on) {
+      monoOn = !!on;
+      persist(KEYS.mono, monoOn ? '1' : '0');
+      document.documentElement.classList.toggle('mono', monoOn);
+      document.querySelectorAll('.mono-btn').forEach(btn => {
+        const isOn = btn.dataset.mono === 'on';
+        btn.classList.toggle('active', monoOn ? isOn : !isOn);
+      });
+      updateThemeColorLabel();
+    }
+
     function applyColorTheme(id) {
       const theme = COLOR_THEMES.find(t => t.id === id) || COLOR_THEMES.find(t => t.id === 'green');
       document.documentElement.setAttribute('data-color', theme.id);
       persist(KEYS.color, theme.id);
-      const nameEl = document.getElementById('theme-color-name');
-      if (nameEl) nameEl.textContent = theme.name;
+      updateThemeColorLabel();
       const wrap = document.getElementById('theme-swatches');
       if (!wrap) return;
       wrap.innerHTML = COLOR_THEMES.map(t => {
@@ -4525,6 +4603,14 @@
       if (!btn) return;
       e.stopPropagation();
       applyColorTheme(btn.dataset.color);
+    });
+
+    document.getElementById('panel-theme').addEventListener('click', (e) => {
+      const monoBtn = e.target.closest('.mono-btn');
+      if (monoBtn) {
+        e.stopPropagation();
+        applyMono(monoBtn.dataset.mono === 'on');
+      }
     });
 
     document.getElementById('menu-clear').addEventListener('click', (e) => {
