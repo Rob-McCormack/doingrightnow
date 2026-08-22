@@ -354,6 +354,86 @@
       --today-ink: #fff;
     }
 
+    /* Everforest — warm forest palette (sainnhe/everforest, medium contrast) */
+    html[data-color="everforest"] {
+      --bg: #fdf6e3;
+      --bg-secondary: #efebd4;
+      --text: #5c6a72;
+      --text-muted: #939f91;
+      --text-soft: #829181;
+      --border: #ddd8be;
+      --accent: #8da101;
+      --today: #8da101;
+      --today-heading: #8da101;
+      --today-soft: #e5e6c5;
+      --today-ink: #fdf6e3;
+      --danger: #f85552;
+      --danger-bg: #ffe7de;
+      --input-bg: #f4f0d9;
+      --card: #fdf6e3;
+      --shadow: rgba(92, 106, 114, 0.08);
+      --dot: rgba(92, 106, 114, 0.06);
+    }
+
+    html.dark[data-color="everforest"] {
+      --bg: #2d353b;
+      --bg-secondary: #343f44;
+      --text: #d3c6aa;
+      --text-muted: #859289;
+      --text-soft: #9da9a0;
+      --border: #475258;
+      --accent: #a7c080;
+      --today: #a7c080;
+      --today-heading: #a7c080;
+      --today-soft: rgba(167, 192, 128, 0.16);
+      --today-ink: #2d353b;
+      --danger: #e67e80;
+      --danger-bg: #514045;
+      --input-bg: #343f44;
+      --card: #343f44;
+      --shadow: rgba(0, 0, 0, 0.35);
+      --dot: rgba(255, 255, 255, 0.04);
+    }
+
+    html[data-color="everforest"] .tag-person { color: #df69ba; }
+    html[data-color="everforest"] .tag-location { color: #35a77c; }
+    html[data-color="everforest"] .tag-project { color: #dfa000; }
+    html.dark[data-color="everforest"] .tag-person { color: #d699b6; }
+    html.dark[data-color="everforest"] .tag-location { color: #83c092; }
+    html.dark[data-color="everforest"] .tag-project { color: #dbbc7f; }
+
+    html[data-color="everforest"] .question-highlight {
+      background: #faedcd;
+    }
+
+    html.dark[data-color="everforest"] .question-highlight {
+      background: rgba(219, 188, 127, 0.28);
+    }
+
+    html[data-color="everforest"] .entry-elapsed.elapsed-ok {
+      color: #8da101;
+    }
+
+    html.dark[data-color="everforest"] .entry-elapsed.elapsed-ok {
+      color: #a7c080;
+    }
+
+    html[data-color="everforest"] .entry-elapsed.elapsed-warn {
+      color: #dfa000;
+    }
+
+    html.dark[data-color="everforest"] .entry-elapsed.elapsed-warn {
+      color: #dbbc7f;
+    }
+
+    html[data-color="everforest"] .strike-check {
+      color: #8da101;
+    }
+
+    html.dark[data-color="everforest"] .strike-check {
+      color: #a7c080;
+    }
+
     /* Monochrome — calm neutral accents; overrides color swatch */
     html.mono {
       --accent: #5c6370;
@@ -2587,6 +2667,7 @@
     };
 
     const COLOR_THEMES = [
+      { id: 'everforest', name: 'Everforest', swatch: '#a7c080' },
       { id: 'red', name: 'Red', swatch: '#c52f21' },
       { id: 'pink', name: 'Pink', swatch: '#d92662' },
       { id: 'fuchsia', name: 'Fuchsia', swatch: '#c1208b' },
