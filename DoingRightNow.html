@@ -2712,6 +2712,10 @@
     let dayStars = {}; // ISO date → 0–5 (0 = unrated outline star)
     let lastRenderedToday = null; // ISO date of the last render's "today"
     let elapsedTimer = null;
+    let todayInputCommitTimer = null;
+    let todayInputComposing = false;
+    const isTouchInputDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    const TODAY_INPUT_COMMIT_MS = 280;
 
     // Touch swipe state
     let touchStartX = 0;
@@ -3495,18 +3499,33 @@
           closeTodayPanels();
           syncTodayPanelDim();
         });
+        todayInput.addEventListener('compositionstart', () => {
+          todayInputComposing = true;
+        });
+        todayInput.addEventListener('compositionend', () => {
+          todayInputComposing = false;
+        });
         todayInput.addEventListener('keydown', e => {
           if (e.key === 'Enter') {
             e.preventDefault();
-            commitTodayInput();
+            if (e.isComposing || todayInputComposing) {
+              scheduleTodayInputCommit(TODAY_INPUT_COMMIT_MS);
+              return;
+            }
+            if (isTouchInputDevice) {
+              scheduleTodayInputCommit(TODAY_INPUT_COMMIT_MS);
+            } else {
+              commitTodayInput();
+            }
           }
         });
         todayInput.addEventListener('blur', () => {
+          const delay = isTouchInputDevice ? TODAY_INPUT_COMMIT_MS : 120;
+          scheduleTodayInputCommit(delay);
           setTimeout(() => {
-            commitTodayInput();
             flushStorageReload();
             syncTodayPanelDim();
-          }, 120);
+          }, delay);
           setTimeout(containViewport, 300);
         });
       }
@@ -4028,6 +4047,14 @@
     // ─────────────────────────────────────────────
     // Entry actions
     // ─────────────────────────────────────────────
+    function scheduleTodayInputCommit(delay) {
+      clearTimeout(todayInputCommitTimer);
+      todayInputCommitTimer = setTimeout(() => {
+        todayInputCommitTimer = null;
+        commitTodayInput();
+      }, delay);
+    }
+
     function commitTodayInput() {
       // Roll over to the new calendar day if the page was left open past midnight
       ensureCorrectDay();
