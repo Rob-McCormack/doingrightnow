@@ -86,6 +86,18 @@ Tap the search icon in the Today header.
 
 ---
 
+## My Tags
+
+At the bottom of the app, **My Tags** sits just above Help.
+
+- Open it to see every `@person`, `#place`, and `*project` tag you've used in journal entries — grouped in three columns, sorted A–Z within each group.
+- The table is read-only and rebuilds each time you open the panel (or while it stays open and your journal changes).
+- Handy once your tag vocabulary grows — a quick index of what you've actually tagged, without turning into a second planner.
+
+![Screenshot placeholder: the My Tags panel open, showing three columns of @, #, and * tags in alphabetical order.](placeholder-my-tags.png)
+
+---
+
 ## Quick Add
 
 For lines you type often.
@@ -114,7 +126,7 @@ A scratchpad under Today, for anything that isn't a timestamped line — a URL, 
 ## Viewing & Exporting
 
 - **View** (Today / 2d / 3d / 7d / All) controls how many days show in your feed.
-- Tap the **Today** label at the top of the feed to jump to today only — same as choosing Today under View.
+- Tap the **Today** label at the top of the feed to jump to today only — same as choosing Today under View. This also closes any open panels (Theme, Settings, My Tags, Help, Quick Add, Notes) and search if it was open — a quick reset to focus on today.
 - **Export** uses the same ranges. Tap a range, then **Export** opens a preview you can **Copy** or **Download** as a `.txt` file.
 - **Export All** is the only option that also includes your Notes and Quick Add templates — treat it as your full backup.
 - Exports are for reading and backup only — there is no import. You can't load a `.txt` file back into the app.
