@@ -113,6 +113,7 @@ A scratchpad under Today, for anything that isn't a timestamped line — a URL, 
 ## Viewing & Exporting
 
 - **View** (Today / 2d / 3d / 7d / All) controls how many days show in your feed.
+- Tap the **Today** label at the top of the feed to jump to today only — same as choosing Today under View.
 - **Export** uses the same ranges. Tap a range, then **Export** opens a preview you can **Copy** or **Download** as a `.txt` file.
 - **Export All** is the only option that also includes your Notes and Quick Add templates — treat it as your full backup.
 - Exports are for reading and backup only — there is no import. You can't load a `.txt` file back into the app.
