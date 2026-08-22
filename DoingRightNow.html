@@ -1052,13 +1052,18 @@
     #feed.today-panel-open .today-group .entry,
     #feed.today-panel-open .day-group:not(.today-group),
     #feed.today-input-active .today-group .entry,
-    #feed.today-input-active .day-group:not(.today-group) {
+    #feed.today-input-active .day-group:not(.today-group),
+    #feed.entry-editing-active .entry:not(.entry-editing),
+    #feed.entry-editing-active #today-input-wrap,
+    #feed.entry-editing-active .today-tools,
+    #feed.entry-editing-active .day-group:not(:has(.entry-editing)) {
       opacity: 0.48;
     }
 
     #feed.today-panel-open .today-tools,
     #feed.today-input-active #today-input-wrap,
-    #feed.today-input-active .today-tools {
+    #feed.today-input-active .today-tools,
+    #feed.entry-editing-active .entry-editing {
       position: relative;
       z-index: 2;
     }
@@ -1164,7 +1169,15 @@
       margin: 6px 0;
     }
 
-    .entry.latest .entry-inner {
+    .entry.entry-editing {
+      overflow-x: hidden;
+      overflow-y: visible;
+      z-index: 3;
+      margin: 6px 0;
+    }
+
+    .entry.latest .entry-inner,
+    .entry.entry-editing .entry-inner {
       align-items: center;
       padding-top: 14px;
       padding-bottom: 14px;
@@ -1236,7 +1249,8 @@
       align-items: flex-end;
     }
 
-    .entry.latest .entry-clock {
+    .entry.latest .entry-clock,
+    .entry.entry-editing .entry-clock {
       color: var(--today);
       font-weight: 600;
     }
@@ -1317,10 +1331,19 @@
 
     .entry-body[contenteditable="true"] {
       outline: none;
-      background: var(--today-soft);
-      border-radius: 0;
-      padding: 2px 4px;
-      margin: -2px -4px;
+      border-left: 2px solid var(--today);
+      border-radius: 6px;
+      padding: 8px 10px;
+      margin: -2px 0;
+      background: color-mix(in srgb, var(--today-soft) 55%, var(--today) 18%);
+      box-shadow: 0 0 0 1px color-mix(in srgb, var(--today) 25%, transparent);
+      transition: background 0.15s, box-shadow 0.15s, border-color 0.15s;
+    }
+
+    html.dark .entry-body[contenteditable="true"] {
+      background: color-mix(in srgb, var(--today) 42%, var(--input-bg));
+      border-left-color: color-mix(in srgb, var(--today-heading) 65%, #fff);
+      box-shadow: 0 0 12px color-mix(in srgb, var(--today-heading) 35%, transparent);
     }
 
     /* Optional tagging & emphasis */
@@ -3865,9 +3888,14 @@
       // Close any open swipe first
       closeAllSwipes();
 
+      const entryEl = bodyEl.closest('.entry');
+      const feed = document.getElementById('feed');
+
       // Show plain text while editing (no styled spans)
       bodyEl.textContent = entry.text;
       bodyEl.contentEditable = 'true';
+      if (entryEl) entryEl.classList.add('entry-editing');
+      if (feed) feed.classList.add('entry-editing-active');
       bodyEl.focus();
 
       // Place caret at end
@@ -3880,6 +3908,8 @@
 
       const finish = () => {
         bodyEl.contentEditable = 'false';
+        if (entryEl) entryEl.classList.remove('entry-editing');
+        if (feed) feed.classList.remove('entry-editing-active');
         const newText = bodyEl.textContent.trim();
         if (!newText) {
           applyEntryBodyDisplay(bodyEl, entry);
