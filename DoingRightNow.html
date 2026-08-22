@@ -1681,8 +1681,43 @@
       scroll-margin-top: 16px;
     }
 
+    #menu-tags,
     #menu-help {
       scroll-margin-top: 16px;
+    }
+
+    .my-tags-content {
+      font-size: 14px;
+      color: var(--text-soft);
+      line-height: 1.5;
+    }
+
+    .my-tags-empty {
+      margin: 0;
+      padding: 4px 4px 8px;
+      color: var(--text-muted);
+    }
+
+    .my-tags-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .my-tags-table th {
+      text-align: left;
+      font-weight: 600;
+      padding: 4px 8px 6px;
+      font-size: 13px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .my-tags-table td {
+      padding: 5px 8px;
+      vertical-align: top;
+    }
+
+    .my-tags-table .tag {
+      white-space: nowrap;
     }
 
     .menu-heading .scroll-top-btn {
@@ -2525,6 +2560,16 @@
         </button>
       </div>
 
+      <!-- My Tags -->
+      <button type="button" class="menu-item menu-fold" id="menu-tags" aria-expanded="false" aria-controls="panel-tags">
+        <span class="menu-icon" data-icon="tag"></span>
+        <span class="settings-label">My Tags</span>
+        <span class="settings-chevron" id="tags-chevron" data-icon="chevron-down"></span>
+      </button>
+      <div class="panel" id="panel-tags">
+        <div id="my-tags-content" class="my-tags-content"></div>
+      </div>
+
       <!-- Help -->
       <button type="button" class="menu-item menu-fold" id="menu-help" aria-expanded="false" aria-controls="panel-help">
         <span class="menu-icon" data-icon="help-circle"></span>
@@ -2648,7 +2693,8 @@
       'check': '<polyline points="20 6 9 17 4 12"/>',
       'star': '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>',
       'copy': '<rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>',
-      'mail': '<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>'
+      'mail': '<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>',
+      'tag': '<path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/>'
     };
 
     function icon(name, extraClass = '') {
@@ -3563,6 +3609,8 @@
         applySearchFilter();
       }
       syncTodayPanelDim();
+      const tagsPanel = document.getElementById('panel-tags');
+      if (tagsPanel && tagsPanel.classList.contains('open')) renderMyTags();
       startElapsedTimer();
     }
 
@@ -3770,8 +3818,15 @@
 
     function showOnlyToday() {
       dismissKeyboard();
+      if (searchOpen) {
+        clearTimeout(searchTimeout);
+        searchOpen = false;
+        searchQuery = '';
+      }
+      closeTodayPanels();
+      closeAllPanels();
       viewRange = 1;
-      if (searchOpen) searchRange = 1;
+      searchRange = 1;
       render();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -4308,9 +4363,11 @@
       openPanel = null;
       const settingsBtn = document.getElementById('menu-settings');
       const themeBtn = document.getElementById('menu-theme-panel');
+      const tagsBtn = document.getElementById('menu-tags');
       const helpBtn = document.getElementById('menu-help');
       const settingsChevron = document.getElementById('settings-chevron');
       const themeChevron = document.getElementById('theme-chevron');
+      const tagsChevron = document.getElementById('tags-chevron');
       const helpChevron = document.getElementById('help-chevron');
       if (settingsBtn) {
         settingsBtn.classList.remove('open-fold');
@@ -4320,13 +4377,79 @@
         themeBtn.classList.remove('open-fold');
         themeBtn.setAttribute('aria-expanded', 'false');
       }
+      if (tagsBtn) {
+        tagsBtn.classList.remove('open-fold');
+        tagsBtn.setAttribute('aria-expanded', 'false');
+      }
       if (helpBtn) {
         helpBtn.classList.remove('open-fold');
         helpBtn.setAttribute('aria-expanded', 'false');
       }
       if (settingsChevron) settingsChevron.innerHTML = icon('chevron-down');
       if (themeChevron) themeChevron.innerHTML = icon('chevron-down');
+      if (tagsChevron) tagsChevron.innerHTML = icon('chevron-down');
       if (helpChevron) helpChevron.innerHTML = icon('chevron-down');
+    }
+
+    function collectJournalTags() {
+      const people = new Map();
+      const places = new Map();
+      const projects = new Map();
+
+      function addTag(map, prefix, name) {
+        const key = prefix + name.toLowerCase();
+        if (!map.has(key)) map.set(key, prefix + name);
+      }
+
+      journal.forEach(entry => {
+        const text = entry.text || '';
+        let m;
+        const personRe = /(?:^|\s)@([\w-]+)/g;
+        const placeRe = /(?:^|\s)#([\w-]+)/g;
+        const projectRe = /(?:^|\s)\*([\w-]+)/g;
+        while ((m = personRe.exec(text))) addTag(people, '@', m[1]);
+        while ((m = placeRe.exec(text))) addTag(places, '#', m[1]);
+        while ((m = projectRe.exec(text))) addTag(projects, '*', m[1]);
+      });
+
+      const sortTags = tags => tags.sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
+      return {
+        people: sortTags([...people.values()]),
+        places: sortTags([...places.values()]),
+        projects: sortTags([...projects.values()])
+      };
+    }
+
+    function renderMyTags() {
+      const wrap = document.getElementById('my-tags-content');
+      if (!wrap) return;
+      const tags = collectJournalTags();
+      const max = Math.max(tags.people.length, tags.places.length, tags.projects.length);
+      if (max === 0) {
+        wrap.innerHTML = '<p class="my-tags-empty">No tags yet — use @person, #place, or *project in any line.</p>';
+        return;
+      }
+      let rows = '';
+      for (let i = 0; i < max; i++) {
+        const person = tags.people[i];
+        const place = tags.places[i];
+        const project = tags.projects[i];
+        rows += `<tr>
+          <td>${person ? `<span class="tag tag-person">${escapeHtml(person)}</span>` : ''}</td>
+          <td>${place ? `<span class="tag tag-location">${escapeHtml(place)}</span>` : ''}</td>
+          <td>${project ? `<span class="tag tag-project">${escapeHtml(project)}</span>` : ''}</td>
+        </tr>`;
+      }
+      wrap.innerHTML = `<table class="my-tags-table">
+        <thead>
+          <tr>
+            <th><span class="tag tag-person">@</span></th>
+            <th><span class="tag tag-location">#</span></th>
+            <th><span class="tag tag-project">*</span></th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>`;
     }
 
     function togglePanel(id) {
@@ -4337,9 +4460,11 @@
 
       const settingsBtn = document.getElementById('menu-settings');
       const themeBtn = document.getElementById('menu-theme-panel');
+      const tagsBtn = document.getElementById('menu-tags');
       const helpBtn = document.getElementById('menu-help');
       const settingsChevron = document.getElementById('settings-chevron');
       const themeChevron = document.getElementById('theme-chevron');
+      const tagsChevron = document.getElementById('tags-chevron');
       const helpChevron = document.getElementById('help-chevron');
 
       if (!isOpen) {
@@ -4360,6 +4485,14 @@
             themeBtn.setAttribute('aria-expanded', 'true');
           }
           if (themeChevron) themeChevron.innerHTML = icon('chevron-up');
+        }
+        if (id === 'panel-tags') {
+          if (tagsBtn) {
+            tagsBtn.classList.add('open-fold');
+            tagsBtn.setAttribute('aria-expanded', 'true');
+          }
+          if (tagsChevron) tagsChevron.innerHTML = icon('chevron-up');
+          renderMyTags();
         }
         if (id === 'panel-help') {
           if (helpBtn) {
@@ -4726,6 +4859,7 @@
 
     document.getElementById('menu-theme-panel').addEventListener('click', () => togglePanel('panel-theme'));
     document.getElementById('menu-settings').addEventListener('click', () => togglePanel('panel-settings'));
+    document.getElementById('menu-tags').addEventListener('click', () => togglePanel('panel-tags'));
     document.getElementById('menu-help').addEventListener('click', () => togglePanel('panel-help'));
 
     document.getElementById('menu-theme').addEventListener('click', (e) => {
