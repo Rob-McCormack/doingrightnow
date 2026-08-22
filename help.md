@@ -56,7 +56,8 @@ Optional shorthand you can drop into any line:
 | `@name` | Tags a person (shown in violet) |
 | `#place` | Tags a location (shown in teal) |
 | `*project` | Tags a project (shown in amber) |
-| `!` anywhere in the line | Makes the whole line **bold and red** |
+| `!` anywhere in the line | Makes the whole line **bold and red** — urgent or important |
+| `?` anywhere in the line | Highlights the text in yellow — open loops, things to revisit |
 | `xx` as its own word | Strikes the whole line through, marks it done |
 
 **Example:** `email @Bill about *Website xx` — done, tagged to Bill and the Website project, and searchable by either tag later.
