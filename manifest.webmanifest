@@ -23,5 +23,14 @@
       "type": "image/png",
       "purpose": "any"
     }
+  ],
+  "screenshots": [
+    {
+      "src": "images/screenshot.png",
+      "sizes": "840x1720",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Today's journal — one timestamped line at a time"
+    }
   ]
 }

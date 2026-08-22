@@ -6,7 +6,7 @@ A minimalist, offline-first journal to cure task paralysis. No logins, no cloud 
 
 Not a planner, to-do list, or habit tracker. Write one timestamped line — what you just did, or the tiny next step — and do that. Each line lowers the bar for the next one. If you drift, the last line is exactly where you left off.
 
-[Use it at DoingRightNow.com](https://doingrightnow.com/) · [Open the journal](https://doingrightnow.com/DoingRightNow)
+[Use it at DoingRightNow.com](https://doingrightnow.com/) · [Open the journal](https://doingrightnow.com/DoingRightNow) · [Press kit](press/README.md)
 
 ![Doing Right Now journal](images/screenshot.png)
 
@@ -54,6 +54,7 @@ Then visit [http://127.0.0.1:8000/](http://127.0.0.1:8000/).
 | --- | --- |
 | `index.html` | Landing page |
 | `DoingRightNow.html` | The journal (single file, no build step) |
+| `press/` | Icons, screenshots, copy for reviewers & directories |
 
 ## Privacy
 
