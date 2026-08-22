@@ -1479,6 +1479,18 @@
       background: rgba(255, 241, 118, 0.42);
     }
 
+    .entry-code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.92em;
+      font-style: normal;
+      font-weight: 500;
+      background: var(--bg-secondary);
+      border-radius: 3px;
+      padding: 0.05em 0.25em;
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+    }
+
     .entry-body.struck .entry-line {
       text-decoration-line: line-through;
       text-decoration-color: var(--danger);
@@ -2539,7 +2551,7 @@
             <li>Your journal lives in this browser on this device — no cloud. Phone and laptop are separate; only tabs in the same browser stay in sync. Export All for backup. Clearing browser data can wipe it too.</li>
             <li>On a phone, Add to Home Screen for an app icon.</li>
           </ul>
-          <div class="tip">Optional: <em>@person</em> · <em>#location</em> · <em>*project</em> · any <strong>!</strong> makes the line bold and red · any <strong>?</strong> highlights it yellow · <strong>xx</strong> as its own word strikes it out.</div>
+          <div class="tip">Optional: <em>@person</em> · <em>#location</em> · <em>*project</em> · any <strong>!</strong> makes the line bold and red · any <strong>?</strong> highlights it yellow · <strong>xx</strong> as its own word strikes it out · wrap any word in <strong>`backticks`</strong> for monospace.</div>
           <h3>Calling all clowns 🤡</h3>
           <p>Search is plain text — a single emoji works on any device. Type or paste one character to find every line that used it.</p>
           <ul>
@@ -4012,9 +4024,13 @@
     // *project → project (amber, italic)
     // any !  → whole entry bold red
     // any ?  → inline yellow highlighter on the text
+    // `word` → inline monospace on that word or phrase (any entry)
     // xx     → whole entry struck out (standalone marker, case insensitive)
     function formatEntryText(raw) {
       let html = escapeHtml(raw);
+
+      // Inline `word` or `phrase` — before tags so @ inside backticks stays literal
+      html = html.replace(/`([^`\n]+)`/g, '<span class="entry-code">$1</span>');
 
       // Tags only after start-of-line or whitespace (avoids email false positives)
       html = html.replace(/(^|\s)@([\w-]+)/g, '$1<span class="tag tag-person">@$2</span>');
