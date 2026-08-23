@@ -23,33 +23,14 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+  <link rel="stylesheet" href="css/site.css">
   <style>
     :root {
-      --bg: #ffffff;
-      --bg-secondary: #f4f5f7;
-      --text: #373c44;
-      --heading: #1f2329;
-      --text-muted: #646b79;
-      --text-soft: #4d5461;
-      --border: #e7eaef;
-      --today: #398712;
-      --today-hover: #33790f;
-      --today-soft: #d7fbc1;
       --shadow: rgba(0, 0, 0, 0.08);
       --dot: rgba(0, 0, 0, 0.04);
     }
 
     html.dark {
-      --bg: #13171e;
-      --bg-secondary: #181c25;
-      --text: #c2c7d0;
-      --heading: #eef1f5;
-      --text-muted: #7b8495;
-      --text-soft: #9aa3b2;
-      --border: #202632;
-      --today: #398712;
-      --today-hover: #409614;
-      --today-soft: rgba(57, 135, 18, 0.22);
       --shadow: rgba(0, 0, 0, 0.45);
       --dot: rgba(255, 255, 255, 0.04);
     }
@@ -67,71 +48,6 @@
     body {
       background-image: radial-gradient(var(--dot) 1px, transparent 1px);
       background-size: 18px 18px;
-    }
-
-    .page {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 28px 24px 40px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 20px;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-    }
-
-    .brand a {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--text);
-      text-decoration: none;
-    }
-
-    .brand a:hover { color: var(--today); }
-
-    .theme-btn {
-      margin-left: auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      padding: 0;
-      border: none;
-      border-radius: 8px;
-      background: none;
-      color: var(--text-muted);
-      cursor: pointer;
-    }
-
-    .theme-btn:hover {
-      color: var(--text);
-      background: var(--bg-secondary);
-    }
-
-    .theme-btn svg {
-      width: 20px;
-      height: 20px;
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .brand-mark svg {
-      width: 32px;
-      height: 32px;
-      stroke: #4ba764;
-      fill: none;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
     }
 
     .guide-hero {
@@ -279,27 +195,7 @@
 
     .text-link:hover { text-decoration: underline; }
 
-    footer {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      margin-top: 48px;
-      padding-top: 22px;
-      border-top: 1px solid var(--border);
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-
-    footer a {
-      color: var(--text-muted);
-      text-decoration: none;
-    }
-
-    footer a:hover { color: var(--text); }
-
     @media (max-width: 640px) {
-      .page { padding: 20px 18px 32px; }
       .guide-intro p,
       article p,
       .steps span { font-size: 17px; }
@@ -307,27 +203,37 @@
     }
   </style>
 </head>
-<body>
-  <div class="page">
-    <header class="brand">
-      <a class="brand-mark" href="index.html">
-        <svg viewBox="0 0 24 24" width="32" height="32" aria-hidden="true">
+<body data-page="guide">
+  <div class="site-shell">
+    <header class="site-header" id="site-header">
+      <a class="brand" href="index.html">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
           <rect x="3" y="4" width="18" height="18" rx="2"/>
           <line x1="16" y1="2" x2="16" y2="6"/>
           <line x1="8" y1="2" x2="8" y2="6"/>
           <line x1="3" y1="10" x2="21" y2="10"/>
           <path d="m9 16 2 2 4-4"/>
         </svg>
-        <span>DoingRightNow.com</span>
+        <span>Doing Right Now</span>
       </a>
-      <button type="button" class="theme-btn" id="theme-btn" aria-label="Dark Mode">
-        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-        </svg>
-      </button>
+      <nav class="nav-links" aria-label="Site">
+        <a href="guide.html" data-nav="guide"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>Guide</a>
+        <a href="help.html" data-nav="help"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>Help</a>
+      </nav>
+      <div class="header-actions">
+        <button type="button" class="theme-btn" id="theme-btn" aria-label="Dark Mode">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+        <a class="header-cta" href="DoingRightNow.html">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          Open journal
+        </a>
+      </div>
     </header>
 
-    <main>
+    <main class="doc-main">
       <header class="guide-hero">
         <p class="guide-label">Guide</p>
         <h1>Getting the most out of Doing Right Now</h1>
@@ -413,43 +319,13 @@
       </section>
     </main>
 
-    <footer>
-      <a href="index.html">Home</a>
-      <a href="https://github.com/Rob-McCormack/doingrightnow">Open source on GitHub</a>
-      <a href="https://simplertasks.com">Designed by SimplerTasks</a>
+    <footer class="site-footer">
+      <a href="help.html">Help</a>
+      <a href="guide.html">Guide</a>
+      <a href="https://github.com/Rob-McCormack/doingrightnow">GitHub</a>
+      <a href="https://simplertasks.com">SimplerTasks</a>
     </footer>
   </div>
-  <script>
-    const THEME_KEY = 'doingrightnow_theme';
-    const moonIcon = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
-    const sunIcon = '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>';
-
-    function applyTheme(mode) {
-      const btn = document.getElementById('theme-btn');
-      const meta = document.querySelector('meta[name="theme-color"]');
-      if (mode === 'dark') {
-        document.documentElement.classList.add('dark');
-        if (meta) meta.setAttribute('content', '#13171e');
-        if (btn) {
-          btn.setAttribute('aria-label', 'Light Mode');
-          btn.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">' + sunIcon + '</svg>';
-        }
-      } else {
-        document.documentElement.classList.remove('dark');
-        if (meta) meta.setAttribute('content', '#ffffff');
-        if (btn) {
-          btn.setAttribute('aria-label', 'Dark Mode');
-          btn.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">' + moonIcon + '</svg>';
-        }
-      }
-      try { localStorage.setItem(THEME_KEY, mode); } catch (e) {}
-    }
-
-    const initial = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
-    applyTheme(initial);
-    document.getElementById('theme-btn').addEventListener('click', () => {
-      applyTheme(document.documentElement.classList.contains('dark') ? 'light' : 'dark');
-    });
-  </script>
+  <script src="js/site.js"></script>
 </body>
 </html>

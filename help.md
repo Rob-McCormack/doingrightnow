@@ -168,7 +168,6 @@ An optional small elapsed-time readout next to today's newest entry — how long
 ## Your Data
 
 - Everything lives in your browser on this device only. There is no account and nothing is sent anywhere.
-- **Add to Home Screen** (on phone) gives you an app icon — the journal still lives on this device only, not "in the cloud."
 - If you open the app in two tabs or windows at once, they stay in sync automatically — but only in the **same browser on the same device**.
 - **Different device or different browser = different journal.** Only tabs/windows in the same browser share one copy. Your phone and laptop do not sync.
 - **Export All** regularly if you want a backup — a new phone or a cleared browser will not have your history otherwise.
@@ -181,6 +180,24 @@ In **Settings**, you can:
 - **Clear All, Add Sample Data** — resets and loads example entries, useful for a demo or a fresh look at the layout.
 
 All of these ask for confirmation first and cannot be undone once confirmed.
+
+---
+
+## Install as an app
+
+Optional — opens in its own window with an icon. Your journal still lives on this device only; nothing is synced to the cloud.
+
+**iPhone or iPad (Safari):**
+
+1. Open the journal in Safari.
+2. Tap **Share** → **Add to Home Screen**.
+
+**Mac (Safari):**
+
+1. Open the journal in Safari (macOS Sonoma or later).
+2. Choose **File → Add to Dock…**, or click **Share** in the toolbar → **Add to Dock**.
+
+On Chrome (desktop), look for an install icon in the address bar if your browser offers it.
 
 ---
 

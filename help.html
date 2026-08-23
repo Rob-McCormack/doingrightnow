@@ -23,18 +23,9 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+  <link rel="stylesheet" href="css/site.css">
   <style>
     :root {
-      --bg: #ffffff;
-      --bg-secondary: #f4f5f7;
-      --text: #373c44;
-      --heading: #1f2329;
-      --text-muted: #646b79;
-      --text-soft: #4d5461;
-      --border: #e7eaef;
-      --today: #398712;
-      --today-hover: #33790f;
-      --today-soft: #d7fbc1;
       --shadow: rgba(0, 0, 0, 0.08);
       --dot: rgba(0, 0, 0, 0.04);
       --tag-person: #7c6bc4;
@@ -44,16 +35,6 @@
     }
 
     html.dark {
-      --bg: #13171e;
-      --bg-secondary: #181c25;
-      --text: #c2c7d0;
-      --heading: #eef1f5;
-      --text-muted: #7b8495;
-      --text-soft: #9aa3b2;
-      --border: #202632;
-      --today: #398712;
-      --today-hover: #409614;
-      --today-soft: rgba(57, 135, 18, 0.22);
       --shadow: rgba(0, 0, 0, 0.45);
       --dot: rgba(255, 255, 255, 0.04);
     }
@@ -71,71 +52,6 @@
     body {
       background-image: radial-gradient(var(--dot) 1px, transparent 1px);
       background-size: 18px 18px;
-    }
-
-    .page {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 28px 24px 40px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 20px;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-    }
-
-    .brand a {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--text);
-      text-decoration: none;
-    }
-
-    .brand a:hover { color: var(--today); }
-
-    .theme-btn {
-      margin-left: auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      padding: 0;
-      border: none;
-      border-radius: 8px;
-      background: none;
-      color: var(--text-muted);
-      cursor: pointer;
-    }
-
-    .theme-btn:hover {
-      color: var(--text);
-      background: var(--bg-secondary);
-    }
-
-    .theme-btn svg {
-      width: 20px;
-      height: 20px;
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .brand-mark svg {
-      width: 32px;
-      height: 32px;
-      stroke: #4ba764;
-      fill: none;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
     }
 
     .help-hero {
@@ -358,27 +274,7 @@
 
     .text-link:hover { text-decoration: underline; }
 
-    footer {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      margin-top: 48px;
-      padding-top: 22px;
-      border-top: 1px solid var(--border);
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-
-    footer a {
-      color: var(--text-muted);
-      text-decoration: none;
-    }
-
-    footer a:hover { color: var(--text); }
-
     @media (max-width: 640px) {
-      .page { padding: 20px 18px 32px; }
       .help-intro p,
       article p,
       article ul,
@@ -388,27 +284,37 @@
     }
   </style>
 </head>
-<body>
-  <div class="page">
-    <header class="brand">
-      <a class="brand-mark" href="index.html">
-        <svg viewBox="0 0 24 24" width="32" height="32" aria-hidden="true">
+<body data-page="help">
+  <div class="site-shell">
+    <header class="site-header" id="site-header">
+      <a class="brand" href="index.html">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
           <rect x="3" y="4" width="18" height="18" rx="2"/>
           <line x1="16" y1="2" x2="16" y2="6"/>
           <line x1="8" y1="2" x2="8" y2="6"/>
           <line x1="3" y1="10" x2="21" y2="10"/>
           <path d="m9 16 2 2 4-4"/>
         </svg>
-        <span>DoingRightNow.com</span>
+        <span>Doing Right Now</span>
       </a>
-      <button type="button" class="theme-btn" id="theme-btn" aria-label="Dark Mode">
-        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-        </svg>
-      </button>
+      <nav class="nav-links" aria-label="Site">
+        <a href="guide.html" data-nav="guide"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>Guide</a>
+        <a href="help.html" data-nav="help"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>Help</a>
+      </nav>
+      <div class="header-actions">
+        <button type="button" class="theme-btn" id="theme-btn" aria-label="Dark Mode">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+        <a class="header-cta" href="DoingRightNow.html">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          Open journal
+        </a>
+      </div>
     </header>
 
-    <main>
+    <main class="doc-main">
       <header class="help-hero">
         <p class="help-label">Help</p>
         <h1>Doing Right Now — Help</h1>
@@ -627,7 +533,6 @@
         <h2 id="your-data">Your Data</h2>
         <ul>
           <li>Everything lives in your browser on this device only. There is no account and nothing is sent anywhere.</li>
-          <li><strong>Add to Home Screen</strong> (on phone) gives you an app icon — the journal still lives on this device only, not "in the cloud."</li>
           <li>If you open the app in two tabs or windows at once, they stay in sync automatically — but only in the <strong>same browser on the same device</strong>.</li>
           <li><strong>Different device or different browser = different journal.</strong> Only tabs/windows in the same browser share one copy. Your phone and laptop do not sync.</li>
           <li><strong>Export All</strong> regularly if you want a backup — a new phone or a cleared browser will not have your history otherwise.</li>
@@ -641,6 +546,20 @@
           <li><strong>Clear All, Add Sample Data</strong> — resets and loads example entries, useful for a demo or a fresh look at the layout.</li>
         </ul>
         <p>All of these ask for confirmation first and cannot be undone once confirmed.</p>
+
+        <h2 id="install-as-app">Install as an app</h2>
+        <p>Optional — opens in its own window with an icon. Your journal still lives on this device only; nothing is synced to the cloud.</p>
+        <h3>iPhone or iPad (Safari)</h3>
+        <ol class="steps">
+          <li>Open the <a class="text-link" href="DoingRightNow.html">journal</a> in Safari.</li>
+          <li>Tap <strong>Share</strong> → <strong>Add to Home Screen</strong>.</li>
+        </ol>
+        <h3>Mac (Safari)</h3>
+        <ol class="steps">
+          <li>Open the <a class="text-link" href="DoingRightNow.html">journal</a> in Safari (macOS Sonoma or later).</li>
+          <li>Choose <strong>File → Add to Dock…</strong>, or click <strong>Share</strong> in the toolbar → <strong>Add to Dock</strong>.</li>
+        </ol>
+        <p class="note">On Chrome (desktop), look for an install icon in the address bar if your browser offers it.</p>
 
         <h2 id="not-a-task-manager">Not a task manager</h2>
         <p>DRN records moments; it doesn't replace a full task manager. For a free, open-source option with projects, timers, and time tracking, see <a class="text-link" href="https://super-productivity.com/download/" target="_blank" rel="noopener noreferrer">Super Productivity</a> (all major platforms).</p>
@@ -675,30 +594,13 @@
       </article>
     </main>
 
-    <footer>
-      <a href="DoingRightNow.html">Open journal</a>
-      <a href="guide.html">Getting the most out of DRN</a>
-      <a href="index.html">Home</a>
+    <footer class="site-footer">
+      <a href="help.html">Help</a>
+      <a href="guide.html">Guide</a>
+      <a href="https://github.com/Rob-McCormack/doingrightnow">GitHub</a>
+      <a href="https://simplertasks.com">SimplerTasks</a>
     </footer>
   </div>
-
-  <script>
-    (function () {
-      const btn = document.getElementById('theme-btn');
-      const root = document.documentElement;
-      const meta = document.querySelector('meta[name="theme-color"]');
-
-      function applyDark(dark) {
-        root.classList.toggle('dark', dark);
-        meta.setAttribute('content', dark ? '#13171e' : '#ffffff');
-        btn.setAttribute('aria-label', dark ? 'Light Mode' : 'Dark Mode');
-        try { localStorage.setItem('doingrightnow_theme', dark ? 'dark' : 'light'); } catch (e) {}
-      }
-
-      btn.addEventListener('click', function () {
-        applyDark(!root.classList.contains('dark'));
-      });
-    })();
-  </script>
+  <script src="js/site.js"></script>
 </body>
 </html>
