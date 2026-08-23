@@ -28,7 +28,7 @@ Optional tags in any line:
 | --- | --- |
 | `@person` | Person |
 | `#location` | Place |
-| `*project` | Project |
+| `+project` | Project |
 | `!` | Makes the line bold and red |
 | `xx` | Strikes the line out (any case) |
 

@@ -55,13 +55,13 @@ Optional shorthand you can drop into any line:
 |---|---|
 | `@name` | Tags a person (shown in violet) |
 | `#place` | Tags a location (shown in teal) |
-| `*project` | Tags a project (shown in amber) |
+| `+project` | Tags a project (shown in amber) |
 | `!` anywhere in the line | Makes the whole line **bold and red** — urgent or important |
 | `?` anywhere in the line | Highlights the text in yellow — open loops, things to revisit |
 | `` `word` `` or `` `any phrase` `` | Monospace highlight on that word or phrase only — works inline, on any entry |
 | `xx` as its own word | Strikes the whole line through, marks it done |
 
-**Example:** `email @Bill about *Website xx` — done, tagged to Bill and the Website project, and searchable by either tag later.
+**Example:** `email @Bill about +Website xx` — done, tagged to Bill and the Website project, and searchable by either tag later.
 
 Two more work anywhere, including from an emoji keyboard:
 - **🤡** — flag a distraction or rabbit hole, so it's easy to spot scrolling back
@@ -75,7 +75,7 @@ Tap the search icon in the Today header.
 
 - Plain text finds any line containing it.
 - A single tag (`@Bill`) finds every line with that tag.
-- **Mention vs marker:** `gym` finds any line with that word (*went to the gym*); `#gym` finds only lines you tagged with `#gym`. Same idea for `@` and `*` — the prefix means "I tagged this on purpose."
+- **Mention vs marker:** `gym` finds any line with that word (*went to the gym*); `#gym` finds only lines you tagged with `#gym`. Same idea for `@` and `+` — the prefix means "I tagged this on purpose."
 - **Two tags, unquoted** (`@Bill #home`) → matches lines with **either** tag (OR).
 - **Two tags, quoted** (`"@Bill #home"`) → matches lines with **both** tags (AND).
 - Search `xx` to pull up completed lines — handy for a quick "what I finished" report.
@@ -90,11 +90,11 @@ Tap the search icon in the Today header.
 
 At the bottom of the app, **My Tags** sits just above Help.
 
-- Open it to see every `@person`, `#place`, and `*project` tag you've used in journal entries — grouped in three columns, sorted A–Z within each group.
+- Open it to see every `@person`, `#place`, and `+project` tag you've used in journal entries — grouped in three columns, sorted A–Z within each group.
 - The table is read-only and rebuilds each time you open the panel (or while it stays open and your journal changes).
 - Handy once your tag vocabulary grows — a quick index of what you've actually tagged, without turning into a second planner.
 
-![Screenshot placeholder: the My Tags panel open, showing three columns of @, #, and * tags in alphabetical order.](placeholder-my-tags.png)
+![Screenshot placeholder: the My Tags panel open, showing three columns of @, #, and + tags in alphabetical order.](placeholder-my-tags.png)
 
 ---
 
@@ -106,7 +106,7 @@ For lines you type often.
 2. Tap a saved template any time to log it **now**, with a fresh timestamp.
 3. Tap the **×** next to a template to remove it.
 
-Tags work in templates too — e.g. save `standup *Website` once, then tap it every morning.
+Tags work in templates too — e.g. save `standup +Website` once, then tap it every morning.
 
 ![Screenshot placeholder: the Quick Add panel expanded, showing a short list of saved templates with an × to remove each.](placeholder-quickadd.png)
 

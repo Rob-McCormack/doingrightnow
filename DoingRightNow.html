@@ -2591,14 +2591,14 @@
             <li>Search is in the Today header. Two tags find either one; quote them to require both. <em>gym</em> finds the word; <em>#gym</em> finds tagged lines only. Search <strong>xx</strong> for completed lines. Use the In: buttons (Today, 2d, 7d, All) — pick All for your full journal.</li>
             <li>Tap the <strong>Today</strong> label at the top to jump to today only — also closes Theme, Settings, My Tags, Help, Quick Add, Notes, and search.</li>
             <li>View Today, 2d, 3d, 7d, or All. Export uses the same ranges — tap one below View. Exports are backup only; you can’t import them back.</li>
-            <li><strong>My Tags</strong> (above Help) lists every <em>@</em>, <em>#</em>, and <em>*</em> tag from your journal in three columns, A–Z — read-only, refreshes when you open it.</li>
+            <li><strong>My Tags</strong> (above Help) lists every <em>@</em>, <em>#</em>, and <em>+</em> tag from your journal in three columns, A–Z — read-only, refreshes when you open it.</li>
             <li>Theme (above Settings): light or dark, then pick an accent from the swatches. Green is the default.</li>
             <li>Settings has font size, trophy threshold, and clear options. Optional: Timer on current line shows elapsed time on today’s latest entry — a nudge, not a timesheet.</li>
             <li>On a past day, click the date to rate it with stars.</li>
             <li>Your journal lives in this browser on this device — no cloud. Phone and laptop are separate; only tabs in the same browser stay in sync. Export All for backup. Clearing browser data can wipe it too.</li>
             <li>On a phone, Add to Home Screen for an app icon.</li>
           </ul>
-          <div class="tip">Optional: <em>@person</em> · <em>#location</em> · <em>*project</em> · any <strong>!</strong> makes the line bold and red · any <strong>?</strong> highlights it yellow · <strong>xx</strong> as its own word strikes it out · wrap any word in <strong>`backticks`</strong> for monospace.</div>
+          <div class="tip">Optional: <em>@person</em> · <em>#location</em> · <em>+project</em> · any <strong>!</strong> makes the line bold and red · any <strong>?</strong> highlights it yellow · <strong>xx</strong> as its own word strikes it out · wrap any word in <strong>`backticks`</strong> for monospace.</div>
           <h3>Calling all clowns 🤡</h3>
           <p>Search is plain text — a single emoji works on any device. Type or paste one character to find every line that used it.</p>
           <ul>
@@ -2614,10 +2614,10 @@
           <h4><span class="help-heading-icon" data-icon="zap" aria-hidden="true"></span>Quick Add</h4>
           <p>If you type the same line often, save it once. Open Quick Add, type the line, press Enter. Tap it later to log it now, with a new timestamp. Tags work here too.</p>
           <ul>
-            <li>open the document *Report</li>
+            <li>open the document +Report</li>
             <li>walk #park</li>
             <li>email @Bill</li>
-            <li>standup *Website</li>
+            <li>standup +Website</li>
           </ul>
           <h3>Credit</h3>
           <p>Doing Right Now was inspired by Novie by the Sea’s talk on <a href="https://youtu.be/UFidZJhxz84" target="_blank" rel="noopener noreferrer">interstitial journaling</a> — timestamped lines between tasks, one moment at a time.</p>
@@ -3232,16 +3232,16 @@
           startedAt: now.getTime(),
           text: 'Try out DoingRightNow app — be sure to watch the 2 minute video to master the software. Help file is at the bottom of this screen.'
         },
-        yest(16, 10, 'Emailed @Bill about *Report !'),
+        yest(16, 10, 'Emailed @Bill about +Report !'),
         yest(14, 35, 'walk #park'),
-        yest(11, 20, 'Opened the document *Report'),
+        yest(11, 20, 'Opened the document +Report'),
         yest(9, 45, 'Wrote the first sentence to @sam'),
         yest(8, 15, 'Made coffee at #kitchen xx')
       ];
       quickAdds = [
         { id: uid(), text: 'walk #park' },
         { id: uid(), text: 'email @Bill' },
-        { id: uid(), text: 'open the document *Report' }
+        { id: uid(), text: 'open the document +Report' }
       ];
       notes = '';
       dayStars = {};
@@ -3262,31 +3262,31 @@
         'Made coffee at #kitchen',
         'Reviewed the open tabs',
         'Closed three unnecessary tabs',
-        'Texted @rob about *renovations!',
+        'Texted @rob about +renovations!',
         'Started the laundry at #home',
         'Put the kettle on',
         'Replied to one message from @maya',
         'Took a short walk around the block',
-        'Opened the *budget spreadsheet I was avoiding',
-        'Wrote three bullet points for *proposal',
+        'Opened the +budget spreadsheet I was avoiding',
+        'Wrote three bullet points for +proposal',
         'Stretched for two minutes',
         'Cleared the kitchen counter at #home',
         'Named the next tiny step',
-        'Called @alex about the *website redesign',
-        'Picked up paint samples for *renovations at #hardware',
+        'Called @alex about the +website redesign',
+        'Picked up paint samples for +renovations at #hardware',
         'Quick standup note with @team',
         'Filed receipts from #office',
-        'Drafted intro paragraph for *proposal!',
+        'Drafted intro paragraph for +proposal!',
         'Watered plants at #home',
         'Sent calendar invite to @sam and @maya',
-        'Measured the wall for *renovations',
+        'Measured the wall for +renovations',
         'Inbox zero — deleted six old threads',
-        'Sketched wireframe for *website',
+        'Sketched wireframe for +website',
         'Packed lunch at #kitchen',
         'Followed up with @rob on materials!',
         'Read two pages of the brief',
         'Moved one box to #garage',
-        'Logged a small win on *budget'
+        'Logged a small win on +budget'
       ];
 
       const now = new Date();
@@ -3317,7 +3317,7 @@
       quickAdds = [
         { id: uid(), text: 'Quick stretch break' },
         { id: uid(), text: 'Check in with @rob' },
-        { id: uid(), text: 'One step on *renovations' }
+        { id: uid(), text: 'One step on +renovations' }
       ];
       notes = '';
       dayStars = {};
@@ -3718,7 +3718,15 @@
     }
 
     function isSearchTag(token) {
-      return /^[@#*][\w-]+$/i.test(token);
+      return /^[@#+][\w-]+$/i.test(token) || /^\*[\w-]+$/i.test(token);
+    }
+
+    function hayIncludesTag(hay, tag) {
+      const t = tag.toLowerCase();
+      if (hay.includes(t)) return true;
+      if (/^\+[\w-]+$/.test(t)) return hay.includes('*' + t.slice(1));
+      if (/^\*[\w-]+$/.test(t)) return hay.includes('+' + t.slice(1));
+      return false;
     }
 
     function parseSearchQuery(raw) {
@@ -3733,8 +3741,8 @@
       }).replace(/\s+/g, ' ').trim();
 
       quoted.forEach(inner => {
-        const tags = inner.match(/[@#*][\w-]+/g) || [];
-        const leftover = inner.replace(/[@#*][\w-]+/g, ' ').replace(/\s+/g, ' ').trim();
+        const tags = inner.match(/[@#+*][\w-]+/g) || [];
+        const leftover = inner.replace(/[@#+*][\w-]+/g, ' ').replace(/\s+/g, ' ').trim();
         if (tags.length >= 2) {
           clauses.push({ type: 'and-tags', values: tags.map(t => t.toLowerCase()) });
           if (leftover) clauses.push({ type: 'phrase', value: leftover.toLowerCase() });
@@ -3767,10 +3775,10 @@
           return hay.includes(clause.value);
         }
         if (clause.type === 'and-tags') {
-          return clause.values.every(tag => hay.includes(tag));
+          return clause.values.every(tag => hayIncludesTag(hay, tag));
         }
         if (clause.type === 'or-tags') {
-          return clause.values.some(tag => hay.includes(tag));
+          return clause.values.some(tag => hayIncludesTag(hay, tag));
         }
         return true;
       });
@@ -4078,7 +4086,7 @@
     // Optional progressive markup:
     // @name  → person (violet, italic)
     // #place → location (teal, italic)
-    // *project → project (amber, italic)
+    // +project → project (amber, italic); legacy * still recognized
     // any !  → whole entry bold red
     // any ?  → inline yellow highlighter on the text
     // `word` → inline monospace on that word or phrase (any entry)
@@ -4092,6 +4100,7 @@
       // Tags only after start-of-line or whitespace (avoids email false positives)
       html = html.replace(/(^|\s)@([\w-]+)/g, '$1<span class="tag tag-person">@$2</span>');
       html = html.replace(/(^|\s)#([\w-]+)/g, '$1<span class="tag tag-location">#$2</span>');
+      html = html.replace(/(^|\s)\+([\w-]+)/g, '$1<span class="tag tag-project">+$2</span>');
       html = html.replace(/(^|\s)\*([\w-]+)/g, '$1<span class="tag tag-project">*$2</span>');
 
       if (hasQuestion(raw)) {
@@ -4408,10 +4417,10 @@
         let m;
         const personRe = /(?:^|\s)@([\w-]+)/g;
         const placeRe = /(?:^|\s)#([\w-]+)/g;
-        const projectRe = /(?:^|\s)\*([\w-]+)/g;
+        const projectRe = /(?:^|\s)[*+]([\w-]+)/g;
         while ((m = personRe.exec(text))) addTag(people, '@', m[1]);
         while ((m = placeRe.exec(text))) addTag(places, '#', m[1]);
-        while ((m = projectRe.exec(text))) addTag(projects, '*', m[1]);
+        while ((m = projectRe.exec(text))) addTag(projects, '+', m[1]);
       });
 
       const sortTags = tags => tags.sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
@@ -4428,7 +4437,7 @@
       const tags = collectJournalTags();
       const max = Math.max(tags.people.length, tags.places.length, tags.projects.length);
       if (max === 0) {
-        wrap.innerHTML = '<p class="my-tags-empty">No tags yet — use @person, #place, or *project in any line.</p>';
+        wrap.innerHTML = '<p class="my-tags-empty">No tags yet — use @person, #place, or +project in any line.</p>';
         return;
       }
       let rows = '';
@@ -4447,7 +4456,7 @@
           <tr>
             <th><span class="tag tag-person">@</span></th>
             <th><span class="tag tag-location">#</span></th>
-            <th><span class="tag tag-project">*</span></th>
+            <th><span class="tag tag-project">+</span></th>
           </tr>
         </thead>
         <tbody>${rows}</tbody>
@@ -4601,7 +4610,7 @@
 
     function searchExportFilename() {
       const q = searchQuery.trim();
-      const slug = q.replace(/[^\w@#*-]+/g, '_').replace(/^_+|_+$/g, '').slice(0, 40);
+      const slug = q.replace(/[^\w@#+-]+/g, '_').replace(/^_+|_+$/g, '').slice(0, 40);
       return slug
         ? 'DoingRightNow_' + slug + '_' + exportStamp() + '.txt'
         : 'DoingRightNow_Search_' + exportStamp() + '.txt';
