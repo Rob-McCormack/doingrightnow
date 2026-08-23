@@ -184,6 +184,25 @@ All of these ask for confirmation first and cannot be undone once confirmed.
 
 ---
 
+## Not a task manager
+
+DRN records moments; it doesn't replace a full task manager. For a free, open-source option with projects, timers, and time tracking, see [Super Productivity](https://super-productivity.com/download/) (all major platforms).
+
+Typical pattern: Open Super Productivity and choose the next thing → work there → log the next line in DRN when you switch tasks.
+
+---
+
+## Privacy & security
+
+This isn't a password manager or encrypted vault. Don't store passwords, financial details, or other highly sensitive information in your journal or Notes.
+
+- Your data lives in **plain text** in this browser on this device — not on our servers (there aren't any).
+- Anyone with access to your unlocked phone or computer can read it.
+- Browser extensions with site access can read page storage on any website, including this one.
+- DRN uses no third-party scripts or analytics — your journal never leaves this device unless you export it.
+
+---
+
 ## Advanced Tips
 
 - **`xx` doubles as a lightweight checkbox.** Since it strikes the line and counts toward the day's "done" total, you can use short entries as quick to-do-in-the-moment items: write the task, come back and add `xx` when it's done.
