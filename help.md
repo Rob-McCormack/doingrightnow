@@ -2,6 +2,8 @@
 
 A journal for getting unstuck. Write one line for what you're doing right now, timestamp it automatically, and move on. No planning, no streaks, no pressure to finish.
 
+[New here? Read the philosophy →](/guide)
+
 ---
 
 ## Quick Start
