@@ -8,8 +8,8 @@ Everything here is for **people writing about or sharing the app** — bloggers,
 |---|---|
 | **Landing page** | https://doingrightnow.com/ |
 | **Open the journal** | https://doingrightnow.com/DoingRightNow |
-| **Guide** (philosophy) | https://doingrightnow.com/guide.html |
-| **Help** (how it works) | https://doingrightnow.com/help.html |
+| **Guide** (philosophy) | https://doingrightnow.com/guide |
+| **Help** (how it works) | https://doingrightnow.com/help |
 | **Source** | https://github.com/Rob-McCormack/doingrightnow |
 
 ## One-line pitch
