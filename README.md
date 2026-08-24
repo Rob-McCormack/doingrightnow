@@ -8,7 +8,7 @@ Not a planner, to-do list, or habit tracker. Write one timestamped line — what
 
 [Use it at DoingRightNow.com](https://doingrightnow.com/) · [Open the journal](https://doingrightnow.com/DoingRightNow) · [Press kit](press/README.md)
 
-![Doing Right Now journal](images/screenshot.png)
+![Doing Right Now journal](images/screenshot-840.jpg)
 
 ## How it works
 

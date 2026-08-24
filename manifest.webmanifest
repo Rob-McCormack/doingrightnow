@@ -26,9 +26,9 @@
   ],
   "screenshots": [
     {
-      "src": "images/screenshot.png",
-      "sizes": "840x1720",
-      "type": "image/png",
+      "src": "images/screenshot-840.jpg",
+      "sizes": "840x1819",
+      "type": "image/jpeg",
       "form_factor": "narrow",
       "label": "Today's journal — one timestamped line at a time"
     }

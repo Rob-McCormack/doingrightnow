@@ -42,7 +42,7 @@ All data lives in the browser's local storage on that device. No accounts, no se
 
 Name files clearly so reviewers know what they're looking at:
 
-- `01-today-view.png` — Today input + a few entries *(starter included)*
+- `01-today-view.jpg` — Today input, timer, tags, yesterday's entries *(starter included)*
 - `02-search.png` — Search open with matches
 - `03-export.png` — Export preview sheet
 - `04-dark-mode.png` — Dark mode / Everforest theme (optional)
