@@ -1,0 +1,5043 @@
+<!DOCTYPE html>
+<html lang="en" data-color="green">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="robots" content="noindex, nofollow" />
+  <script>
+    try {
+      if (localStorage.getItem('doingrightnow_dev1_theme') === 'dark') {
+        document.documentElement.classList.add('dark');
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#13171e');
+      }
+      var color = localStorage.getItem('doingrightnow_dev1_color');
+      if (color) document.documentElement.setAttribute('data-color', color);
+      if (localStorage.getItem('doingrightnow_dev1_mono') === '1') {
+        document.documentElement.classList.add('mono');
+      }
+    } catch (e) {}
+  </script>
+  <title>Doing Right Now — Dev (screenshots)</title>
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="../images/favicon-48x48.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../images/favicon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../images/favicon-192x192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="../images/favicon-512x512.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Doing Right Now">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-secondary: #f4f5f7;
+      --text: #373c44;
+      --text-muted: #646b79;
+      --text-soft: #4d5461;
+      --border: #e7eaef;
+      --accent: #33790f;
+      --today: #398712;
+      --today-heading: #33790f;
+      --today-soft: #d7fbc1;
+      --today-ink: #fff;
+      --danger: #e05c5c;
+      --danger-bg: #ffebeb;
+      --input-bg: #fff;
+      --card: #fff;
+      --shadow: rgba(0,0,0,0.04);
+      --dot: rgba(0,0,0,0.04);
+      --latest-glow: rgba(120, 120, 120, 0.35);
+    }
+
+    html.dark {
+      --bg: #13171e;
+      --bg-secondary: #181c25;
+      --text: #c2c7d0;
+      --text-muted: #7b8495;
+      --text-soft: #9aa3b2;
+      --border: #202632;
+      --accent: #4eb31b;
+      --today: #398712;
+      --today-heading: #4eb31b;
+      --today-soft: rgba(57, 135, 18, 0.22);
+      --today-ink: #fff;
+      --danger: #e05c5c;
+      --danger-bg: #3a1f1f;
+      --input-bg: #181c25;
+      --card: #181c25;
+      --shadow: rgba(0,0,0,0.3);
+      --dot: rgba(255,255,255,0.04);
+      --latest-glow: rgba(200, 200, 200, 0.4);
+    }
+
+    /* Pico color themes — tokens only, no Pico CSS */
+    html[data-color="red"] {
+      --accent: #c52f21;
+      --today: #c52f21;
+      --today-heading: #c52f21;
+      --today-soft: #faeeeb;
+      --today-ink: #fff;
+    }
+    html.dark[data-color="red"] {
+      --accent: #f17961;
+      --today: #c52f21;
+      --today-heading: #f17961;
+      --today-soft: rgba(197, 47, 33, 0.22);
+      --today-ink: #fff;
+    }
+    html[data-color="pink"] {
+      --accent: #c72259;
+      --today: #d92662;
+      --today-heading: #c72259;
+      --today-soft: #fbedef;
+      --today-ink: #fff;
+    }
+    html.dark[data-color="pink"] {
+      --accent: #f7708e;
+      --today: #d92662;
+      --today-heading: #f7708e;
+      --today-soft: rgba(217, 38, 98, 0.22);
+      --today-ink: #fff;
+    }
+    html[data-color="fuchsia"] {
+      --accent: #c1208b;
+      --today: #c1208b;
+      --today-heading: #c1208b;
+      --today-soft: #fbedf4;
+      --today-ink: #fff;
+    }
+    html.dark[data-color="fuchsia"] {
+      --accent: #f869bf;
+      --today: #c1208b;
+      --today-heading: #f869bf;
+      --today-soft: rgba(193, 32, 139, 0.22);
+      --today-ink: #fff;
+    }
+    html[data-color="purple"] {
+      --accent: #aa40bf;
+      --today: #9236a4;
+      --today-heading: #aa40bf;
+      --today-soft: #f8eef9;
+      --today-ink: #fff;
+    }
+    html.dark[data-color="purple"] {
+      --accent: #d47de4;
+      --today: #9236a4;
+      --today-heading: #d47de4;
+      --today-soft: rgba(146, 54, 164, 0.22);
+      --today-ink: #fff;
+    }
+    html[data-color="violet"] {
+      --accent: #8352c5;
+      --today: #7540bf;
+      --today-heading: #8352c5;
+      --today-soft: #f3eff7;
+      --today-ink: #fff;
+    }
+    html.dark[data-color="violet"] {
+      --accent: #b290d9;
+      --today: #7540bf;
+      --today-heading: #b290d9;
+      --today-soft: rgba(117, 64, 191, 0.22);
+      --today-ink: #fff;
+    }
+    html[data-color="indigo"] {
+      --accent: #655cd6;
+      --today: #524ed2;
+      --today-heading: #655cd6;
+      --today-soft: #f2f0f9;
+      --today-ink: #fff;
+    }
+    html.dark[data-color="indigo"] {
+      --accent: #a294e5;
+      --today: #524ed2;
+      --today-heading: #a294e5;
+      --today-soft: rgba(82, 78, 210, 0.22);
+      --today-ink: #fff;
+    }
+    html[data-color="blue"] {
+      --accent: #2060df;
+      --today: #2060df;
+      --today-heading: #2060df;
+      --today-soft: #f0f0fb;
+      --today-ink: #fff;
+    }
+    html.dark[data-color="blue"] {
+      --accent: #8999f9;
+      --today: #2060df;
+      --today-heading: #8999f9;
+      --today-soft: rgba(32, 96, 223, 0.22);
+      --today-ink: #fff;
+    }
+    html[data-color="azure"] {
+      --accent: #0172ad;
+      --today: #0172ad;
+      --today-heading: #0172ad;
+      --today-soft: #e9f2fc;
+      --today-ink: #fff;
+    }
+    html.dark[data-color="azure"] {
+      --accent: #01aaff;
+      --today: #0172ad;
+      --today-heading: #01aaff;
+      --today-soft: rgba(1, 114, 173, 0.22);
+      --today-ink: #fff;
+    }
+    html[data-color="cyan"] {
+      --accent: #047878;
+      --today: #047878;
+      --today-heading: #047878;
+      --today-soft: #c3fcfa;
+      --today-ink: #fff;
+    }
+    html.dark[data-color="cyan"] {
+      --accent: #0ab1b1;
+      --today: #047878;
+      --today-heading: #0ab1b1;
+      --today-soft: rgba(4, 120, 120, 0.22);
+      --today-ink: #fff;
+    }
+    html[data-color="jade"] {
+      --accent: #007a50;
+      --today: #007a50;
+      --today-heading: #007a50;
+      --today-soft: #cbfce1;
+      --today-ink: #fff;
+    }
+    html.dark[data-color="jade"] {
+      --accent: #00b478;
+      --today: #007a50;
+      --today-heading: #00b478;
+      --today-soft: rgba(0, 122, 80, 0.22);
+      --today-ink: #fff;
+    }
+    html[data-color="green"] {
+      --accent: #33790f;
+      --today: #398712;
+      --today-heading: #33790f;
+      --today-soft: #d7fbc1;
+      --today-ink: #fff;
+    }
+    html.dark[data-color="green"] {
+      --accent: #4eb31b;
+      --today: #398712;
+      --today-heading: #4eb31b;
+      --today-soft: rgba(57, 135, 18, 0.22);
+      --today-ink: #fff;
+    }
+    html[data-color="lime"] {
+      --accent: #577400;
+      --today: #a5d601;
+      --today-heading: #577400;
+      --today-soft: #defc85;
+      --today-ink: #000;
+    }
+    html.dark[data-color="lime"] {
+      --accent: #82ab00;
+      --today: #a5d601;
+      --today-heading: #82ab00;
+      --today-soft: rgba(165, 214, 1, 0.22);
+      --today-ink: #000;
+    }
+    html[data-color="yellow"] {
+      --accent: #756b00;
+      --today: #f2df0d;
+      --today-heading: #756b00;
+      --today-soft: #fdf1b4;
+      --today-ink: #000;
+    }
+    html.dark[data-color="yellow"] {
+      --accent: #ad9f00;
+      --today: #f2df0d;
+      --today-heading: #ad9f00;
+      --today-soft: rgba(242, 223, 13, 0.22);
+      --today-ink: #000;
+    }
+    html[data-color="amber"] {
+      --accent: #876400;
+      --today: #ffbf00;
+      --today-heading: #876400;
+      --today-soft: #fcefd9;
+      --today-ink: #000;
+    }
+    html.dark[data-color="amber"] {
+      --accent: #c79400;
+      --today: #ffbf00;
+      --today-heading: #c79400;
+      --today-soft: rgba(255, 191, 0, 0.22);
+      --today-ink: #000;
+    }
+    html[data-color="pumpkin"] {
+      --accent: #9c5900;
+      --today: #ff9500;
+      --today-heading: #9c5900;
+      --today-soft: #fceee3;
+      --today-ink: #000;
+    }
+    html.dark[data-color="pumpkin"] {
+      --accent: #e48500;
+      --today: #ff9500;
+      --today-heading: #e48500;
+      --today-soft: rgba(255, 149, 0, 0.22);
+      --today-ink: #000;
+    }
+    html[data-color="orange"] {
+      --accent: #bd3c13;
+      --today: #d24317;
+      --today-heading: #bd3c13;
+      --today-soft: #faeeea;
+      --today-ink: #fff;
+    }
+    html.dark[data-color="orange"] {
+      --accent: #f56b3d;
+      --today: #d24317;
+      --today-heading: #f56b3d;
+      --today-soft: rgba(210, 67, 23, 0.22);
+      --today-ink: #fff;
+    }
+    html[data-color="sand"] {
+      --accent: #6e6a60;
+      --today: #ccc6b4;
+      --today-heading: #6e6a60;
+      --today-soft: #f2f0ec;
+      --today-ink: #000;
+    }
+    html.dark[data-color="sand"] {
+      --accent: #a39e8f;
+      --today: #ccc6b4;
+      --today-heading: #a39e8f;
+      --today-soft: rgba(204, 198, 180, 0.22);
+      --today-ink: #000;
+    }
+    html[data-color="grey"] {
+      --accent: #6a6a6a;
+      --today: #ababab;
+      --today-heading: #6a6a6a;
+      --today-soft: #f1f1f1;
+      --today-ink: #000;
+    }
+    html.dark[data-color="grey"] {
+      --accent: #9e9e9e;
+      --today: #ababab;
+      --today-heading: #9e9e9e;
+      --today-soft: rgba(171, 171, 171, 0.22);
+      --today-ink: #000;
+    }
+    html[data-color="zinc"] {
+      --accent: #646b79;
+      --today: #646b79;
+      --today-heading: #646b79;
+      --today-soft: #f0f1f3;
+      --today-ink: #fff;
+    }
+    html.dark[data-color="zinc"] {
+      --accent: #969eaf;
+      --today: #646b79;
+      --today-heading: #969eaf;
+      --today-soft: rgba(100, 107, 121, 0.22);
+      --today-ink: #fff;
+    }
+    html[data-color="slate"] {
+      --accent: #5d6b89;
+      --today: #525f7a;
+      --today-heading: #5d6b89;
+      --today-soft: #eff1f4;
+      --today-ink: #fff;
+    }
+    html.dark[data-color="slate"] {
+      --accent: #909ebe;
+      --today: #525f7a;
+      --today-heading: #909ebe;
+      --today-soft: rgba(82, 95, 122, 0.22);
+      --today-ink: #fff;
+    }
+
+    /* Everforest — warm forest palette (sainnhe/everforest, medium contrast) */
+    html[data-color="everforest"] {
+      --bg: #fdf6e3;
+      --bg-secondary: #efebd4;
+      --text: #5c6a72;
+      --text-muted: #939f91;
+      --text-soft: #829181;
+      --border: #ddd8be;
+      --accent: #8da101;
+      --today: #8da101;
+      --today-heading: #8da101;
+      --today-soft: #e5e6c5;
+      --today-ink: #fdf6e3;
+      --danger: #f85552;
+      --danger-bg: #ffe7de;
+      --input-bg: #f4f0d9;
+      --card: #fdf6e3;
+      --shadow: rgba(92, 106, 114, 0.08);
+      --dot: rgba(92, 106, 114, 0.06);
+    }
+
+    html.dark[data-color="everforest"] {
+      --bg: #2d353b;
+      --bg-secondary: #343f44;
+      --text: #d3c6aa;
+      --text-muted: #859289;
+      --text-soft: #9da9a0;
+      --border: #475258;
+      --accent: #a7c080;
+      --today: #a7c080;
+      --today-heading: #a7c080;
+      --today-soft: rgba(167, 192, 128, 0.16);
+      --today-ink: #2d353b;
+      --danger: #e67e80;
+      --danger-bg: #514045;
+      --input-bg: #343f44;
+      --card: #343f44;
+      --shadow: rgba(0, 0, 0, 0.35);
+      --dot: rgba(255, 255, 255, 0.04);
+    }
+
+    html[data-color="everforest"] .tag-person { color: #df69ba; }
+    html[data-color="everforest"] .tag-location { color: #35a77c; }
+    html[data-color="everforest"] .tag-project { color: #dfa000; }
+    html.dark[data-color="everforest"] .tag-person { color: #d699b6; }
+    html.dark[data-color="everforest"] .tag-location { color: #83c092; }
+    html.dark[data-color="everforest"] .tag-project { color: #dbbc7f; }
+
+    html[data-color="everforest"] .question-highlight {
+      background: #faedcd;
+    }
+
+    html.dark[data-color="everforest"] .question-highlight {
+      background: rgba(219, 188, 127, 0.28);
+    }
+
+    html[data-color="everforest"] .entry-elapsed.elapsed-ok {
+      color: #8da101;
+    }
+
+    html.dark[data-color="everforest"] .entry-elapsed.elapsed-ok {
+      color: #a7c080;
+    }
+
+    html[data-color="everforest"] .entry-elapsed.elapsed-warn {
+      color: #dfa000;
+    }
+
+    html.dark[data-color="everforest"] .entry-elapsed.elapsed-warn {
+      color: #dbbc7f;
+    }
+
+    html[data-color="everforest"] .strike-check {
+      color: #8da101;
+    }
+
+    html.dark[data-color="everforest"] .strike-check {
+      color: #a7c080;
+    }
+
+    /* Monochrome — calm neutral accents; overrides color swatch */
+    html.mono {
+      --accent: #5c6370;
+      --today: #4d5461;
+      --today-heading: #4d5461;
+      --today-soft: #eef0f3;
+      --today-ink: #fff;
+    }
+
+    html.dark.mono {
+      --accent: #9aa3b2;
+      --today: #8b95a5;
+      --today-heading: #c2c7d0;
+      --today-soft: rgba(154, 163, 178, 0.16);
+      --today-ink: #13171e;
+    }
+
+    html.mono .tag-person,
+    html.mono .tag-location,
+    html.mono .tag-project {
+      color: var(--text-muted);
+    }
+
+    html.mono .strike-check {
+      color: var(--text-muted);
+    }
+
+    html.mono #theme-color-picker {
+      opacity: 0.38;
+      pointer-events: none;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      min-height: 100%;
+      max-width: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.45;
+      overflow-x: clip;
+    }
+
+    body {
+      background-image: radial-gradient(var(--dot) 1px, transparent 1px);
+      background-size: 18px 18px;
+    }
+
+    #app {
+      width: 100%;
+      max-width: 560px;
+      margin: 0 auto;
+      min-height: 100vh;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      padding: 0 16px 40px;
+      position: relative;
+      overflow-x: clip;
+    }
+
+    /* View range switcher */
+    .brand-sep {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 24px 4px 0;
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-sep-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .brand-sep a {
+      color: inherit;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .brand-sep a:hover {
+      color: var(--text);
+    }
+
+    .scroll-top-btn {
+      background: none;
+      border: none;
+      color: var(--today);
+      cursor: pointer;
+      padding: 6px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      opacity: 0.85;
+      transition: background 0.12s, opacity 0.12s;
+    }
+
+    .scroll-top-btn:hover {
+      background: var(--today-soft);
+      opacity: 1;
+    }
+
+    .scroll-top-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .view-switcher {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 10px 4px;
+      font-size: 14px;
+      color: var(--text-soft);
+    }
+
+    .view-row {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+
+    .view-switcher .view-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .view-switcher .view-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .view-switcher .view-label {
+      margin-right: 4px;
+      font-weight: 500;
+    }
+
+    .export-range-hint {
+      margin: 2px 0 0 26px;
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.35;
+    }
+
+    .view-btn {
+      background: none;
+      border: none;
+      border-radius: 6px;
+      padding: 5px 10px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: background 0.12s, color 0.12s;
+    }
+
+    .view-btn:hover {
+      color: var(--text);
+      background: var(--bg-secondary);
+    }
+
+    .view-btn.active {
+      color: var(--today);
+      background: var(--today-soft);
+    }
+
+    .settings-font-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 10px 10px 37px;
+      font-size: 14px;
+      color: var(--text-soft);
+      border-radius: 8px;
+    }
+
+    .settings-font-row .view-label {
+      margin-right: 2px;
+      font-weight: 500;
+      min-width: 36px;
+    }
+
+    .view-divider {
+      width: 1px;
+      height: 18px;
+      background: var(--border);
+      margin: 0 6px;
+    }
+
+    /* Font size scale — Medium is the default */
+    html.font-medium {
+      font-size: 17px;
+    }
+    html.font-medium .day-header { font-size: 16px; }
+    html.font-medium .day-header.today { font-size: 28px; }
+    html.font-medium .entry-body { font-size: 16px; }
+    html.font-medium #today-input { font-size: 16px; }
+    html.font-medium .template-item,
+    html.font-medium #quickadd-input { font-size: 16px; }
+
+    html.font-large {
+      font-size: 19px;
+    }
+    html.font-large .day-header { font-size: 17px; }
+    html.font-large .day-header.today { font-size: 30px; }
+    html.font-large .entry-body { font-size: 18px; }
+    html.font-large #today-input { font-size: 17px; }
+    html.font-large .template-item,
+    html.font-large #quickadd-input { font-size: 18px; }
+    html.font-large .entry-time { font-size: 14px; width: 86px; }
+
+    /* Search */
+    .today-header-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      align-items: center;
+      width: 100%;
+      min-width: 0;
+      gap: 8px;
+    }
+
+    .today-header-left {
+      display: flex;
+      align-items: center;
+      min-width: 0;
+      justify-self: start;
+    }
+
+    .today-header-center {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      justify-self: center;
+    }
+
+    .today-header-right {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      justify-self: end;
+      gap: 6px;
+    }
+
+    .scroll-bottom-btn,
+    .scroll-help-btn {
+      background: none;
+      border: none;
+      color: var(--today);
+      cursor: pointer;
+      padding: 6px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.85;
+      transition: background 0.12s, opacity 0.12s;
+    }
+
+    .scroll-bottom-btn:hover,
+    .scroll-help-btn:hover {
+      background: var(--today-soft);
+      opacity: 1;
+    }
+
+    .scroll-bottom-btn svg,
+    .scroll-help-btn svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .search-toggle {
+      background: none;
+      border: none;
+      color: var(--today);
+      cursor: pointer;
+      padding: 6px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      opacity: 0.85;
+      transition: background 0.12s, opacity 0.12s;
+    }
+
+    .search-toggle:hover,
+    .search-toggle.active {
+      background: var(--today-soft);
+      opacity: 1;
+    }
+
+    .search-toggle svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .scroll-top-btn:focus-visible,
+    .scroll-bottom-btn:focus-visible,
+    .scroll-help-btn:focus-visible,
+    .search-toggle:focus-visible,
+    #search-close:focus-visible {
+      outline: 2px solid var(--today);
+      outline-offset: 2px;
+    }
+
+    @media (pointer: coarse) {
+      .scroll-top-btn,
+      .scroll-bottom-btn,
+      .scroll-help-btn,
+      .search-toggle,
+      #search-close {
+        min-width: 44px;
+        min-height: 44px;
+        padding: 10px;
+      }
+
+      #today-input,
+      #search-input,
+      #notes-area,
+      #quickadd-input,
+      #export-sheet-preview {
+        font-size: 16px;
+      }
+    }
+
+    #search-panel {
+      display: none;
+      margin-bottom: 12px;
+      animation: fadeIn 0.2s ease;
+    }
+
+    #search-panel.open {
+      display: block;
+    }
+
+    #feed.search-open #today-input-wrap,
+    #feed.search-open .today-tools,
+    #feed.search-open .today-panel {
+      display: none;
+    }
+
+    .search-box-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      min-width: 0;
+    }
+
+    #search-input {
+      flex: 1;
+      min-width: 0;
+      padding: 10px 12px;
+      font-size: 16px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      background: var(--input-bg);
+      color: var(--text);
+      outline: none;
+    }
+
+    #search-input:focus {
+      background: var(--today-soft);
+    }
+
+    #search-close {
+      background: none;
+      border: none;
+      color: var(--danger);
+      cursor: pointer;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      flex-shrink: 0;
+      opacity: 0.92;
+      transition: background 0.12s, opacity 0.12s, color 0.12s;
+    }
+
+    #search-close:hover {
+      color: var(--danger);
+      background: color-mix(in srgb, var(--danger) 14%, transparent);
+      opacity: 1;
+    }
+
+    #search-close svg {
+      width: 24px;
+      height: 24px;
+      stroke-width: 2.5;
+    }
+
+    .search-meta {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      margin-top: 8px;
+      font-size: 12px;
+      color: var(--text-muted);
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .search-range-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      align-items: center;
+      min-width: 0;
+    }
+
+    .search-range-btns .view-btn {
+      padding: 3px 8px;
+      font-size: 12px;
+    }
+
+    .search-hit-count {
+      font-weight: 500;
+      min-height: 1.2em;
+    }
+
+    .search-hit-count:empty {
+      display: none;
+    }
+
+    .search-meta-right {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    #search-export {
+      padding: 3px 8px;
+      font-size: 12px;
+    }
+
+    .entry.search-hidden {
+      display: none !important;
+    }
+
+    .day-group.search-empty-hidden {
+      display: none !important;
+    }
+
+    /* Feed */
+    #feed {
+      flex: 1;
+      padding-top: 12px;
+      min-width: 0;
+      width: 100%;
+      overflow-x: clip;
+    }
+
+    .day-group {
+      margin-bottom: 28px;
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .day-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 10px;
+      padding-bottom: 6px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .day-header.today {
+      border-bottom: 2px solid var(--today);
+      color: var(--today-heading);
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      align-items: center;
+    }
+
+    .today-jump {
+      display: inline-flex;
+      align-items: center;
+      padding: 0;
+      margin: 0;
+      border: none;
+      background: none;
+      font: inherit;
+      color: inherit;
+      cursor: pointer;
+      letter-spacing: inherit;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .today-jump:focus-visible {
+      outline: 2px solid var(--today);
+      outline-offset: 2px;
+    }
+
+    .day-header.today .today-icon {
+      width: 24px;
+      height: 24px;
+      margin-right: 6px;
+      display: inline-block;
+      vertical-align: -3px;
+      color: #4ba764;
+      stroke: #4ba764;
+    }
+
+    .day-header.today .sup {
+      font-size: 14px;
+    }
+
+    .day-header.today .day-count {
+      font-size: 14px;
+    }
+
+    .day-group.today-group {
+      border-bottom: 2px solid var(--today);
+      padding-bottom: 12px;
+      margin-bottom: 32px;
+    }
+
+    .day-header .day-count {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .day-count-wrap {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .day-rate {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 6px 4px 0;
+      margin: 0;
+      border: none;
+      background: none;
+      font: inherit;
+      color: inherit;
+      cursor: pointer;
+      text-align: left;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .day-rate:focus-visible {
+      outline: 2px solid var(--today);
+      outline-offset: 2px;
+    }
+
+    .day-stars {
+      display: inline-flex;
+      align-items: center;
+      gap: 1px;
+    }
+
+    .star-icon {
+      width: 11px;
+      height: 11px;
+      color: #d4a017;
+      stroke: #d4a017;
+      flex-shrink: 0;
+      pointer-events: none;
+    }
+
+    svg.icon.star-icon.filled {
+      fill: #d4a017;
+    }
+
+    .trophy-icon {
+      width: 15px;
+      height: 15px;
+      color: #d4a017;
+      stroke: #d4a017;
+      flex-shrink: 0;
+    }
+
+    .day-header.today .trophy-icon {
+      width: 17px;
+      height: 17px;
+    }
+
+    .day-header .sup {
+      font-size: 11px;
+      vertical-align: super;
+      margin-left: 1px;
+      font-weight: 500;
+    }
+
+    /* Permanent input under Today */
+    #today-input-wrap {
+      position: relative;
+      margin-bottom: 10px;
+    }
+
+    .today-input-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      color: var(--today);
+      pointer-events: none;
+    }
+
+    .today-input-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* Compact tools inside Today */
+    .today-tools {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .today-tool-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 6px;
+      padding: 8px 10px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--today);
+      background: var(--today-soft);
+      border: 2px solid transparent;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s, box-shadow 0.15s, color 0.15s;
+    }
+
+    .today-tool-btn .tool-chevron {
+      margin-left: auto;
+      display: flex;
+      opacity: 0.7;
+    }
+
+    .today-tool-btn .tool-chevron svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .today-tool-btn:hover {
+      background: var(--today-soft);
+    }
+
+    .today-tool-btn.active {
+      background: color-mix(in srgb, var(--today-soft) 55%, var(--today) 18%);
+      border-color: var(--today);
+      box-shadow: 0 0 0 1px color-mix(in srgb, var(--today) 25%, transparent);
+      color: color-mix(in srgb, var(--today-heading) 80%, #000);
+    }
+
+    .today-tool-btn.active .tool-label {
+      font-weight: 800;
+      font-size: 16px;
+      color: inherit;
+      letter-spacing: -0.02em;
+    }
+
+    .today-tool-btn.active svg {
+      width: 17px;
+      height: 17px;
+      stroke-width: 2.5;
+      color: inherit;
+      stroke: currentColor;
+    }
+
+    .today-tool-btn.active .tool-chevron {
+      opacity: 1;
+    }
+
+    html.dark .today-tool-btn.active {
+      background: color-mix(in srgb, var(--today) 42%, var(--input-bg));
+      border-color: color-mix(in srgb, var(--today-heading) 65%, #fff);
+      box-shadow: 0 0 12px color-mix(in srgb, var(--today-heading) 35%, transparent);
+      color: color-mix(in srgb, var(--today-heading) 50%, #fff);
+    }
+
+    .today-tool-btn svg {
+      width: 15px;
+      height: 15px;
+    }
+
+    .today-panel {
+      display: none;
+      margin-bottom: 12px;
+      animation: fadeIn 0.2s ease;
+    }
+
+    .today-panel.open {
+      display: block;
+      position: relative;
+      z-index: 2;
+    }
+
+    #feed.today-panel-open .today-tools {
+      position: relative;
+      z-index: 2;
+    }
+
+    #feed.today-panel-open .today-group .entry,
+    #feed.today-panel-open .day-group:not(.today-group),
+    #feed.today-input-active .today-group .entry,
+    #feed.today-input-active .day-group:not(.today-group),
+    #feed.entry-editing-active .entry:not(.entry-editing),
+    #feed.entry-editing-active #today-input-wrap,
+    #feed.entry-editing-active .today-tools,
+    #feed.entry-editing-active .day-group:not(:has(.entry-editing)) {
+      opacity: 0.48;
+    }
+
+    #feed.today-panel-open .today-tools,
+    #feed.today-input-active #today-input-wrap,
+    #feed.today-input-active .today-tools,
+    #feed.entry-editing-active .entry-editing {
+      position: relative;
+      z-index: 2;
+    }
+
+    .today-group .entry,
+    .day-group {
+      transition: opacity 0.18s ease;
+    }
+
+    #today-input-wrap.today-input-active {
+      position: relative;
+      z-index: 2;
+    }
+
+    #today-input-wrap.today-input-active #today-input {
+      border-style: solid;
+      border-color: var(--today);
+      background: color-mix(in srgb, var(--today-soft) 55%, var(--today) 18%);
+      box-shadow: 0 0 0 1px color-mix(in srgb, var(--today) 25%, transparent);
+    }
+
+    #today-input-wrap.today-input-active .today-input-icon svg {
+      width: 20px;
+      height: 20px;
+      stroke-width: 2.5;
+    }
+
+    html.dark #today-input-wrap.today-input-active #today-input {
+      background: color-mix(in srgb, var(--today) 42%, var(--input-bg));
+      border-color: color-mix(in srgb, var(--today-heading) 65%, #fff);
+      box-shadow: 0 0 12px color-mix(in srgb, var(--today-heading) 35%, transparent);
+    }
+
+    #today-input {
+      width: 100%;
+      min-height: 48px;
+      padding: 14px 14px 14px 42px;
+      font-size: 16px;
+      border: 2px dashed color-mix(in srgb, var(--today) 40%, var(--border));
+      border-radius: 8px;
+      background: color-mix(in srgb, var(--today-soft) 32%, var(--input-bg));
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.15s, background 0.15s, border-style 0.15s;
+    }
+
+    #today-input:focus {
+      border-style: solid;
+      border-color: var(--today);
+      background: color-mix(in srgb, var(--today-soft) 55%, var(--today) 18%);
+      box-shadow: 0 0 0 1px color-mix(in srgb, var(--today) 25%, transparent);
+    }
+
+    html.dark #today-input:focus {
+      background: color-mix(in srgb, var(--today) 42%, var(--input-bg));
+      border-color: color-mix(in srgb, var(--today-heading) 65%, #fff);
+      box-shadow: 0 0 12px color-mix(in srgb, var(--today-heading) 35%, transparent);
+    }
+
+    #today-input::placeholder {
+      color: var(--text-muted);
+      opacity: 0.9;
+    }
+
+    /* Entry */
+    .entry {
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 2px;
+      background: var(--card);
+      border-radius: 0;
+      overflow: hidden;
+      user-select: none;
+      touch-action: pan-y pinch-zoom;
+      max-width: 100%;
+    }
+
+      .entry-inner {
+      display: flex;
+      width: 100%;
+      min-width: 0;
+      padding: 9px 10px 9px 0;
+      background: var(--card);
+      transform: translateX(0);
+      transition: transform 0.22s ease;
+      position: relative;
+      z-index: 2;
+    }
+
+    .entry.swiped-left .entry-inner {
+      transform: translateX(-72px);
+    }
+
+    .entry.swiped-right .entry-inner {
+      transform: translateX(72px);
+    }
+
+    .entry.latest {
+      overflow-x: hidden;
+      overflow-y: visible;
+      z-index: 3;
+      margin: 6px 0;
+    }
+
+    .entry.entry-editing {
+      overflow-x: hidden;
+      overflow-y: visible;
+      z-index: 3;
+      margin: 6px 0;
+    }
+
+    .entry.latest .entry-inner,
+    .entry.entry-editing .entry-inner {
+      align-items: center;
+      padding-top: 14px;
+      padding-bottom: 14px;
+      min-height: 52px;
+    }
+
+    .latest-loader {
+      display: none;
+    }
+
+    .entry.latest .latest-loader {
+      --color-1: var(--today);
+      --size: 0.38px;
+      display: inline-block;
+      width: calc(48 * var(--size));
+      height: calc(48 * var(--size));
+      border: calc(5 * var(--size)) solid var(--color-1);
+      border-radius: 50%;
+      box-sizing: border-box;
+      position: relative;
+      flex-shrink: 0;
+      margin-right: 10px;
+      animation: latest-pulse 1.7s linear infinite;
+    }
+
+    .entry.latest .latest-loader::after {
+      content: '';
+      position: absolute;
+      width: calc(48 * var(--size));
+      height: calc(48 * var(--size));
+      border: calc(5 * var(--size)) solid var(--color-1);
+      border-radius: 50%;
+      box-sizing: border-box;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      animation: latest-scale-up 1.7s linear infinite;
+    }
+
+    @keyframes latest-scale-up {
+      0% { transform: translate(-50%, -50%) scale(0); }
+      60%, 100% { transform: translate(-50%, -50%) scale(1); }
+    }
+
+    @keyframes latest-pulse {
+      0%, 60%, 100% { transform: scale(1); }
+      80% { transform: scale(1.2); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .entry.latest .latest-loader,
+      .entry.latest .latest-loader::after {
+        animation: none;
+      }
+    }
+
+    .entry-time {
+      width: 78px;
+      flex-shrink: 0;
+      text-align: right;
+      padding-right: 12px;
+      font-size: 13px;
+      color: var(--text-muted);
+      font-variant-numeric: tabular-nums;
+      line-height: 1.4;
+      padding-top: 1px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
+    .entry.latest .entry-clock,
+    .entry.entry-editing .entry-clock {
+      color: var(--today);
+      font-weight: 600;
+    }
+
+    .entry-elapsed {
+      display: none;
+      font-size: 15px;
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+      line-height: 1.2;
+      margin-top: 3px;
+      letter-spacing: -0.02em;
+    }
+
+    .entry.latest .entry-elapsed {
+      display: block;
+    }
+
+    html.elapsed-off .entry.latest .entry-elapsed {
+      display: none;
+    }
+
+    .entry-elapsed.elapsed-ok {
+      color: #39b85a;
+    }
+
+    .entry-elapsed.elapsed-warn {
+      color: #d4a017;
+    }
+
+    .entry-elapsed.elapsed-over {
+      color: var(--danger);
+    }
+
+    html.dark .entry-elapsed.elapsed-ok {
+      color: #4ecf6a;
+    }
+
+    html.dark .entry-elapsed.elapsed-warn {
+      color: #f0c14a;
+    }
+
+    .entry-elapsed .elapsed-plus {
+      font-size: 0.62em;
+      font-weight: 700;
+      margin-left: 1px;
+    }
+
+    .entry-time .ampm {
+      font-size: 0.62em;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      margin-left: 1px;
+    }
+
+    .entry-body {
+      flex: 1;
+      min-width: 0;
+      border-left: 2px solid var(--border);
+      padding-left: 12px;
+      font-size: 15px;
+      color: var(--text);
+      line-height: 1.4;
+      min-height: 20px;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+      user-select: text;
+      -webkit-user-select: text;
+    }
+
+    .entry.today-entry .entry-body {
+      border-left-color: var(--border);
+    }
+
+    .entry-body.entry-truncated {
+      cursor: pointer;
+    }
+
+    .entry-body[contenteditable="true"] {
+      outline: none;
+      border-left: 2px solid var(--today);
+      border-radius: 6px;
+      padding: 8px 10px;
+      margin: -2px 0;
+      background: color-mix(in srgb, var(--today-soft) 55%, var(--today) 18%);
+      box-shadow: 0 0 0 1px color-mix(in srgb, var(--today) 25%, transparent);
+      transition: background 0.15s, box-shadow 0.15s, border-color 0.15s;
+    }
+
+    html.dark .entry-body[contenteditable="true"] {
+      background: color-mix(in srgb, var(--today) 42%, var(--input-bg));
+      border-left-color: color-mix(in srgb, var(--today-heading) 65%, #fff);
+      box-shadow: 0 0 12px color-mix(in srgb, var(--today-heading) 35%, transparent);
+    }
+
+    /* Optional tagging & emphasis */
+    .entry-body.emphasis {
+      font-weight: 600;
+      color: var(--danger);
+    }
+
+    .question-highlight {
+      background: #fff59d;
+      border-radius: 2px;
+      padding: 0.05em 0.12em;
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+    }
+
+    html.dark .question-highlight {
+      background: rgba(255, 241, 118, 0.42);
+    }
+
+    .entry-code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.92em;
+      font-style: normal;
+      font-weight: 500;
+      background: var(--bg-secondary);
+      border-radius: 3px;
+      padding: 0.05em 0.25em;
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+    }
+
+    .entry-body.struck .entry-line {
+      text-decoration-line: line-through;
+      text-decoration-color: var(--danger);
+      opacity: 0.7;
+    }
+
+    .strike-check {
+      display: inline-flex;
+      align-items: center;
+      color: #4ba764;
+      margin-right: 0.35em;
+      vertical-align: -0.12em;
+    }
+
+    html.dark .strike-check {
+      color: #4ba764;
+    }
+
+    .strike-check svg {
+      width: 15px;
+      height: 15px;
+    }
+
+    .tag {
+      font-style: italic;
+      font-weight: 500;
+      border-radius: 3px;
+      padding: 0 2px;
+    }
+
+    .tag-person {
+      color: #7c6bc4;
+    }
+
+    .tag-location {
+      color: #2a9d8f;
+    }
+
+    .tag-project {
+      color: #e9a825;
+    }
+
+    html.dark .tag-person {
+      color: #a99be8;
+    }
+
+    html.dark .tag-location {
+      color: #5ecfbf;
+    }
+
+    html.dark .tag-project {
+      color: #f0c14a;
+    }
+
+    /* Delete reveal (swipe left) */
+    .entry-delete {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 72px;
+      background: var(--danger);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+      color: white;
+      cursor: pointer;
+      border: none;
+      padding: 0;
+      font: inherit;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .entry-delete:focus-visible,
+    .entry-bring:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: -4px;
+    }
+
+    .entry-delete svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    /* Bring to Today reveal (swipe right) */
+    .entry-bring {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 72px;
+      background: var(--today);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+      color: var(--today-ink);
+      cursor: pointer;
+      border: none;
+      padding: 0;
+      font: inherit;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .entry-bring svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    /* Desktop / fine-pointer action buttons */
+    .entry-actions {
+      display: none;
+      align-items: center;
+      gap: 4px;
+      flex-shrink: 0;
+      padding-left: 6px;
+      opacity: 0;
+      transition: opacity 0.12s;
+    }
+
+    .entry-action-btn {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-muted);
+      padding: 0;
+      transition: background 0.12s, color 0.12s, border-color 0.12s;
+    }
+
+    .entry-action-btn svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .entry-action-btn.bring:hover {
+      color: var(--today);
+      background: var(--today-soft);
+    }
+
+    .entry-action-btn.del:hover {
+      color: #c44;
+      border-color: #e8a0a0;
+      background: #fdecec;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .entry:hover .entry-actions,
+      .entry:focus-within .entry-actions {
+        display: flex;
+        opacity: 1;
+      }
+    }
+
+    /* Bottom menu */
+    #bottom-menu {
+      margin-top: 32px;
+      padding-top: 16px;
+      padding-bottom: max(140px, 28vh);
+      border-top: 1px solid var(--border);
+    }
+
+    .menu-divide {
+      height: 1px;
+      background: var(--border);
+      margin: 10px 4px 14px;
+    }
+
+    .menu-heading {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+      margin: 0 4px 12px;
+      padding-top: 4px;
+      font-size: 16px;
+      font-weight: 650;
+      letter-spacing: -0.02em;
+      color: var(--today-heading);
+      scroll-margin-top: 16px;
+    }
+
+    #menu-tags,
+    #menu-help {
+      scroll-margin-top: 16px;
+    }
+
+    .my-tags-content {
+      font-size: 14px;
+      color: var(--text-soft);
+      line-height: 1.5;
+    }
+
+    .my-tags-empty {
+      margin: 0;
+      padding: 4px 4px 8px;
+      color: var(--text-muted);
+    }
+
+    .my-tags-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .my-tags-table th {
+      text-align: left;
+      font-weight: 600;
+      padding: 4px 8px 6px;
+      font-size: 13px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .my-tags-table td {
+      padding: 5px 8px;
+      vertical-align: top;
+    }
+
+    .my-tags-table .tag {
+      white-space: nowrap;
+    }
+
+    .menu-heading .scroll-top-btn {
+      margin-left: auto;
+      padding: 12px 14px;
+      min-width: 52px;
+      min-height: 52px;
+      border-radius: 10px;
+      background: var(--today-soft);
+      opacity: 1;
+    }
+
+    .menu-heading .scroll-top-btn svg {
+      width: 26px;
+      height: 26px;
+    }
+
+    .menu-heading .scroll-top-btn:hover {
+      background: color-mix(in srgb, var(--today-soft) 70%, var(--today) 15%);
+    }
+
+    .menu-heading-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      color: var(--today);
+      flex-shrink: 0;
+    }
+
+    .menu-heading-icon svg {
+      width: 18px;
+      height: 18px;
+      color: var(--today);
+    }
+
+    .app-version {
+      margin: 10px 4px 0;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--text-muted);
+    }
+
+    .menu-item,
+    .view-btn,
+    .today-tool-btn,
+    .today-jump,
+    .day-rate,
+    .scroll-top-btn,
+    .scroll-bottom-btn,
+    .scroll-help-btn,
+    .search-toggle,
+    #search-close,
+    .settings-row,
+    .theme-swatch,
+    .entry-action-btn {
+      touch-action: manipulation;
+    }
+
+    .menu-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 4px;
+      width: 100%;
+      font: inherit;
+      font-size: 15px;
+      color: var(--text-soft);
+      background: none;
+      border: none;
+      text-align: left;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: background 0.12s, color 0.12s;
+      user-select: none;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .menu-item:hover,
+    .menu-item:active {
+      background: var(--bg-secondary);
+      color: var(--text);
+    }
+
+    .menu-item:focus-visible,
+    .fold-panel .settings-row:focus-visible,
+    .theme-swatch:focus-visible {
+      outline: 2px solid var(--today);
+      outline-offset: 2px;
+    }
+
+    .menu-item svg {
+      width: 18px;
+      height: 18px;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .menu-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      color: var(--accent);
+    }
+
+    .menu-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* Inline icons (replaces Lucide CDN) */
+    svg.icon {
+      display: inline-block;
+      vertical-align: middle;
+      flex-shrink: 0;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .menu-item > span:not(.menu-icon):not(.settings-chevron) {
+      flex: 1;
+    }
+
+    .menu-fold .settings-label {
+      flex: 0 0 auto;
+    }
+
+    /* Expandable panels */
+    .panel {
+      display: none;
+      padding: 4px 0 12px;
+      margin: 0 0 4px;
+      animation: fadeIn 0.2s ease;
+    }
+
+    .panel.open {
+      display: block;
+    }
+
+    .menu-fold {
+      justify-content: flex-start;
+      gap: 12px;
+    }
+
+    .menu-fold .settings-label {
+      flex: 0 1 auto;
+    }
+
+    .menu-fold .settings-chevron {
+      color: var(--text-muted);
+      display: flex;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
+    .menu-fold .settings-chevron svg {
+      width: 18px;
+      height: 18px;
+      color: var(--text-muted);
+    }
+
+    .menu-fold.open-fold {
+      background: var(--bg-secondary);
+      color: var(--text);
+      border-radius: 8px 8px 0 0;
+    }
+
+    .fold-panel {
+      background: var(--bg-secondary);
+      border-radius: 0 0 10px 10px;
+      padding: 4px 8px 10px;
+      margin: 0 0 8px;
+    }
+
+    .fold-panel .settings-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 10px;
+      width: 100%;
+      font: inherit;
+      font-size: 14px;
+      color: var(--text-soft);
+      background: none;
+      border: none;
+      text-align: left;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.12s, color 0.12s;
+      user-select: none;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .fold-panel .settings-row:hover {
+      background: var(--card);
+      color: var(--text);
+    }
+
+    .fold-panel .settings-row .row-icon {
+      display: flex;
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      color: var(--accent);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .fold-panel .settings-row .row-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .fold-panel .settings-row .row-label {
+      flex: 1;
+      line-height: 1.3;
+    }
+
+    .fold-panel .settings-row .row-hint {
+      display: block;
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 400;
+      margin-top: 2px;
+    }
+
+    .fold-panel .settings-row.static-row {
+      cursor: default;
+    }
+
+    .fold-panel .settings-row.static-row:hover {
+      background: transparent;
+      color: var(--text-soft);
+    }
+
+    .settings-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 8px 6px;
+    }
+
+    .theme-picker-name {
+      color: var(--today-heading);
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      padding: 6px 10px 10px;
+    }
+
+    .theme-swatches {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      padding: 2px 6px 8px;
+    }
+
+    @media (min-width: 480px) {
+      .theme-swatches {
+        grid-template-columns: repeat(10, 1fr);
+      }
+    }
+
+    .theme-swatch {
+      aspect-ratio: 1;
+      width: 100%;
+      border: none;
+      border-radius: 50%;
+      padding: 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      appearance: none;
+      -webkit-appearance: none;
+      transition: transform 0.12s, box-shadow 0.12s;
+    }
+
+    .theme-swatch:hover {
+      transform: scale(1.08);
+    }
+
+    .theme-swatch svg {
+      width: 52%;
+      height: 52%;
+      color: #fff;
+      stroke-width: 3;
+    }
+
+    .theme-swatch.ink-dark svg {
+      color: #000;
+    }
+
+    #trophy-threshold {
+      width: 48px;
+      padding: 5px 6px;
+      font-size: 16px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--input-bg);
+      color: var(--text);
+      text-align: center;
+      outline: none;
+    }
+
+    #trophy-threshold:focus {
+      border-color: var(--border);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Quick Add panel */
+    #quickadd-input {
+      width: 100%;
+      padding: 10px 12px;
+      font-size: 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--input-bg);
+      color: var(--text);
+      outline: none;
+      margin-bottom: 10px;
+    }
+
+    #quickadd-input:focus {
+      border-color: var(--border);
+    }
+
+    .template-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .template-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 9px 10px;
+      background: var(--bg-secondary);
+      border-radius: 6px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background 0.12s;
+    }
+
+    .template-item:hover {
+      background: var(--border);
+    }
+
+    .template-item .tpl-text {
+      flex: 1;
+      color: var(--text);
+    }
+
+    .template-item .tpl-del {
+      color: var(--text-muted);
+      padding: 4px;
+      display: flex;
+      opacity: 0.6;
+    }
+
+    .template-item .tpl-del svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .template-item .tpl-del:hover {
+      opacity: 1;
+      color: var(--danger);
+    }
+
+    .tpl-add-hint {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 8px;
+      padding-left: 2px;
+    }
+
+    /* Notes panel — wrapper scrolls (more reliable on phones than a textarea) */
+    .notes-scroll {
+      max-height: min(50vh, 360px);
+      min-height: 160px;
+      overflow-x: hidden;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+      touch-action: pan-y pinch-zoom;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--input-bg);
+      scrollbar-width: thin;
+      scrollbar-color: var(--text-muted) var(--border);
+    }
+
+    .notes-scroll::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .notes-scroll::-webkit-scrollbar-track {
+      background: var(--border);
+      border-radius: 0 8px 8px 0;
+    }
+
+    .notes-scroll::-webkit-scrollbar-thumb {
+      background: var(--text-muted);
+      border-radius: 4px;
+    }
+
+    #notes-area {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      min-height: 160px;
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background: transparent;
+      color: var(--text);
+      resize: none;
+      overflow: hidden;
+      overflow-wrap: anywhere;
+      outline: none;
+      font-family: inherit;
+      line-height: 1.5;
+    }
+
+    #notes-area:focus {
+      border-color: var(--border);
+    }
+
+    @media (pointer: fine) {
+      .notes-scroll {
+        resize: vertical;
+      }
+    }
+
+    @media (pointer: coarse) {
+      .notes-scroll {
+        overflow-y: scroll;
+        max-height: min(55vh, 420px);
+      }
+    }
+
+    /* Export preview sheet */
+    .export-sheet {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 0;
+    }
+
+    .export-sheet.open {
+      display: flex;
+    }
+
+    .export-sheet-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.42);
+    }
+
+    html.dark .export-sheet-backdrop {
+      background: rgba(0, 0, 0, 0.62);
+    }
+
+    .export-sheet-panel {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 640px;
+      height: min(92vh, 780px);
+      max-height: min(92vh, 780px);
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px 14px 0 0;
+      box-shadow: 0 -8px 40px var(--shadow);
+      overflow: hidden;
+    }
+
+    @media (min-width: 640px) {
+      .export-sheet {
+        align-items: center;
+        padding: 24px;
+      }
+
+      .export-sheet-panel {
+        border-radius: 14px;
+        height: min(85vh, 720px);
+        max-height: min(85vh, 720px);
+        box-shadow: 0 20px 50px var(--shadow);
+      }
+    }
+
+    .export-sheet-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 12px 10px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .export-sheet-title {
+      font-size: 14px;
+      font-weight: 650;
+      color: var(--today-heading);
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+      margin-right: auto;
+    }
+
+    .export-sheet-actions {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .export-action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 7px 10px;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--today);
+      background: var(--today-soft);
+      border: 1px solid color-mix(in srgb, var(--today) 22%, transparent);
+      border-radius: 8px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .export-action-btn svg {
+      width: 15px;
+      height: 15px;
+      flex-shrink: 0;
+    }
+
+    .export-action-btn:hover:not(:disabled) {
+      background: color-mix(in srgb, var(--today-soft) 70%, var(--today) 12%);
+    }
+
+    .export-action-btn:disabled {
+      opacity: 0.38;
+      cursor: not-allowed;
+    }
+
+    .export-sheet-close {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      padding: 0;
+      margin-left: 2px;
+      border: none;
+      border-radius: 8px;
+      background: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .export-sheet-close:hover {
+      color: var(--danger);
+      background: color-mix(in srgb, var(--danger) 12%, transparent);
+    }
+
+    .export-sheet-close svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .export-sheet-empty {
+      padding: 28px 20px;
+      text-align: center;
+      font-size: 15px;
+      color: var(--text-muted);
+    }
+
+    .export-sheet-preview {
+      flex: 1 1 auto;
+      min-height: 0;
+      width: 100%;
+      margin: 0;
+      padding: 14px 16px 18px;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 12.5px;
+      line-height: 1.45;
+      color: var(--text);
+      background: var(--input-bg);
+      border: none;
+      border-top: 1px solid var(--border);
+      resize: none;
+      outline: none;
+      tab-size: 2;
+    }
+
+    .export-sheet-preview:focus {
+      background: color-mix(in srgb, var(--input-bg) 88%, var(--today-soft));
+    }
+
+    .export-action-btn.copied {
+      color: var(--today-heading);
+      background: color-mix(in srgb, var(--today-soft) 55%, var(--today) 18%);
+    }
+
+    /* Help panel */
+    .help-content {
+      font-size: 14px;
+      color: var(--text-soft);
+      line-height: 1.6;
+    }
+
+    .help-content h3 {
+      font-size: 15px;
+      color: var(--text);
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .help-content p {
+      margin-bottom: 12px;
+    }
+
+    .help-content h4 {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 14px;
+      color: var(--text);
+      margin: 16px 0 6px;
+      font-weight: 600;
+    }
+
+    .help-heading-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      color: var(--accent);
+    }
+
+    .help-heading-icon svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .help-content ul {
+      margin: 0 0 12px 1.15em;
+      color: var(--text-soft);
+    }
+
+    .help-content li + li {
+      margin-top: 5px;
+    }
+
+    .help-content .tip {
+      background: var(--bg-secondary);
+      padding: 10px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .help-content a {
+      color: var(--today-heading);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .help-content a:hover {
+      color: var(--accent);
+    }
+
+    .help-content .help-full-link {
+      margin-bottom: 16px;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .help-content .help-full-link a {
+      text-decoration: none;
+    }
+
+    .help-content .help-full-link a:hover {
+      text-decoration: underline;
+    }
+
+    /* Empty state */
+    .empty-day {
+      font-size: 13px;
+      color: var(--text-muted);
+      padding: 6px 0 6px 82px;
+      font-style: italic;
+    }
+
+    /* Utility */
+    .hidden {
+      display: none !important;
+    }
+
+    /* Smooth scroll */
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div id="feed"></div>
+
+    <div id="bottom-menu">
+      <h2 class="menu-heading" id="settings-heading">
+        <span class="menu-heading-icon" data-icon="settings"></span>
+        Settings
+        <button type="button" class="scroll-top-btn" id="scroll-top-btn" title="Jump to top" aria-label="Jump to top" data-icon="arrow-up"></button>
+      </h2>
+
+      <!-- View range switcher -->
+      <div class="view-switcher" id="view-switcher">
+        <div class="view-row" id="view-range-row">
+          <span class="view-icon" data-icon="eye"></span>
+          <span class="view-label">View:</span>
+          <button type="button" class="view-btn" data-range="1">Today</button>
+          <button type="button" class="view-btn active" data-range="2">2d</button>
+          <button type="button" class="view-btn" data-range="3">3d</button>
+          <button type="button" class="view-btn" data-range="7">7d</button>
+          <button type="button" class="view-btn" data-range="all">All</button>
+        </div>
+      </div>
+
+      <div class="view-switcher" id="export-switcher">
+        <div class="view-row" id="export-range-row">
+          <span class="view-icon" data-icon="download"></span>
+          <span class="view-label">Export:</span>
+          <button type="button" class="view-btn export-range-btn" data-export-range="1">Today</button>
+          <button type="button" class="view-btn export-range-btn active" data-export-range="2">2d</button>
+          <button type="button" class="view-btn export-range-btn" data-export-range="3">3d</button>
+          <button type="button" class="view-btn export-range-btn" data-export-range="7">7d</button>
+          <button type="button" class="view-btn export-range-btn" data-export-range="all">All</button>
+        </div>
+        <p class="export-range-hint">All includes Notes &amp; Quick Add — your full backup.</p>
+      </div>
+
+      <div class="menu-divide" role="separator"></div>
+
+      <!-- Theme -->
+      <button type="button" class="menu-item menu-fold" id="menu-theme-panel" aria-expanded="false" aria-controls="panel-theme">
+        <span class="menu-icon" data-icon="palette"></span>
+        <span class="settings-label">Theme</span>
+        <span class="settings-chevron" id="theme-chevron" data-icon="chevron-down"></span>
+      </button>
+      <div class="panel fold-panel" id="panel-theme">
+        <button type="button" class="settings-row" id="menu-theme">
+          <span class="row-icon" id="theme-icon" data-icon="moon"></span>
+          <span class="row-label" id="theme-label">Dark Mode</span>
+        </button>
+        <div class="settings-row static-row">
+          <span class="row-icon" data-icon="contrast"></span>
+          <span class="row-label">Monochrome</span>
+          <button type="button" class="view-btn mono-btn" data-mono="on">On</button>
+          <button type="button" class="view-btn mono-btn active" data-mono="off">Off</button>
+        </div>
+        <div id="theme-color-picker">
+          <div class="theme-picker-name" id="theme-color-name">Green</div>
+          <div class="theme-swatches" id="theme-swatches" role="listbox" aria-label="Color theme"></div>
+        </div>
+      </div>
+
+      <!-- Settings -->
+      <button type="button" class="menu-item menu-fold" id="menu-settings" aria-expanded="false" aria-controls="panel-settings">
+        <span class="menu-icon" data-icon="settings"></span>
+        <span class="settings-label">Settings</span>
+        <span class="settings-chevron" id="settings-chevron" data-icon="chevron-down"></span>
+      </button>
+      <div class="panel fold-panel" id="panel-settings">
+        <div class="settings-row static-row">
+          <span class="row-icon" data-icon="type"></span>
+          <span class="row-label">Size</span>
+          <button type="button" class="view-btn font-btn" data-font="small">S</button>
+          <button type="button" class="view-btn font-btn active" data-font="medium">M</button>
+          <button type="button" class="view-btn font-btn" data-font="large">L</button>
+        </div>
+        <div class="settings-row static-row">
+          <span class="row-icon" data-icon="trophy"></span>
+          <span class="row-label">Trophy after</span>
+          <input type="number" id="trophy-threshold" min="1" max="99" value="6" />
+          <span class="row-label" style="flex:0;">entries</span>
+        </div>
+        <div class="settings-row static-row">
+          <span class="row-icon" data-icon="clock"></span>
+          <span class="row-label">Timer on current line</span>
+          <button type="button" class="view-btn elapsed-btn active" data-elapsed="on">On</button>
+          <button type="button" class="view-btn elapsed-btn" data-elapsed="off">Off</button>
+        </div>
+        <div class="settings-divider" role="separator"></div>
+        <button type="button" class="settings-row" id="menu-clear">
+          <span class="row-icon" data-icon="trash-2"></span>
+          <span class="row-label">Clear All Data</span>
+        </button>
+        <button type="button" class="settings-row" id="menu-clear-except-today">
+          <span class="row-icon" data-icon="calendar-minus"></span>
+          <span class="row-label">Clear All Except Today</span>
+        </button>
+        <button type="button" class="settings-row" id="menu-clear-old">
+          <span class="row-icon" data-icon="calendar-x"></span>
+          <span class="row-label">Clear Data Older Than 30 Days</span>
+        </button>
+        <button type="button" class="settings-row" id="menu-reset-sample">
+          <span class="row-icon" data-icon="refresh-cw"></span>
+          <span class="row-label">Clear All, Add Sample Data</span>
+        </button>
+      </div>
+
+      <!-- My Tags -->
+      <button type="button" class="menu-item menu-fold" id="menu-tags" aria-expanded="false" aria-controls="panel-tags">
+        <span class="menu-icon" data-icon="tag"></span>
+        <span class="settings-label">My Tags</span>
+        <span class="settings-chevron" id="tags-chevron" data-icon="chevron-down"></span>
+      </button>
+      <div class="panel" id="panel-tags">
+        <div id="my-tags-content" class="my-tags-content"></div>
+      </div>
+
+      <!-- Help -->
+      <button type="button" class="menu-item menu-fold" id="menu-help" aria-expanded="false" aria-controls="panel-help">
+        <span class="menu-icon" data-icon="help-circle"></span>
+        <span class="settings-label">Help</span>
+        <span class="settings-chevron" id="help-chevron" data-icon="chevron-down"></span>
+      </button>
+      <div class="panel" id="panel-help">
+        <div class="help-content">
+          <p class="help-full-link"><a href="/help" target="_blank" rel="noopener noreferrer">Full help guide →</a></p>
+          <h3>Don’t plan your entire day. Just start with what’s right in front of you.</h3>
+          <p>A journal built for getting unstuck. When a task feels too big to start, don’t plan it — just write down the tiny next step and do that. Jot the time and one line: what you just did, or the small thing you’re about to do. Each entry lowers the bar to starting the next one, and your last line always shows exactly where you left off if you drift and come back. No planning, no streaks, no pressure to finish — just a trail of small starts that add up.</p>
+          <h3>What you gotta know</h3>
+          <p>Some things are tucked away on purpose. Once you find them, they stay out of the way until you need them.</p>
+          <ul>
+            <li>Type a line under Today and press Enter.</li>
+            <li>Tap a line to edit the words. Very long lines truncate — tap once to expand, tap again to edit. You can’t change the time or reorder the day.</li>
+            <li>Swipe left to reveal delete, then tap. On a computer, hover the line and use the trash icon.</li>
+            <li>Swipe right to reveal copy to Today, then tap. The original stays. On a computer, hover and use the calendar icon.</li>
+            <li>Search is in the Today header. Two tags find either one; quote them to require both. <em>gym</em> finds the word; <em>#gym</em> finds tagged lines only. Search <strong>xx</strong> for completed lines. Use the In: buttons (Today, 2d, 7d, All) — pick All for your full journal.</li>
+            <li>Tap the <strong>Today</strong> label at the top to jump to today only — also closes Theme, Settings, My Tags, Help, Quick Add, Notes, and search.</li>
+            <li>View Today, 2d, 3d, 7d, or All. Export uses the same ranges — tap one below View. Exports are backup only; you can’t import them back.</li>
+            <li><strong>My Tags</strong> (above Help) lists every <em>@</em>, <em>#</em>, and <em>+</em> tag from your journal in three columns, A–Z — read-only, refreshes when you open it.</li>
+            <li>Theme (above Settings): light or dark, then pick an accent from the swatches. Green is the default.</li>
+            <li>Settings has font size, trophy threshold, and clear options. Optional: Timer on current line shows elapsed time on today’s latest entry — a nudge, not a timesheet.</li>
+            <li>On a past day, click the date to rate it with stars.</li>
+            <li>Your journal lives in this browser on this device — no cloud. Phone and laptop are separate; only tabs in the same browser stay in sync. Export All for backup. Clearing browser data can wipe it too.</li>
+          </ul>
+          <div class="tip">Optional: <em>@person</em> · <em>#location</em> · <em>+project</em> · any <strong>!</strong> makes the line bold and red · any <strong>?</strong> highlights it yellow · <strong>xx</strong> as its own word strikes it out · wrap any word in <strong>`backticks`</strong> for monospace.</div>
+          <h3>Calling all clowns 🤡</h3>
+          <p>Search is plain text — a single emoji works on any device. Type or paste one character to find every line that used it.</p>
+          <ul>
+            <li><strong>🤡</strong> — mark a distraction or rabbit hole; it jumps out when you scroll back</li>
+            <li><strong>✅</strong> — tag a small win; one tap from the emoji keyboard, easy to spot in the feed</li>
+          </ul>
+          <h3>Notes and Quick Add</h3>
+          <h4><span class="help-heading-icon" data-icon="sticky-note" aria-hidden="true"></span>Notes</h4>
+          <p>Some things don’t belong on a timestamped line — a URL, a thought for after this, a reminder before bed. Notes is a scratchpad for that. It sits under Today and auto-saves.</p>
+          <p>Notes is one overall pad, not a note for each day. You won’t see Notes under Monday or Tuesday. Export All puts Notes once at the bottom, not beside each day. Search export leaves Notes out.</p>
+          <p>Don’t turn it into a second planner. You can ignore Notes. The journal still works.</p>
+          <p>You can’t change a time or reorder the day. You can edit the words of any line — handy if you later add @Bill or #home for search.</p>
+          <h4><span class="help-heading-icon" data-icon="zap" aria-hidden="true"></span>Quick Add</h4>
+          <p>If you type the same line often, save it once. Open Quick Add, type the line, press Enter. Tap it later to log it now, with a new timestamp. Tags work here too.</p>
+          <ul>
+            <li>open the document +Report</li>
+            <li>walk #park</li>
+            <li>email @Bill</li>
+            <li>standup +Website</li>
+          </ul>
+          <h3>Not a task manager</h3>
+          <p>DRN records moments; it doesn't replace a full task manager. For a free, open-source option with projects, timers, and time tracking, see <a href="https://super-productivity.com/download/" target="_blank" rel="noopener noreferrer">Super Productivity</a> (all major platforms).</p>
+          <p>Typical pattern: Open Super Productivity and choose the next thing → work there → log the next line in DRN when you switch tasks.</p>
+          <h3>Privacy &amp; security</h3>
+          <p>This isn't a password manager or encrypted vault. Don't store passwords, financial details, or other highly sensitive information in your journal or Notes.</p>
+          <ul>
+            <li>Your data lives in <strong>plain text</strong> in this browser on this device — not on our servers (there aren't any).</li>
+            <li>Anyone with access to your unlocked phone or computer can read it.</li>
+            <li>Browser extensions with site access can read page storage on any website, including this one.</li>
+            <li>DRN uses no third-party scripts or analytics — your journal never leaves this device unless you export it.</li>
+          </ul>
+          <h3>Credit</h3>
+          <p>Doing Right Now was inspired by Novie by the Sea’s talk on <a href="https://youtu.be/UFidZJhxz84" target="_blank" rel="noopener noreferrer">interstitial journaling</a> — timestamped lines between tasks, one moment at a time.</p>
+        </div>
+      </div>
+
+      <div class="brand-sep">
+        <span class="brand-sep-line"></span>
+        <a href="https://doingrightnow.com/">DoingRightNow.com</a>
+        <span class="brand-sep-line"></span>
+      </div>
+
+      <p class="app-version" id="app-version"></p>
+    </div>
+  </div>
+
+  <div id="export-sheet" class="export-sheet" aria-hidden="true">
+    <div class="export-sheet-backdrop" id="export-sheet-backdrop"></div>
+    <div class="export-sheet-panel" role="dialog" aria-modal="true" aria-labelledby="export-sheet-title">
+      <div class="export-sheet-toolbar">
+        <span class="export-sheet-title" id="export-sheet-title">Export</span>
+        <div class="export-sheet-actions">
+          <button type="button" class="export-action-btn" id="export-copy-btn" title="Copy plain text" aria-label="Copy">
+            <span data-icon="copy"></span><span class="export-action-label" id="export-copy-label">Copy</span>
+          </button>
+          <button type="button" class="export-action-btn" id="export-download-btn" title="Download .txt file" aria-label="Download">
+            <span data-icon="download"></span><span class="export-action-label" id="export-download-label">Download</span>
+          </button>
+        </div>
+        <button type="button" class="export-sheet-close" id="export-close-btn" title="Close" aria-label="Close">
+          <span data-icon="x"></span>
+        </button>
+      </div>
+      <div class="export-sheet-empty" id="export-sheet-empty" hidden>No matching entries.</div>
+      <textarea class="export-sheet-preview" id="export-sheet-preview" spellcheck="false" aria-label="Export text — editable"></textarea>
+    </div>
+  </div>
+
+  <script>
+    // ─────────────────────────────────────────────
+    // State & Storage
+    // ─────────────────────────────────────────────
+
+    const APP_VERSION = '1.1.3';
+
+    // Inline Lucide-style icons (no CDN)
+    const ICON_PATHS = {
+      'settings': '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>',
+      'moon': '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>',
+      'eye': '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>',
+      'sun': '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>',
+      'download': '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>',
+      'trash-2': '<polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/>',
+      'calendar-x': '<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="10" y1="14" x2="14" y2="18"/><line x1="14" y1="14" x2="10" y2="18"/>',
+      'calendar-minus': '<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="10" y1="16" x2="14" y2="16"/>',
+      'refresh-cw': '<polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>',
+      'help-circle': '<circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>',
+      'calendar-check': '<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="m9 16 2 2 4-4"/>',
+      'circle-check-big': '<path d="M21.801 10A10 10 0 1 1 17 3.335"/><path d="m9 11 3 3L22 4"/>',
+      'search': '<circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>',
+      'x': '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>',
+      'arrow-up': '<path d="M12 19V5"/><path d="m5 12 7-7 7 7"/>',
+      'arrow-down': '<path d="M12 5v14"/><path d="m19 12-7 7-7-7"/>',
+      'zap': '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>',
+      'sticky-note': '<path d="M15.5 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8.5L15.5 3z"/><polyline points="15 3 15 9 21 9"/>',
+      'calendar-plus': '<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="12" y1="14" x2="12" y2="18"/><line x1="10" y1="16" x2="14" y2="16"/>',
+      'trophy': '<path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>',
+      'clock': '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
+      'chevron-down': '<polyline points="6 9 12 15 18 9"/>',
+      'chevron-up': '<polyline points="18 15 12 9 6 15"/>',
+      'type': '<polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/>',
+      'pencil': '<path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>',
+      'palette': '<circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>',
+      'contrast': '<circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 0 0 20"/>',
+      'check': '<polyline points="20 6 9 17 4 12"/>',
+      'star': '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>',
+      'copy': '<rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>',
+      'mail': '<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>',
+      'tag': '<path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/>'
+    };
+
+    function icon(name, extraClass = '') {
+      const paths = ICON_PATHS[name] || '';
+      const cls = extraClass ? `icon ${extraClass}` : 'icon';
+      return `<svg class="${cls}" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">${paths}</svg>`;
+    }
+
+    function paintStaticIcons() {
+      document.querySelectorAll('[data-icon]').forEach(el => {
+        const name = el.getAttribute('data-icon');
+        if (name && ICON_PATHS[name]) el.innerHTML = icon(name);
+      });
+    }
+
+    const KEYS = {
+      journal: 'doingrightnow_dev1_journal',
+      quickadds: 'doingrightnow_dev1_quickadds',
+      notes: 'doingrightnow_dev1_usernotes',
+      theme: 'doingrightnow_dev1_theme',
+      color: 'doingrightnow_dev1_color',
+      mono: 'doingrightnow_dev1_mono',
+      font: 'doingrightnow_dev1_font',
+      seeded: 'doingrightnow_dev1_seeded',
+      trophy: 'doingrightnow_dev1_trophy',
+      elapsed: 'doingrightnow_dev1_elapsed',
+      daystars: 'doingrightnow_dev1_daystars'
+    };
+
+    const COLOR_THEMES = [
+      { id: 'everforest', name: 'Everforest', swatch: '#a7c080' },
+      { id: 'red', name: 'Red', swatch: '#c52f21' },
+      { id: 'pink', name: 'Pink', swatch: '#d92662' },
+      { id: 'fuchsia', name: 'Fuchsia', swatch: '#c1208b' },
+      { id: 'purple', name: 'Purple', swatch: '#9236a4' },
+      { id: 'violet', name: 'Violet', swatch: '#7540bf' },
+      { id: 'indigo', name: 'Indigo', swatch: '#524ed2' },
+      { id: 'blue', name: 'Blue', swatch: '#2060df' },
+      { id: 'azure', name: 'Azure', swatch: '#0172ad' },
+      { id: 'cyan', name: 'Cyan', swatch: '#047878' },
+      { id: 'jade', name: 'Jade', swatch: '#007a50' },
+      { id: 'green', name: 'Green', swatch: '#398712' },
+      { id: 'lime', name: 'Lime', swatch: '#a5d601', ink: 'dark' },
+      { id: 'yellow', name: 'Yellow', swatch: '#f2df0d', ink: 'dark' },
+      { id: 'amber', name: 'Amber', swatch: '#ffbf00', ink: 'dark' },
+      { id: 'pumpkin', name: 'Pumpkin', swatch: '#ff9500', ink: 'dark' },
+      { id: 'orange', name: 'Orange', swatch: '#d24317' },
+      { id: 'sand', name: 'Sand', swatch: '#ccc6b4', ink: 'dark' },
+      { id: 'grey', name: 'Grey', swatch: '#ababab', ink: 'dark' },
+      { id: 'zinc', name: 'Zinc', swatch: '#646b79' },
+      { id: 'slate', name: 'Slate', swatch: '#525f7a' }
+    ];
+
+    let expandedEntryIds = new Set();
+    const ENTRY_PREVIEW_LEN = 200;
+
+    let exportSheetState = { filename: '', empty: false };
+    let exportCopyResetTimer = null;
+    let exportDownloadResetTimer = null;
+
+    let quickAdds = [];
+    let notes = '';
+    let viewRange = 2; // 1 | 2 | 3 | 7 | 'all' — default 2d so yesterday stays visible after midnight
+    let exportRange = 2;
+    let openPanel = null;
+    let searchOpen = false;
+    let searchQuery = '';
+    let searchRange = 7; // default 7 days when searching
+    let searchTimeout = null;
+    let trophyThreshold = 6; // show gold trophy on day headers at this count
+    let showElapsed = true; // timer under the current line
+    let monoOn = false;
+    let dayStars = {}; // ISO date → 0–5 (0 = unrated outline star)
+    let lastRenderedToday = null; // ISO date of the last render's "today"
+    let elapsedTimer = null;
+    let todayInputCommitTimer = null;
+    let todayInputComposing = false;
+    const isTouchInputDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    const TODAY_INPUT_COMMIT_MS = 280;
+
+    // Touch swipe state
+    let touchStartX = 0;
+    let touchCurrentX = 0;
+    let swipingEntry = null;
+    let isSwiping = false;
+
+    // ─────────────────────────────────────────────
+    // Helpers
+    // ─────────────────────────────────────────────
+    function uid() {
+      return Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+    }
+
+    function todayISO() {
+      const d = new Date();
+      return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    }
+
+    // If the calendar day changed since last render (e.g. tab left open overnight), redraw
+    function ensureCorrectDay() {
+      const now = todayISO();
+      if (lastRenderedToday && lastRenderedToday !== now) {
+        lastRenderedToday = now;
+        viewRange = 2;
+        render();
+        return true;
+      }
+      lastRenderedToday = now;
+      return false;
+    }
+
+    function formatTime(date = new Date()) {
+      let h = date.getHours();
+      const m = String(date.getMinutes()).padStart(2, '0');
+      const ampm = h >= 12 ? 'PM' : 'AM';
+      h = h % 12 || 12;
+      return `${h}:${m} ${ampm}`;
+    }
+
+    function formatTimeHtml(t) {
+      return escapeHtml(t).replace(/\s*(AM|PM|A|P)$/i, '<sup class="ampm">$1</sup>');
+    }
+
+    // Convert "9:15 AM" / "2:20 P" (legacy A/P) into minutes since midnight for sorting
+    function timeToMinutes(t) {
+      const match = t.match(/^(\d{1,2}):(\d{2})\s*(AM|PM|A|P)$/i);
+      if (!match) return 0;
+      let h = parseInt(match[1], 10);
+      const m = parseInt(match[2], 10);
+      const ap = match[3].toUpperCase();
+      const isPM = ap === 'PM' || ap === 'P';
+      const isAM = ap === 'AM' || ap === 'A';
+      if (isPM && h !== 12) h += 12;
+      if (isAM && h === 12) h = 0;
+      return h * 60 + m;
+    }
+
+    function entryStartMs(entry) {
+      const n = Number(entry.startedAt);
+      if (n > 0) return n;
+      const d = parseISODate(entry.date);
+      const mins = timeToMinutes(entry.time);
+      d.setHours(Math.floor(mins / 60), mins % 60, 0, 0);
+      return d.getTime();
+    }
+
+    function elapsedView(startMs) {
+      const elapsed = Math.max(0, Date.now() - startMs);
+      if (elapsed >= 3600000) {
+        return { html: '1hr<sup class="elapsed-plus">+</sup>', phase: 'over', done: true };
+      }
+      const totalSec = Math.floor(elapsed / 1000);
+      const m = Math.floor(totalSec / 60);
+      const s = totalSec % 60;
+      const phase = elapsed >= 1800000 ? 'warn' : 'ok';
+      return { html: m + ':' + String(s).padStart(2, '0'), phase, done: false };
+    }
+
+    function paintElapsed() {
+      const el = document.querySelector('.entry.latest .entry-elapsed');
+      if (!el) {
+        stopElapsedTimer();
+        return;
+      }
+      const startMs = Number(el.dataset.started);
+      if (!startMs) {
+        stopElapsedTimer();
+        return;
+      }
+      const view = elapsedView(startMs);
+      el.innerHTML = view.html;
+      el.classList.remove('elapsed-ok', 'elapsed-warn', 'elapsed-over');
+      el.classList.add('elapsed-' + view.phase);
+      if (view.done) stopElapsedTimer();
+    }
+
+    function stopElapsedTimer() {
+      if (elapsedTimer) {
+        clearInterval(elapsedTimer);
+        elapsedTimer = null;
+      }
+    }
+
+    function startElapsedTimer() {
+      stopElapsedTimer();
+      if (!showElapsed) return;
+      paintElapsed();
+      const el = document.querySelector('.entry.latest .entry-elapsed');
+      if (!el || el.classList.contains('elapsed-over')) return;
+      elapsedTimer = setInterval(paintElapsed, 1000);
+    }
+
+    function containViewport() {
+      if (window.scrollX) window.scrollTo({ left: 0 });
+    }
+
+    function isTextInputFocused() {
+      const el = document.activeElement;
+      return !!el && el.matches('#today-input, #quickadd-input, #notes-area, #search-input, #export-sheet-preview, .entry-body[contenteditable="true"]');
+    }
+
+    function dismissKeyboard() {
+      const el = document.activeElement;
+      if (!el || typeof el.blur !== 'function') return;
+      if (el.matches('#today-input, #quickadd-input, #notes-area, #search-input, #export-sheet-preview, .entry-body[contenteditable="true"]')) {
+        el.blur();
+      }
+    }
+
+    function keyboardDismissTargetInside(target) {
+      return target.closest(
+        '#today-input, #quickadd-input, #notes-area, #search-input, #export-sheet-preview, .entry-body[contenteditable="true"], #today-input-wrap, .today-panel, .today-tools, #search-panel, #export-sheet-panel, .export-sheet-panel'
+      );
+    }
+
+    function bindKeyboardDismiss() {
+      const app = document.getElementById('app');
+      if (!app || app.dataset.keyboardDismissBound) return;
+      app.dataset.keyboardDismissBound = '1';
+
+      app.addEventListener('touchstart', (e) => {
+        if (!isTextInputFocused()) return;
+        if (keyboardDismissTargetInside(e.target)) return;
+        dismissKeyboard();
+      }, { passive: true });
+
+      app.addEventListener('mousedown', (e) => {
+        if (!isTextInputFocused()) return;
+        if (keyboardDismissTargetInside(e.target)) return;
+        dismissKeyboard();
+      });
+    }
+
+    function parseISODate(iso) {
+      const [y, m, d] = iso.split('-').map(Number);
+      return new Date(y, m - 1, d);
+    }
+
+    function daysAgo(iso) {
+      const today = parseISODate(todayISO());
+      const d = parseISODate(iso);
+      return Math.round((today - d) / 86400000);
+    }
+
+    function formatDayHeader(iso) {
+      const days = daysAgo(iso);
+      const d = parseISODate(iso);
+      const dayNum = d.getDate();
+
+      if (days === 0) {
+        return { label: `${icon('calendar-check', 'today-icon')}Today<span class="sup">${dayNum}</span>`, isToday: true };
+      }
+      // Within last 7 days (or any recent weekday-style header): show weekday + day superscript
+      if (days > 0 && days < 7) {
+        const names = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        return { label: `${names[d.getDay()]}<span class="sup">${dayNum}</span>`, isToday: false };
+      }
+      // Older full date — day number is already in the string, no extra superscript
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      const dd = String(d.getDate()).padStart(2, '0');
+      return { label: `${dd}-${months[d.getMonth()]}-${d.getFullYear()}`, isToday: false };
+    }
+
+    // Build a continuous list of ISO dates from startISO → endISO (inclusive), newest first
+    function dateRange(startISO, endISO) {
+      const result = [];
+      const cur = parseISODate(endISO);
+      const start = parseISODate(startISO);
+      while (cur >= start) {
+        const y = cur.getFullYear();
+        const m = String(cur.getMonth() + 1).padStart(2, '0');
+        const d = String(cur.getDate()).padStart(2, '0');
+        result.push(`${y}-${m}-${d}`);
+        cur.setDate(cur.getDate() - 1);
+      }
+      return result;
+    }
+
+    function readStorage() {
+      try {
+        journal = JSON.parse(localStorage.getItem(KEYS.journal) || '[]');
+        quickAdds = JSON.parse(localStorage.getItem(KEYS.quickadds) || '[]');
+        notes = localStorage.getItem(KEYS.notes) || '';
+        const theme = localStorage.getItem(KEYS.theme) || 'light';
+        applyTheme(theme);
+        applyColorTheme(localStorage.getItem(KEYS.color) || 'green');
+        const font = localStorage.getItem(KEYS.font) || 'medium';
+        applyFont(font);
+        const t = parseInt(localStorage.getItem(KEYS.trophy) || '6', 10);
+        trophyThreshold = (isNaN(t) || t < 1) ? 6 : t;
+        applyElapsed(localStorage.getItem(KEYS.elapsed) !== '0');
+        applyMono(localStorage.getItem(KEYS.mono) === '1');
+        try {
+          dayStars = JSON.parse(localStorage.getItem(KEYS.daystars) || '{}') || {};
+        } catch (err) {
+          dayStars = {};
+        }
+      } catch (e) {
+        journal = [];
+        quickAdds = [];
+        notes = '';
+        applyColorTheme('green');
+      }
+    }
+
+    function load() {
+      readStorage();
+
+      // Only auto-seed on true first visit, not after user clears data
+      if (journal.length === 0 && !localStorage.getItem(KEYS.seeded)) {
+        seedWelcomeLine();
+        persist(KEYS.seeded, '1');
+      }
+    }
+
+    let storageReloadPending = false;
+    let storageReloadTimer = null;
+    let lastStorageSnapshot = '';
+    const TAB_ID = Math.random().toString(36).slice(2, 9);
+    let syncChannel = null;
+    try {
+      syncChannel = new BroadcastChannel('doingrightnow_dev1_sync');
+      syncChannel.onmessage = (e) => {
+        if (e.data && e.data.tabId === TAB_ID) return;
+        scheduleStorageReload();
+      };
+    } catch (err) {}
+
+    function storageSnapshot() {
+      return JSON.stringify({
+        j: localStorage.getItem(KEYS.journal),
+        q: localStorage.getItem(KEYS.quickadds),
+        n: localStorage.getItem(KEYS.notes),
+        d: localStorage.getItem(KEYS.daystars),
+        t: localStorage.getItem(KEYS.theme),
+        c: localStorage.getItem(KEYS.color),
+        f: localStorage.getItem(KEYS.font),
+        tr: localStorage.getItem(KEYS.trophy),
+        e: localStorage.getItem(KEYS.elapsed)
+      });
+    }
+
+    function storageSyncBlocked() {
+      // Background tab — always sync (activeElement can linger after switching away)
+      if (!document.hasFocus()) return false;
+      if (document.querySelector('.entry-body[contenteditable="true"]')) return true;
+      const input = document.getElementById('today-input');
+      if (input && document.activeElement === input && input.value.trim()) return true;
+      return false;
+    }
+
+    function reloadFromStorage() {
+      readStorage();
+      lastStorageSnapshot = storageSnapshot();
+      render();
+      const trophyInput = document.getElementById('trophy-threshold');
+      if (trophyInput) trophyInput.value = trophyThreshold;
+      startElapsedTimer();
+    }
+
+    function scheduleStorageReload() {
+      clearTimeout(storageReloadTimer);
+      storageReloadTimer = setTimeout(() => {
+        if (storageSyncBlocked()) {
+          storageReloadPending = true;
+          return;
+        }
+        storageReloadPending = false;
+        if (storageSnapshot() === lastStorageSnapshot) return;
+        reloadFromStorage();
+      }, 80);
+    }
+
+    function flushStorageReload() {
+      if (storageSyncBlocked()) return;
+      storageReloadPending = false;
+      if (storageSnapshot() === lastStorageSnapshot) return;
+      reloadFromStorage();
+    }
+
+    function syncWhenVisible() {
+      if (document.visibilityState !== 'visible') return;
+      ensureCorrectDay();
+      startElapsedTimer();
+      if (storageSnapshot() !== lastStorageSnapshot) {
+        scheduleStorageReload();
+      } else {
+        flushStorageReload();
+      }
+    }
+
+    window.addEventListener('storage', (e) => {
+      if (e.key !== null && !Object.values(KEYS).includes(e.key)) return;
+      scheduleStorageReload();
+    });
+
+    let saveWarned = false;
+
+    function persist(key, value) {
+      try {
+        localStorage.setItem(key, value);
+        lastStorageSnapshot = storageSnapshot();
+        if (syncChannel) syncChannel.postMessage({ tabId: TAB_ID, key });
+      } catch (e) {
+        if (!saveWarned) {
+          saveWarned = true;
+          window.alert("Couldn't save — export a copy below View, then free some browser storage.");
+        }
+      }
+    }
+
+    function saveJournal() {
+      persist(KEYS.journal, JSON.stringify(journal));
+    }
+
+    function saveQuickAdds() {
+      persist(KEYS.quickadds, JSON.stringify(quickAdds));
+    }
+
+    function saveNotes() {
+      persist(KEYS.notes, notes);
+    }
+
+    function fitNotesArea() {
+      const ta = document.getElementById('notes-area');
+      if (!ta) return;
+      ta.style.height = 'auto';
+      ta.style.height = Math.max(160, ta.scrollHeight) + 'px';
+    }
+
+    function applyTheme(mode) {
+      const themeIcon = document.getElementById('theme-icon');
+      if (mode === 'dark') {
+        document.documentElement.classList.add('dark');
+        if (themeIcon) {
+          themeIcon.setAttribute('data-icon', 'sun');
+          themeIcon.innerHTML = icon('sun');
+        }
+        const themeLabel = document.getElementById('theme-label');
+        if (themeLabel) themeLabel.textContent = 'Light Mode';
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#13171e');
+      } else {
+        document.documentElement.classList.remove('dark');
+        if (themeIcon) {
+          themeIcon.setAttribute('data-icon', 'moon');
+          themeIcon.innerHTML = icon('moon');
+        }
+        const themeLabel = document.getElementById('theme-label');
+        if (themeLabel) themeLabel.textContent = 'Dark Mode';
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff');
+      }
+      persist(KEYS.theme, mode);
+    }
+
+    function updateThemeColorLabel() {
+      const nameEl = document.getElementById('theme-color-name');
+      if (!nameEl) return;
+      if (monoOn) {
+        nameEl.textContent = 'Monochrome';
+        return;
+      }
+      const id = document.documentElement.getAttribute('data-color') || 'green';
+      const theme = COLOR_THEMES.find(t => t.id === id) || COLOR_THEMES.find(t => t.id === 'green');
+      nameEl.textContent = theme.name;
+    }
+
+    function applyMono(on) {
+      monoOn = !!on;
+      persist(KEYS.mono, monoOn ? '1' : '0');
+      document.documentElement.classList.toggle('mono', monoOn);
+      document.querySelectorAll('.mono-btn').forEach(btn => {
+        const isOn = btn.dataset.mono === 'on';
+        btn.classList.toggle('active', monoOn ? isOn : !isOn);
+      });
+      updateThemeColorLabel();
+    }
+
+    function applyColorTheme(id) {
+      const theme = COLOR_THEMES.find(t => t.id === id) || COLOR_THEMES.find(t => t.id === 'green');
+      document.documentElement.setAttribute('data-color', theme.id);
+      persist(KEYS.color, theme.id);
+      updateThemeColorLabel();
+      const wrap = document.getElementById('theme-swatches');
+      if (!wrap) return;
+      wrap.innerHTML = COLOR_THEMES.map(t => {
+        const selected = t.id === theme.id;
+        const ink = t.ink === 'dark' ? ' ink-dark' : '';
+        return `<button type="button" class="theme-swatch${ink}${selected ? ' selected' : ''}" data-color="${t.id}" style="background:${t.swatch}" title="${t.name}" aria-label="${t.name}" role="option" aria-selected="${selected}">${selected ? icon('check') : ''}</button>`;
+      }).join('');
+    }
+
+    function applyFont(size) {
+      document.documentElement.classList.remove('font-medium', 'font-large');
+      if (size === 'medium') document.documentElement.classList.add('font-medium');
+      if (size === 'large') document.documentElement.classList.add('font-large');
+      persist(KEYS.font, size);
+      document.querySelectorAll('.font-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.font === size);
+      });
+    }
+
+    function applyElapsed(on) {
+      showElapsed = !!on;
+      persist(KEYS.elapsed, showElapsed ? '1' : '0');
+      document.documentElement.classList.toggle('elapsed-off', !showElapsed);
+      document.querySelectorAll('.elapsed-btn').forEach(btn => {
+        const isOn = btn.dataset.elapsed === 'on';
+        btn.classList.toggle('active', showElapsed ? isOn : !isOn);
+      });
+      if (showElapsed) startElapsedTimer();
+      else stopElapsedTimer();
+    }
+
+    // First launch — welcome line on Today, a few tagged samples on yesterday
+    // ─────────────────────────────────────────────
+    function seedWelcomeLine() {
+      const now = new Date();
+      const y = new Date(now);
+      y.setDate(y.getDate() - 1);
+      const yesterday = y.getFullYear() + '-' + String(y.getMonth() + 1).padStart(2, '0') + '-' + String(y.getDate()).padStart(2, '0');
+
+      function yest(h, min, text) {
+        const d = new Date(y);
+        d.setHours(h, min, 0, 0);
+        return { id: uid(), date: yesterday, time: formatTime(d), text };
+      }
+
+      journal = [
+        {
+          id: uid(),
+          date: todayISO(),
+          time: formatTime(now),
+          startedAt: now.getTime(),
+          text: 'Try out DoingRightNow app — be sure to watch the 2 minute video to master the software. Help file is at the bottom of this screen.'
+        },
+        yest(16, 10, 'Emailed @Bill about +Report !'),
+        yest(14, 35, 'walk #park'),
+        yest(11, 20, 'Opened the document +Report'),
+        yest(9, 45, 'Wrote the first sentence to @sam'),
+        yest(8, 15, 'Made coffee at #kitchen xx')
+      ];
+      quickAdds = [
+        { id: uid(), text: 'walk #park' },
+        { id: uid(), text: 'email @Bill' },
+        { id: uid(), text: 'open the document +Report' }
+      ];
+      notes = '';
+      dayStars = {};
+      saveJournal();
+      saveQuickAdds();
+      saveNotes();
+      saveDayStars();
+      persist(KEYS.seeded, '1');
+      viewRange = 2;
+    }
+
+    // Settings → Clear All, Add Sample Data
+    // ─────────────────────────────────────────────
+    function seedDummyData() {
+      const samples = [
+        'Opened the laptop and sat down at #desk',
+        'Wrote the first sentence of the email to @sam',
+        'Made coffee at #kitchen',
+        'Reviewed the open tabs',
+        'Closed three unnecessary tabs',
+        'Texted @rob about +renovations!',
+        'Started the laundry at #home',
+        'Put the kettle on',
+        'Replied to one message from @maya',
+        'Took a short walk around the block',
+        'Opened the +budget spreadsheet I was avoiding',
+        'Wrote three bullet points for +proposal',
+        'Stretched for two minutes',
+        'Cleared the kitchen counter at #home',
+        'Named the next tiny step',
+        'Called @alex about the +website redesign',
+        'Picked up paint samples for +renovations at #hardware',
+        'Quick standup note with @team',
+        'Filed receipts from #office',
+        'Drafted intro paragraph for +proposal!',
+        'Watered plants at #home',
+        'Sent calendar invite to @sam and @maya',
+        'Measured the wall for +renovations',
+        'Inbox zero — deleted six old threads',
+        'Sketched wireframe for +website',
+        'Packed lunch at #kitchen',
+        'Followed up with @rob on materials!',
+        'Read two pages of the brief',
+        'Moved one box to #garage',
+        'Logged a small win on +budget'
+      ];
+
+      const now = new Date();
+      const entries = [];
+      // Spread across the last 14 days but NEVER put sample data on Today
+      const spanDays = 14;
+
+      for (let i = 0; i < samples.length; i++) {
+        const dayOffset = 1 + Math.floor(i * spanDays / samples.length);
+        const d = new Date(now);
+        d.setDate(d.getDate() - dayOffset);
+        d.setHours(7 + (i % 12), (i * 11) % 60, 0, 0);
+
+        const iso = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+        entries.push({
+          id: uid(),
+          date: iso,
+          time: formatTime(d),
+          text: samples[i]
+        });
+      }
+
+      journal = entries.sort((a, b) => {
+        if (a.date !== b.date) return b.date.localeCompare(a.date);
+        return timeToMinutes(b.time) - timeToMinutes(a.time);
+      });
+
+      quickAdds = [
+        { id: uid(), text: 'Quick stretch break' },
+        { id: uid(), text: 'Check in with @rob' },
+        { id: uid(), text: 'One step on +renovations' }
+      ];
+      notes = '';
+      dayStars = {};
+      saveJournal();
+      saveQuickAdds();
+      saveNotes();
+      saveDayStars();
+      persist(KEYS.seeded, '1');
+    }
+
+    // ─────────────────────────────────────────────
+    // Render
+    // ─────────────────────────────────────────────
+    function starSvg(filled) {
+      const cls = filled ? 'icon star-icon filled' : 'icon star-icon';
+      return `<svg class="${cls}" viewBox="0 0 24 24" width="11" height="11" aria-hidden="true">${ICON_PATHS.star}</svg>`;
+    }
+
+    function dayStarsHtml(n) {
+      const count = Number(n) || 0;
+      if (count < 1) return `<span class="day-stars">${starSvg(false)}</span>`;
+      let out = '<span class="day-stars">';
+      for (let i = 0; i < count; i++) out += starSvg(true);
+      return out + '</span>';
+    }
+
+    function saveDayStars() {
+      persist(KEYS.daystars, JSON.stringify(dayStars));
+    }
+
+    function cycleDayStars(date) {
+      const current = Number(dayStars[date]) || 0;
+      const next = current >= 5 ? 0 : current + 1;
+      if (next === 0) delete dayStars[date];
+      else dayStars[date] = next;
+      saveDayStars();
+      return next;
+    }
+
+    function dayCountLabel(entries) {
+      const total = entries.length;
+      const done = entries.filter(e => hasStrike(e.text)).length;
+      return total === 0 ? '0' : `${done}/${total}`;
+    }
+
+    function dayCountHtml(entries) {
+      const count = entries.length;
+      const trophy = count >= trophyThreshold
+        ? icon('trophy', 'trophy-icon')
+        : '';
+      return `<span class="day-count-wrap">${trophy}<span class="day-count">${dayCountLabel(entries)}</span></span>`;
+    }
+
+    function refreshDayCount(date) {
+      const group = document.querySelector(`.day-group[data-date="${date}"]`);
+      if (!group) return;
+      const wrap = group.querySelector('.day-count-wrap');
+      if (!wrap) return;
+      const entries = journal.filter(e => e.date === date);
+      wrap.outerHTML = dayCountHtml(entries);
+    }
+
+    function render() {
+      const feed = document.getElementById('feed');
+      feed.innerHTML = '';
+
+      // Group by date
+      const groups = {};
+      journal.forEach(e => {
+        if (!groups[e.date]) groups[e.date] = [];
+        groups[e.date].push(e);
+      });
+
+      const today = todayISO();
+      lastRenderedToday = today;
+      let dates;
+
+      // When search is open, the search range controls the visible window
+      const effectiveRange = searchOpen ? searchRange : viewRange;
+
+      if (effectiveRange === 'all') {
+        const existing = Object.keys(groups);
+        let oldest = today;
+        if (existing.length > 0) {
+          oldest = existing.sort((a, b) => a.localeCompare(b))[0];
+        }
+        dates = dateRange(oldest, today);
+      } else {
+        const days = Number(effectiveRange);
+        const cutoff = new Date();
+        cutoff.setDate(cutoff.getDate() - (days - 1));
+        const cutoffISO = cutoff.getFullYear() + '-' + String(cutoff.getMonth() + 1).padStart(2, '0') + '-' + String(cutoff.getDate()).padStart(2, '0');
+        dates = dateRange(cutoffISO, today);
+      }
+
+      // Ensure every date has a group array
+      dates.forEach(d => {
+        if (!groups[d]) groups[d] = [];
+      });
+
+      dates.forEach(date => {
+        const entries = groups[date] || [];
+        // Sort entries within day: newest time first
+        entries.sort((a, b) => timeToMinutes(b.time) - timeToMinutes(a.time));
+
+        const { label, isToday } = formatDayHeader(date);
+        const group = document.createElement('div');
+        group.className = 'day-group' + (isToday ? ' today-group' : '');
+        group.dataset.date = date;
+
+        const header = document.createElement('div');
+        header.className = 'day-header' + (isToday ? ' today' : '');
+        const countHtml = dayCountHtml(entries);
+
+        if (isToday) {
+          header.innerHTML = `
+            <div class="today-header-row">
+              <div class="today-header-left">
+                <button type="button" class="today-jump" id="today-jump" title="Show only Today" aria-label="Show only Today">${label}</button>
+              </div>
+              <div class="today-header-center">
+                <button type="button" class="search-toggle${searchOpen ? ' active' : ''}" id="search-toggle" title="Search" aria-label="Search">
+                  ${icon('search')}
+                </button>
+              </div>
+              <div class="today-header-right">
+                <button type="button" class="scroll-help-btn" id="scroll-help-btn" title="Help" aria-label="Help">
+                  ${icon('help-circle')}
+                </button>
+                <button type="button" class="scroll-bottom-btn" id="scroll-bottom-btn" title="Settings" aria-label="Settings">
+                  ${icon('settings')}
+                </button>
+                ${countHtml}
+              </div>
+            </div>
+          `;
+        } else {
+          const rating = Number(dayStars[date]) || 0;
+          header.innerHTML = `<button type="button" class="day-rate" data-date="${date}" title="Rate this day" aria-label="Rate this day">${label}${dayStarsHtml(rating)}</button>${countHtml}`;
+          const rateBtn = header.querySelector('.day-rate');
+          if (rateBtn) {
+            rateBtn.addEventListener('click', (e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              const next = cycleDayStars(date);
+              const stars = rateBtn.querySelector('.day-stars');
+              if (stars) stars.outerHTML = dayStarsHtml(next);
+            });
+          }
+        }
+        group.appendChild(header);
+
+        if (isToday) {
+          // Search panel (stays open until closed)
+          const searchPanel = document.createElement('div');
+          searchPanel.id = 'search-panel';
+          if (searchOpen) searchPanel.classList.add('open');
+          searchPanel.innerHTML = `
+            <div class="search-box-row">
+              <input type="text" id="search-input" placeholder="Search for text or tags" autocomplete="off" value="${escapeHtml(searchQuery)}" />
+              <button type="button" id="search-close" title="Close search" aria-label="Close search">${icon('x')}</button>
+            </div>
+            <div class="search-meta">
+              <div class="search-range-btns">
+                <span>In:</span>
+                <button type="button" class="view-btn search-range-btn${searchRange === 1 ? ' active' : ''}" data-search-range="1">Today</button>
+                <button type="button" class="view-btn search-range-btn${searchRange === 2 ? ' active' : ''}" data-search-range="2">2d</button>
+                <button type="button" class="view-btn search-range-btn${searchRange === 3 ? ' active' : ''}" data-search-range="3">3d</button>
+                <button type="button" class="view-btn search-range-btn${searchRange === 7 ? ' active' : ''}" data-search-range="7">7d</button>
+                <button type="button" class="view-btn search-range-btn${searchRange === 'all' ? ' active' : ''}" data-search-range="all">All</button>
+              </div>
+              <div class="search-meta-right">
+                <span class="search-hit-count" id="search-hit-count"></span>
+                <button type="button" class="view-btn" id="search-export">Export</button>
+              </div>
+            </div>
+          `;
+          group.appendChild(searchPanel);
+
+          const inputWrap = document.createElement('div');
+          inputWrap.id = 'today-input-wrap';
+          inputWrap.innerHTML = `<span class="today-input-icon" aria-hidden="true">${icon('pencil')}</span><input type="text" id="today-input" placeholder="What are you doing right now?" autocomplete="off" />`;
+          group.appendChild(inputWrap);
+
+          // Compact tools row
+          const tools = document.createElement('div');
+          tools.className = 'today-tools';
+          tools.innerHTML = `
+            <button type="button" class="today-tool-btn" id="btn-today-quickadd" aria-expanded="false">
+              ${icon('zap')}<span class="tool-label">Quick Add</span>
+              <span class="tool-chevron">${icon('chevron-down')}</span>
+            </button>
+            <button type="button" class="today-tool-btn" id="btn-today-notes" aria-expanded="false">
+              ${icon('sticky-note')}<span class="tool-label">Notes</span>
+              <span class="tool-chevron">${icon('chevron-down')}</span>
+            </button>
+          `;
+          group.appendChild(tools);
+
+          // Quick Add panel
+          const qaPanel = document.createElement('div');
+          qaPanel.className = 'today-panel';
+          qaPanel.id = 'panel-quickadd';
+          qaPanel.innerHTML = `
+            <input type="text" id="quickadd-input" placeholder="Type a reusable template and press Enter…" />
+            <div class="template-list" id="template-list"></div>
+            <div class="tpl-add-hint">Tap a template to log it now · × to remove</div>
+          `;
+          group.appendChild(qaPanel);
+
+          // Notes panel
+          const notesPanel = document.createElement('div');
+          notesPanel.className = 'today-panel';
+          notesPanel.id = 'panel-notes';
+          notesPanel.innerHTML = `<div class="notes-scroll" id="notes-scroll"><textarea id="notes-area" placeholder="Scratchpad — anything goes. Auto-saves."></textarea></div>`;
+          group.appendChild(notesPanel);
+        }
+
+        if (entries.length === 0 && isToday) {
+          // nothing extra
+        } else if (entries.length === 0) {
+          const empty = document.createElement('div');
+          empty.className = 'empty-day';
+          empty.textContent = 'No entries';
+          group.appendChild(empty);
+        } else {
+          entries.forEach((entry, i) => {
+            group.appendChild(createEntryEl(entry, isToday, isToday && i === 0));
+          });
+        }
+
+        feed.appendChild(group);
+      });
+
+      // Re-bind today input + tools
+      const todayInput = document.getElementById('today-input');
+      if (todayInput) {
+        todayInput.addEventListener('focus', () => {
+          closeTodayPanels();
+          syncTodayPanelDim();
+        });
+        todayInput.addEventListener('compositionstart', () => {
+          todayInputComposing = true;
+        });
+        todayInput.addEventListener('compositionend', () => {
+          todayInputComposing = false;
+        });
+        todayInput.addEventListener('keydown', e => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            if (e.isComposing || todayInputComposing) {
+              scheduleTodayInputCommit(TODAY_INPUT_COMMIT_MS);
+              return;
+            }
+            if (isTouchInputDevice) {
+              scheduleTodayInputCommit(TODAY_INPUT_COMMIT_MS);
+            } else {
+              commitTodayInput();
+            }
+          }
+        });
+        todayInput.addEventListener('blur', () => {
+          const delay = isTouchInputDevice ? TODAY_INPUT_COMMIT_MS : 120;
+          scheduleTodayInputCommit(delay);
+          setTimeout(() => {
+            flushStorageReload();
+            syncTodayPanelDim();
+          }, delay);
+          setTimeout(containViewport, 300);
+        });
+      }
+
+      bindTodayTools();
+      bindSearch();
+
+      // Sync view switcher active state (only range buttons, not font)
+      document.querySelectorAll('#view-range-row .view-btn').forEach(btn => {
+        const r = btn.dataset.range;
+        const active = (r === 'all' && viewRange === 'all') || (r !== 'all' && Number(r) === viewRange);
+        btn.classList.toggle('active', active);
+      });
+
+      document.querySelectorAll('#export-range-row .export-range-btn').forEach(btn => {
+        const r = btn.dataset.exportRange;
+        const active = (r === 'all' && exportRange === 'all') || (r !== 'all' && Number(r) === exportRange);
+        btn.classList.toggle('active', active);
+      });
+
+      // Apply search filter if active
+      if (searchOpen && searchQuery.trim()) {
+        applySearchFilter();
+      }
+      syncTodayPanelDim();
+      const tagsPanel = document.getElementById('panel-tags');
+      if (tagsPanel && tagsPanel.classList.contains('open')) renderMyTags();
+      startElapsedTimer();
+    }
+
+    function bindSearch() {
+      const toggle = document.getElementById('search-toggle');
+      const closeBtn = document.getElementById('search-close');
+      const input = document.getElementById('search-input');
+      const scrollBtn = document.getElementById('scroll-bottom-btn');
+      const helpScrollBtn = document.getElementById('scroll-help-btn');
+
+      if (helpScrollBtn) {
+        helpScrollBtn.onclick = (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          openHelpPanel();
+        };
+      }
+
+      if (scrollBtn) {
+        scrollBtn.onclick = (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const target = document.getElementById('settings-heading');
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          } else {
+            const top = Math.max(
+              document.body.scrollHeight,
+              document.documentElement.scrollHeight,
+              document.body.offsetHeight,
+              document.documentElement.offsetHeight
+            );
+            window.scrollTo({ top, behavior: 'smooth' });
+          }
+        };
+      }
+
+      if (toggle) {
+        toggle.onclick = () => {
+          searchOpen = !searchOpen;
+          if (searchOpen) {
+            searchRange = 7; // default to 7 days when opening
+            searchQuery = '';
+          } else {
+            searchQuery = '';
+          }
+          render();
+          if (searchOpen) {
+            setTimeout(() => {
+              const si = document.getElementById('search-input');
+              if (si) si.focus();
+            }, 40);
+          }
+        };
+      }
+
+      if (closeBtn) {
+        closeBtn.onclick = () => closeSearch();
+      }
+
+      if (input) {
+        input.oninput = (e) => {
+          searchQuery = e.target.value;
+          clearTimeout(searchTimeout);
+          searchTimeout = setTimeout(() => {
+            applySearchFilter();
+          }, 200);
+        };
+        input.addEventListener('blur', () => setTimeout(containViewport, 300));
+        input.onkeydown = (e) => {
+          if (e.key === 'Escape') closeSearch();
+        };
+        // Restore cursor position after re-renders if needed
+        if (searchOpen && searchQuery) {
+          input.focus();
+          input.setSelectionRange(input.value.length, input.value.length);
+        }
+      }
+
+      document.querySelectorAll('.search-range-btn').forEach(btn => {
+        btn.onclick = () => {
+          const r = btn.dataset.searchRange;
+          searchRange = r === 'all' ? 'all' : Number(r);
+          render();
+          setTimeout(() => {
+            const si = document.getElementById('search-input');
+            if (si) {
+              si.focus();
+              si.setSelectionRange(si.value.length, si.value.length);
+            }
+          }, 40);
+        };
+      });
+
+      const exportBtn = document.getElementById('search-export');
+      if (exportBtn) {
+        exportBtn.onclick = (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          openSearchExportPreview();
+        };
+      }
+    }
+
+    function isSearchTag(token) {
+      return /^[@#+][\w-]+$/i.test(token) || /^\*[\w-]+$/i.test(token);
+    }
+
+    function hayIncludesTag(hay, tag) {
+      const t = tag.toLowerCase();
+      if (hay.includes(t)) return true;
+      if (/^\+[\w-]+$/.test(t)) return hay.includes('*' + t.slice(1));
+      if (/^\*[\w-]+$/.test(t)) return hay.includes('+' + t.slice(1));
+      return false;
+    }
+
+    function parseSearchQuery(raw) {
+      const q = String(raw || '').trim();
+      if (!q) return { empty: true, clauses: [] };
+
+      const clauses = [];
+      const quoted = [];
+      const unquoted = q.replace(/"([^"]*)"/g, (_, inner) => {
+        quoted.push(inner);
+        return ' ';
+      }).replace(/\s+/g, ' ').trim();
+
+      quoted.forEach(inner => {
+        const tags = inner.match(/[@#+*][\w-]+/g) || [];
+        const leftover = inner.replace(/[@#+*][\w-]+/g, ' ').replace(/\s+/g, ' ').trim();
+        if (tags.length >= 2) {
+          clauses.push({ type: 'and-tags', values: tags.map(t => t.toLowerCase()) });
+          if (leftover) clauses.push({ type: 'phrase', value: leftover.toLowerCase() });
+        } else if (inner.trim()) {
+          clauses.push({ type: 'phrase', value: inner.trim().toLowerCase() });
+        }
+      });
+
+      if (unquoted) {
+        const tokens = unquoted.split(' ').filter(Boolean);
+        const tags = tokens.filter(isSearchTag);
+        const words = tokens.filter(t => !isSearchTag(t));
+        if (tags.length >= 2) {
+          clauses.push({ type: 'or-tags', values: tags.map(t => t.toLowerCase()) });
+          if (words.length) clauses.push({ type: 'contains', value: words.join(' ').toLowerCase() });
+        } else {
+          clauses.push({ type: 'contains', value: unquoted.toLowerCase() });
+        }
+      }
+
+      return { empty: false, clauses };
+    }
+
+    function entryMatchesSearch(haystack, rawQuery) {
+      const parsed = parseSearchQuery(rawQuery);
+      if (parsed.empty) return true;
+      const hay = String(haystack || '').toLowerCase();
+      return parsed.clauses.every(clause => {
+        if (clause.type === 'phrase' || clause.type === 'contains') {
+          return hay.includes(clause.value);
+        }
+        if (clause.type === 'and-tags') {
+          return clause.values.every(tag => hayIncludesTag(hay, tag));
+        }
+        if (clause.type === 'or-tags') {
+          return clause.values.some(tag => hayIncludesTag(hay, tag));
+        }
+        return true;
+      });
+    }
+
+    function applySearchFilter() {
+      const q = searchQuery.trim();
+      let hits = 0;
+
+      document.querySelectorAll('.day-group').forEach(group => {
+        const entries = group.querySelectorAll('.entry');
+        let visibleInDay = 0;
+
+        entries.forEach(el => {
+          const body = el.querySelector('.entry-body');
+          const text = body ? body.textContent : '';
+          const match = entryMatchesSearch(text, q);
+          el.classList.toggle('search-hidden', !match);
+          if (match) {
+            visibleInDay++;
+            hits++;
+          }
+        });
+
+        // Hide day groups with no matching entries (keep Today visible for the search UI)
+        const isTodayGroup = group.classList.contains('today-group');
+        if (!isTodayGroup) {
+          group.classList.toggle('search-empty-hidden', q && visibleInDay === 0);
+        } else {
+          const todayEntries = group.querySelectorAll('.entry');
+          todayEntries.forEach(el => el.classList.remove('latest'));
+          const firstVisible = Array.from(todayEntries).find(el => !el.classList.contains('search-hidden'));
+          if (firstVisible) firstVisible.classList.add('latest');
+        }
+      });
+
+      const hitEl = document.getElementById('search-hit-count');
+      if (hitEl) {
+        if (!q) {
+          hitEl.textContent = '';
+        } else {
+          hitEl.textContent = hits === 1 ? '1 match' : `${hits} matches`;
+        }
+      }
+      startElapsedTimer();
+    }
+
+    function showOnlyToday() {
+      dismissKeyboard();
+      if (searchOpen) {
+        clearTimeout(searchTimeout);
+        searchOpen = false;
+        searchQuery = '';
+      }
+      closeTodayPanels();
+      closeAllPanels();
+      viewRange = 1;
+      searchRange = 1;
+      render();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function bindTodayTools() {
+      const todayJump = document.getElementById('today-jump');
+      if (todayJump) todayJump.onclick = showOnlyToday;
+
+      const qaBtn = document.getElementById('btn-today-quickadd');
+      const notesBtn = document.getElementById('btn-today-notes');
+      if (!qaBtn) return;
+
+      qaBtn.onclick = () => toggleTodayPanel('panel-quickadd', qaBtn);
+      notesBtn.onclick = () => toggleTodayPanel('panel-notes', notesBtn);
+
+      // Quick-add input
+      const qaInput = document.getElementById('quickadd-input');
+      if (qaInput) {
+        qaInput.onkeydown = e => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            const text = e.target.value.trim();
+            if (!text) return;
+            quickAdds.push({ id: uid(), text });
+            quickAdds.sort(compareQuickAdds);
+            saveQuickAdds();
+            e.target.value = '';
+            renderTemplates();
+          }
+        };
+      }
+
+      // Notes
+      const notesArea = document.getElementById('notes-area');
+      const notesScroll = document.getElementById('notes-scroll');
+      if (notesArea) {
+        notesArea.value = notes;
+        notesArea.oninput = e => {
+          notes = e.target.value;
+          saveNotes();
+          fitNotesArea();
+        };
+        notesArea.addEventListener('blur', () => setTimeout(containViewport, 300));
+        if (notesScroll) {
+          notesScroll.addEventListener('touchstart', (e) => e.stopPropagation(), { passive: true });
+          notesScroll.addEventListener('touchmove', (e) => e.stopPropagation(), { passive: true });
+        }
+        fitNotesArea();
+      }
+
+      renderTemplates();
+    }
+
+    function syncTodayPanelDim() {
+      const feed = document.getElementById('feed');
+      if (!feed) return;
+      feed.classList.toggle('search-open', searchOpen);
+      feed.classList.toggle('today-panel-open', !!document.querySelector('.today-panel.open'));
+      const input = document.getElementById('today-input');
+      const inputActive = !!(input && document.activeElement === input);
+      feed.classList.toggle('today-input-active', inputActive);
+      const wrap = document.getElementById('today-input-wrap');
+      if (wrap) wrap.classList.toggle('today-input-active', inputActive);
+    }
+
+    function closeTodayPanels() {
+      document.querySelectorAll('.today-panel').forEach(p => p.classList.remove('open'));
+      document.querySelectorAll('.today-tool-btn').forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-expanded', 'false');
+        const ch = b.querySelector('.tool-chevron');
+        if (ch) ch.innerHTML = icon('chevron-down');
+      });
+      syncTodayPanelDim();
+    }
+
+    function openHelpPanel() {
+      dismissKeyboard();
+      closeTodayPanels();
+      const helpMenuBtn = document.getElementById('menu-help');
+      if (helpMenuBtn) {
+        helpMenuBtn.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      const panel = document.getElementById('panel-help');
+      if (panel && !panel.classList.contains('open')) {
+        togglePanel('panel-help');
+      }
+    }
+
+    function toggleTodayPanel(id, btn) {
+      const panel = document.getElementById(id);
+      if (!panel) return;
+      const isOpen = panel.classList.contains('open');
+
+      closeTodayPanels();
+
+      if (!isOpen) {
+        panel.classList.add('open');
+        if (btn) {
+          btn.classList.add('active');
+          btn.setAttribute('aria-expanded', 'true');
+          const ch = btn.querySelector('.tool-chevron');
+          if (ch) ch.innerHTML = icon('chevron-up');
+        }
+        if (id === 'panel-quickadd') {
+          setTimeout(() => {
+            const inp = document.getElementById('quickadd-input');
+            if (inp) inp.focus();
+          }, 40);
+        }
+        if (id === 'panel-notes') {
+          setTimeout(() => {
+            const ta = document.getElementById('notes-area');
+            if (ta) {
+              fitNotesArea();
+              ta.focus();
+            }
+          }, 40);
+        }
+      }
+      syncTodayPanelDim();
+    }
+
+    function createEntryEl(entry, isToday, isLatest) {
+      const el = document.createElement('div');
+      el.className = 'entry' + (isToday ? ' today-entry' : '') + (isLatest ? ' latest' : '');
+      el.dataset.id = entry.id;
+
+      const emphasisClass = hasEmphasis(entry.text) ? ' emphasis' : '';
+      const strikeClass = hasStrike(entry.text) ? ' struck' : '';
+      const truncated = isEntryTruncated(entry);
+      el.innerHTML = `
+        <button type="button" class="entry-bring" data-id="${entry.id}" title="Bring to Today" aria-label="Bring to Today">
+          ${icon('calendar-plus')}
+        </button>
+        <button type="button" class="entry-delete" data-id="${entry.id}" title="Delete" aria-label="Delete">
+          ${icon('trash-2')}
+        </button>
+        <div class="entry-inner">
+          <div class="entry-time">
+            <span class="entry-clock">${formatTimeHtml(entry.time)}</span>
+            ${isToday ? `<span class="entry-elapsed" data-started="${entryStartMs(entry)}"></span>` : ''}
+          </div>
+          <span class="latest-loader" aria-hidden="true"></span>
+          <div class="entry-body${emphasisClass}${strikeClass}${truncated ? ' entry-truncated' : ''}" data-id="${entry.id}">${formatEntryText(entryDisplayText(entry))}</div>
+          <div class="entry-actions">
+            <button type="button" class="entry-action-btn bring" data-id="${entry.id}" title="Bring to Today" aria-label="Bring to Today">${icon('calendar-plus')}</button>
+            <button type="button" class="entry-action-btn del" data-id="${entry.id}" title="Delete" aria-label="Delete">${icon('trash-2')}</button>
+          </div>
+        </div>
+      `;
+
+      // Click to edit
+      const body = el.querySelector('.entry-body');
+      body.addEventListener('click', (e) => {
+        if (el.classList.contains('swiped-left') || el.classList.contains('swiped-right')) return;
+        if (searchOpen) {
+          closeSearch();
+          return;
+        }
+        if (isEntryTruncated(entry)) {
+          expandEntry(entry, body);
+          return;
+        }
+        startEdit(body, entry);
+      });
+
+      // Delete (swipe reveal + desktop button)
+      el.querySelector('.entry-delete').addEventListener('click', (e) => {
+        e.stopPropagation();
+        deleteEntry(entry.id);
+      });
+      const delBtn = el.querySelector('.entry-action-btn.del');
+      if (delBtn) {
+        delBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          deleteEntry(entry.id);
+        });
+      }
+
+      // Bring to Today (swipe reveal + desktop button)
+      el.querySelector('.entry-bring').addEventListener('click', (e) => {
+        e.stopPropagation();
+        bringToToday(entry);
+      });
+      const bringBtn = el.querySelector('.entry-action-btn.bring');
+      if (bringBtn) {
+        bringBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          bringToToday(entry);
+        });
+      }
+
+      // Touch swipe
+      const inner = el.querySelector('.entry-inner');
+      inner.addEventListener('touchstart', onTouchStart, { passive: true });
+      inner.addEventListener('touchmove', onTouchMove, { passive: false });
+      inner.addEventListener('touchend', onTouchEnd, { passive: true });
+
+      return el;
+    }
+
+    function truncateEntryText(raw, max = ENTRY_PREVIEW_LEN) {
+      if (raw.length <= max) return raw;
+      let cut = raw.slice(0, max);
+      const lastSpace = cut.lastIndexOf(' ');
+      if (lastSpace > max * 0.55) cut = cut.slice(0, lastSpace);
+      return cut.trimEnd() + '…';
+    }
+
+    function entryDisplayText(entry) {
+      if (entry.text.length <= ENTRY_PREVIEW_LEN || expandedEntryIds.has(entry.id)) {
+        return entry.text;
+      }
+      return truncateEntryText(entry.text);
+    }
+
+    function isEntryTruncated(entry) {
+      return entry.text.length > ENTRY_PREVIEW_LEN && !expandedEntryIds.has(entry.id);
+    }
+
+    function expandEntry(entry, bodyEl) {
+      expandedEntryIds.add(entry.id);
+      bodyEl.classList.remove('entry-truncated');
+      bodyEl.innerHTML = formatEntryText(entry.text);
+      bodyEl.classList.toggle('emphasis', hasEmphasis(entry.text));
+      bodyEl.classList.toggle('struck', hasStrike(entry.text));
+    }
+
+    function applyEntryBodyDisplay(bodyEl, entry) {
+      expandedEntryIds.delete(entry.id);
+      const truncated = isEntryTruncated(entry);
+      bodyEl.innerHTML = formatEntryText(entryDisplayText(entry));
+      bodyEl.classList.toggle('emphasis', hasEmphasis(entry.text));
+      bodyEl.classList.toggle('struck', hasStrike(entry.text));
+      bodyEl.classList.toggle('entry-truncated', truncated);
+    }
+
+    function escapeHtml(str) {
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    // Optional progressive markup:
+    // @name  → person (violet, italic)
+    // #place → location (teal, italic)
+    // +project → project (amber, italic); legacy * still recognized
+    // any !  → whole entry bold red
+    // any ?  → inline yellow highlighter on the text
+    // `word` → inline monospace on that word or phrase (any entry)
+    // xx     → whole entry struck out (standalone marker, case insensitive)
+    function formatEntryText(raw) {
+      let html = escapeHtml(raw);
+
+      // Inline `word` or `phrase` — before tags so @ inside backticks stays literal
+      html = html.replace(/`([^`\n]+)`/g, '<span class="entry-code">$1</span>');
+
+      // Tags only after start-of-line or whitespace (avoids email false positives)
+      html = html.replace(/(^|\s)@([\w-]+)/g, '$1<span class="tag tag-person">@$2</span>');
+      html = html.replace(/(^|\s)#([\w-]+)/g, '$1<span class="tag tag-location">#$2</span>');
+      html = html.replace(/(^|\s)\+([\w-]+)/g, '$1<span class="tag tag-project">+$2</span>');
+      html = html.replace(/(^|\s)\*([\w-]+)/g, '$1<span class="tag tag-project">*$2</span>');
+
+      if (hasQuestion(raw)) {
+        html = '<span class="question-highlight">' + html + '</span>';
+      }
+
+      if (hasStrike(raw)) {
+        html = '<span class="strike-check" aria-hidden="true">' + icon('circle-check-big') + '</span><span class="entry-line">' + html + '</span>';
+      }
+
+      return html;
+    }
+
+    function hasEmphasis(raw) {
+      return raw.includes('!');
+    }
+
+    function hasQuestion(raw) {
+      return raw.includes('?');
+    }
+
+    function hasStrike(raw) {
+      return /\bxx\b/i.test(raw);
+    }
+
+    // ─────────────────────────────────────────────
+    // Entry actions
+    // ─────────────────────────────────────────────
+    function scheduleTodayInputCommit(delay) {
+      clearTimeout(todayInputCommitTimer);
+      todayInputCommitTimer = setTimeout(() => {
+        todayInputCommitTimer = null;
+        commitTodayInput();
+      }, delay);
+    }
+
+    function commitTodayInput() {
+      // Roll over to the new calendar day if the page was left open past midnight
+      ensureCorrectDay();
+
+      const input = document.getElementById('today-input');
+      if (!input) return;
+      const text = input.value.trim();
+      if (!text) return;
+
+      const entry = {
+        id: uid(),
+        date: todayISO(),
+        time: formatTime(),
+        startedAt: Date.now(),
+        text
+      };
+      journal.unshift(entry);
+      saveJournal();
+      input.value = '';
+      render();
+      // Keep focus for rapid entry
+      setTimeout(() => {
+        const ni = document.getElementById('today-input');
+        if (ni) ni.focus();
+      }, 30);
+    }
+
+    function startEdit(bodyEl, entry) {
+      // Close any open swipe first
+      closeAllSwipes();
+
+      const entryEl = bodyEl.closest('.entry');
+      const feed = document.getElementById('feed');
+
+      // Show plain text while editing (no styled spans)
+      bodyEl.textContent = entry.text;
+      bodyEl.contentEditable = 'true';
+      if (entryEl) entryEl.classList.add('entry-editing');
+      if (feed) feed.classList.add('entry-editing-active');
+      bodyEl.focus();
+
+      // Place caret at end
+      const range = document.createRange();
+      range.selectNodeContents(bodyEl);
+      range.collapse(false);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+
+      const finish = () => {
+        bodyEl.contentEditable = 'false';
+        if (entryEl) entryEl.classList.remove('entry-editing');
+        if (feed) feed.classList.remove('entry-editing-active');
+        const newText = bodyEl.textContent.trim();
+        if (!newText) {
+          applyEntryBodyDisplay(bodyEl, entry);
+          return;
+        }
+        if (newText !== entry.text) {
+          entry.text = newText;
+          const idx = journal.findIndex(e => e.id === entry.id);
+          if (idx !== -1) {
+            journal[idx].text = newText;
+            saveJournal();
+          }
+        }
+        applyEntryBodyDisplay(bodyEl, entry);
+        refreshDayCount(entry.date);
+        flushStorageReload();
+      };
+
+      bodyEl.onblur = finish;
+      bodyEl.onkeydown = (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          bodyEl.blur();
+        }
+        if (e.key === 'Escape') {
+          bodyEl.textContent = entry.text;
+          bodyEl.blur();
+        }
+      };
+    }
+
+    function deleteEntry(id) {
+      journal = journal.filter(e => e.id !== id);
+      saveJournal();
+      render();
+    }
+
+    // ─────────────────────────────────────────────
+    // Swipe to delete
+    // ─────────────────────────────────────────────
+    function onTouchStart(e) {
+      if (e.touches.length !== 1) return;
+      touchStartX = e.touches[0].clientX;
+      touchCurrentX = touchStartX;
+      swipingEntry = e.currentTarget.closest('.entry');
+      isSwiping = false;
+
+      // Close other open swipes
+      document.querySelectorAll('.entry.swiped-left, .entry.swiped-right').forEach(el => {
+        if (el !== swipingEntry) {
+          el.classList.remove('swiped-left', 'swiped-right');
+        }
+      });
+    }
+
+    function onTouchMove(e) {
+      if (!swipingEntry) return;
+      touchCurrentX = e.touches[0].clientX;
+      const dx = touchCurrentX - touchStartX;
+
+      if (Math.abs(dx) > 8) {
+        isSwiping = true;
+        e.preventDefault(); // prevent scroll while swiping
+      }
+
+      if (isSwiping) {
+        const translate = Math.max(-80, Math.min(80, dx));
+        swipingEntry.querySelector('.entry-inner').style.transform = `translateX(${translate}px)`;
+        swipingEntry.querySelector('.entry-inner').style.transition = 'none';
+      }
+    }
+
+    function onTouchEnd() {
+      if (!swipingEntry) return;
+      const inner = swipingEntry.querySelector('.entry-inner');
+      inner.style.transition = '';
+
+      const dx = touchCurrentX - touchStartX;
+      swipingEntry.classList.remove('swiped-left', 'swiped-right');
+
+      if (dx < -40) {
+        swipingEntry.classList.add('swiped-left');
+        inner.style.transform = '';
+      } else if (dx > 40) {
+        swipingEntry.classList.add('swiped-right');
+        inner.style.transform = '';
+      } else {
+        inner.style.transform = '';
+      }
+
+      swipingEntry = null;
+      isSwiping = false;
+    }
+
+    function closeAllSwipes() {
+      document.querySelectorAll('.entry.swiped-left, .entry.swiped-right').forEach(el => {
+        el.classList.remove('swiped-left', 'swiped-right');
+      });
+    }
+
+    function bringToToday(entry) {
+      const copy = {
+        id: uid(),
+        date: todayISO(),
+        time: formatTime(),
+        startedAt: Date.now(),
+        text: entry.text
+      };
+      journal.unshift(copy);
+      saveJournal();
+      closeAllSwipes();
+      render();
+      // Re-bind tools after re-render
+      bindTodayTools();
+    }
+
+    // Click anywhere to close swipes
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.entry')) {
+        closeAllSwipes();
+      }
+    });
+
+    // ─────────────────────────────────────────────
+    // Quick Adds
+    // ─────────────────────────────────────────────
+    function compareQuickAdds(a, b) {
+      return a.text.localeCompare(b.text, undefined, { sensitivity: 'base' });
+    }
+
+    function sortedQuickAdds() {
+      return quickAdds.slice().sort(compareQuickAdds);
+    }
+
+    function closeSearch() {
+      if (!searchOpen) return;
+      clearTimeout(searchTimeout);
+      searchOpen = false;
+      searchQuery = '';
+      render();
+    }
+
+    function renderTemplates() {
+      const list = document.getElementById('template-list');
+      list.innerHTML = '';
+      sortedQuickAdds().forEach(t => {
+        const item = document.createElement('div');
+        item.className = 'template-item';
+        item.innerHTML = `
+          <span class="tpl-text">${escapeHtml(t.text)}</span>
+          <span class="tpl-del" data-id="${t.id}">${icon('x')}</span>
+        `;
+        item.querySelector('.tpl-text').addEventListener('click', () => {
+          // Instantly add to today
+          const entry = {
+            id: uid(),
+            date: todayISO(),
+            time: formatTime(),
+            startedAt: Date.now(),
+            text: t.text
+          };
+          journal.unshift(entry);
+          saveJournal();
+          render();
+          // Close panel optionally
+        });
+        item.querySelector('.tpl-del').addEventListener('click', (e) => {
+          e.stopPropagation();
+          quickAdds = quickAdds.filter(q => q.id !== t.id);
+          saveQuickAdds();
+          renderTemplates();
+        });
+        list.appendChild(item);
+      });
+    }
+
+    // ─────────────────────────────────────────────
+    // Menu actions
+    // ─────────────────────────────────────────────
+    function closeAllPanels() {
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('open'));
+      openPanel = null;
+      const settingsBtn = document.getElementById('menu-settings');
+      const themeBtn = document.getElementById('menu-theme-panel');
+      const tagsBtn = document.getElementById('menu-tags');
+      const helpBtn = document.getElementById('menu-help');
+      const settingsChevron = document.getElementById('settings-chevron');
+      const themeChevron = document.getElementById('theme-chevron');
+      const tagsChevron = document.getElementById('tags-chevron');
+      const helpChevron = document.getElementById('help-chevron');
+      if (settingsBtn) {
+        settingsBtn.classList.remove('open-fold');
+        settingsBtn.setAttribute('aria-expanded', 'false');
+      }
+      if (themeBtn) {
+        themeBtn.classList.remove('open-fold');
+        themeBtn.setAttribute('aria-expanded', 'false');
+      }
+      if (tagsBtn) {
+        tagsBtn.classList.remove('open-fold');
+        tagsBtn.setAttribute('aria-expanded', 'false');
+      }
+      if (helpBtn) {
+        helpBtn.classList.remove('open-fold');
+        helpBtn.setAttribute('aria-expanded', 'false');
+      }
+      if (settingsChevron) settingsChevron.innerHTML = icon('chevron-down');
+      if (themeChevron) themeChevron.innerHTML = icon('chevron-down');
+      if (tagsChevron) tagsChevron.innerHTML = icon('chevron-down');
+      if (helpChevron) helpChevron.innerHTML = icon('chevron-down');
+    }
+
+    function collectJournalTags() {
+      const people = new Map();
+      const places = new Map();
+      const projects = new Map();
+
+      function addTag(map, prefix, name) {
+        const key = prefix + name.toLowerCase();
+        if (!map.has(key)) map.set(key, prefix + name);
+      }
+
+      journal.forEach(entry => {
+        const text = entry.text || '';
+        let m;
+        const personRe = /(?:^|\s)@([\w-]+)/g;
+        const placeRe = /(?:^|\s)#([\w-]+)/g;
+        const projectRe = /(?:^|\s)[*+]([\w-]+)/g;
+        while ((m = personRe.exec(text))) addTag(people, '@', m[1]);
+        while ((m = placeRe.exec(text))) addTag(places, '#', m[1]);
+        while ((m = projectRe.exec(text))) addTag(projects, '+', m[1]);
+      });
+
+      const sortTags = tags => tags.sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
+      return {
+        people: sortTags([...people.values()]),
+        places: sortTags([...places.values()]),
+        projects: sortTags([...projects.values()])
+      };
+    }
+
+    function renderMyTags() {
+      const wrap = document.getElementById('my-tags-content');
+      if (!wrap) return;
+      const tags = collectJournalTags();
+      const max = Math.max(tags.people.length, tags.places.length, tags.projects.length);
+      if (max === 0) {
+        wrap.innerHTML = '<p class="my-tags-empty">No tags yet — use @person, #place, or +project in any line.</p>';
+        return;
+      }
+      let rows = '';
+      for (let i = 0; i < max; i++) {
+        const person = tags.people[i];
+        const place = tags.places[i];
+        const project = tags.projects[i];
+        rows += `<tr>
+          <td>${person ? `<span class="tag tag-person">${escapeHtml(person)}</span>` : ''}</td>
+          <td>${place ? `<span class="tag tag-location">${escapeHtml(place)}</span>` : ''}</td>
+          <td>${project ? `<span class="tag tag-project">${escapeHtml(project)}</span>` : ''}</td>
+        </tr>`;
+      }
+      wrap.innerHTML = `<table class="my-tags-table">
+        <thead>
+          <tr>
+            <th><span class="tag tag-person">@</span></th>
+            <th><span class="tag tag-location">#</span></th>
+            <th><span class="tag tag-project">+</span></th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>`;
+    }
+
+    function togglePanel(id) {
+      const panel = document.getElementById(id);
+      if (!panel) return;
+      const isOpen = panel.classList.contains('open');
+      closeAllPanels();
+
+      const settingsBtn = document.getElementById('menu-settings');
+      const themeBtn = document.getElementById('menu-theme-panel');
+      const tagsBtn = document.getElementById('menu-tags');
+      const helpBtn = document.getElementById('menu-help');
+      const settingsChevron = document.getElementById('settings-chevron');
+      const themeChevron = document.getElementById('theme-chevron');
+      const tagsChevron = document.getElementById('tags-chevron');
+      const helpChevron = document.getElementById('help-chevron');
+
+      if (!isOpen) {
+        panel.classList.add('open');
+        openPanel = id;
+        if (id === 'panel-settings') {
+          if (settingsBtn) {
+            settingsBtn.classList.add('open-fold');
+            settingsBtn.setAttribute('aria-expanded', 'true');
+          }
+          if (settingsChevron) settingsChevron.innerHTML = icon('chevron-up');
+          const ti = document.getElementById('trophy-threshold');
+          if (ti) ti.value = trophyThreshold;
+        }
+        if (id === 'panel-theme') {
+          if (themeBtn) {
+            themeBtn.classList.add('open-fold');
+            themeBtn.setAttribute('aria-expanded', 'true');
+          }
+          if (themeChevron) themeChevron.innerHTML = icon('chevron-up');
+        }
+        if (id === 'panel-tags') {
+          if (tagsBtn) {
+            tagsBtn.classList.add('open-fold');
+            tagsBtn.setAttribute('aria-expanded', 'true');
+          }
+          if (tagsChevron) tagsChevron.innerHTML = icon('chevron-up');
+          renderMyTags();
+        }
+        if (id === 'panel-help') {
+          if (helpBtn) {
+            helpBtn.classList.add('open-fold');
+            helpBtn.setAttribute('aria-expanded', 'true');
+          }
+          if (helpChevron) helpChevron.innerHTML = icon('chevron-up');
+        }
+      }
+    }
+
+    function exportDayLabel(iso) {
+      const days = daysAgo(iso);
+      const d = parseISODate(iso);
+      const dayNum = d.getDate();
+      if (days === 0) return 'Today ' + dayNum;
+      if (days > 0 && days < 7) {
+        const names = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        return names[d.getDay()] + ' ' + dayNum;
+      }
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      return String(dayNum).padStart(2, '0') + '-' + months[d.getMonth()] + '-' + d.getFullYear();
+    }
+
+    function matchingSearchEntries() {
+      const q = searchQuery.trim();
+      return journal.filter(entry => {
+        if (searchRange !== 'all') {
+          const days = daysAgo(entry.date);
+          if (days < 0 || days >= Number(searchRange)) return false;
+        }
+        return entryMatchesSearch(entry.text, q);
+      });
+    }
+
+    function downloadTextFile(filename, text) {
+      const blob = new Blob(['\uFEFF' + text], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function exportStamp() {
+      const d = new Date();
+      return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    }
+
+    function exportRangeLabel(range) {
+      return range === 'all' ? 'All' : (Number(range) === 1 ? 'Today' : range + 'd');
+    }
+
+    function exportDateWindow(range) {
+      const today = todayISO();
+      if (range === 'all') {
+        const existing = journal.map(e => e.date);
+        let oldest = today;
+        if (existing.length > 0) {
+          oldest = existing.sort((a, b) => a.localeCompare(b))[0];
+        }
+        return dateRange(oldest, today);
+      }
+      const days = Number(range);
+      const cutoff = new Date();
+      cutoff.setDate(cutoff.getDate() - (days - 1));
+      const cutoffISO = cutoff.getFullYear() + '-' + String(cutoff.getMonth() + 1).padStart(2, '0') + '-' + String(cutoff.getDate()).padStart(2, '0');
+      return dateRange(cutoffISO, today);
+    }
+
+    function entriesForExportRange(range) {
+      const allowed = new Set(exportDateWindow(range));
+      return journal.filter(entry => allowed.has(entry.date));
+    }
+
+    function buildJournalExportText(range) {
+      const entries = entriesForExportRange(range);
+      let out = 'Doing Right Now - Export\n';
+      out += 'Range: ' + exportRangeLabel(range) + '\n';
+      out += 'Generated: ' + new Date().toLocaleString() + '\n';
+      out += '========================================\n\n';
+      out += formatGroupedEntries(entries);
+      if (range === 'all') out += formatNotesAndQuickAdds();
+      return out;
+    }
+
+    function exportFilenameForRange(range) {
+      return 'DoingRightNow_Export_' + exportRangeLabel(range) + '_' + exportStamp() + '.txt';
+    }
+
+    function buildSearchExportText() {
+      const entries = matchingSearchEntries();
+      const q = searchQuery.trim();
+      const rangeLabel = searchRange === 'all' ? 'All' : (Number(searchRange) === 1 ? 'Today' : searchRange + 'd');
+      let out = 'Doing Right Now - Search export\n';
+      out += 'Query: ' + (q || '(all)') + '\n';
+      out += 'Range: ' + rangeLabel + '\n';
+      out += 'Generated: ' + new Date().toLocaleString() + '\n';
+      out += '========================================\n\n';
+      out += formatGroupedEntries(entries);
+      return out;
+    }
+
+    function searchExportFilename() {
+      const q = searchQuery.trim();
+      const slug = q.replace(/[^\w@#+-]+/g, '_').replace(/^_+|_+$/g, '').slice(0, 40);
+      return slug
+        ? 'DoingRightNow_' + slug + '_' + exportStamp() + '.txt'
+        : 'DoingRightNow_Search_' + exportStamp() + '.txt';
+    }
+
+    function getExportEditorText() {
+      const previewEl = document.getElementById('export-sheet-preview');
+      return previewEl ? previewEl.value : '';
+    }
+
+    function resetExportActionLabels() {
+      clearTimeout(exportCopyResetTimer);
+      clearTimeout(exportDownloadResetTimer);
+      const copyBtn = document.getElementById('export-copy-btn');
+      const copyLabel = document.getElementById('export-copy-label');
+      const downloadBtn = document.getElementById('export-download-btn');
+      const downloadLabel = document.getElementById('export-download-label');
+      if (copyLabel) copyLabel.textContent = 'Copy';
+      if (copyBtn) copyBtn.classList.remove('copied');
+      if (downloadLabel) downloadLabel.textContent = 'Download';
+      if (downloadBtn) downloadBtn.classList.remove('copied');
+    }
+
+    function flashExportButton(btn, labelEl, tempText) {
+      if (!btn || !labelEl) return;
+      labelEl.textContent = tempText;
+      btn.classList.add('copied');
+      return setTimeout(() => {
+        if (document.getElementById('export-sheet')?.classList.contains('open')) {
+          labelEl.textContent = btn.id === 'export-copy-btn' ? 'Copy' : 'Download';
+          btn.classList.remove('copied');
+        }
+      }, 2000);
+    }
+
+    function updateExportSheetActions() {
+      const empty = exportSheetState.empty;
+      const copyBtn = document.getElementById('export-copy-btn');
+      const downloadBtn = document.getElementById('export-download-btn');
+      const previewEl = document.getElementById('export-sheet-preview');
+      if (copyBtn) copyBtn.disabled = empty;
+      if (downloadBtn) downloadBtn.disabled = empty;
+      if (previewEl) previewEl.disabled = empty;
+    }
+
+    function openExportSheet(opts) {
+      dismissKeyboard();
+      resetExportActionLabels();
+      exportSheetState = {
+        filename: opts.filename || 'DoingRightNow_Export.txt',
+        empty: !!opts.empty
+      };
+
+      const sheet = document.getElementById('export-sheet');
+      const titleEl = document.getElementById('export-sheet-title');
+      const previewEl = document.getElementById('export-sheet-preview');
+      const emptyEl = document.getElementById('export-sheet-empty');
+
+      if (titleEl) titleEl.textContent = opts.title || 'Export';
+      if (emptyEl) {
+        emptyEl.hidden = !opts.empty;
+        emptyEl.textContent = opts.emptyMessage || 'Nothing to export.';
+      }
+      if (previewEl) {
+        previewEl.hidden = !!opts.empty;
+        previewEl.value = opts.empty ? '' : (opts.text || '');
+      }
+
+      updateExportSheetActions();
+      paintStaticIcons();
+
+      if (sheet) {
+        sheet.classList.add('open');
+        sheet.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+
+      if (!opts.empty) {
+        setTimeout(() => {
+          if (previewEl) {
+            previewEl.focus();
+            previewEl.setSelectionRange(0, 0);
+          }
+        }, 30);
+      }
+    }
+
+    function closeExportSheet() {
+      const sheet = document.getElementById('export-sheet');
+      if (sheet) {
+        sheet.classList.remove('open');
+        sheet.setAttribute('aria-hidden', 'true');
+      }
+      document.body.style.overflow = '';
+      resetExportActionLabels();
+    }
+
+    async function copyExportText() {
+      if (exportSheetState.empty) return;
+      const text = getExportEditorText();
+      const copyBtn = document.getElementById('export-copy-btn');
+      const copyLabel = document.getElementById('export-copy-label');
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(text);
+          clearTimeout(exportCopyResetTimer);
+          exportCopyResetTimer = flashExportButton(copyBtn, copyLabel, 'Copied!');
+          return;
+        }
+      } catch (err) {}
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        clearTimeout(exportCopyResetTimer);
+        exportCopyResetTimer = flashExportButton(copyBtn, copyLabel, 'Copied!');
+      } catch (err) {
+        clearTimeout(exportCopyResetTimer);
+        exportCopyResetTimer = flashExportButton(copyBtn, copyLabel, 'Failed');
+      }
+      document.body.removeChild(ta);
+    }
+
+    function downloadExportText() {
+      if (exportSheetState.empty) return;
+      downloadTextFile(exportSheetState.filename, getExportEditorText());
+      const downloadBtn = document.getElementById('export-download-btn');
+      const downloadLabel = document.getElementById('export-download-label');
+      clearTimeout(exportDownloadResetTimer);
+      exportDownloadResetTimer = flashExportButton(downloadBtn, downloadLabel, 'Saved!');
+    }
+
+    function bindExportSheet() {
+      document.getElementById('export-copy-btn')?.addEventListener('click', copyExportText);
+      document.getElementById('export-download-btn')?.addEventListener('click', downloadExportText);
+      document.getElementById('export-close-btn')?.addEventListener('click', closeExportSheet);
+      document.getElementById('export-sheet-backdrop')?.addEventListener('click', closeExportSheet);
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && document.getElementById('export-sheet')?.classList.contains('open')) {
+          closeExportSheet();
+        }
+      });
+    }
+
+    function openJournalExportPreview() {
+      const entries = entriesForExportRange(exportRange);
+      const hasNotesOrQuickAdds = exportRange === 'all' && (!!notes.trim() || quickAdds.length > 0);
+      const empty = entries.length === 0 && !hasNotesOrQuickAdds;
+      openExportSheet({
+        title: 'Export — ' + exportRangeLabel(exportRange),
+        text: buildJournalExportText(exportRange),
+        filename: exportFilenameForRange(exportRange),
+        empty,
+        emptyMessage: 'Nothing to export in this range.'
+      });
+    }
+
+    function openSearchExportPreview() {
+      const entries = matchingSearchEntries();
+      if (entries.length === 0) {
+        openExportSheet({
+          title: 'Search export',
+          text: '',
+          filename: '',
+          empty: true,
+          emptyMessage: 'No matching entries to export.'
+        });
+        return;
+      }
+      openExportSheet({
+        title: 'Search export',
+        text: buildSearchExportText(),
+        filename: searchExportFilename(),
+        empty: false
+      });
+    }
+
+    function formatGroupedEntries(entries) {
+      const groups = {};
+      entries.forEach(e => {
+        if (!groups[e.date]) groups[e.date] = [];
+        groups[e.date].push(e);
+      });
+      const dates = Object.keys(groups).sort((a, b) => b.localeCompare(a));
+      let out = '';
+      dates.forEach(date => {
+        const dayEntries = groups[date].sort((a, b) => timeToMinutes(b.time) - timeToMinutes(a.time));
+        out += exportDayLabel(date) + '  (' + dayEntries.length + ')\n';
+        out += '----------------------------------------\n';
+        dayEntries.forEach(e => {
+          out += String(e.time).padEnd(10) + '  ' + e.text + '\n';
+        });
+        out += '\n';
+      });
+      return out;
+    }
+
+    function formatNotesAndQuickAdds() {
+      let out = '';
+      if (notes.trim()) {
+        out += '========================================\n';
+        out += 'NOTES\n';
+        out += '----------------------------------------\n';
+        out += notes.replace(/\s+$/, '') + '\n\n';
+      }
+      if (quickAdds.length) {
+        out += '========================================\n';
+        out += 'QUICK ADD\n';
+        out += '----------------------------------------\n';
+        sortedQuickAdds().forEach(t => {
+          out += t.text + '\n';
+        });
+      }
+      return out;
+    }
+
+    // ─────────────────────────────────────────────
+    // Event bindings
+    // ─────────────────────────────────────────────
+    document.getElementById('view-switcher').addEventListener('click', (e) => {
+      const btn = e.target.closest('#view-range-row .view-btn');
+      if (!btn) return;
+
+      if (btn.classList.contains('font-btn')) {
+        applyFont(btn.dataset.font);
+        return;
+      }
+
+      const r = btn.dataset.range;
+      if (!r) return;
+      viewRange = r === 'all' ? 'all' : Number(r);
+      render();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    document.getElementById('export-switcher').addEventListener('click', (e) => {
+      const btn = e.target.closest('.export-range-btn');
+      if (!btn) return;
+      const r = btn.dataset.exportRange;
+      if (!r) return;
+      exportRange = r === 'all' ? 'all' : Number(r);
+      document.querySelectorAll('#export-range-row .export-range-btn').forEach(b => {
+        b.classList.toggle('active', b === btn);
+      });
+      openJournalExportPreview();
+    });
+
+    document.getElementById('scroll-top-btn').addEventListener('click', () => {
+      closeAllPanels();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    document.getElementById('menu-theme-panel').addEventListener('click', () => togglePanel('panel-theme'));
+    document.getElementById('menu-settings').addEventListener('click', () => togglePanel('panel-settings'));
+    document.getElementById('menu-tags').addEventListener('click', () => togglePanel('panel-tags'));
+    document.getElementById('menu-help').addEventListener('click', () => togglePanel('panel-help'));
+
+    document.getElementById('menu-theme').addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isDark = document.documentElement.classList.contains('dark');
+      applyTheme(isDark ? 'light' : 'dark');
+    });
+
+    document.getElementById('theme-swatches').addEventListener('click', (e) => {
+      const btn = e.target.closest('.theme-swatch');
+      if (!btn) return;
+      e.stopPropagation();
+      applyColorTheme(btn.dataset.color);
+    });
+
+    document.getElementById('panel-theme').addEventListener('click', (e) => {
+      const monoBtn = e.target.closest('.mono-btn');
+      if (monoBtn) {
+        e.stopPropagation();
+        applyMono(monoBtn.dataset.mono === 'on');
+      }
+    });
+
+    document.getElementById('menu-clear').addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (!window.confirm('Clear all journal entries, quick adds, and notes?\n\nThis cannot be undone.')) return;
+      journal = [];
+      quickAdds = [];
+      notes = '';
+      dayStars = {};
+      saveJournal();
+      saveQuickAdds();
+      saveNotes();
+      saveDayStars();
+      persist(KEYS.seeded, '1'); // prevent auto re-seed on reload
+      searchOpen = false;
+      searchQuery = '';
+      render();
+    });
+
+    document.getElementById('menu-clear-except-today').addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (!window.confirm('Delete all journal entries except Today?\n\nQuick adds and notes are kept. This cannot be undone.')) return;
+      const today = todayISO();
+      const before = journal.length;
+      journal = journal.filter(entry => entry.date === today);
+      Object.keys(dayStars).forEach(d => {
+        if (d !== today) delete dayStars[d];
+      });
+      saveJournal();
+      saveDayStars();
+      persist(KEYS.seeded, '1');
+      const removed = before - journal.length;
+      searchOpen = false;
+      searchQuery = '';
+      render();
+      if (removed === 0) {
+        alert('Nothing to clear — only Today has entries.');
+      }
+    });
+
+    document.getElementById('menu-clear-old').addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (!window.confirm('Delete all journal entries older than 30 days?\n\nQuick adds and notes are kept. This cannot be undone.')) return;
+      const cutoff = new Date();
+      cutoff.setDate(cutoff.getDate() - 30);
+      const cutoffISO = cutoff.getFullYear() + '-' + String(cutoff.getMonth() + 1).padStart(2, '0') + '-' + String(cutoff.getDate()).padStart(2, '0');
+      const before = journal.length;
+      journal = journal.filter(entry => entry.date >= cutoffISO);
+      Object.keys(dayStars).forEach(d => {
+        if (d < cutoffISO) delete dayStars[d];
+      });
+      saveJournal();
+      saveDayStars();
+      persist(KEYS.seeded, '1');
+      const removed = before - journal.length;
+      searchOpen = false;
+      searchQuery = '';
+      render();
+      if (removed === 0) {
+        alert('No entries older than 30 days.');
+      }
+    });
+
+    document.getElementById('menu-reset-sample').addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (!window.confirm('Clear everything and load sample data?\n\nYour current journal, quick adds, and notes will be replaced.')) return;
+      journal = [];
+      quickAdds = [];
+      notes = '';
+      dayStars = {};
+      saveJournal();
+      saveQuickAdds();
+      saveNotes();
+      saveDayStars();
+      seedDummyData();
+      searchOpen = false;
+      searchQuery = '';
+      viewRange = 2;
+      render();
+    });
+
+    // Font size buttons live inside Settings panel
+    document.getElementById('panel-settings').addEventListener('click', (e) => {
+      const fontBtn = e.target.closest('.font-btn');
+      if (fontBtn) {
+        e.stopPropagation();
+        applyFont(fontBtn.dataset.font);
+        return;
+      }
+      const elapsedBtn = e.target.closest('.elapsed-btn');
+      if (elapsedBtn) {
+        e.stopPropagation();
+        applyElapsed(elapsedBtn.dataset.elapsed === 'on');
+      }
+    });
+
+    document.getElementById('trophy-threshold').addEventListener('change', (e) => {
+      let v = parseInt(e.target.value, 10);
+      if (isNaN(v) || v < 1) v = 6;
+      if (v > 99) v = 99;
+      trophyThreshold = v;
+      e.target.value = v;
+      persist(KEYS.trophy, String(v));
+      render();
+    });
+
+    document.getElementById('trophy-threshold').addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+
+    // ─────────────────────────────────────────────
+    // When returning to the tab/app after midnight, fix the Today boundary
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') {
+        syncWhenVisible();
+      } else {
+        stopElapsedTimer();
+      }
+    });
+    window.addEventListener('focus', syncWhenVisible);
+
+    // Init
+    // ─────────────────────────────────────────────
+    load();
+    lastStorageSnapshot = storageSnapshot();
+    bindKeyboardDismiss();
+    bindExportSheet();
+    paintStaticIcons();
+    const versionEl = document.getElementById('app-version');
+    if (versionEl) versionEl.textContent = 'v' + APP_VERSION;
+    const trophyInput = document.getElementById('trophy-threshold');
+    if (trophyInput) trophyInput.value = trophyThreshold;
+    lastRenderedToday = todayISO();
+    render();
+
+    // Dev copy: no service worker — keeps screenshots isolated from the live app cache.
+  </script>
+</body>
+</html>
