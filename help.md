@@ -105,10 +105,10 @@ At the bottom of the app, **My Tags** sits just above Help.
 For lines you type often.
 
 1. Tap **Quick Add** under Today, type a line, press **Enter** to save it as a reusable template.
-2. Tap a saved template any time to log it **now**, with a fresh timestamp.
+2. Tap a saved template to fill the Today line — tweak if you want, then press **Enter** to log it with a fresh timestamp.
 3. Tap the **×** next to a template to remove it.
 
-Tags work in templates too — e.g. save `standup +Website` once, then tap it every morning.
+Tags work in templates too — e.g. save `standup +Website` once, tap it each morning, add a tag if needed, then Enter.
 
 ![Screenshot placeholder: the Quick Add panel expanded, showing a short list of saved templates with an × to remove each.](placeholder-quickadd.png)
 

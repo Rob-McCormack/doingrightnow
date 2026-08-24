@@ -2611,7 +2611,7 @@
           <p>Don’t turn it into a second planner. You can ignore Notes. The journal still works.</p>
           <p>You can’t change a time or reorder the day. You can edit the words of any line — handy if you later add @Bill or #home for search.</p>
           <h4><span class="help-heading-icon" data-icon="zap" aria-hidden="true"></span>Quick Add</h4>
-          <p>If you type the same line often, save it once. Open Quick Add, type the line, press Enter. Tap it later to log it now, with a new timestamp. Tags work here too.</p>
+          <p>If you type the same line often, save it once. Open Quick Add, type the line, press Enter. Tap a template to fill the Today line — tweak if you want, then Enter to log with a fresh timestamp. Tags work here too.</p>
           <ul>
             <li>open the document +Report</li>
             <li>walk #park</li>
@@ -2671,7 +2671,7 @@
     // State & Storage
     // ─────────────────────────────────────────────
 
-    const APP_VERSION = '1.1.3';
+    const APP_VERSION = '1.2.0';
 
     // Inline Lucide-style icons (no CDN)
     const ICON_PATHS = {
@@ -3534,7 +3534,7 @@
           qaPanel.innerHTML = `
             <input type="text" id="quickadd-input" placeholder="Type a reusable template and press Enter…" />
             <div class="template-list" id="template-list"></div>
-            <div class="tpl-add-hint">Tap a template to log it now · × to remove</div>
+            <div class="tpl-add-hint">Tap a template to fill the line above · Enter to log · × to remove</div>
           `;
           group.appendChild(qaPanel);
 
@@ -4342,6 +4342,17 @@
       render();
     }
 
+    function fillTodayInputFromTemplate(text) {
+      closeTodayPanels();
+      const input = document.getElementById('today-input');
+      if (!input) return;
+      input.value = text;
+      syncTodayPanelDim();
+      input.focus();
+      const len = text.length;
+      input.setSelectionRange(len, len);
+    }
+
     function renderTemplates() {
       const list = document.getElementById('template-list');
       list.innerHTML = '';
@@ -4353,18 +4364,7 @@
           <span class="tpl-del" data-id="${t.id}">${icon('x')}</span>
         `;
         item.querySelector('.tpl-text').addEventListener('click', () => {
-          // Instantly add to today
-          const entry = {
-            id: uid(),
-            date: todayISO(),
-            time: formatTime(),
-            startedAt: Date.now(),
-            text: t.text
-          };
-          journal.unshift(entry);
-          saveJournal();
-          render();
-          // Close panel optionally
+          fillTodayInputFromTemplate(t.text);
         });
         item.querySelector('.tpl-del').addEventListener('click', (e) => {
           e.stopPropagation();
