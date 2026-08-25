@@ -651,7 +651,7 @@
     html.font-medium .entry-body { font-size: 16px; }
     html.font-medium #today-input { font-size: 16px; }
     html.font-medium .entry.latest .entry-elapsed {
-      font-size: clamp(19px, 5vw, 28px);
+      font-size: clamp(17px, 4.2vw, 23px);
     }
     html.font-medium .template-item,
     html.font-medium #quickadd-input { font-size: 16px; }
@@ -667,7 +667,7 @@
     html.font-large #quickadd-input { font-size: 18px; }
     html.font-large .entry-time { font-size: 14px; width: 86px; }
     html.font-large .entry.latest .entry-elapsed {
-      font-size: clamp(20px, 5vw, 30px);
+      font-size: clamp(18px, 4.2vw, 24px);
     }
 
     /* Search */
@@ -1379,6 +1379,22 @@
       color: #4ecf6a;
     }
 
+    html[data-color="everforest"] .entry.latest .entry-clock {
+      color: #8da101;
+    }
+
+    html.dark[data-color="everforest"] .entry.latest .entry-clock {
+      color: #a7c080;
+    }
+
+    html.mono .entry.latest .entry-clock {
+      color: #398712;
+    }
+
+    html.dark.mono .entry.latest .entry-clock {
+      color: #4ecf6a;
+    }
+
     .entry.entry-editing .entry-clock {
       color: var(--today);
       font-weight: 600;
@@ -1396,10 +1412,9 @@
 
     .entry.latest .entry-elapsed {
       display: block;
-      font-size: clamp(18px, 5vw, 26px);
-      font-weight: 700;
-      margin-top: 5px;
-      line-height: 1.1;
+      font-size: clamp(16px, 4.2vw, 22px);
+      margin-top: 4px;
+      line-height: 1.15;
     }
 
     html.elapsed-off .entry.latest .entry-elapsed {
