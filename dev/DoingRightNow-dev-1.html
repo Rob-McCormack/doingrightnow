@@ -650,6 +650,9 @@
     html.font-medium .day-header.today { font-size: 28px; }
     html.font-medium .entry-body { font-size: 16px; }
     html.font-medium #today-input { font-size: 16px; }
+    html.font-medium .entry.latest .entry-elapsed {
+      font-size: clamp(17px, 4.2vw, 23px);
+    }
     html.font-medium .template-item,
     html.font-medium #quickadd-input { font-size: 16px; }
 
@@ -663,6 +666,9 @@
     html.font-large .template-item,
     html.font-large #quickadd-input { font-size: 18px; }
     html.font-large .entry-time { font-size: 14px; width: 86px; }
+    html.font-large .entry.latest .entry-elapsed {
+      font-size: clamp(18px, 4.2vw, 24px);
+    }
 
     /* Search */
     .today-header-row {
@@ -1382,6 +1388,9 @@
 
     .entry.latest .entry-elapsed {
       display: block;
+      font-size: clamp(16px, 4.2vw, 22px);
+      margin-top: 4px;
+      line-height: 1.15;
     }
 
     html.elapsed-off .entry.latest .entry-elapsed {
