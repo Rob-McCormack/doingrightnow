@@ -1979,6 +1979,30 @@
       margin: 8px 6px;
     }
 
+    .storage-nudge {
+      margin: 0 6px 10px 34px;
+      padding: 10px 12px;
+      font-size: 13px;
+      line-height: 1.45;
+      color: var(--text-soft);
+      background: color-mix(in srgb, var(--today-soft) 40%, var(--bg-secondary));
+      border: 1px solid color-mix(in srgb, var(--today) 22%, var(--border));
+      border-radius: 8px;
+    }
+
+    .storage-nudge p + p {
+      margin-top: 6px;
+    }
+
+    .storage-nudge.warn {
+      border-color: color-mix(in srgb, #d4a017 45%, var(--border));
+      background: color-mix(in srgb, #fff8e6 55%, var(--bg-secondary));
+    }
+
+    html.dark .storage-nudge.warn {
+      background: color-mix(in srgb, #3d3418 45%, var(--bg-secondary));
+    }
+
     .theme-picker-name {
       color: var(--today-heading);
       font-size: 18px;
@@ -2550,6 +2574,14 @@
           <button type="button" class="view-btn elapsed-btn active" data-elapsed="on">On</button>
           <button type="button" class="view-btn elapsed-btn" data-elapsed="off">Off</button>
         </div>
+        <div class="settings-row static-row storage-readout-row">
+          <span class="row-icon" data-icon="database"></span>
+          <span class="row-label">
+            Storage
+            <span class="row-hint" id="storage-readout-text">Calculating…</span>
+          </span>
+        </div>
+        <div class="storage-nudge" id="storage-nudge" hidden></div>
         <div class="settings-divider" role="separator"></div>
         <button type="button" class="settings-row" id="menu-clear">
           <span class="row-icon" data-icon="trash-2"></span>
@@ -2602,7 +2634,7 @@
             <li>View Today, 2d, 3d, 7d, or All. Export uses the same ranges — tap one below View. Exports are backup only; you can’t import them back.</li>
             <li><strong>My Tags</strong> (above Help) lists every <em>@</em>, <em>#</em>, and <em>+</em> tag from your journal in three columns, A–Z — read-only, refreshes when you open it.</li>
             <li>Theme (above Settings): light or dark, then pick an accent from the swatches. Green is the default.</li>
-            <li>Settings has font size, trophy threshold, and clear options. Optional: Timer on current line shows elapsed time on today’s latest entry — a nudge, not a timesheet.</li>
+            <li>Settings has font size, trophy threshold, storage readout, and clear options. Optional: Timer on current line shows elapsed time on today’s latest entry — a nudge, not a timesheet.</li>
             <li>On a past day, click the date to rate it with stars.</li>
             <li>Your journal lives in this browser on this device — no cloud. Phone and laptop are separate; only tabs in the same browser stay in sync. Export All for backup. Clearing browser data can wipe it too.</li>
           </ul>
@@ -2715,8 +2747,13 @@
       'star': '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>',
       'copy': '<rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>',
       'mail': '<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>',
-      'tag': '<path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/>'
+      'tag': '<path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/>',
+      'database': '<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3"/>'
     };
+
+    const STORAGE_QUOTA_GUESS = 5 * 1024 * 1024;
+    const STORAGE_WARN_RATIO = 0.8;
+    const JOURNAL_YEAR_DAYS = 365;
 
     function icon(name, extraClass = '') {
       const paths = ICON_PATHS[name] || '';
@@ -3129,14 +3166,108 @@
 
     function saveJournal() {
       persist(KEYS.journal, JSON.stringify(journal));
+      updateStorageReadout();
     }
 
     function saveQuickAdds() {
       persist(KEYS.quickadds, JSON.stringify(quickAdds));
+      updateStorageReadout();
     }
 
     function saveNotes() {
       persist(KEYS.notes, notes);
+      updateStorageReadout();
+    }
+
+    function storageStringBytes(str) {
+      if (!str) return 0;
+      try {
+        return new Blob([str]).size;
+      } catch (e) {
+        return str.length * 2;
+      }
+    }
+
+    function drnStorageBytes() {
+      let total = 0;
+      Object.values(KEYS).forEach(key => {
+        const v = localStorage.getItem(key);
+        if (v != null) total += storageStringBytes(key) + storageStringBytes(v);
+      });
+      return total;
+    }
+
+    function formatStorageBytes(bytes) {
+      if (bytes < 1024) return bytes + ' B';
+      if (bytes < 1024 * 1024) {
+        const kb = bytes / 1024;
+        return (kb >= 100 ? Math.round(kb) : kb.toFixed(1).replace(/\.0$/, '')) + ' KB';
+      }
+      const mb = bytes / (1024 * 1024);
+      return mb.toFixed(1).replace(/\.0$/, '') + ' MB';
+    }
+
+    function journalAgeDays() {
+      if (!journal.length) return 0;
+      let min = journal[0].date;
+      journal.forEach(e => {
+        if (e.date < min) min = e.date;
+      });
+      const start = parseISODate(min);
+      const today = parseISODate(todayISO());
+      return Math.max(0, Math.floor((today - start) / 86400000));
+    }
+
+    function formatEntryCount(n) {
+      return n.toLocaleString() + (n === 1 ? ' line' : ' lines');
+    }
+
+    function renderStorageReadout(usedBytes, quotaBytes, quotaIsEstimate) {
+      const readout = document.getElementById('storage-readout-text');
+      const nudge = document.getElementById('storage-nudge');
+      if (!readout) return;
+
+      const lines = journal.length;
+      const pct = quotaBytes > 0 ? Math.min(999, Math.round((usedBytes / quotaBytes) * 100)) : 0;
+      const capLabel = quotaIsEstimate ? '~' + formatStorageBytes(quotaBytes) + ' (approx.)' : formatStorageBytes(quotaBytes);
+      readout.textContent = formatEntryCount(lines) + ' · ' + formatStorageBytes(usedBytes) + ' · ~' + pct + '% of ' + capLabel;
+
+      if (!nudge) return;
+
+      const nudges = [];
+      let warn = false;
+
+      if (quotaBytes > 0 && usedBytes / quotaBytes >= STORAGE_WARN_RATIO) {
+        nudges.push('Getting full — <strong>Export All</strong> (under View) for backup, or clear data older than 30 days.');
+        warn = true;
+      }
+
+      if (journalAgeDays() >= JOURNAL_YEAR_DAYS) {
+        nudges.push('You\'ve been journaling a while — <strong>Export All</strong> occasionally keeps a portable copy.');
+      }
+
+      if (nudges.length) {
+        nudge.hidden = false;
+        nudge.classList.toggle('warn', warn);
+        nudge.innerHTML = nudges.map(t => '<p>' + t + '</p>').join('');
+      } else {
+        nudge.hidden = true;
+        nudge.classList.remove('warn');
+        nudge.innerHTML = '';
+      }
+    }
+
+    function updateStorageReadout() {
+      const usedBytes = drnStorageBytes();
+      renderStorageReadout(usedBytes, STORAGE_QUOTA_GUESS, true);
+
+      if (navigator.storage && navigator.storage.estimate) {
+        navigator.storage.estimate().then(est => {
+          if (est && est.quota && est.quota > 0) {
+            renderStorageReadout(usedBytes, est.quota, false);
+          }
+        }).catch(() => {});
+      }
     }
 
     function fitNotesArea() {
@@ -4508,6 +4639,7 @@
           if (settingsChevron) settingsChevron.innerHTML = icon('chevron-up');
           const ti = document.getElementById('trophy-threshold');
           if (ti) ti.value = trophyThreshold;
+          updateStorageReadout();
         }
         if (id === 'panel-theme') {
           if (themeBtn) {
@@ -5045,6 +5177,7 @@
     if (trophyInput) trophyInput.value = trophyThreshold;
     lastRenderedToday = todayISO();
     render();
+    updateStorageReadout();
 
     // Dev copy: no service worker — keeps screenshots isolated from the live app cache.
   </script>

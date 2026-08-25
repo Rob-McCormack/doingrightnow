@@ -173,6 +173,7 @@ An optional small elapsed-time readout next to today's newest entry — how long
 - If you open the app in two tabs or windows at once, they stay in sync automatically — but only in the **same browser on the same device**.
 - **Different device or different browser = different journal.** Only tabs/windows in the same browser share one copy. Your phone and laptop do not sync.
 - **Export All** regularly if you want a backup — a new phone or a cleared browser will not have your history otherwise.
+- **Settings → Storage** shows how many lines you're storing and an approximate share of your browser's limit (~5 MB unless your browser reports otherwise). After about a year of use, or when you're near ~80% full, a gentle reminder appears to export or trim old entries.
 - Clearing site data, cache, or browsing history from your browser settings can delete the journal too — not just the in-app Clear options. **Export All first** if you're about to clean up.
 
 In **Settings**, you can:
