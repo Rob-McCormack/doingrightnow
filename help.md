@@ -30,7 +30,8 @@ That's enough to start. Everything below is optional — the app is built so you
 ## Editing a Line
 
 - **Tap a line** to edit its text in place. Press **Enter** or tap elsewhere to save; press **Escape** to cancel.
-- Long lines (over ~200 characters) show truncated with `…`. **Tap once to expand**, tap again to edit.
+- Type **` & `** (spaces around `&`) to split a line on *older* entries: the part before the last **` & `** is the headline; the rest stays hidden until you tap. A green **▼** hint marks hidden text. Your **current line** (with the timer) always shows in full.
+- Long lines (over ~200 characters) collapse the same way on older entries — **tap once to expand**, tap again to edit.
 
 ![Screenshot placeholder: a single entry mid-edit, showing the text cursor active inside the line with no timestamp change.](placeholder-editing.png)
 

@@ -9,7 +9,7 @@
    fetch() of the .html URL is redirected. Strip that flag before we cache
    or return the response.
 */
-const CACHE = 'doingrightnow-v4';
+const CACHE = 'doingrightnow-v7';
 const JOURNAL_URLS = ['./DoingRightNow', './DoingRightNow.html'];
 const PRECACHE = JOURNAL_URLS.concat([
   './favicon.svg',

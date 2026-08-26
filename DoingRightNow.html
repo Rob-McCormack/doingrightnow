@@ -1475,8 +1475,59 @@
       border-left-color: var(--border);
     }
 
-    .entry-body.entry-truncated {
+    .entry-body.entry-truncated,
+    .entry-body.entry-detail-collapsed {
       cursor: pointer;
+    }
+
+    .entry-headline {
+      display: block;
+    }
+
+    .entry-headline-row {
+      display: inline;
+      line-height: inherit;
+    }
+
+    .entry-headline-text {
+      display: inline;
+    }
+
+    .entry-expand-hint {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      vertical-align: -2px;
+      margin-left: 5px;
+      padding: 2px 5px;
+      border-radius: 6px;
+      border: 1px solid color-mix(in srgb, var(--today) 45%, var(--border));
+      background: color-mix(in srgb, var(--today-soft) 70%, var(--bg));
+      color: var(--today-heading);
+      line-height: 0;
+    }
+
+    .entry-expand-hint svg {
+      width: 15px;
+      height: 15px;
+      stroke-width: 2.5;
+    }
+
+    html.dark .entry-expand-hint {
+      background: color-mix(in srgb, var(--today) 22%, var(--bg-secondary));
+    }
+
+    .entry-detail-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 8px 0;
+    }
+
+    .entry-detail {
+      display: block;
+      font-size: 0.94em;
+      color: var(--text-muted);
+      line-height: 1.45;
     }
 
     .entry-body[contenteditable="true"] {
@@ -2652,7 +2703,7 @@
           <p>Some things are tucked away on purpose. Once you find them, they stay out of the way until you need them.</p>
           <ul>
             <li>Type a line under Today and press Enter.</li>
-            <li>Tap a line to edit the words. Very long lines truncate — tap once to expand, tap again to edit. You can’t change the time or reorder the day.</li>
+            <li>Tap a line to edit the words. Type <strong> & </strong> (spaces around <strong>&</strong>) to hide extra context on <em>older</em> lines — the part before the last <strong> & </strong> shows with a <strong>▼</strong> hint until you tap. Your <strong>current line</strong> (with the timer) always shows in full. Very long older lines truncate the same way. Tap once to expand, tap again to edit. You can’t change the time or reorder the day.</li>
             <li>Swipe left to reveal delete, then tap. On a computer, hover the line and use the trash icon.</li>
             <li>Swipe right to reveal copy to Today, then tap. The original stays. On a computer, hover and use the calendar icon.</li>
             <li>Search is in the Today header. Two tags find either one; quote them to require both. <em>gym</em> finds the word; <em>#gym</em> finds tagged lines only. Search <strong>xx</strong> for completed lines. Use the In: buttons (Today, 2d, 7d, All) — pick All for your full journal.</li>
@@ -2738,7 +2789,7 @@
     // State & Storage
     // ─────────────────────────────────────────────
 
-    const APP_VERSION = '1.2.0';
+    const APP_VERSION = '1.2.3';
 
     // Inline Lucide-style icons (no CDN)
     const ICON_PATHS = {
@@ -2774,7 +2825,8 @@
       'copy': '<rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>',
       'mail': '<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>',
       'tag': '<path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/>',
-      'database': '<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3"/>'
+      'database': '<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3"/>',
+      'ellipsis': '<circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/>'
     };
 
     const STORAGE_QUOTA_GUESS = 5 * 1024 * 1024;
@@ -4143,7 +4195,8 @@
 
       const emphasisClass = hasEmphasis(entry.text) ? ' emphasis' : '';
       const strikeClass = hasStrike(entry.text) ? ' struck' : '';
-      const truncated = isEntryTruncated(entry);
+      const collapsed = isEntryCollapsed(entry, isLatest);
+      const detailCollapsed = isEntryDetailCollapsed(entry, isLatest);
       el.innerHTML = `
         <button type="button" class="entry-bring" data-id="${entry.id}" title="Bring to Today" aria-label="Bring to Today">
           ${icon('calendar-plus')}
@@ -4157,7 +4210,7 @@
             ${isToday ? `<span class="entry-elapsed" data-started="${entryStartMs(entry)}"></span>` : ''}
           </div>
           <span class="latest-loader" aria-hidden="true"></span>
-          <div class="entry-body${emphasisClass}${strikeClass}${truncated ? ' entry-truncated' : ''}" data-id="${entry.id}">${formatEntryText(entryDisplayText(entry))}</div>
+          <div class="entry-body${emphasisClass}${strikeClass}${collapsed && !detailCollapsed ? ' entry-truncated' : ''}${detailCollapsed ? ' entry-detail-collapsed' : ''}" data-id="${entry.id}">${formatEntryBodyHtml(entry, isLatest)}</div>
           <div class="entry-actions">
             <button type="button" class="entry-action-btn bring" data-id="${entry.id}" title="Bring to Today" aria-label="Bring to Today">${icon('calendar-plus')}</button>
             <button type="button" class="entry-action-btn del" data-id="${entry.id}" title="Delete" aria-label="Delete">${icon('trash-2')}</button>
@@ -4173,11 +4226,12 @@
           closeSearch();
           return;
         }
-        if (isEntryTruncated(entry)) {
-          expandEntry(entry, body);
+        const current = journal.find(j => j.id === entry.id) || entry;
+        if (isEntryCollapsed(current, el.classList.contains('latest'))) {
+          expandEntry(current, body);
           return;
         }
-        startEdit(body, entry);
+        startEdit(body, current);
       });
 
       // Delete (swipe reveal + desktop button)
@@ -4215,40 +4269,125 @@
       return el;
     }
 
+    function splitEntryDetail(raw) {
+      const re = /\s&\s+/g;
+      let match;
+      let lastIndex = -1;
+      let lastLen = 0;
+      while ((match = re.exec(raw)) !== null) {
+        lastIndex = match.index;
+        lastLen = match[0].length;
+      }
+      if (lastIndex === -1) return null;
+      const headline = raw.slice(0, lastIndex).trim();
+      const detail = raw.slice(lastIndex + lastLen).trim();
+      if (!headline || !detail) return null;
+      return { headline, detail };
+    }
+
+    function hasDetailSplit(entry) {
+      return splitEntryDetail(entry.text) !== null;
+    }
+
+    function isEntryDetailCollapsed(entry, isLatest = false) {
+      if (isLatest) return false;
+      return hasDetailSplit(entry) && !expandedEntryIds.has(entry.id);
+    }
+
+    function isEntryCollapsed(entry, isLatest = false) {
+      if (isLatest) return false;
+      if (expandedEntryIds.has(entry.id)) return false;
+      if (hasDetailSplit(entry)) return true;
+      return entry.text.length > ENTRY_PREVIEW_LEN;
+    }
+
     function truncateEntryText(raw, max = ENTRY_PREVIEW_LEN) {
       if (raw.length <= max) return raw;
       let cut = raw.slice(0, max);
       const lastSpace = cut.lastIndexOf(' ');
       if (lastSpace > max * 0.55) cut = cut.slice(0, lastSpace);
-      return cut.trimEnd() + '…';
+      return cut.trimEnd();
+    }
+
+    function entryExpandHintHtml() {
+      return '<span class="entry-expand-hint" aria-hidden="true" title="Tap to expand">' + icon('chevron-down') + '</span>';
+    }
+
+    function formatCollapsedPreviewHtml(textPart) {
+      return (
+        '<span class="entry-headline-row">' +
+          '<span class="entry-headline-text">' + formatEntryText(textPart) + '</span>' +
+          entryExpandHintHtml() +
+        '</span>'
+      );
+    }
+
+    function formatEntrySplitHtml(split) {
+      return (
+        '<span class="entry-headline">' + formatEntryText(split.headline) + '</span>' +
+        '<div class="entry-detail-divider" role="separator"></div>' +
+        '<div class="entry-detail">' + formatEntryText(split.detail) + '</div>'
+      );
     }
 
     function entryDisplayText(entry) {
-      if (entry.text.length <= ENTRY_PREVIEW_LEN || expandedEntryIds.has(entry.id)) {
-        return entry.text;
-      }
+      if (expandedEntryIds.has(entry.id)) return entry.text;
+      const split = splitEntryDetail(entry.text);
+      if (split) return split.headline;
+      if (entry.text.length <= ENTRY_PREVIEW_LEN) return entry.text;
       return truncateEntryText(entry.text);
     }
 
     function isEntryTruncated(entry) {
-      return entry.text.length > ENTRY_PREVIEW_LEN && !expandedEntryIds.has(entry.id);
+      return isEntryCollapsed(entry);
+    }
+
+    function formatEntryBodyHtml(entry, isLatest = false) {
+      const split = splitEntryDetail(entry.text);
+      const expanded = expandedEntryIds.has(entry.id);
+
+      if (isLatest) {
+        if (split) return formatEntrySplitHtml(split);
+        return formatEntryText(entry.text);
+      }
+
+      if (split && !expanded) {
+        return formatCollapsedPreviewHtml(split.headline);
+      }
+
+      if (split && expanded) {
+        return formatEntrySplitHtml(split);
+      }
+
+      if (!expanded && entry.text.length > ENTRY_PREVIEW_LEN) {
+        return formatCollapsedPreviewHtml(truncateEntryText(entry.text));
+      }
+
+      return formatEntryText(entry.text);
+    }
+
+    function entryIsLatest(bodyEl) {
+      return bodyEl.closest('.entry.latest') !== null;
     }
 
     function expandEntry(entry, bodyEl) {
       expandedEntryIds.add(entry.id);
-      bodyEl.classList.remove('entry-truncated');
-      bodyEl.innerHTML = formatEntryText(entry.text);
+      bodyEl.classList.remove('entry-truncated', 'entry-detail-collapsed');
+      bodyEl.innerHTML = formatEntryBodyHtml(entry, entryIsLatest(bodyEl));
       bodyEl.classList.toggle('emphasis', hasEmphasis(entry.text));
       bodyEl.classList.toggle('struck', hasStrike(entry.text));
     }
 
     function applyEntryBodyDisplay(bodyEl, entry) {
       expandedEntryIds.delete(entry.id);
-      const truncated = isEntryTruncated(entry);
-      bodyEl.innerHTML = formatEntryText(entryDisplayText(entry));
+      const isLatest = entryIsLatest(bodyEl);
+      const collapsed = isEntryCollapsed(entry, isLatest);
+      const detailCollapsed = isEntryDetailCollapsed(entry, isLatest);
+      bodyEl.innerHTML = formatEntryBodyHtml(entry, isLatest);
       bodyEl.classList.toggle('emphasis', hasEmphasis(entry.text));
       bodyEl.classList.toggle('struck', hasStrike(entry.text));
-      bodyEl.classList.toggle('entry-truncated', truncated);
+      bodyEl.classList.toggle('entry-truncated', collapsed && !detailCollapsed);
+      bodyEl.classList.toggle('entry-detail-collapsed', detailCollapsed);
     }
 
     function escapeHtml(str) {
