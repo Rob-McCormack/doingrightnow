@@ -1,7 +1,7 @@
 {
   "id": "/DoingRightNow",
   "name": "Doing Right Now",
-  "short_name": "Right Now",
+  "short_name": "Doing Right",
   "description": "A journal for getting unstuck. One timestamped line at a time.",
   "start_url": "./DoingRightNow",
   "scope": "./",
