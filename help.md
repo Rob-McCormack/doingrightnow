@@ -25,7 +25,7 @@ That's enough to start. Everything below is optional.
 
 - The **Today** composer creates a timestamped entry. The newest entry also appears in the **Doing Right Now** card with its elapsed timer when enabled.
 - Entries can't be reordered, and their timestamps can't be changed.
-- Open the hamburger drawer for **Today**, **Yesterday**, **Last 7 days**, **Last 30 days**, **Last 365 days**, and **All journal**. The command palette offers the same destinations.
+- Open the navigation drawer with the hamburger or by tapping the current view title, such as **Today** or **Yesterday**. It includes 7-, 30-, 365-day, and All journal views; the command palette offers the same destinations.
 - Tap an entry—or anywhere on the current card except its Zen button—to view and edit its complete text.
 
 ## Editing a Line
