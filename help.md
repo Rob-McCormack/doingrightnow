@@ -11,13 +11,14 @@ This reference covers the **1.0.0-beta.1** public beta.
 ## Quick Start
 
 1. Open the journal — you land on **Today**.
-2. Type what you're doing right now in the composer at the top, then press **Enter** or the Enter-icon button.
-3. When what you're doing changes, write the next line. That's the whole app.
-4. Everything stays in this browser — no sign-up and no cloud sync.
+2. A new journal starts with one normal entry, **Trying out Doing Right Now**, to demonstrate the journal. You can edit or delete it.
+3. Type what you're doing right now in the composer at the top, then press **Enter** or the Enter-icon button.
+4. When what you're doing changes, write the next line. That's the whole app.
+5. Everything stays in this browser — no sign-up and no cloud sync.
 
 ![Screenshot placeholder: the Today view with the composer, current Doing Right Now card, Quick Note, and timestamped entries.](placeholder-quickstart.png)
 
-That's enough to start. Everything below is optional.
+Two brief, dismissible messages guide your first entry and then disappear permanently. That's enough to start. Everything below is optional.
 
 ---
 
