@@ -25,7 +25,7 @@ That's enough to start. Everything below is optional.
 
 - The **Today** composer creates a timestamped entry. The newest entry also appears in the **Doing Right Now** card with its elapsed timer when enabled.
 - Entries can't be reordered, and their timestamps can't be changed.
-- Open the drawer for **Today**, **Yesterday**, **Last 7 days**, **Last 30 days**, **Last 365 days**, and **All journal**.
+- Use the header’s command icon for **Today**, **Yesterday**, **Last 7 days**, **Last 30 days**, **Last 365 days**, and **All journal**.
 - Tap an entry—or anywhere on the current card except its Zen button—to view and edit its complete text.
 
 ## Editing a Line
@@ -70,14 +70,14 @@ Markers are standalone symbols. Emoji are ordinary searchable text; for example,
 
 ## Search
 
-Open **Search** from the drawer. Search is a simple, case-insensitive **substring search** across every entry.
+Open **Search** from the command palette. Search is a simple, case-insensitive **substring search** across every entry.
 
 - Typing `Bill` finds that sequence anywhere, including in `@Bill`. Typing `@Bill` narrows the substring to the prefixed text.
 - An empty search shows all entries. Results update as you type and display newest first.
 - **Copy** copies matching entries as plain text.
 - **Edit** opens an editable plain-text preview before copying; changing the preview does not change the journal.
 
-![Screenshot placeholder: the Search drawer view with a search box, result count, and Copy and Edit controls.](placeholder-search.png)
+![Screenshot placeholder: the Search view with a search box, result count, and Copy and Edit controls.](placeholder-search.png)
 
 ## Quick Add
 
@@ -111,8 +111,8 @@ Quick Note is a shared scratchpad below the current card for anything that is no
 
 ## Command Palette & Zen
 
-- Open the command palette with the command icon or **⌘K**/**Ctrl+K**. Filter commands by typing and use the arrow keys and Enter to select.
-- Commands cover adding an activity, changing views, searching, opening Quick Note, entering Zen, opening Settings, System, and Help, and changing appearance. Recently used commands sort first.
+- The command icon is the only navigation control in the header. Open it with the icon or **⌘K**/**Ctrl+K**, filter by typing, and use the arrow keys and Enter to select.
+- Commands cover adding an activity; Today, Yesterday, 7-, 30-, 365-day, and All views; Search; Quick Note; Zen mode; Settings; System; Help; appearance; and temporary Developer tools. Recently used commands sort first.
 - Use the expand button on the current card to enter **Zen mode**, a distraction-free full-screen view of the current entry, elapsed duration, and current clock time. Its **+** returns to Today ready to add another activity.
 
 ---
@@ -135,7 +135,7 @@ The optional elapsed-time display on today's current card shows how long the new
 
 ## Theme & Appearance
 
-- Choose **System**, **Light**, or **Dark**. The header appearance button cycles the same choices.
+- Choose **System**, **Light**, or **Dark** in Settings, or use **Change theme** in the command palette.
 - Choose Small, Medium, or Large text and one of six accents: Green, Blue, Violet, Amber, Coral, or Pumpkin. The app icon remains green.
 - Choose 12- or 24-hour timestamps and Regional, MM/DD/YYYY, DD/MM/YYYY, or YYYY-MM-DD dates.
 - Reduced-motion preferences disable decorative animation.
