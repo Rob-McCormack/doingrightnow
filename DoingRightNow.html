@@ -216,7 +216,7 @@
     $('#clearExceptToday').onclick=()=>openClearWarning('Clear all except Today?',"This permanently removes every entry before today. Quick Note, lists, and settings will be kept.",()=>{data.entries=data.entries.filter(e=>dayKey(e.ts)===today())});$('#clearOlder').onclick=()=>{const input=$('#clearOlderDays'),days=Math.min(36500,Math.max(1,Number(input.value)||30));input.value=days;openClearWarning(`Clear entries older than ${days} days?`,`This permanently removes entries outside the most recent ${days} calendar days. Quick Note, lists, and settings will be kept.`,()=>{const cutoff=new Date();cutoff.setDate(cutoff.getDate()-(days-1));cutoff.setHours(0,0,0,0);data.entries=data.entries.filter(e=>e.ts>=cutoff.getTime())})};$('#clearClose').onclick=$('#clearCancel').onclick=()=>{pendingClear=null;$('#clearDialog').close()};$('#clearConfirm').onclick=()=>finishClear('Old entries cleared');
     $('#entryActionsClose').onclick=$('#entryActionsDone').onclick=()=>$('#entryActionsDialog').close();$('#actionCopyToday').onclick=copyEntryToToday;$('#actionStarted').onclick=()=>toggleEntryMarker('^','Started');$('#actionImportant').onclick=()=>toggleEntryMarker('!','Important');$('#actionQuestion').onclick=()=>toggleEntryMarker('?','Question');$('#actionDelete').onclick=()=>{editing=actionEntryId;$('#entryActionsDialog').close();openDeleteConfirmation('actions')};
     $('#copyClose').onclick=$('#copyCancel').onclick=()=>$('#copyDialog').close();$('#copyPreviewButton').onclick=async()=>{await copyText($('#copyPreview').value);const b=$('#copyPreviewButton');b.innerHTML=`${ico('check')} Copied!`;setTimeout(()=>{if($('#copyDialog').open)b.innerHTML=`${ico('copy')} Copy`},1600)};
-    const goToTodayAndAdd=()=>{view='today';render();$('#todayInput')?.focus()},cycleTheme=()=>{const order=['system','light','dark'],current=data.settings.theme||'system',next=order[(order.indexOf(current)+1)%order.length];data.settings.theme=next;applyTheme(next);persist();toast(`Theme: ${next}`)};matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change',()=>{if((data.settings?.theme||'system')==='system')applyTheme('system')});
+    const goToTodayAndAdd=()=>{view='today';render();$('#todayInput')?.focus()},toggleLightDark=()=>{const current=data.settings.theme||'system',isDark=current==='dark'||(current==='system'&&matchMedia('(prefers-color-scheme: dark)').matches),next=isDark?'light':'dark';data.settings.theme=next;applyTheme(next);persist();toast(`Theme: ${next}`)};matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change',()=>{if((data.settings?.theme||'system')==='system')applyTheme('system')});
     const COMMANDS=[
       {label:'Add an activity',hint:'Today',run:goToTodayAndAdd},
       {label:'Go to Today',hint:'View',run:()=>{view='today';render()}},
@@ -231,7 +231,7 @@
       {label:'Open Settings',hint:'Lists',run:openSettings},
       {label:'Open System',hint:'Backup',run:openSystem},
       {label:'Open Help',hint:'Guide',run:openHelp},
-      {label:'Change theme',hint:'Appearance',run:cycleTheme},
+      {label:'Toggle Light/Dark',hint:'Appearance',run:toggleLightDark},
       {label:'Open Developer tools',hint:'Temporary',run:openDeveloper}
     ];
     function recordCommand(label){const history=data.settings.commandHistory.filter(x=>x!==label);history.unshift(label);data.settings.commandHistory=history.slice(0,10);persist()}
