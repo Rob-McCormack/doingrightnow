@@ -30,6 +30,7 @@ Optional tags in any line:
 | `#location` | Place |
 | `+project` | Project |
 | `^` | Marks the line as started |
+| `"` | Marks the line as a completed small step |
 | `!` | Marks the line as important |
 | `?` | Marks the line as a question |
 | `` `text` `` | Monospace highlight |

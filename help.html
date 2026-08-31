@@ -367,8 +367,10 @@
         <p>Use the <strong>ellipsis</strong> beside an entry to open its actions:</p>
         <ul>
           <li><strong>Copy to Today</strong> duplicates it with a new current timestamp; the original remains unchanged.</li>
-          <li><strong>Mark as started</strong> toggles <code>^</code>.</li>
-          <li><strong>Mark as important</strong> toggles <code>!</code>, and <strong>Mark as question</strong> toggles <code>?</code>.</li>
+          <li><strong>Mark as started (<code>^</code>)</strong> — you began this. Counts in the day's started total.</li>
+          <li><strong>Mark as completed (<code>"</code>)</strong> — you finished a small step. Different from started; it does not count in started/total.</li>
+          <li><strong>Mark as important (<code>!</code>)</strong> — worth noticing.</li>
+          <li><strong>Mark as question (<code>?</code>)</strong> — an open loop.</li>
           <li>An entry can have only one of these special markers. Choosing another replaces the current one.</li>
           <li><strong>Delete entry</strong> asks for confirmation before permanently removing it.</li>
         </ul>
@@ -405,6 +407,10 @@
                 <td>Marks the entry as started and counts it in the day's started total</td>
               </tr>
               <tr>
+                <td><code>"</code> as a standalone marker</td>
+                <td>Marks the entry as a completed small step. Different from started; it does not count in the day's started total</td>
+              </tr>
+              <tr>
                 <td><code>!</code> as a standalone marker</td>
                 <td>Marks the entry important</td>
               </tr>
@@ -422,7 +428,7 @@
         <p><strong>Example:</strong></p>
         <p class="example-line">Email <span class="tag-person">@Bill</span> about <span class="tag-project">+Website</span> <code>^</code> — started and tagged to Bill and the Website project.</p>
         <p>Type <code>@</code>, <code>+</code>, or <code>#</code> to see matching suggestions. Suggestions come only from the People, Projects, and Places lists managed in <strong>Settings</strong>. Matching is case-insensitive and based on the text typed after the prefix.</p>
-        <p>Special markers are standalone symbols, and an entry can contain only one of <code>^</code>, <code>!</code>, or <code>?</code>. If you type more than one, the last one is kept. Emoji are ordinary searchable text; for example:</p>
+        <p>Special markers are standalone symbols, and an entry can contain only one of <code>^</code>, <code>"</code>, <code>!</code>, or <code>?</code>. If you type more than one, the last one is kept. Emoji are ordinary searchable text; for example:</p>
         <ul>
           <li><strong>🤡</strong> can flag a distraction or rabbit hole.</li>
           <li><strong>✅</strong> can flag a small win.</li>
@@ -479,7 +485,7 @@
         <ul>
           <li>The right side of the header contains only the command icon; the hamburger on the left opens the navigation drawer. Open the palette with its icon or <strong>⌘K</strong>/<strong>Ctrl+K</strong>, filter by typing, and use the arrow keys and Enter to select.</li>
           <li>Commands cover adding an activity; Today, Yesterday, 7-, 30-, 365-day, and All views; Search; Quick Note; Zen mode; Settings; System; Help; appearance; and temporary Developer tools. <strong>Add an activity</strong> and <strong>Go to Today</strong> stay first; the remaining commands are alphabetical.</li>
-          <li>Use the expand button on the current card to enter <strong>Zen mode</strong>, a distraction-free full-screen view of the current entry, elapsed duration, and current clock time. Started, important, and question markers appear as icons instead of <code>^</code>, <code>!</code>, or <code>?</code>. Its <strong>+</strong> returns to Today ready to add another activity.</li>
+          <li>Use the expand button on the current card to enter <strong>Zen mode</strong>, a distraction-free full-screen view of the current entry, elapsed duration, and current clock time. Started, completed, important, and question markers appear as icons instead of <code>^</code>, <code>"</code>, <code>!</code>, or <code>?</code>. Its <strong>+</strong> returns to Today ready to add another activity.</li>
         </ul>
 
         <h2 id="day-ratings">Day Ratings &amp; Counts</h2>
@@ -561,7 +567,7 @@
 
         <h2 id="advanced-tips">Advanced Tips</h2>
         <ul>
-          <li><strong>Use <code>^</code> to count starts.</strong> Add or remove it from the ellipsis menu, then use each day's started/total badge as a record rather than a quota.</li>
+          <li><strong>Use <code>^</code> to count starts and <code>"</code> to mark a completed small step.</strong> Add or remove either from the ellipsis menu. Use each day's started/total badge as a record rather than a quota.</li>
           <li><strong>Search exactly the fragment you remember.</strong> Search does not interpret operators or quotes; every query is one case-insensitive substring.</li>
           <li><strong>Emoji are searchable text.</strong> Paste 🤡 into search to find every entry containing it.</li>
           <li><strong>Tune the trophy threshold to match your day, not a generic number.</strong> If your entries are naturally longer or shorter than average, adjust it in Settings so the trophy actually reflects a good day for you.</li>

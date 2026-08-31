@@ -43,8 +43,10 @@ Two brief, dismissible messages guide your first entry and then disappear perman
 Use the **ellipsis** beside an entry to open its actions:
 
 - **Copy to Today** duplicates it with a new current timestamp; the original remains unchanged.
-- **Mark as started** toggles `^`.
-- **Mark as important** toggles `!`, and **Mark as question** toggles `?`.
+- **Mark as started (`^`)** — you began this. Counts in the day's started total.
+- **Mark as completed (`"`)** — you finished a small step. Different from started; it does not count in started/total.
+- **Mark as important (`!`)** — worth noticing.
+- **Mark as question (`?`)** — an open loop.
 - An entry can have only one of these special markers. Choosing another replaces the current one.
 - **Delete entry** asks for confirmation before permanently removing it.
 
@@ -60,6 +62,7 @@ Optional shorthand:
 - `+project` tags a project and is shown in amber.
 - `#place` tags a place and is shown in teal.
 - `^` as a standalone marker means started and counts in the day's started total.
+- `"` as a standalone marker means you completed a small step. It is not a start and does not count in started/total.
 - `!` as a standalone marker means important.
 - `?` as a standalone marker means question or open loop.
 - Backticks display inline text in monospace, such as `` `next step` ``.
@@ -68,7 +71,7 @@ Example: `Email @Bill about +Website ^`
 
 Type `@`, `+`, or `#` to see matching suggestions. Suggestions come only from the People, Projects, and Places lists managed in **Settings**. Matching is case-insensitive and based on the text after the prefix.
 
-Special markers are standalone symbols, and an entry can contain only one of `^`, `!`, or `?`. If you type more than one, the last one is kept. Emoji are ordinary searchable text; for example, 🤡 can flag a distraction and ✅ can flag a small win.
+Special markers are standalone symbols, and an entry can contain only one of `^`, `"`, `!`, or `?`. If you type more than one, the last one is kept. Emoji are ordinary searchable text; for example, 🤡 can flag a distraction and ✅ can flag a small win.
 
 ## Search
 
@@ -116,7 +119,7 @@ Quick Note is a shared scratchpad below the current card for anything that is no
 
 - The right side of the header contains only the command icon; the hamburger on the left opens the navigation drawer. Open the palette with its icon or **⌘K**/**Ctrl+K**, filter by typing, and use the arrow keys and Enter to select.
 - Commands cover adding an activity; Today, Yesterday, 7-, 30-, 365-day, and All views; Search; Quick Note; Zen mode; Settings; System; Help; appearance; and temporary Developer tools. **Add an activity** and **Go to Today** stay first; the remaining commands are alphabetical.
-- Use the expand button on the current card to enter **Zen mode**, a distraction-free full-screen view of the current entry, elapsed duration, and current clock time. Started, important, and question markers appear as icons instead of `^`, `!`, or `?`. Its **+** returns to Today ready to add another activity.
+- Use the expand button on the current card to enter **Zen mode**, a distraction-free full-screen view of the current entry, elapsed duration, and current clock time. Started, completed, important, and question markers appear as icons instead of `^`, `"`, `!`, or `?`. Its **+** returns to Today ready to add another activity.
 
 ---
 
@@ -197,7 +200,7 @@ This isn't a password manager or encrypted vault. Don't store passwords, financi
 
 ## Advanced Tips
 
-- Use `^` to count starts. Add or remove it from the ellipsis menu, then treat started/total as a record rather than a quota.
+- Use `^` to count starts and `"` to mark a completed small step. Add or remove either from the ellipsis menu. Treat started/total as a record rather than a quota.
 - Search exactly the fragment you remember. Search does not interpret operators or quotes; every query is one case-insensitive substring.
 - Emoji are searchable text.
 - Tune the trophy threshold to match your day.
