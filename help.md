@@ -32,7 +32,7 @@ That's enough to start. Everything below is optional.
 
 - The dialog editor supports multiple lines and up to **1,000 characters**, with a live character count. Press **Enter** to save or **Shift+Enter** to add a new line.
 - Choose **Save** to keep changes, **Cancel** to discard them, or **Delete** and confirm to remove the entry.
-- Long entries are shortened only in the journal display: up to three lines in the current card and two in entry lists. The editor always shows the complete text.
+- Long entries are shortened to three lines with an ellipsis in the journal display. The editor always shows the complete text.
 - Addresses beginning with `http://`, `https://`, or `www.` appear as openable links in the editor and entry-actions dialog.
 
 ![Screenshot placeholder: the entry dialog with multiline text, character count, detected links, and Save, Cancel, and Delete actions.](placeholder-editing.png)
@@ -114,7 +114,7 @@ Quick Note is a shared scratchpad below the current card for anything that is no
 ## Command Palette & Zen
 
 - The right side of the header contains only the command icon; the hamburger on the left opens the navigation drawer. Open the palette with its icon or **⌘K**/**Ctrl+K**, filter by typing, and use the arrow keys and Enter to select.
-- Commands cover adding an activity; Today, Yesterday, 7-, 30-, 365-day, and All views; Search; Quick Note; Zen mode; Settings; System; Help; appearance; and temporary Developer tools. Recently used commands sort first.
+- Commands cover adding an activity; Today, Yesterday, 7-, 30-, 365-day, and All views; Search; Quick Note; Zen mode; Settings; System; Help; appearance; and temporary Developer tools. **Add an activity** and **Go to Today** stay first; the remaining commands are alphabetical.
 - Use the expand button on the current card to enter **Zen mode**, a distraction-free full-screen view of the current entry, elapsed duration, and current clock time. Its **+** returns to Today ready to add another activity.
 
 ---
