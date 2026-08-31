@@ -25,7 +25,7 @@ That's enough to start. Everything below is optional.
 
 - The **Today** composer creates a timestamped entry. The newest entry also appears in the **Doing Right Now** card with its elapsed timer when enabled.
 - Entries can't be reordered, and their timestamps can't be changed.
-- Use the header’s command icon for **Today**, **Yesterday**, **Last 7 days**, **Last 30 days**, **Last 365 days**, and **All journal**.
+- Open the hamburger drawer for **Today**, **Yesterday**, **Last 7 days**, **Last 30 days**, **Last 365 days**, and **All journal**. The command palette offers the same destinations.
 - Tap an entry—or anywhere on the current card except its Zen button—to view and edit its complete text.
 
 ## Editing a Line
@@ -70,7 +70,7 @@ Markers are standalone symbols. Emoji are ordinary searchable text; for example,
 
 ## Search
 
-Open **Search** from the command palette. Search is a simple, case-insensitive **substring search** across every entry.
+Open **Search** from the drawer or command palette. Search is a simple, case-insensitive **substring search** across every entry.
 
 - Typing `Bill` finds that sequence anywhere, including in `@Bill`. Typing `@Bill` narrows the substring to the prefixed text.
 - An empty search shows all entries. Results update as you type and display newest first.
@@ -111,7 +111,7 @@ Quick Note is a shared scratchpad below the current card for anything that is no
 
 ## Command Palette & Zen
 
-- The command icon is the only navigation control in the header. Open it with the icon or **⌘K**/**Ctrl+K**, filter by typing, and use the arrow keys and Enter to select.
+- The right side of the header contains only the command icon; the hamburger on the left opens the navigation drawer. Open the palette with its icon or **⌘K**/**Ctrl+K**, filter by typing, and use the arrow keys and Enter to select.
 - Commands cover adding an activity; Today, Yesterday, 7-, 30-, 365-day, and All views; Search; Quick Note; Zen mode; Settings; System; Help; appearance; and temporary Developer tools. Recently used commands sort first.
 - Use the expand button on the current card to enter **Zen mode**, a distraction-free full-screen view of the current entry, elapsed duration, and current clock time. Its **+** returns to Today ready to add another activity.
 

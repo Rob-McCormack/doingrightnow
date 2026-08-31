@@ -40,7 +40,7 @@ Markers are standalone symbols. People, Places, Projects, and Quick Add suggesti
 
 The current release is **1.0.0-beta.1**.
 
-- Command-palette navigation and substring search across the journal
+- Slide-out drawer and command-palette navigation, plus substring search across the journal
 - Entry actions for copying to Today, toggling markers, and deleting
 - Quick Note, Settings-managed Quick Add templates, and tag suggestions
 - Zen mode and a keyboard command palette
