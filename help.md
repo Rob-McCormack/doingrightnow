@@ -16,7 +16,7 @@ This reference covers the **1.0.0-beta.1** public beta.
 4. When what you're doing changes, write the next line. That's the whole app.
 5. Everything stays in this browser — no sign-up and no cloud sync.
 
-![Screenshot placeholder: the Today view with the composer, current Doing Right Now card, Quick Note, and timestamped entries.](placeholder-quickstart.png)
+![The Today view with the composer, current Doing Right Now card, Quick Note, and timestamped entries.](images/screenshot-680.jpg)
 
 Two brief, dismissible messages guide your first entry and then disappear permanently. That's enough to start. Everything below is optional.
 

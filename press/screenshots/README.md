@@ -9,4 +9,4 @@ Put **portrait phone captures** here with descriptive filenames.
 | `03-export.png` | *(add)* Export preview |
 | `04-dark-mode.png` | *(add)* Dark or Everforest theme |
 
-Live site also hosts `../images/screenshot-840.jpg` (840×1819) for social previews.
+Live site also hosts `../images/screenshot-840.jpg` (840×1818) for social previews.
