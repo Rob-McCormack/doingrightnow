@@ -30,7 +30,7 @@ That's enough to start. Everything below is optional.
 
 ## Editing a Line
 
-- The dialog editor supports multiple lines and up to **1,000 characters**, with a live character count.
+- The dialog editor supports multiple lines and up to **1,000 characters**, with a live character count. Press **Enter** to save or **Shift+Enter** to add a new line.
 - Choose **Save** to keep changes, **Cancel** to discard them, or **Delete** and confirm to remove the entry.
 - Long entries are shortened only in the journal display: up to three lines in the current card and two in entry lists. The editor always shows the complete text.
 - Addresses beginning with `http://`, `https://`, or `www.` appear as openable links in the editor and entry-actions dialog.
