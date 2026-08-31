@@ -29,7 +29,7 @@
   <link rel="manifest" href="manifest.webmanifest">
   <title>Doing Right Now</title>
   <style>
-    :root{color-scheme:light dark;--bg:#f3f5f2;--panel:#fbfcfa;--ink:#253028;--muted:#717d74;--line:#e0e6e1;--green:#3f7d52;--green2:#e7f0e9;--dot:#2530280b;--danger:#a23c36;--shadow:0 18px 50px #24302814;--entry-pad-y:15px;--entry-gap:12px;--entry-time-col:58px;--entry-mark-col:22px;font:16px/1.45 ui-rounded,"SF Pro Rounded","Segoe UI",system-ui,sans-serif}html[data-font-size="small"]{font-size:14px}html[data-font-size="large"]{font-size:18px}html[data-item-spacing="tight"]{--entry-pad-y:8px;--entry-gap:6px;--entry-time-col:52px;--entry-mark-col:18px}html[data-item-spacing="tight"] .entry.current::before{top:5px;bottom:5px}html[data-item-spacing="tight"] .now{padding:12px 14px;margin-bottom:10px}html[data-item-spacing="tight"] .now-content{gap:6px}html[data-item-spacing="tight"] .composer{margin-bottom:10px}html[data-item-spacing="tight"] .quick-note{margin-bottom:10px}html[data-item-spacing="tight"] .search-results .dayhead,html[data-item-spacing="tight"] .history .dayhead{padding-top:14px}html[data-item-spacing="tight"] .view-tools{margin-bottom:8px}html[data-item-spacing="tight"] .menu{padding:4px 6px}
+    :root{color-scheme:light dark;--bg:#f3f5f2;--panel:#fbfcfa;--ink:#253028;--muted:#717d74;--line:#e0e6e1;--green:#3f7d52;--green2:#e7f0e9;--dot:#2530280b;--danger:#a23c36;--shadow:0 18px 50px #24302814;--entry-pad-y:15px;--entry-gap:12px;--entry-time-col:58px;--entry-mark-col:22px;font:16px/1.45 ui-rounded,"SF Pro Rounded","Segoe UI",system-ui,sans-serif}html[data-font-size="small"]{font-size:14px}html[data-font-size="large"]{font-size:18px}html[data-item-spacing="tight"]{--entry-pad-y:4px;--entry-gap:4px;--entry-time-col:50px;--entry-mark-col:18px}html[data-item-spacing="tight"] .entry.current::before{top:2px;bottom:2px}html[data-item-spacing="tight"] .now{padding:8px 10px;margin-bottom:6px}html[data-item-spacing="tight"] .now-content{gap:4px}html[data-item-spacing="tight"] .composer{margin-bottom:6px}html[data-item-spacing="tight"] .quick-note{margin-bottom:6px}html[data-item-spacing="tight"] .search-results .dayhead,html[data-item-spacing="tight"] .history .dayhead{padding-top:8px}html[data-item-spacing="tight"] .view-tools{margin-bottom:4px}html[data-item-spacing="tight"] .menu{padding:2px 4px}html[data-item-spacing="tight"] .time{padding-top:1px}
     *{box-sizing:border-box}body{margin:0;background-color:var(--bg);background-image:radial-gradient(var(--dot) 1px,transparent 1px);background-size:18px 18px;color:var(--ink);min-height:100dvh}button,input,textarea{font:inherit;color:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #70a77e;outline-offset:2px}.hidden{display:none!important}
     .shell{max-width:780px;min-height:100dvh;margin:auto;background-color:var(--panel);background-image:radial-gradient(var(--dot) 1px,transparent 1px);background-size:18px 18px;box-shadow:0 0 70px #24302812}.topbar{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:8px;padding:max(12px,env(safe-area-inset-top)) 14px 11px;background:#fbfcfaf0;border-bottom:1px solid var(--line);backdrop-filter:blur(18px)}.title{min-width:0;flex:1}.title-button{border:0;background:transparent;text-align:left;padding:5px 8px;border-radius:10px}.title-button:hover,.title-button:focus-visible{background:var(--green2)}.title h1{font-size:1.28rem;margin:0;color:var(--green)}.subtitle{font-size:.78rem;color:var(--muted)}
     .icon{border:0;background:transparent;border-radius:999px;width:46px;height:46px;display:grid;place-items:center}.icon:hover{background:var(--green2)}.lucide{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}#nav .lucide{width:25px;height:25px;stroke-width:2.2}.main{padding:22px 18px 110px}.now{display:flex;width:100%;justify-content:space-between;gap:18px;padding:18px;border-radius:18px;background:linear-gradient(145deg,#eceeef,#f6f7f7);border:1px solid #d9dddf;margin-bottom:16px;text-align:left}.now:hover{border-color:var(--green)}.eyebrow{text-transform:uppercase;letter-spacing:.12em;font-size:.68rem;font-weight:800;color:var(--green)}.now-text{display:block;font-size:1.12rem;font-weight:700;margin-top:5px}.elapsed{font-variant-numeric:tabular-nums;color:var(--green);font-weight:800;white-space:nowrap}
@@ -64,7 +64,7 @@
     <section><h3>About the app</h3><p><b>Version 1.0.0-beta.1</b></p><p>A private, local-first journal for getting unstuck—one timestamped line at a time.</p><p><a href="https://doingrightnow.com" target="_blank" rel="noopener">doingrightnow.com</a></p></section>
     <section><h3>Navigation and entry actions</h3><p>Use the hamburger to open the navigation drawer. Tap the current view title to return directly to Today; when already on Today, it scrolls to the top without opening the keyboard. The right side keeps only the command icon, which offers the same destinations from a searchable palette.</p></section>
     <section><h3>Quick start</h3><ul><li>A new journal begins with one normal entry: <b>Trying out Doing Right Now</b>. You can edit or delete it.</li><li>Write the smallest thing you are doing in the Today box.</li><li>Press Enter or the Enter-icon button to timestamp it.</li><li>Write another line whenever your focus changes. The two brief onboarding messages do not return after your first entry.</li></ul></section>
-    <section><h3>Command palette</h3><p>Press ⌘K or Ctrl+K, or use the command icon. The palette includes adding an activity; every journal view; Search; Quick Note; Zen mode; Settings; System backup tools; Help; appearance; and temporary Developer tools. Type to filter, then use Enter or the arrow keys to choose.</p></section>
+    <section><h3>Command palette</h3><p>Press ⌘K or Ctrl+K, or use the command icon. Type to filter, then use Enter or the arrow keys to choose. <b>Add an activity</b> and <b>Go to Today</b> stay first; the rest are alphabetical. Settings commands are prefixed <b>Settings:</b> and System commands <b>System:</b>, including appearance, font size, item spacing, time and date, accents, timer, lists, export, import, cleanup, and reset.</p></section>
     <section><h3>Quick Note</h3><p>Tap the accent-colored Quick Note control or its chevron below the Doing Right Now card to disclose a reusable note. The chevron rotates to show whether the note is open. It saves automatically as you type. Use its small Copy button to place the note on your clipboard. The Command Palette can open and focus Quick Note directly.</p></section>
     <section><h3>Quick Add and formatting</h3><p>Use the lightning button for reusable entries. Type <span class="tag-person">@</span> for people, <span class="tag-project">+</span> for projects, or <span class="tag-location">#</span> for places. Suggestions come only from the corresponding lists in Settings. Add one standalone special marker: <b>^</b> for started, <b>"</b> for a completed small step, <b>!</b> for important, or <b>?</b> for a question. Choosing another replaces the current special marker. Wrap text in backticks, such as <code>`next step`</code>, to display it in monospace.</p></section>
     <section><h3>Timer, time, and date</h3><p>The timer is enabled by default, but it is optional. It shows how long the newest Today entry has been current. Its animated timer icon has a second hand that circles every minute to show passing time, not a target. If the timer feels distracting or creates pressure, turn off <b>Timer on current entry</b> in Settings; the journal works exactly the same without it. The numeric elapsed-time counter is a duration, so it does not use AM/PM. Settings also lets you choose 12-hour or 24-hour clock timestamps, Regional or numeric date formats, Small, Medium, or Large text, and Loose or Tight item spacing. Loose is the default.</p></section>
@@ -233,6 +233,13 @@
     $('#entryActionsClose').onclick=$('#entryActionsDone').onclick=()=>$('#entryActionsDialog').close();$('#actionCopyToday').onclick=copyEntryToToday;$('#actionStarted').onclick=()=>toggleEntryMarker('^','Started');$('#actionDone').onclick=()=>toggleEntryMarker('"','Completed');$('#actionImportant').onclick=()=>toggleEntryMarker('!','Important');$('#actionQuestion').onclick=()=>toggleEntryMarker('?','Question');$('#actionDelete').onclick=()=>{editing=actionEntryId;$('#entryActionsDialog').close();openDeleteConfirmation('actions')};
     $('#copyClose').onclick=$('#copyCancel').onclick=()=>$('#copyDialog').close();$('#copyPreviewButton').onclick=async()=>{await copyText($('#copyPreview').value);const b=$('#copyPreviewButton');b.innerHTML=`${ico('check')} Copied!`;setTimeout(()=>{if($('#copyDialog').open)b.innerHTML=`${ico('copy')} Copy`},1600)};
     const goToTodayAndAdd=()=>{view='today';render();$('#todayInput')?.focus()},toggleLightDark=()=>{const current=data.settings.theme||'system',isDark=current==='dark'||(current==='system'&&matchMedia('(prefers-color-scheme: dark)').matches),next=isDark?'light':'dark';data.settings.theme=next;applyTheme(next);persist();toast(`Theme: ${next}`)};matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change',()=>{if((data.settings?.theme||'system')==='system')applyTheme('system')});
+    function setAppearance(theme){data.settings.theme=theme;applyTheme(theme);persist();toast(`Theme: ${theme}`)}
+    function setFontSizePref(size){data.settings.fontSize=size;applyFontSize(size);persist();toast(`Font size: ${size}`)}
+    function setItemSpacingPref(spacing){data.settings.itemSpacing=spacing;applyItemSpacing(spacing);persist();toast(`Item spacing: ${spacing}`)}
+    function setAccentPref(accent){data.settings.accent=accent;applyAccent(accent);persist();toast(`Accent: ${accent}`)}
+    function setTimeFormatPref(format){data.settings.timeFormat=format;persist();render();toast(format==='24'?'24-hour time':'12-hour time')}
+    function setDateFormatPref(format){data.settings.dateFormat=format;persist();render();toast({regional:'Regional dates',mdy:'MM/DD/YYYY',dmy:'DD/MM/YYYY',iso:'YYYY-MM-DD'}[format])}
+    function toggleTimerPref(){data.settings.timer=!data.settings.timer;persist();render();toast(data.settings.timer?'Timer on':'Timer off')}
     const COMMANDS=[
       {label:'Add an activity',hint:'Today',run:goToTodayAndAdd},
       {label:'Go to Today',hint:'View',run:()=>{view='today';render();focusTodayComposerForDesktop()}},
@@ -244,11 +251,42 @@
       {label:'Search journal',hint:'Find',run:()=>{view='search';render()}},
       {label:'Open Quick Note',hint:'Autosaving note',run:openQuickNote},
       {label:'Toggle Zen mode',hint:'Focus',run:()=>zen($('#zenView').classList.contains('hidden'))},
-      {label:'Open Settings',hint:'Lists',run:openSettings},
-      {label:'Open System',hint:'Backup',run:openSystem},
       {label:'Open Help',hint:'Guide',run:openHelp},
-      {label:'Toggle Light/Dark',hint:'Appearance',run:toggleLightDark},
-      {label:'Open Developer tools',hint:'Temporary',run:openDeveloper}
+      {label:'Open Developer tools',hint:'Temporary',run:openDeveloper},
+      {label:'Settings: Open',hint:'Preferences & lists',run:openSettings},
+      {label:'Settings: Appearance System',hint:'Theme',run:()=>setAppearance('system')},
+      {label:'Settings: Appearance Light',hint:'Theme',run:()=>setAppearance('light')},
+      {label:'Settings: Appearance Dark',hint:'Theme',run:()=>setAppearance('dark')},
+      {label:'Settings: Toggle Light/Dark',hint:'Theme',run:toggleLightDark},
+      {label:'Settings: Font size Small',hint:'Text',run:()=>setFontSizePref('small')},
+      {label:'Settings: Font size Medium',hint:'Text',run:()=>setFontSizePref('medium')},
+      {label:'Settings: Font size Large',hint:'Text',run:()=>setFontSizePref('large')},
+      {label:'Settings: Item spacing Loose',hint:'Layout',run:()=>setItemSpacingPref('loose')},
+      {label:'Settings: Item spacing Tight',hint:'Layout',run:()=>setItemSpacingPref('tight')},
+      {label:'Settings: 12-hour time',hint:'Clock',run:()=>setTimeFormatPref('12')},
+      {label:'Settings: 24-hour time',hint:'Clock',run:()=>setTimeFormatPref('24')},
+      {label:'Settings: Date Regional',hint:'Dates',run:()=>setDateFormatPref('regional')},
+      {label:'Settings: Date MM/DD/YYYY',hint:'Dates',run:()=>setDateFormatPref('mdy')},
+      {label:'Settings: Date DD/MM/YYYY',hint:'Dates',run:()=>setDateFormatPref('dmy')},
+      {label:'Settings: Date YYYY-MM-DD',hint:'Dates',run:()=>setDateFormatPref('iso')},
+      {label:'Settings: Accent Green',hint:'Color',run:()=>setAccentPref('green')},
+      {label:'Settings: Accent Blue',hint:'Color',run:()=>setAccentPref('blue')},
+      {label:'Settings: Accent Violet',hint:'Color',run:()=>setAccentPref('violet')},
+      {label:'Settings: Accent Amber',hint:'Color',run:()=>setAccentPref('amber')},
+      {label:'Settings: Accent Coral',hint:'Color',run:()=>setAccentPref('coral')},
+      {label:'Settings: Accent Pumpkin',hint:'Color',run:()=>setAccentPref('pumpkin')},
+      {label:'Settings: Toggle timer',hint:'Current card',run:toggleTimerPref},
+      {label:'Settings: Trophy threshold',hint:'Day trophy',run:openSettings},
+      {label:'Settings: People',hint:'@ tags',run:openSettings},
+      {label:'Settings: Projects',hint:'+ tags',run:openSettings},
+      {label:'Settings: Places',hint:'# tags',run:openSettings},
+      {label:'Settings: Quick Add',hint:'Reusable lines',run:openSettings},
+      {label:'System: Open',hint:'Data & backup',run:openSystem},
+      {label:'System: Export journal',hint:'JSON backup',run:()=>$('#export').click()},
+      {label:'System: Import journal',hint:'Restore backup',run:()=>$('#import').click()},
+      {label:'System: Clear all except Today',hint:'Cleanup',run:()=>$('#clearExceptToday').click()},
+      {label:'System: Clear older entries',hint:'Cleanup',run:()=>$('#clearOlder').click()},
+      {label:'System: Reset',hint:'Clear all data',run:()=>$('#resetBtn').click()}
     ];
     const PINNED_COMMANDS=['Add an activity','Go to Today'];
     function renderCommands(query=''){const q=query.trim().toLowerCase(),matches=COMMANDS.map((command,index)=>({command,index,pin:PINNED_COMMANDS.indexOf(command.label)})).filter(x=>!q||`${x.command.label} ${x.command.hint}`.toLowerCase().includes(q)).sort((a,b)=>(a.pin<0?999:a.pin)-(b.pin<0?999:b.pin)||a.command.label.localeCompare(b.command.label,undefined,{numeric:true,sensitivity:'base'}));$('#commandList').innerHTML=matches.length?matches.map(x=>`<button type="button" data-command-index="${x.index}"><span>${esc(x.command.label)}</span><small>${esc(x.command.hint)}</small></button>`).join(''):'<div class="list-empty">No matching commands.</div>';$('#commandList').querySelectorAll('[data-command-index]').forEach(b=>b.onclick=()=>{const command=COMMANDS[Number(b.dataset.commandIndex)];$('#commandDialog').close();command.run()})}

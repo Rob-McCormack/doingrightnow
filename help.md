@@ -118,7 +118,7 @@ Quick Note is a shared scratchpad below the current card for anything that is no
 ## Command Palette & Zen
 
 - The right side of the header contains only the command icon; the hamburger on the left opens the navigation drawer. Open the palette with its icon or **⌘K**/**Ctrl+K**, filter by typing, and use the arrow keys and Enter to select.
-- Commands cover adding an activity; Today, Yesterday, 7-, 30-, 365-day, and All views; Search; Quick Note; Zen mode; Settings; System; Help; appearance; and temporary Developer tools. **Add an activity** and **Go to Today** stay first; the remaining commands are alphabetical.
+- Commands cover adding an activity; Today, Yesterday, 7-, 30-, 365-day, and All views; Search; Quick Note; Zen mode; Help; and temporary Developer tools. Settings commands are prefixed **Settings:** and System commands **System:** — appearance, font size, item spacing, time and date, accents, timer, lists, export, import, cleanup, and reset. **Add an activity** and **Go to Today** stay first; the remaining commands are alphabetical.
 - Use the expand button on the current card to enter **Zen mode**, a distraction-free full-screen view of the current entry, elapsed duration, and current clock time. Started, completed, important, and question markers appear as icons instead of `^`, `"`, `!`, or `?`. Its **+** returns to Today ready to add another activity.
 
 ---
@@ -142,7 +142,7 @@ The elapsed-time display on today's current card shows how long the newest entry
 
 ## Theme & Appearance
 
-- Choose **System**, **Light**, or **Dark** in Settings, or use **Toggle Light/Dark** in the command palette.
+- Choose **System**, **Light**, or **Dark** in Settings, or use **Settings: Toggle Light/Dark** in the command palette.
 - Choose Small, Medium, or Large text and one of six accents: Green, Blue, Violet, Amber, Coral, or Pumpkin. The app icon remains green.
 - Choose **Loose** (default) or **Tight** item spacing for the journal list.
 - Choose 12- or 24-hour timestamps and Regional, MM/DD/YYYY, DD/MM/YYYY, or YYYY-MM-DD dates.
