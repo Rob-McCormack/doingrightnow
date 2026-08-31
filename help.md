@@ -144,10 +144,11 @@ The elapsed-time display on today's current card shows how long the newest entry
 
 - Choose **System**, **Light**, or **Dark** in Settings, or use **Toggle Light/Dark** in the command palette.
 - Choose Small, Medium, or Large text and one of six accents: Green, Blue, Violet, Amber, Coral, or Pumpkin. The app icon remains green.
+- Choose **Loose** (default) or **Tight** item spacing for the journal list.
 - Choose 12- or 24-hour timestamps and Regional, MM/DD/YYYY, DD/MM/YYYY, or YYYY-MM-DD dates.
 - Reduced-motion preferences disable decorative animation.
 
-![Screenshot placeholder: Settings showing appearance, font size, date and time formats, and six accents.](placeholder-theme.png)
+![Screenshot placeholder: Settings showing appearance, font size, item spacing, date and time formats, and six accents.](placeholder-theme.png)
 
 ---
 
