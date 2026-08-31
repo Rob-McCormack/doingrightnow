@@ -115,7 +115,7 @@ Quick Note is a shared scratchpad below the current card for anything that is no
 
 - The right side of the header contains only the command icon; the hamburger on the left opens the navigation drawer. Open the palette with its icon or **⌘K**/**Ctrl+K**, filter by typing, and use the arrow keys and Enter to select.
 - Commands cover adding an activity; Today, Yesterday, 7-, 30-, 365-day, and All views; Search; Quick Note; Zen mode; Settings; System; Help; appearance; and temporary Developer tools. **Add an activity** and **Go to Today** stay first; the remaining commands are alphabetical.
-- Use the expand button on the current card to enter **Zen mode**, a distraction-free full-screen view of the current entry, elapsed duration, and current clock time. Its **+** returns to Today ready to add another activity.
+- Use the expand button on the current card to enter **Zen mode**, a distraction-free full-screen view of the current entry, elapsed duration, and current clock time. Started, important, and question markers appear as icons instead of `^`, `!`, or `?`. Its **+** returns to Today ready to add another activity.
 
 ---
 
