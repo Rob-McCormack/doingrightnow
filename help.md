@@ -73,7 +73,8 @@ Markers are standalone symbols. Emoji are ordinary searchable text; for example,
 Open **Search** from the drawer or command palette. Search is a simple, case-insensitive **substring search** across every entry.
 
 - Typing `Bill` finds that sequence anywhere, including in `@Bill`. Typing `@Bill` narrows the substring to the prefixed text.
-- An empty search shows all entries. Results update as you type and display newest first.
+- Search opens with no results and a prompt to type. Results update as you type and display newest first.
+- Search tags directly with `@person`, `+project`, or `#place`.
 - **Copy** copies matching entries as plain text.
 - **Edit** opens an editable plain-text preview before copying; changing the preview does not change the journal.
 
