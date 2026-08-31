@@ -11,7 +11,7 @@ This reference covers the **1.0.0-beta.1** public beta.
 ## Quick Start
 
 1. Open the journal — you land on **Today**.
-2. Type what you're doing right now in the composer at the top, then press **Enter** or the **+** button.
+2. Type what you're doing right now in the composer at the top, then press **Enter** or the Enter-icon button.
 3. When what you're doing changes, write the next line. That's the whole app.
 4. Everything stays in this browser — no sign-up and no cloud sync.
 
@@ -86,7 +86,7 @@ Quick Add stores reusable activity text. Manage the list in **Settings → Quick
 
 1. Use the lightning button beside the Today composer to open the Quick Add menu.
 2. Choose an item to append it to anything already in the composer.
-3. Edit the combined text if needed, then press **Enter** or **+** to create the entry.
+3. Edit the combined text if needed, then press **Enter** or the Enter-icon button to create the entry.
 
 The full entry dialog also displays Quick Add items as buttons. Templates may include tags, markers, and backtick formatting.
 
