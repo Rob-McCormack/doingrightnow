@@ -128,11 +128,12 @@ Quick Note is a shared scratchpad below the current card for anything that is no
 
 ## Timer on the Current Line
 
-The optional elapsed-time display on today's current card shows how long the newest entry has been current.
+The elapsed-time display on today's current card shows how long the newest entry has been current. It is enabled by default, but it is optional.
 
 - It counts seconds and minutes, then hours, up to **8hr+**.
 - The stopwatch hand circles every minute to show passing time; it is not a target or countdown.
-- Toggle it in **Settings**. The duration does not use AM/PM and is not logged or reported elsewhere.
+- If the timer feels distracting, visually dominant, or creates pressure, turn it off in **Settings → Timer on current entry**. The journal works exactly the same without it.
+- The duration does not use AM/PM and is not logged or reported elsewhere.
 
 ## Theme & Appearance
 
