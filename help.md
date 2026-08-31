@@ -2,6 +2,8 @@
 
 A journal for getting unstuck. Write one line for what you're doing right now, timestamp it automatically, and move on. No planning, no streaks, no pressure to finish.
 
+This reference covers the **1.0.0-beta.1** public beta.
+
 [New here? Read the philosophy →](/guide)
 
 ---
@@ -9,231 +11,200 @@ A journal for getting unstuck. Write one line for what you're doing right now, t
 ## Quick Start
 
 1. Open the journal — you land on **Today**.
-2. Type what you're doing right now in the box at the top and press **Enter**.
+2. Type what you're doing right now in the composer at the top, then press **Enter** or the **+** button.
 3. When what you're doing changes, write the next line. That's the whole app.
-4. Everything you write stays on this device — no sign-up, no cloud.
+4. Everything stays in this browser — no sign-up and no cloud sync.
 
-![Screenshot placeholder: the Today view with the input box at top and a few timestamped entries below it, showing the elapsed timer next to the newest line.](placeholder-quickstart.png)
+![Screenshot placeholder: the Today view with the composer, current Doing Right Now card, Quick Note, and timestamped entries.](placeholder-quickstart.png)
 
-That's enough to start. Everything below is optional — the app is built so you never *have* to learn it.
+That's enough to start. Everything below is optional.
 
 ---
 
 ## The Journal
 
-- Type a line, press **Enter**. It's saved instantly with the current time.
-- Entries can't be reordered, and you can't change a line's timestamp. This is deliberate: the journal is a record of what actually happened, not a plan you can rearrange.
-- You *can* edit the words of any line at any time — see [Editing a Line](#editing-a-line).
-
----
+- The **Today** composer creates a timestamped entry. The newest entry also appears in the **Doing Right Now** card with its elapsed timer when enabled.
+- Entries can't be reordered, and their timestamps can't be changed.
+- Open the drawer for **Today**, **Yesterday**, **Last 7 days**, **Last 30 days**, **Last 365 days**, and **All journal**.
+- Tap an entry—or anywhere on the current card except its Zen button—to view and edit its complete text.
 
 ## Editing a Line
 
-- **Tap a line** to edit its text in place. Press **Enter** or tap elsewhere to save; press **Escape** to cancel.
-- Type **` & `** (spaces around `&`) to split a line on *older* entries: the part before the last **` & `** is the headline; the rest stays hidden until you tap. A green **▼** hint marks hidden text. Your **current line** (with the timer) always shows in full.
-- Long lines (over ~200 characters) collapse the same way on older entries — **tap once to expand**, tap again to edit.
+- The dialog editor supports multiple lines and up to **1,000 characters**, with a live character count.
+- Choose **Save** to keep changes, **Cancel** to discard them, or **Delete** and confirm to remove the entry.
+- Long entries are shortened only in the journal display: up to three lines in the current card and two in entry lists. The editor always shows the complete text.
+- Addresses beginning with `http://`, `https://`, or `www.` appear as openable links in the editor and entry-actions dialog.
 
-![Screenshot placeholder: a single entry mid-edit, showing the text cursor active inside the line with no timestamp change.](placeholder-editing.png)
+![Screenshot placeholder: the entry dialog with multiline text, character count, detected links, and Save, Cancel, and Delete actions.](placeholder-editing.png)
 
----
+## Entry Actions
 
-## Deleting or Reusing a Line
+Use the **ellipsis** beside an entry to open its actions:
 
-| Action | On phone | On computer |
-|---|---|---|
-| Delete | Swipe the line **left**, tap the trash icon | Hover the line, click the trash icon |
-| Copy to Today | Swipe the line **right**, tap the calendar icon | Hover the line, click the calendar icon |
+- **Copy to Today** duplicates it with a new current timestamp; the original remains unchanged.
+- **Mark as started** toggles `^`.
+- **Mark as important** toggles `!`, and **Mark as question** toggles `?`.
+- **Delete entry** asks for confirmation before permanently removing it.
 
-"Copy to Today" duplicates the line with a **new** timestamp at the current time — the original entry stays exactly where it was. Useful for a task you keep returning to.
-
-![Screenshot placeholder: an entry swiped left on mobile, revealing the delete icon underneath.](placeholder-swipe.png)
+![Screenshot placeholder: the ellipsis entry-actions dialog with Copy to Today, marker controls, links, and Delete entry.](placeholder-actions.png)
 
 ---
 
 ## Tags & Formatting
 
-Optional shorthand you can drop into any line:
+Optional shorthand:
 
-| Type this | Result |
-|---|---|
-| `@name` | Tags a person (shown in violet) |
-| `#place` | Tags a location (shown in teal) |
-| `+project` | Tags a project (shown in amber) |
-| `!` anywhere in the line | Makes the whole line **bold and red** — urgent or important |
-| `?` anywhere in the line | Highlights the text in yellow — open loops, things to revisit |
-| `` `word` `` or `` `any phrase` `` | Monospace highlight on that word or phrase only — works inline, on any entry |
-| `xx` as its own word | Strikes the whole line through, marks it done |
+- `@name` tags a person and is shown in violet.
+- `+project` tags a project and is shown in amber.
+- `#place` tags a place and is shown in teal.
+- `^` as a standalone marker means started and counts in the day's started total.
+- `!` as a standalone marker means important.
+- `?` as a standalone marker means question or open loop.
+- Backticks display inline text in monospace, such as `` `next step` ``.
 
-**Example:** `email @Bill about +Website xx` — done, tagged to Bill and the Website project, and searchable by either tag later.
+Example: `Email @Bill about +Website ^ !`
 
-Two more work anywhere, including from an emoji keyboard:
-- **🤡** — flag a distraction or rabbit hole, so it's easy to spot scrolling back
-- **✅** — flag a small win
+Type `@`, `+`, or `#` to see matching suggestions. Suggestions come only from the People, Projects, and Places lists managed in **Settings**. Matching is case-insensitive and based on the text after the prefix.
 
----
+Markers are standalone symbols. Emoji are ordinary searchable text; for example, 🤡 can flag a distraction and ✅ can flag a small win.
 
 ## Search
 
-Tap the search icon in the Today header.
+Open **Search** from the drawer. Search is a simple, case-insensitive **substring search** across every entry.
 
-- Plain text finds any line containing it.
-- A single tag (`@Bill`) finds every line with that tag.
-- **Mention vs marker:** `gym` finds any line with that word (*went to the gym*); `#gym` finds only lines you tagged with `#gym`. Same idea for `@` and `+` — the prefix means "I tagged this on purpose."
-- **Two tags, unquoted** (`@Bill #home`) → matches lines with **either** tag (OR).
-- **Two tags, quoted** (`"@Bill #home"`) → matches lines with **both** tags (AND).
-- Search `xx` to pull up completed lines — handy for a quick "what I finished" report.
-- Search has its own date range (Today / 2d / 3d / 7d / All), separate from the main view range.
-- Tap **Export** inside search to export just the matching lines.
+- Typing `Bill` finds that sequence anywhere, including in `@Bill`. Typing `@Bill` narrows the substring to the prefixed text.
+- An empty search shows all entries. Results update as you type and display newest first.
+- **Copy** copies matching entries as plain text.
+- **Edit** opens an editable plain-text preview before copying; changing the preview does not change the journal.
 
-![Screenshot placeholder: the search panel open, showing the search box, date-range buttons, and a match count.](placeholder-search.png)
-
----
-
-## My Tags
-
-At the bottom of the app, **My Tags** sits just above Help.
-
-- Open it to see every `@person`, `#place`, and `+project` tag you've used in journal entries — grouped in three columns, sorted A–Z within each group.
-- The table is read-only and rebuilds each time you open the panel (or while it stays open and your journal changes).
-- Handy once your tag vocabulary grows — a quick index of what you've actually tagged, without turning into a second planner.
-
-![Screenshot placeholder: the My Tags panel open, showing three columns of @, #, and + tags in alphabetical order.](placeholder-my-tags.png)
-
----
+![Screenshot placeholder: the Search drawer view with a search box, result count, and Copy and Edit controls.](placeholder-search.png)
 
 ## Quick Add
 
-For lines you type often.
+Quick Add stores reusable activity text. Manage the list in **Settings → Quick Add**.
 
-1. Tap **Quick Add** under Today, type a line, press **Enter** to save it as a reusable template.
-2. Tap a saved template to fill the Today line — tweak if you want, then press **Enter** to log it with a fresh timestamp.
-3. Tap the **×** next to a template to remove it.
+1. Use the lightning button beside the Today composer to open the Quick Add menu.
+2. Choose an item to append it to anything already in the composer.
+3. Edit the combined text if needed, then press **Enter** or **+** to create the entry.
 
-Tags work in templates too — e.g. save `standup +Website` once, tap it each morning, add a tag if needed, then Enter.
+The full entry dialog also displays Quick Add items as buttons. Templates may include tags, markers, and backtick formatting.
 
-![Screenshot placeholder: the Quick Add panel expanded, showing a short list of saved templates with an × to remove each.](placeholder-quickadd.png)
+![Screenshot placeholder: the lightning-button menu beside the Today composer, showing reusable activities managed in Settings.](placeholder-quickadd.png)
 
----
+## Quick Note
 
-## Notes
+Quick Note is a shared scratchpad below the current card for anything that is not a timestamped entry.
 
-A scratchpad under Today, for anything that isn't a timestamped line — a URL, a reminder, a thought for later.
+- Use the **Quick Note** control and chevron to open or close it.
+- It auto-saves as you type and is shared across Today rather than attached to a date.
+- Its small **Copy** button copies only the note.
+- The command palette can open and focus Quick Note directly.
 
-- Auto-saves as you type.
-- One shared pad, not one per day — it won't show up under Monday or Tuesday specifically.
-- Left out of Search Export; included once, at the bottom, in a full **Export All**.
-- Entirely optional — ignore it and the journal still works exactly the same.
+## Views, Copy & Editable Plain Text
 
----
+- History views group entries by day and show the newest entries first.
+- In Yesterday, 7-, 30-, 365-day, All journal, and Search views, **Copy** sends displayed entries to the clipboard as readable plain text.
+- **Edit** opens the same plain text in a dialog. You may revise it before copying; those revisions never alter saved entries.
+- Plain text includes date headings, optional ratings as `*` characters, timestamps, and entry text.
 
-## Viewing & Exporting
+![Screenshot placeholder: a history view and its editable plain-text copy dialog.](placeholder-copy.png)
 
-- **View** (Today / 2d / 3d / 7d / All) controls how many days show in your feed.
-- Tap the **Today** label at the top of the feed to jump to today only — same as choosing Today under View. This also closes any open panels (Theme, Settings, My Tags, Help, Quick Add, Notes) and search if it was open — a quick reset to focus on today.
-- **Export** uses the same ranges. Tap a range, then **Export** opens a preview you can **Copy** or **Download** as a `.txt` file.
-- **Export All** is the only option that also includes your Notes and Quick Add templates — treat it as your full backup.
-- Exports are for reading and backup only — there is no import. You can't load a `.txt` file back into the app.
+## Command Palette & Zen
 
-![Screenshot placeholder: the export preview sheet, showing an editable text preview with Copy and Download buttons at the top.](placeholder-export.png)
+- Open the command palette with the command icon or **⌘K**/**Ctrl+K**. Filter commands by typing and use the arrow keys and Enter to select.
+- Commands cover adding an activity, changing views, searching, opening Quick Note, entering Zen, opening Settings, System, and Help, and changing appearance. Recently used commands sort first.
+- Use the expand button on the current card to enter **Zen mode**, a distraction-free full-screen view of the current entry, elapsed duration, and current clock time. Its **+** returns to Today ready to add another activity.
 
 ---
 
 ## Day Ratings & Counts
 
-- On any **past** day, tap the date to cycle a star rating from 0 to 5.
-- Every day header shows a small **done/total** count — "done" meaning lines you've marked with `xx`.
-- Once a day reaches your trophy threshold (default 6 entries, set in Settings), a small trophy icon appears next to the count. It's a nudge, not a target — there's no penalty for not hitting it.
+- On any **past** day, tap the date to cycle a star rating from 0 to 5. Today can't be rated.
+- Every day header shows **started/total**. “Started” means entries carrying the `^` marker.
+- A trophy appears when a day's total reaches the threshold configured in Settings (default 6).
 
-![Screenshot placeholder: a past day's header showing the date, a 3-star rating, and a "4/6" count badge.](placeholder-daystars.png)
-
----
+![Screenshot placeholder: a past day's heading with rating, started/total badge, and trophy.](placeholder-daystars.png)
 
 ## Timer on the Current Line
 
-An optional small elapsed-time readout next to today's newest entry — how long you've been on this one thing.
+The optional elapsed-time display on today's current card shows how long the newest entry has been current.
 
-- Counts up normally for the first 30 minutes.
-- Turns a warning color between 30–60 minutes.
-- Shows **"1hr+"** and stops counting after an hour.
-- Toggle it on/off in **Settings**. It's a gentle nudge, not a timesheet — nothing is logged or reported anywhere.
-
----
+- It counts seconds and minutes, then hours, up to **8hr+**.
+- The stopwatch hand circles every minute to show passing time; it is not a target or countdown.
+- Toggle it in **Settings**. The duration does not use AM/PM and is not logged or reported elsewhere.
 
 ## Theme & Appearance
 
-- **Theme** panel: toggle light/dark, then pick from 20 accent colors.
-- **Settings** panel: font size (S/M/L).
+- Choose **System**, **Light**, or **Dark**. The header appearance button cycles the same choices.
+- Choose Small, Medium, or Large text and one of six accents: Green, Blue, Violet, Amber, Coral, or Pumpkin. The app icon remains green.
+- Choose 12- or 24-hour timestamps and Regional, MM/DD/YYYY, DD/MM/YYYY, or YYYY-MM-DD dates.
+- Reduced-motion preferences disable decorative animation.
 
-![Screenshot placeholder: the Theme panel open, showing the light/dark toggle above a grid of color swatches.](placeholder-theme.png)
+![Screenshot placeholder: Settings showing appearance, font size, date and time formats, and six accents.](placeholder-theme.png)
 
 ---
 
 ## Your Data
 
-- Everything lives in your browser on this device only. There is no account and nothing is sent anywhere.
-- If you open the app in two tabs or windows at once, they stay in sync automatically — but only in the **same browser on the same device**.
-- **Different device or different browser = different journal.** Only tabs/windows in the same browser share one copy. Your phone and laptop do not sync.
-- **Export All** regularly if you want a backup — a new phone or a cleared browser will not have your history otherwise.
-- **Settings → Storage** shows how many lines you're storing and an approximate share of your browser's limit (~5 MB unless your browser reports otherwise). After about a year of use, or when you're near ~80% full, a gentle reminder appears to export or trim old entries.
-- Clearing site data, cache, or browsing history from your browser settings can delete the journal too — not just the in-app Clear options. **Export All first** if you're about to clean up.
+- Journal data is stored in **IndexedDB** in this browser. There is no account or cloud service.
+- Tabs and windows stay in sync automatically only in the **same browser on the same device**.
+- A different device or browser has a separate journal. Clearing browser site data can permanently remove it.
+- Open **System → Data & backup** to see journal size, browser storage estimates when available, and the last backup time.
+- **Export journal** downloads a complete `.json` backup containing entries, Quick Note, ratings, lists, and settings.
+- **Import journal** accepts a Doing Right Now JSON backup. After showing its entry count and date range, import **replaces the entire current journal**, Quick Note, ratings, lists, and settings; it does not merge. Export the current journal first if you may need it.
+- A backup reminder appears after seven days of journal history with no export, or when the latest export is at least 30 days old. Repeat reminders are limited to once a week.
 
-In **Settings**, you can:
-- **Clear All Data** — wipes everything.
-- **Clear All Except Today** — keeps only today's entries.
-- **Clear Data Older Than 30 Days** — trims old entries, keeps recent ones, keeps Notes and Quick Add.
-- **Clear All, Add Sample Data** — resets and loads example entries, useful for a demo or a fresh look at the layout.
+In **System**, destructive cleanup actions ask for confirmation:
 
-All of these ask for confirmation first and cannot be undone once confirmed.
+- **Clear all except Today** removes entries before today while keeping Quick Note, lists, and settings.
+- **Clear older entries** keeps a chosen number of recent calendar days and removes earlier entries.
+- **Reset** removes journal entries, Quick Note, ratings, custom lists, and settings, then restores starter People, Projects, Places, and Quick Add lists.
 
----
+Clearing and resetting cannot be undone without a previously exported JSON backup.
 
-## Install as an app
+## Install as an App
 
-Optional — opens in its own window with an icon. Your journal still lives on this device only; nothing is synced to the cloud.
+Installing the PWA is optional. It opens in its own window with an icon, but storage remains local to that browser installation.
 
 **iPhone or iPad (Safari):**
 
 1. Open the journal in Safari.
-2. Tap **Share** → **Add to Home Screen**.
+2. Tap **Share → Add to Home Screen**.
 
 **Mac (Safari):**
 
 1. Open the journal in Safari (macOS Sonoma or later).
-2. Choose **File → Add to Dock…**, or click **Share** in the toolbar → **Add to Dock**.
+2. Choose **File → Add to Dock…**, or **Share → Add to Dock**.
 
-On Chrome (desktop), look for an install icon in the address bar if your browser offers it.
+On desktop Chrome, use the install icon in the address bar when offered.
 
----
+## Not a Task Manager
 
-## Not a task manager
+DRN records moments; it doesn't replace a full task manager. For a free, open-source option with projects, timers, and time tracking, see [Super Productivity](https://super-productivity.com/download/). Typical pattern: choose the next thing in your planner, work there, and log a new line in DRN when you switch.
 
-DRN records moments; it doesn't replace a full task manager. For a free, open-source option with projects, timers, and time tracking, see [Super Productivity](https://super-productivity.com/download/) (all major platforms).
+## Privacy & Security
 
-Typical pattern: Open Super Productivity and choose the next thing → work there → log the next line in DRN when you switch tasks.
+This isn't a password manager or encrypted vault. Don't store passwords, financial details, or other highly sensitive information in your journal or Quick Note.
 
----
-
-## Privacy & security
-
-This isn't a password manager or encrypted vault. Don't store passwords, financial details, or other highly sensitive information in your journal or Notes.
-
-- Your data lives in **plain text** in this browser on this device — not on our servers (there aren't any).
-- Anyone with access to your unlocked phone or computer can read it.
-- Browser extensions with site access can read page storage on any website, including this one.
-- DRN uses no third-party scripts or analytics — your journal never leaves this device unless you export it.
-
----
+- Data is plain text in this browser, not on Doing Right Now servers.
+- Anyone with access to your unlocked device can read it.
+- Browser extensions with site access may be able to read page storage.
+- DRN uses no third-party scripts or analytics. Your journal leaves the browser only when you explicitly export a backup or copy text.
 
 ## Advanced Tips
 
-- **`xx` doubles as a lightweight checkbox.** Since it strikes the line and counts toward the day's "done" total, you can use short entries as quick to-do-in-the-moment items: write the task, come back and add `xx` when it's done.
-- **Quote tags to narrow, leave unquoted to widen.** `@Bill #home` casts a wide net (either tag); `"@Bill #home"` narrows to lines tagged with both — handy once your tag vocabulary grows.
-- **Emoji as tags work in search too.** Paste 🤡 into search to instantly pull up every rabbit hole you flagged this week.
-- **Tune the trophy threshold to match your day, not a generic number.** If your entries are naturally longer or shorter than average, adjust it in Settings so the trophy actually reflects a good day for you.
-- **The un-editable timestamp is a feature, not a limitation.** If you want to reconstruct what you were doing at a specific time, the journal is more trustworthy than a to-do list precisely because you can't quietly rewrite history.
-- **Notes is not a second inbox.** If you catch yourself building a running list of tasks in Notes, that's a sign to move it to whatever planner you already use — Notes is meant for one-off scraps, not a parallel system.
-- **Star ratings are for your own pattern-spotting**, not a metric to optimize — there's no aggregate score anywhere in the app by design.
-- **Export before switching devices or clearing your browser.** There is no account recovery — the exported `.txt` file is your only portable copy.
+- Use `^` to count starts. Add or remove it from the ellipsis menu, then treat started/total as a record rather than a quota.
+- Search exactly the fragment you remember. Search does not interpret operators or quotes; every query is one case-insensitive substring.
+- Emoji are searchable text.
+- Tune the trophy threshold to match your day.
+- Timestamps are intentionally uneditable.
+- Quick Note is meant for one-off scraps, not a parallel planning system.
+- Star ratings are for personal pattern-spotting; there is no aggregate score.
+- Export before switching devices or clearing browser data.
+
+## Public Beta Notes
+
+**1.0.0-beta.1** is a public beta. Back up regularly and expect details of the interface to evolve. Data remains browser-local: there is no account sync, collaborative editing, server recovery, or automatic cross-device backup. The current JSON import is a full replacement, not a merge. Features removed from the earlier app are intentionally absent, and no migration workflow is required.
 
 ---
 

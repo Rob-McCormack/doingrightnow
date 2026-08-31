@@ -1,7 +1,7 @@
 /* Doing Right Now — light service worker
    HTML: network-first (auto-update when online, cache when offline)
    Icons: cache-first
-   Journal data stays in localStorage — this file never touches it.
+   Journal data stays in IndexedDB — this file never touches it.
 
    Safari (iOS PWA) rejects navigation responses whose `redirected` flag is
    true: "Response served by service worker has redirections".
@@ -9,7 +9,7 @@
    fetch() of the .html URL is redirected. Strip that flag before we cache
    or return the response.
 */
-const CACHE = 'doingrightnow-v7';
+const CACHE = 'doingrightnow-v8';
 const JOURNAL_URLS = ['./DoingRightNow', './DoingRightNow.html'];
 const PRECACHE = JOURNAL_URLS.concat([
   './favicon.svg',

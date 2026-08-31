@@ -18,7 +18,7 @@ One prompt: **What are you doing right now?**
 - **Empty your working memory.** Your brain is a processor, not a storage drive. Log the line so you don’t have to hold it in your head.
 - **Anchor your attention.** Your timeline is a safety net. Come back anytime and see exactly what you were just doing.
 
-Entries group by day: Today, 2d, 3d, 7d, or All.
+Entries group by day in Today, Yesterday, 7-day, 30-day, 365-day, and All views.
 
 ## Markup
 
@@ -29,16 +29,25 @@ Optional tags in any line:
 | `@person` | Person |
 | `#location` | Place |
 | `+project` | Project |
-| `!` | Makes the line bold and red |
-| `xx` | Strikes the line out (any case) |
+| `^` | Marks the line as started |
+| `!` | Marks the line as important |
+| `?` | Marks the line as a question |
+| `` `text` `` | Monospace highlight |
 
-## Gestures
+Markers are standalone symbols. People, Places, Projects, and Quick Add suggestions are managed in Settings.
 
-- **Swipe left** to delete an entry
-- **Swipe right** (or hover → calendar) to bring a line into Today — the original stays
-- Search across days from the Today header
+## Public beta
 
-Also included: quick-add templates, a scratchpad, dark mode, font size, and a trophy on a day once you hit a set number of entries.
+The current release is **1.0.0-beta.1**.
+
+- Drawer navigation and substring search across the journal
+- Entry actions for copying to Today, toggling markers, and deleting
+- Quick Note, Settings-managed Quick Add templates, and tag suggestions
+- Zen mode and a keyboard command palette
+- Day ratings, started/total counts, and configurable trophies
+- Light, dark, and system appearance with six accents
+- Complete JSON export/import with replacement confirmation
+- Offline PWA support
 
 ## Run locally
 
@@ -58,7 +67,7 @@ Then visit [http://127.0.0.1:8000/](http://127.0.0.1:8000/).
 
 ## Privacy
 
-Everything lives in this browser’s `localStorage`. No accounts, no cloud, no tracking. Export or clear data from Settings.
+Everything lives in this browser’s IndexedDB. No accounts, no cloud, no tracking. Export a JSON backup or manage stored data from System.
 
 ## Credits
 

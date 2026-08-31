@@ -1,21 +1,21 @@
-# Dev copies — screenshot & book data
+# Dev copies
 
-Practice builds of the journal with **separate localStorage** from the live app at `/DoingRightNow`.
+Development snapshots of the journal. The root [`DoingRightNow.html`](../DoingRightNow.html) is the authoritative app after a beta is promoted.
 
-## DoingRightNow-dev-1.html
+## DoingRightNow-dev-2.html
 
-- **URL (local):** open `dev/DoingRightNow-dev-1.html` in a browser
-- **Storage prefix:** `doingrightnow_dev1_*` — will not read or write the main app’s data
-- **First visit:** same default welcome + sample entries as production
+- **URL (local):** open `dev/DoingRightNow-dev-2.html` in a browser
+- **Storage:** IndexedDB database `doing-right-now-inline`
+- **Caution:** when served from the same origin as the root app, this snapshot can share journal data with it. Export a backup first or use a separate browser profile.
 - **Not a PWA:** no manifest or service worker (won’t clash with the installed app)
 - **Not indexed:** `noindex` meta; `/dev/` disallowed in `robots.txt`
 
-## Resetting screenshot data
+## Resetting test data
 
-1. Open the dev app → **Settings** → **Clear All** (or **Clear All Except Today**)
-2. Or in DevTools → Application → Local Storage → delete keys starting with `doingrightnow_dev1_`
-3. Reload for a fresh first-visit seed
+1. Export anything you need from **System**.
+2. Use **System → Reset**, or remove the `doing-right-now-inline` IndexedDB database in browser developer tools.
+3. Reload to restore the starter lists.
 
 ## Keeping in sync
 
-This file is a copy of `DoingRightNow.html`. After major app changes, recopy and re-apply the dev patches (storage keys, asset paths, no SW).
+Do not maintain the dev snapshot and root app as parallel production implementations. Make release changes in the root app after promotion; create a new explicitly named dev snapshot only when another experiment begins.
