@@ -44,6 +44,7 @@ Use the **ellipsis** beside an entry to open its actions:
 - **Copy to Today** duplicates it with a new current timestamp; the original remains unchanged.
 - **Mark as started** toggles `^`.
 - **Mark as important** toggles `!`, and **Mark as question** toggles `?`.
+- An entry can have only one of these special markers. Choosing another replaces the current one.
 - **Delete entry** asks for confirmation before permanently removing it.
 
 ![Screenshot placeholder: the ellipsis entry-actions dialog with Copy to Today, marker controls, links, and Delete entry.](placeholder-actions.png)
@@ -62,11 +63,11 @@ Optional shorthand:
 - `?` as a standalone marker means question or open loop.
 - Backticks display inline text in monospace, such as `` `next step` ``.
 
-Example: `Email @Bill about +Website ^ !`
+Example: `Email @Bill about +Website ^`
 
 Type `@`, `+`, or `#` to see matching suggestions. Suggestions come only from the People, Projects, and Places lists managed in **Settings**. Matching is case-insensitive and based on the text after the prefix.
 
-Markers are standalone symbols. Emoji are ordinary searchable text; for example, 🤡 can flag a distraction and ✅ can flag a small win.
+Special markers are standalone symbols, and an entry can contain only one of `^`, `!`, or `?`. If you type more than one, the last one is kept. Emoji are ordinary searchable text; for example, 🤡 can flag a distraction and ✅ can flag a small win.
 
 ## Search
 

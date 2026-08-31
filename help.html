@@ -368,6 +368,7 @@
           <li><strong>Copy to Today</strong> duplicates it with a new current timestamp; the original remains unchanged.</li>
           <li><strong>Mark as started</strong> toggles <code>^</code>.</li>
           <li><strong>Mark as important</strong> toggles <code>!</code>, and <strong>Mark as question</strong> toggles <code>?</code>.</li>
+          <li>An entry can have only one of these special markers. Choosing another replaces the current one.</li>
           <li><strong>Delete entry</strong> asks for confirmation before permanently removing it.</li>
         </ul>
         <figure class="help-figure">
@@ -418,9 +419,9 @@
           </table>
         </div>
         <p><strong>Example:</strong></p>
-        <p class="example-line">Email <span class="tag-person">@Bill</span> about <span class="tag-project">+Website</span> <code>^</code> <code>!</code> — started, important, and tagged to Bill and the Website project.</p>
+        <p class="example-line">Email <span class="tag-person">@Bill</span> about <span class="tag-project">+Website</span> <code>^</code> — started and tagged to Bill and the Website project.</p>
         <p>Type <code>@</code>, <code>+</code>, or <code>#</code> to see matching suggestions. Suggestions come only from the People, Projects, and Places lists managed in <strong>Settings</strong>. Matching is case-insensitive and based on the text typed after the prefix.</p>
-        <p>Markers are standalone symbols. Emoji are ordinary searchable text; for example:</p>
+        <p>Special markers are standalone symbols, and an entry can contain only one of <code>^</code>, <code>!</code>, or <code>?</code>. If you type more than one, the last one is kept. Emoji are ordinary searchable text; for example:</p>
         <ul>
           <li><strong>🤡</strong> can flag a distraction or rabbit hole.</li>
           <li><strong>✅</strong> can flag a small win.</li>
