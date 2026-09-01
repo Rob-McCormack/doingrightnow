@@ -34,7 +34,7 @@ Two brief, dismissible messages guide your first entry and then disappear perman
 - The dialog editor supports multiple lines and up to **1,000 characters**, with a live character count. Press **Enter** to save or **Shift+Enter** to add a new line.
 - Choose **Save** to keep changes, **Cancel** to discard them, or **Delete** and confirm to remove the entry.
 - Long entries are shortened to three lines with an ellipsis in the journal display. The editor always shows the complete text.
-- Addresses beginning with `http://`, `https://`, or `www.` appear as openable links in the editor and entry-actions dialog.
+- Addresses beginning with `http://`, `https://`, or `www.` appear as openable links in the editor and entry-actions dialog. `+Ongoing` and `+Ongoing.1` appear in the same list when that project or issue exists; tapping one opens it.
 
 ![Screenshot placeholder: the entry dialog with multiline text, character count, detected links, and Save, Cancel, and Delete actions.](placeholder-editing.png)
 
@@ -110,12 +110,84 @@ Quick Note is a shared scratchpad for anything that is not a timestamped entry.
 
 Optional. Open **Projects** from the drawer, or use **Project:** and **Issue:** commands in the command palette. Document and issue commands use the last opened project (default **+Ongoing**); they do not ask which project.
 
-- Every journal has **+Ongoing** — a catch-all document and issue list that cannot be renamed or removed. A new journal includes sample text and two sample issues so you can see how it works; you can edit or delete those.
+Projects are things you work on. Issues belong to a project. Both are just freeform text. Do things your way.
+
+- Every journal has **+Ongoing** — a catch-all document and issue list that cannot be renamed or removed. A new journal includes a short note and two sample issues so you can see how it works; you can edit or delete those.
 - Add another project only if you need a separate document. **+Website** appears next to **+Ongoing** in the picker, not inside it.
 - Starter tag names in Settings (Website, Report, Home) are only tags until you add a project here.
-- Type `+Ongoing.1` in a journal line to point at an issue. Today’s `+` suggestions include those references.
-- There are no status fields, assignees, or due dates — write those in your own words if you need them.
+- Type `+Ongoing.1` in a journal line to point at an issue. Today’s `+` suggestions include those references. The entry’s ellipsis menu (and the editor) list `+Ongoing` and `+Ongoing.1` as links that open that document or issue.
+- There are no status fields, assignees, or due dates — write those in your own words if you need them. The examples below are only illustrations, not a required format.
 - Export includes project documents and issues in the same JSON backup.
+
+Example project document:
+
+```
+WEBSITE REDESIGN
+
+Goal
+Launch the new website before October.
+
+Next
+@Rob — Finish mobile navigation
+@Sarah — Rewrite the introduction
+@Bill — Review the contact form
+@Nina — Confirm launch copy
+
+Milestones
+Sep 12 — Content complete — @Sarah
+Sep 20 — Internal review — @Rob @Bill
+Sep 27 — Launch candidate — @Rob
+Oct 1 — Launch — @Rob @Nina
+
+Timeline
+Sep 1–10 — Content — @Sarah
+Sep 8–18 — Development — @Rob
+Sep 18–25 — Testing — @Bill
+Sep 25–30 — Final changes — @Rob @Sarah
+
+Waiting
+@Sarah — Photographs
+@Bill — Pricing copy
+@Nina — Final approval
+
+Calendar
+Sep 5 — Order remaining assets — @Sarah
+Sep 12 — First full content review — @Rob @Sarah
+Sep 18 — Client review — @Bill
+Sep 25 — Final changes — @Rob
+Oct 1 — Launch — @Rob @Nina
+```
+
+Example issue:
+
+```
++Website.1
+
+Mobile menu closes unexpectedly on iPhone.
+
+Sept 1, 2026
+
+STARTED:
+Reproduced the problem in Safari.
+
+@Rob is checking the outside-click handler.
+
+Need to:
+- test touch events
+- test scroll behaviour
+- compare with desktop Safari
+
+Sept 2, 2026
+
+PROGRESS 50%:
+The issue appears to happen only after scrolling.
+
+Possible fix:
+Ignore outside-click events while the mobile menu is being scrolled.
+
+DONE:
+Fixed the event handler and tested on iPhone.
+```
 
 ## Views, Copy & Editable Plain Text
 

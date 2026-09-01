@@ -164,6 +164,27 @@
       color: var(--text);
     }
 
+    .sample-plain-label {
+      font-size: 13px;
+      font-weight: 650;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--today);
+      margin: 24px 0 8px;
+    }
+
+    .sample-plain {
+      margin: 0 0 20px;
+      padding: 16px 18px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg-secondary);
+      font: 13.5px/1.5 ui-monospace, SFMono-Regular, Consolas, monospace;
+      color: var(--text);
+      white-space: pre-wrap;
+      overflow-x: auto;
+    }
+
     .tag-person { color: var(--tag-person); font-style: italic; }
     .tag-location { color: var(--tag-location); font-style: italic; }
     .tag-project { color: var(--tag-project); font-style: italic; }
@@ -373,7 +394,7 @@
           <li>The dialog editor supports multiple lines and up to <strong>1,000 characters</strong>, with a live character count. Press <strong>Enter</strong> to save or <strong>Shift+Enter</strong> to add a new line.</li>
           <li>Choose <strong>Save</strong> to keep your changes, <strong>Cancel</strong> to discard them, or <strong>Delete</strong> and confirm to remove the entry.</li>
           <li>Long entries are shortened to three lines with an ellipsis in the journal display. The editor always shows the complete text.</li>
-          <li>Addresses beginning with <code>http://</code>, <code>https://</code>, or <code>www.</code> appear as openable links in the editor and entry-actions dialog.</li>
+          <li>Addresses beginning with <code>http://</code>, <code>https://</code>, or <code>www.</code> appear as openable links in the editor and entry-actions dialog. <code>+Ongoing</code> and <code>+Ongoing.1</code> appear in the same list when that project or issue exists; tapping one opens it.</li>
         </ul>
         <figure class="help-figure">
           <div class="help-figure-placeholder" aria-hidden="true">Screenshot coming soon</div>
@@ -488,14 +509,77 @@
 
         <h2 id="projects">Projects</h2>
         <p>Optional. Open <strong>Projects</strong> from the drawer, or use <strong>Project:</strong> and <strong>Issue:</strong> commands in the command palette. Document and issue commands use the last opened project (default <strong>+Ongoing</strong>); they do not ask which project.</p>
+        <p>Projects are things you work on. Issues belong to a project. Both are just freeform text. Do things your way.</p>
         <ul>
-          <li>Every journal has <strong>+Ongoing</strong> — a catch-all document and issue list that cannot be renamed or removed. A new journal includes sample text and two sample issues so you can see how it works; you can edit or delete those.</li>
+          <li>Every journal has <strong>+Ongoing</strong> — a catch-all document and issue list that cannot be renamed or removed. A new journal includes a short note and two sample issues so you can see how it works; you can edit or delete those.</li>
           <li>Add another project only if you need a separate document. <code>+Website</code> appears next to <code>+Ongoing</code> in the picker, not inside it.</li>
           <li>Starter tag names in Settings (Website, Report, Home) are only tags until you add a project here.</li>
-          <li>Type <code>+Ongoing.1</code> in a journal line to point at an issue. Today’s <code>+</code> suggestions include those references.</li>
-          <li>There are no status fields, assignees, or due dates — write those in your own words if you need them.</li>
+          <li>Type <code>+Ongoing.1</code> in a journal line to point at an issue. Today’s <code>+</code> suggestions include those references. The entry’s ellipsis menu (and the editor) list <code>+Ongoing</code> and <code>+Ongoing.1</code> as links that open that document or issue.</li>
+          <li>There are no status fields, assignees, or due dates — write those in your own words if you need them. The examples below are only illustrations, not a required format.</li>
           <li>Export includes project documents and issues in the same JSON backup.</li>
         </ul>
+        <p class="sample-plain-label">Example project document</p>
+        <pre class="sample-plain">WEBSITE REDESIGN
+
+Goal
+Launch the new website before October.
+
+Next
+@Rob — Finish mobile navigation
+@Sarah — Rewrite the introduction
+@Bill — Review the contact form
+@Nina — Confirm launch copy
+
+Milestones
+Sep 12 — Content complete — @Sarah
+Sep 20 — Internal review — @Rob @Bill
+Sep 27 — Launch candidate — @Rob
+Oct 1 — Launch — @Rob @Nina
+
+Timeline
+Sep 1–10 — Content — @Sarah
+Sep 8–18 — Development — @Rob
+Sep 18–25 — Testing — @Bill
+Sep 25–30 — Final changes — @Rob @Sarah
+
+Waiting
+@Sarah — Photographs
+@Bill — Pricing copy
+@Nina — Final approval
+
+Calendar
+Sep 5 — Order remaining assets — @Sarah
+Sep 12 — First full content review — @Rob @Sarah
+Sep 18 — Client review — @Bill
+Sep 25 — Final changes — @Rob
+Oct 1 — Launch — @Rob @Nina</pre>
+        <p class="sample-plain-label">Example issue</p>
+        <pre class="sample-plain">+Website.1
+
+Mobile menu closes unexpectedly on iPhone.
+
+Sept 1, 2026
+
+STARTED:
+Reproduced the problem in Safari.
+
+@Rob is checking the outside-click handler.
+
+Need to:
+- test touch events
+- test scroll behaviour
+- compare with desktop Safari
+
+Sept 2, 2026
+
+PROGRESS 50%:
+The issue appears to happen only after scrolling.
+
+Possible fix:
+Ignore outside-click events while the mobile menu is being scrolled.
+
+DONE:
+Fixed the event handler and tested on iPhone.</pre>
 
         <h2 id="viewing-exporting">Views, Copy &amp; Editable Plain Text</h2>
         <ul>
