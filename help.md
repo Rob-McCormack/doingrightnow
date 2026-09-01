@@ -108,7 +108,7 @@ Quick Note is a shared scratchpad for anything that is not a timestamped entry.
 
 ## Projects
 
-Optional. Open **Projects** from the drawer, or use **Go to Projects** / **New project** in the command palette.
+Optional. Open **Projects** from the drawer, or use **Project:** and **Issue:** commands in the command palette. Document and issue commands use the last opened project (default **+Ongoing**); they do not ask which project.
 
 - Every journal has **+Ongoing** — a catch-all document and issue list that cannot be renamed or removed. A new journal includes sample text and two sample issues so you can see how it works; you can edit or delete those.
 - Add another project only if you need a separate document. **+Website** appears next to **+Ongoing** in the picker, not inside it.
@@ -129,7 +129,7 @@ Optional. Open **Projects** from the drawer, or use **Go to Projects** / **New p
 ## Command Palette & Zen
 
 - The right side of the header contains the command icon and Quick Note; the hamburger on the left opens the navigation drawer. Open the palette with its icon or **⌘K**/**Ctrl+K**, filter by typing, and use the arrow keys and Enter to select.
-- Commands cover adding an activity; Today, Yesterday, 7-, 30-, 365-day, and All views; Search; Projects; Quick Note; Zen mode; Help; and temporary Developer tools. Settings commands are prefixed **Settings:** and System commands **System:** — appearance, font size, item spacing, time and date, accents, timer, lists, export, import, cleanup, and reset. **Add an activity** and **Go to Today** stay first; the remaining commands are alphabetical.
+- Commands cover adding an activity; Today, Yesterday, 7-, 30-, 365-day, and All views; Search; Projects; Quick Note; Zen mode; Help; and temporary Developer tools. Settings commands are prefixed **Settings:**, System commands **System:**, project commands **Project:**, and issue commands **Issue:**. **Add an activity** and **Go to Today** stay first; the remaining commands are alphabetical.
 - Use the expand button at the upper right of Today’s current entry to enter **Zen mode**, a distraction-free full-screen view of the current entry, elapsed duration, and current clock time. Started, completed, important, and question markers appear as icons instead of `^`, `"`, `!`, or `?`. Its **+** returns to Today ready to add another activity.
 
 ---
