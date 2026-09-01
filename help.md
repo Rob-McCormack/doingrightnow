@@ -59,7 +59,7 @@ Use the **ellipsis** beside an entry to open its actions:
 Optional shorthand:
 
 - `@name` tags a person and is shown in violet.
-- `+project` tags a project and is shown in amber.
+- `+project` tags a project and is shown in amber. `+Website.12` tags a numbered issue the same way.
 - `#place` tags a place and is shown in teal.
 - `^` as a standalone marker means started and counts in the day's started total.
 - `"` as a standalone marker means you completed a small step. It is not a start and does not count in started/total.
@@ -69,7 +69,7 @@ Optional shorthand:
 
 Example: `Email @Bill about +Website ^`
 
-Type `@`, `+`, or `#` to see matching suggestions. Suggestions come only from the People, Projects, and Places lists managed in **Settings**. Matching is case-insensitive and based on the text after the prefix.
+Type `@`, `+`, or `#` to see matching suggestions. Suggestions come from the People, Projects, and Places lists managed in **Settings**. Typing `+` also offers issue references such as `Website.12`. Matching is case-insensitive and based on the text after the prefix. `+Website.12` is highlighted as a project tag.
 
 Special markers are standalone symbols, and an entry can contain only one of `^`, `"`, `!`, or `?`. If you type more than one, the last one is kept. Emoji are ordinary searchable text; for example, 🤡 can flag a distraction and ✅ can flag a small win.
 
@@ -106,6 +106,16 @@ Quick Note is a shared scratchpad for anything that is not a timestamped entry.
 - Its **Copy** button copies only the note.
 - The command palette can open and focus Quick Note directly.
 
+## Projects
+
+Optional. A new journal has none. Starter `+` names in Settings (Website, Report, Home) are only tags until you add a project from **Projects**.
+
+- Open **Projects** from the drawer, or use **Go to Projects** / **New project** in the command palette.
+- Each project is one freeform document plus numbered plain-text issues. There are no status fields, assignees, or due dates — write those in your own words if you need them.
+- Type `+Website.12` in a journal line to point at an issue. Today’s `+` suggestions include those references.
+- Removing a `+` tag that has a project asks for confirmation, then deletes the document and issues too.
+- Export includes project documents and issues in the same JSON backup.
+
 ## Views, Copy & Editable Plain Text
 
 - History views group entries by day and show the newest entries first.
@@ -118,7 +128,7 @@ Quick Note is a shared scratchpad for anything that is not a timestamped entry.
 ## Command Palette & Zen
 
 - The right side of the header contains the command icon and Quick Note; the hamburger on the left opens the navigation drawer. Open the palette with its icon or **⌘K**/**Ctrl+K**, filter by typing, and use the arrow keys and Enter to select.
-- Commands cover adding an activity; Today, Yesterday, 7-, 30-, 365-day, and All views; Search; Quick Note; Zen mode; Help; and temporary Developer tools. Settings commands are prefixed **Settings:** and System commands **System:** — appearance, font size, item spacing, time and date, accents, timer, lists, export, import, cleanup, and reset. **Add an activity** and **Go to Today** stay first; the remaining commands are alphabetical.
+- Commands cover adding an activity; Today, Yesterday, 7-, 30-, 365-day, and All views; Search; Projects; Quick Note; Zen mode; Help; and temporary Developer tools. Settings commands are prefixed **Settings:** and System commands **System:** — appearance, font size, item spacing, time and date, accents, timer, lists, export, import, cleanup, and reset. **Add an activity** and **Go to Today** stay first; the remaining commands are alphabetical.
 - Use the expand button at the upper right of Today’s current entry to enter **Zen mode**, a distraction-free full-screen view of the current entry, elapsed duration, and current clock time. Started, completed, important, and question markers appear as icons instead of `^`, `"`, `!`, or `?`. Its **+** returns to Today ready to add another activity.
 
 ---
@@ -158,15 +168,15 @@ The elapsed-time display on Today’s current entry shows how long the newest li
 - Tabs and windows stay in sync automatically only in the **same browser on the same device**.
 - A different device or browser has a separate journal. Clearing browser site data can permanently remove it.
 - Open **System → Data & backup** to see journal size, browser storage estimates when available, and the last backup time.
-- **Export journal** downloads a complete `.json` backup containing entries, Quick Note, ratings, lists, and settings.
-- **Import journal** accepts a Doing Right Now JSON backup. After showing its entry count and date range, import **replaces the entire current journal**, Quick Note, ratings, lists, and settings; it does not merge. Export the current journal first if you may need it.
+- **Export journal** downloads a complete `.json` backup containing entries, Quick Note, ratings, lists, settings, project documents, and issues.
+- **Import journal** accepts a Doing Right Now JSON backup. After showing its entry count and date range, import **replaces the entire current journal**, Quick Note, ratings, lists, settings, project documents, and issues; it does not merge. Export the current journal first if you may need it.
 - A backup reminder appears after seven days of journal history with no export, or when the latest export is at least 30 days old. Repeat reminders are limited to once a week.
 
 In **System**, destructive cleanup actions ask for confirmation:
 
-- **Clear all except Today** removes entries before today while keeping Quick Note, lists, and settings.
+- **Clear all except Today** removes entries before today while keeping Quick Note, lists, settings, and projects.
 - **Clear older entries** keeps a chosen number of recent calendar days and removes earlier entries.
-- **Reset** removes journal entries, Quick Note, ratings, custom lists, and settings, then restores starter People, Projects, Places, and Quick Add lists.
+- **Reset** removes journal entries, Quick Note, ratings, custom lists, settings, project documents, and issues, then restores starter People, Projects, Places, and Quick Add lists.
 
 Clearing and resetting cannot be undone without a previously exported JSON backup.
 
@@ -207,6 +217,7 @@ This isn't a password manager or encrypted vault. Don't store passwords, financi
 - Tune the trophy threshold to match your day.
 - Timestamps are intentionally uneditable.
 - Quick Note is meant for one-off scraps, not a parallel planning system.
+- Projects are optional. Ignore them if the journal is enough.
 - Star ratings are for personal pattern-spotting; there is no aggregate score.
 - Export before switching devices or clearing browser data.
 
