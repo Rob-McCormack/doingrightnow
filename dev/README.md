@@ -10,6 +10,15 @@ Development snapshots of the journal. The root [`DoingRightNow.html`](../DoingRi
 - **Not a PWA:** no manifest or service worker (won’t clash with the installed app)
 - **Not indexed:** `noindex` meta; `/dev/` disallowed in `robots.txt`
 
+## PlanningRightNow-sample.html
+
+A sketch of **Planning Right Now** in the Doing Right Now PWA shell. Forward-looking task lists with checkmarks. Not the live plugin or [planning-right-now-web](../../planning-right-now-web).
+
+- **URL (local):** open `dev/PlanningRightNow-sample.html` in a browser
+- **Storage:** IndexedDB database `planning-right-now-sample` (does not share data with the journal)
+- **Not a PWA:** no manifest or service worker
+- **Not indexed:** `noindex` meta
+
 ## Resetting test data
 
 1. Export anything you need from **System**.
