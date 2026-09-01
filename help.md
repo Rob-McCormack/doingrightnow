@@ -69,7 +69,7 @@ Optional shorthand:
 
 Example: `Email @Bill about +Website ^`
 
-Type `@`, `+`, or `#` to see matching suggestions. Suggestions come from the People, Projects, and Places lists managed in **Settings**. Typing `+` also offers issue references such as `Website.12`. Matching is case-insensitive and based on the text after the prefix. `+Website.12` is highlighted as a project tag.
+Type `@`, `+`, or `#` to see matching suggestions. Suggestions come from the People, Projects, and Places lists managed in **Settings**. Type `+Ongoing.` or `ongoing.` to list that project’s issues (`+Ongoing.1`). Matching is case-insensitive and based on the text after the prefix. `+Website.12` is highlighted as a project tag.
 
 Special markers are standalone symbols, and an entry can contain only one of `^`, `"`, `!`, or `?`. If you type more than one, the last one is kept. Emoji are ordinary searchable text; for example, 🤡 can flag a distraction and ✅ can flag a small win.
 
