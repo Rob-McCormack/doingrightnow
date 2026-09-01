@@ -108,12 +108,13 @@ Quick Note is a shared scratchpad for anything that is not a timestamped entry.
 
 ## Projects
 
-Optional. A new journal has none. Starter `+` names in Settings (Website, Report, Home) are only tags until you add a project from **Projects**.
+Optional. Open **Projects** from the drawer, or use **Go to Projects** / **New project** in the command palette.
 
-- Open **Projects** from the drawer, or use **Go to Projects** / **New project** in the command palette.
-- Each project is one freeform document plus numbered plain-text issues. There are no status fields, assignees, or due dates — write those in your own words if you need them.
-- Type `+Website.12` in a journal line to point at an issue. Today’s `+` suggestions include those references.
-- Removing a `+` tag that has a project asks for confirmation, then deletes the document and issues too.
+- Every journal has **+Ongoing** — a catch-all document and issue list that cannot be renamed or removed. A new journal includes sample text and two sample issues so you can see how it works; you can edit or delete those.
+- Add another project only if you need a separate document. **+Website** appears next to **+Ongoing** in the picker, not inside it.
+- Starter tag names in Settings (Website, Report, Home) are only tags until you add a project here.
+- Type `+Ongoing.1` in a journal line to point at an issue. Today’s `+` suggestions include those references.
+- There are no status fields, assignees, or due dates — write those in your own words if you need them.
 - Export includes project documents and issues in the same JSON backup.
 
 ## Views, Copy & Editable Plain Text
@@ -217,7 +218,7 @@ This isn't a password manager or encrypted vault. Don't store passwords, financi
 - Tune the trophy threshold to match your day.
 - Timestamps are intentionally uneditable.
 - Quick Note is meant for one-off scraps, not a parallel planning system.
-- Projects are optional. Ignore them if the journal is enough.
+- Projects are optional. **+Ongoing** is always there if you want a catch-all; ignore extra named projects if the journal is enough.
 - Star ratings are for personal pattern-spotting; there is no aggregate score.
 - Export before switching devices or clearing browser data.
 
