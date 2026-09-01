@@ -169,7 +169,8 @@ The elapsed-time display on Today’s current entry shows how long the newest li
 - Tabs and windows stay in sync automatically only in the **same browser on the same device**.
 - A different device or browser has a separate journal. Clearing browser site data can permanently remove it.
 - Open **System → Data & backup** to see journal size, browser storage estimates when available, and the last backup time.
-- **Export journal** downloads a complete `.json` backup containing entries, Quick Note, ratings, lists, settings, project documents, and issues.
+- **Export journal** downloads a complete `.json` backup containing entries, Quick Note, ratings, lists, settings, project documents, and issues. Import can restore this file.
+- **Export as text** downloads a readable `.txt` of the journal, Quick Note, project documents, and issues. It is for reading, sharing, or archiving before a cleanup. It cannot be imported.
 - **Import journal** accepts a Doing Right Now JSON backup. After showing its entry count and date range, import **replaces the entire current journal**, Quick Note, ratings, lists, settings, project documents, and issues; it does not merge. Export the current journal first if you may need it.
 - A backup reminder appears after seven days of journal history with no export, or when the latest export is at least 30 days old. Repeat reminders are limited to once a week.
 
