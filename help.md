@@ -16,7 +16,7 @@ This reference covers the **1.0.0-beta.1** public beta.
 4. When what you're doing changes, write the next line. That's the whole app.
 5. Everything stays in this browser — no sign-up and no cloud sync.
 
-![The Today view with the composer, current Doing Right Now card, Quick Note, and timestamped entries.](images/screenshot-680.jpg)
+![The Today view with the composer and timestamped entries. The newest line is the current item.](images/screenshot-680.jpg)
 
 Two brief, dismissible messages guide your first entry and then disappear permanently. That's enough to start. Everything below is optional.
 
@@ -24,10 +24,10 @@ Two brief, dismissible messages guide your first entry and then disappear perman
 
 ## The Journal
 
-- The **Today** composer creates a timestamped entry. The newest entry also appears in the **Doing Right Now** card with its elapsed timer when enabled.
+- The **Today** composer creates a timestamped entry. The newest line is the current item: taller than the rest, with its elapsed timer under the timestamp when the timer is enabled.
 - Entries can't be reordered, and their timestamps can't be changed.
 - Open the navigation drawer with the hamburger. Tap the current view title, such as **Yesterday** or **Search**, to return directly to Today; tapping **Today** scrolls to the top without opening the keyboard.
-- Tap an entry—or anywhere on the current card except its Zen button—to view and edit its complete text.
+- Tap an entry to view and edit its complete text.
 
 ## Editing a Line
 
@@ -99,11 +99,11 @@ The full entry dialog also displays Quick Add items as buttons. Templates may in
 
 ## Quick Note
 
-Quick Note is a shared scratchpad below the current card for anything that is not a timestamped entry.
+Quick Note is a shared scratchpad for anything that is not a timestamped entry.
 
-- Use the **Quick Note** control and chevron to open or close it.
-- It auto-saves as you type and is shared across Today rather than attached to a date.
-- Its small **Copy** button copies only the note.
+- Use the **note icon** in the header, to the right of the command palette, from any view.
+- It auto-saves as you type and is not attached to a date.
+- Its **Copy** button copies only the note.
 - The command palette can open and focus Quick Note directly.
 
 ## Views, Copy & Editable Plain Text
@@ -117,9 +117,9 @@ Quick Note is a shared scratchpad below the current card for anything that is no
 
 ## Command Palette & Zen
 
-- The right side of the header contains only the command icon; the hamburger on the left opens the navigation drawer. Open the palette with its icon or **⌘K**/**Ctrl+K**, filter by typing, and use the arrow keys and Enter to select.
+- The right side of the header contains the command icon and Quick Note; the hamburger on the left opens the navigation drawer. Open the palette with its icon or **⌘K**/**Ctrl+K**, filter by typing, and use the arrow keys and Enter to select.
 - Commands cover adding an activity; Today, Yesterday, 7-, 30-, 365-day, and All views; Search; Quick Note; Zen mode; Help; and temporary Developer tools. Settings commands are prefixed **Settings:** and System commands **System:** — appearance, font size, item spacing, time and date, accents, timer, lists, export, import, cleanup, and reset. **Add an activity** and **Go to Today** stay first; the remaining commands are alphabetical.
-- Use the expand button on the current card to enter **Zen mode**, a distraction-free full-screen view of the current entry, elapsed duration, and current clock time. Started, completed, important, and question markers appear as icons instead of `^`, `"`, `!`, or `?`. Its **+** returns to Today ready to add another activity.
+- Use the expand button at the upper right of Today’s current entry to enter **Zen mode**, a distraction-free full-screen view of the current entry, elapsed duration, and current clock time. Started, completed, important, and question markers appear as icons instead of `^`, `"`, `!`, or `?`. Its **+** returns to Today ready to add another activity.
 
 ---
 
@@ -133,7 +133,7 @@ Quick Note is a shared scratchpad below the current card for anything that is no
 
 ## Timer on the Current Line
 
-The elapsed-time display on today's current card shows how long the newest entry has been current. It is enabled by default, but it is optional.
+The elapsed-time display on Today’s current entry shows how long the newest line has been current. It appears under that entry’s timestamp: the animated timer icon, then the numeric readout. It is enabled by default, but it is optional.
 
 - It counts seconds and minutes, then hours, up to **8hr+**.
 - The stopwatch hand circles every minute to show passing time; it is not a target or countdown.

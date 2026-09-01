@@ -352,9 +352,9 @@
         <figure class="help-figure">
           <picture>
             <source type="image/webp" srcset="images/screenshot-680.webp" />
-            <img src="images/screenshot-680.jpg" alt="Doing Right Now Today view with the composer, current card, Quick Note, and timestamped entries" width="680" height="1472" loading="lazy" decoding="async" />
+            <img src="images/screenshot-680.jpg" alt="Doing Right Now Today view with the composer and timestamped entries" width="680" height="1472" loading="lazy" decoding="async" />
           </picture>
-          <figcaption>The Today view: composer, current Doing Right Now card, Quick Note, and timestamped entries.</figcaption>
+          <figcaption>The Today view: composer and timestamped entries. The newest line is the current item.</figcaption>
         </figure>
         <p class="note">Two brief, dismissible messages guide your first entry and then disappear permanently. That's enough to start. Everything below is optional — the app is built so you never <em>have</em> to learn it.</p>
 
@@ -362,10 +362,10 @@
 
         <h2 id="the-journal">The Journal</h2>
         <ul>
-          <li>The <strong>Today</strong> composer creates a timestamped entry. The newest entry also appears in the <strong>Doing Right Now</strong> card with its elapsed timer when enabled.</li>
+          <li>The <strong>Today</strong> composer creates a timestamped entry. The newest line is the current item: taller than the rest, with its elapsed timer under the timestamp when the timer is enabled.</li>
           <li>Entries can't be reordered, and you can't change a line's timestamp. This is deliberate: the journal is a record of what actually happened, not a plan you can rearrange.</li>
           <li>Open the navigation drawer with the hamburger. Tap the current view title, such as <strong>Yesterday</strong> or <strong>Search</strong>, to return directly to Today; tapping <strong>Today</strong> scrolls to the top without opening the keyboard.</li>
-          <li>Tap an entry—or anywhere on the current card except its Zen button—to view and edit its complete text.</li>
+          <li>Tap an entry to view and edit its complete text.</li>
         </ul>
 
         <h2 id="editing-a-line">Editing a Line</h2>
@@ -478,11 +478,11 @@
         </figure>
 
         <h2 id="notes">Quick Note</h2>
-        <p>A shared scratchpad below the current card for anything that is not a timestamped entry—a URL, reminder, or thought.</p>
+        <p>A shared scratchpad for anything that is not a timestamped entry—a URL, reminder, or thought.</p>
         <ul>
-          <li>Use the <strong>Quick Note</strong> control and chevron to open or close it.</li>
-          <li>It auto-saves as you type and is shared across Today rather than attached to a date.</li>
-          <li>Its small <strong>Copy</strong> button copies only the note.</li>
+          <li>Use the <strong>note icon</strong> in the header, to the right of the command palette, from any view.</li>
+          <li>It auto-saves as you type and is not attached to a date.</li>
+          <li>Its <strong>Copy</strong> button copies only the note.</li>
           <li>The command palette can open and focus Quick Note directly.</li>
         </ul>
 
@@ -500,9 +500,9 @@
 
         <h2 id="command-palette">Command Palette &amp; Zen</h2>
         <ul>
-          <li>The right side of the header contains only the command icon; the hamburger on the left opens the navigation drawer. Open the palette with its icon or <strong>⌘K</strong>/<strong>Ctrl+K</strong>, filter by typing, and use the arrow keys and Enter to select.</li>
+          <li>The right side of the header contains the command icon and Quick Note; the hamburger on the left opens the navigation drawer. Open the palette with its icon or <strong>⌘K</strong>/<strong>Ctrl+K</strong>, filter by typing, and use the arrow keys and Enter to select.</li>
           <li>Commands cover adding an activity; Today, Yesterday, 7-, 30-, 365-day, and All views; Search; Quick Note; Zen mode; Help; and temporary Developer tools. Settings commands are prefixed <strong>Settings:</strong> and System commands <strong>System:</strong> — appearance, font size, item spacing, time and date, accents, timer, lists, export, import, cleanup, and reset. <strong>Add an activity</strong> and <strong>Go to Today</strong> stay first; the remaining commands are alphabetical.</li>
-          <li>Use the expand button on the current card to enter <strong>Zen mode</strong>, a distraction-free full-screen view of the current entry, elapsed duration, and current clock time. Started, completed, important, and question markers appear as icons instead of <code>^</code>, <code>"</code>, <code>!</code>, or <code>?</code>. Its <strong>+</strong> returns to Today ready to add another activity.</li>
+          <li>Use the expand button at the upper right of Today’s current entry to enter <strong>Zen mode</strong>, a distraction-free full-screen view of the current entry, elapsed duration, and current clock time. Started, completed, important, and question markers appear as icons instead of <code>^</code>, <code>"</code>, <code>!</code>, or <code>?</code>. Its <strong>+</strong> returns to Today ready to add another activity.</li>
         </ul>
 
         <h2 id="day-ratings">Day Ratings &amp; Counts</h2>
@@ -517,7 +517,7 @@
         </figure>
 
         <h2 id="timer">Timer on the Current Line</h2>
-        <p>The elapsed-time display on today's current card shows how long the newest entry has been current. It is enabled by default, but it is optional.</p>
+        <p>The elapsed-time display on Today’s current entry shows how long the newest line has been current. It appears under that entry’s timestamp: the animated timer icon, then the numeric readout. It is enabled by default, but it is optional.</p>
         <ul>
           <li>It counts seconds and minutes, then hours, up to <strong>8hr+</strong>.</li>
           <li>The stopwatch hand circles every minute to show passing time; it is not a target or countdown.</li>
