@@ -515,6 +515,9 @@
           <li>Add another project only if you need a separate document. <code>+Website</code> appears next to <code>+Ongoing</code> in the picker, not inside it.</li>
           <li>Starter tag names in Settings (Website, Report, Home) are only tags until you add a project here.</li>
           <li>Type <code>+Ongoing.1</code> in a journal line to point at an issue. Today’s <code>+</code> suggestions include those references. The entry’s ellipsis menu (and the editor) list <code>+Ongoing</code> and <code>+Ongoing.1</code> as links that open that document or issue.</li>
+          <li>Begin a line with <code>Today:</code> in a project document or issue to include the complete line in <strong>Today across projects</strong>. Matching is case-insensitive and only occurs at the beginning of a line, so an ordinary sentence containing “today” is ignored.</li>
+          <li>Open the collected view with the calendar-check icon in Projects or <strong>Project: Today</strong> in the command palette. Each result names its source; selecting it opens the project document or exact issue and selects the matching line.</li>
+          <li><code>Today:</code> lines remain until you edit or remove the prefix. They do not expire automatically.</li>
           <li>There are no status fields, assignees, or due dates — write those in your own words if you need them. The examples below are only illustrations, not a required format.</li>
           <li>Export includes project documents and issues in the same JSON backup.</li>
         </ul>
@@ -525,7 +528,7 @@ Goal
 Launch the new website before October.
 
 Next
-@Rob — Finish mobile navigation
+Today: @Rob — Finish mobile navigation
 @Sarah — Rewrite the introduction
 @Bill — Review the contact form
 @Nina — Confirm launch copy
@@ -566,7 +569,7 @@ Reproduced the problem in Safari.
 @Rob is checking the outside-click handler.
 
 Need to:
-- test touch events
+Today: test touch events
 - test scroll behaviour
 - compare with desktop Safari
 
@@ -596,7 +599,7 @@ Fixed the event handler and tested on iPhone.</pre>
         <h2 id="command-palette">Command Palette &amp; Zen</h2>
         <ul>
           <li>The right side of the header contains the command icon and Quick Note; the hamburger on the left opens the navigation drawer. Open the palette with its icon or <strong>⌘K</strong>/<strong>Ctrl+K</strong>, filter by typing, and use the arrow keys and Enter to select.</li>
-          <li>Commands cover adding an activity; Today, Yesterday, 7-, 30-, 365-day, and All views; Search; Projects; Quick Note; Zen mode; Help; and temporary Developer tools. Settings commands are prefixed <strong>Settings:</strong>, System commands <strong>System:</strong>, project commands <strong>Project:</strong>, and issue commands <strong>Issue:</strong>. <strong>Add an activity</strong> and <strong>Go to Today</strong> stay first; the remaining commands are alphabetical.</li>
+          <li>Commands cover adding an activity; Today, Yesterday, 7-, 30-, 365-day, and All views; Search; Projects (including <strong>Project: Today</strong>); Quick Note; Zen mode; Help; and temporary Developer tools. Settings commands are prefixed <strong>Settings:</strong>, System commands <strong>System:</strong>, project commands <strong>Project:</strong>, and issue commands <strong>Issue:</strong>. <strong>Add an activity</strong> and <strong>Go to Today</strong> stay first; the remaining commands are alphabetical.</li>
           <li>Use the expand button at the upper right of Today’s current entry to enter <strong>Zen mode</strong>, a distraction-free full-screen view of the current entry, elapsed duration, and current clock time. Started, completed, important, and question markers appear as icons instead of <code>^</code>, <code>"</code>, <code>!</code>, or <code>?</code>. Its <strong>+</strong> returns to Today ready to add another activity.</li>
         </ul>
 
