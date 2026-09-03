@@ -1,0 +1,31 @@
+---
+description: Preserve Doing Right Now's product philosophy, architecture, and data compatibility
+alwaysApply: true
+---
+
+# Doing Right Now
+
+- Keep the journal primary: one timestamped line for the present moment that helps the user begin or resume.
+- This is not a planner, to-do list, habit tracker, or project-management system.
+- Judge features by whether they make it easier to write one line and do that.
+
+## Product boundaries
+
+- Projects and issues are optional plain-text support. `+Ongoing` is the permanent default workspace.
+- Avoid statuses, assignees, due dates, boards, workflows, progress systems, and edit history unless explicitly requested.
+- Prefer words users write themselves over structured metadata or required formats.
+- Do not alter Today’s composer or current-entry row unless the request specifically requires it.
+
+## Implementation
+
+- The app is `DoingRightNow.html`: one dependency-free HTML file using IndexedDB and JSON import/export.
+- Preserve existing journals and normalize old data without inventing historical timestamps.
+- Keep visible timestamps purposeful; silent metadata must not complicate the UI.
+- Do not modify `dev/` prototypes unless explicitly requested.
+- Avoid new dependencies and build tooling.
+
+## Completion
+
+- Update in-app Help, `help.md`, and `help.html` when user-visible behavior changes.
+- Keep landing-page copy aligned when the public feature set changes.
+- Syntax-check the embedded script and verify affected existing flows.
