@@ -34,6 +34,7 @@ Two brief, dismissible messages guide your first entry and then disappear perman
 - The dialog editor supports multiple lines and up to **1,000 characters**, with a live character count. Press **Enter** to save or **Shift+Enter** to add a new line.
 - Choose **Save** to keep changes, **Cancel** to discard them, or **Delete** and confirm to remove the entry.
 - Long entries are shortened to three lines with an ellipsis in the journal display. The editor always shows the complete text.
+- The browser’s native spell checker is enabled in the Today composer, entry editor, Quick Note, project documents, issues, and editable copy dialog. Languages and suggestions come from your browser or device; Doing Right Now does not send text anywhere.
 - Addresses beginning with `http://`, `https://`, or `www.` appear as openable links in the editor and entry-actions dialog. `+Ongoing` and `+Ongoing.1` appear in the same list when that project or issue exists; tapping one opens it.
 
 ![Screenshot placeholder: the entry dialog with multiline text, character count, detected links, and Save, Cancel, and Delete actions.](placeholder-editing.png)
