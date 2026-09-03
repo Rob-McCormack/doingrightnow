@@ -112,6 +112,23 @@ Optional. Open **Projects** from the drawer, or use **Project:** and **Issue:** 
 
 Projects are things you work on. Issues belong to a project. Both are just freeform text. Do things your way.
 
+### Today across projects
+
+**Today: may be the complete feature.**
+
+It answers the one cross-project question that fits Doing Right Now:
+
+> What deserves my attention now?
+
+The lifecycle is simple:
+
+1. Add `Today:` to the beginning of a line in a project document or issue.
+2. It appears in **Today across projects**.
+3. Open it and work.
+4. Remove `Today:` when it no longer needs attention.
+
+That is not a status system. The project text remains; only its temporary visibility changes.
+
 - Every journal has **+Ongoing** — a catch-all document and issue list that cannot be renamed or removed. A new journal includes a short note and two sample issues so you can see how it works; you can edit or delete those.
 - Add another project only if you need a separate document. **+Website** appears next to **+Ongoing** in the picker, not inside it.
 - Starter tag names in Settings (Website, Report, Home) are only tags until you add a project here.
