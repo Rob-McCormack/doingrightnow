@@ -530,6 +530,8 @@
           <li>Begin a line with <code>Today:</code> in a project document or issue to include the complete line in <strong>Today across projects</strong>. Matching is case-insensitive and only occurs at the beginning of a line, so an ordinary sentence containing “today” is ignored.</li>
           <li>Open the collected view with the calendar-check icon in Projects or <strong>Project: Today</strong> in the command palette. Each result names its source; selecting it opens the project document or exact issue and selects the matching line.</li>
           <li><code>Today:</code> lines remain until you edit or remove the prefix. They do not expire automatically.</li>
+          <li>For any other text, use <strong>Project: Search documents &amp; issues</strong> in the command palette. It searches every project document and issue together and returns each complete matching line.</li>
+          <li>Select a project-search result to open its project document or exact issue and select the source line. The regular <strong>Search journal</strong> view continues to search journal entries only.</li>
           <li>There are no status fields, assignees, or due dates — write those in your own words if you need them. The examples below are only illustrations, not a required format.</li>
           <li>Export includes project documents and issues in the same JSON backup.</li>
         </ul>
@@ -611,7 +613,7 @@ Fixed the event handler and tested on iPhone.</pre>
         <h2 id="command-palette">Command Palette &amp; Zen</h2>
         <ul>
           <li>The right side of the header contains the command icon and Quick Note; the hamburger on the left opens the navigation drawer. Open the palette with its icon or <strong>⌘K</strong>/<strong>Ctrl+K</strong>, filter by typing, and use the arrow keys and Enter to select.</li>
-          <li>Commands cover adding an activity; Today, Yesterday, 7-, 30-, 365-day, and All views; Search; Projects (including <strong>Project: Today</strong>); Quick Note; Zen mode; Help; and temporary Developer tools. Settings commands are prefixed <strong>Settings:</strong>, System commands <strong>System:</strong>, project commands <strong>Project:</strong>, and issue commands <strong>Issue:</strong>. <strong>Add an activity</strong> and <strong>Go to Today</strong> stay first; the remaining commands are alphabetical.</li>
+          <li>Commands cover adding an activity; Today, Yesterday, 7-, 30-, 365-day, and All views; journal Search; Projects (including <strong>Project: Today</strong> and <strong>Project: Search documents &amp; issues</strong>); Quick Note; Zen mode; Help; and temporary Developer tools. Settings commands are prefixed <strong>Settings:</strong>, System commands <strong>System:</strong>, project commands <strong>Project:</strong>, and issue commands <strong>Issue:</strong>. <strong>Add an activity</strong> and <strong>Go to Today</strong> stay first; the remaining commands are alphabetical.</li>
           <li>Use the expand button at the upper right of Today’s current entry to enter <strong>Zen mode</strong>, a distraction-free full-screen view of the current entry, elapsed duration, and current clock time. Started, completed, important, and question markers appear as icons instead of <code>^</code>, <code>"</code>, <code>!</code>, or <code>?</code>. Its <strong>+</strong> returns to Today ready to add another activity.</li>
         </ul>
 
