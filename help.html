@@ -615,7 +615,7 @@ Fixed the event handler and tested on iPhone.</pre>
         <ul>
           <li>The right side of the header contains the command icon and Quick Note; the hamburger on the left opens the navigation drawer. Open the palette with its icon or <strong>⌘K</strong>/<strong>Ctrl+K</strong>.</li>
           <li>Choose in any of three ways: type a more specific phrase and press <strong>Enter</strong>, click or tap a command, or use the arrow keys and <strong>Enter</strong>. For example, instead of stopping at <code>project</code>, search for <code>open document</code>, <code>new project</code>, or <code>search documents</code>.</li>
-          <li>Commands cover adding an activity; Today, Yesterday, 7-, 30-, 365-day, and All views; journal Search; Projects (including <strong>Project: Today</strong> and <strong>Project: Search documents &amp; issues</strong>); Quick Note; Zen mode; Help; and temporary Developer tools. Settings commands are prefixed <strong>Settings:</strong>, System commands <strong>System:</strong>, project commands <strong>Project:</strong>, and issue commands <strong>Issue:</strong>. <strong>Add an activity</strong> and <strong>Go to Today</strong> stay first; the remaining commands are alphabetical.</li>
+          <li>Commands cover adding an activity; Today, Yesterday, 7-, 30-, 365-day, and All views; journal Search; Projects (including <strong>Project: Today</strong> and <strong>Project: Search documents &amp; issues</strong>); Quick Note; Zen mode; Help; and temporary Developer tools. Settings commands are prefixed <strong>Settings:</strong>, System commands <strong>System:</strong>, project commands <strong>Project:</strong>, and issue commands <strong>Issue:</strong>. <strong>Add an activity</strong> and <strong>Go to Today</strong> stay first; the remaining commands are alphabetical. <strong>System: Test GitHub connection</strong> and <strong>System: Back up to GitHub</strong> appear only when Advanced is on.</li>
           <li>Use the expand button at the upper right of Today’s current entry to enter <strong>Zen mode</strong>, a distraction-free full-screen view of the current entry, elapsed duration, and current clock time. Started, completed, important, and question markers appear as icons instead of <code>^</code>, <code>"</code>, <code>!</code>, or <code>?</code>. Its <strong>+</strong> returns to Today ready to add another activity.</li>
         </ul>
 
@@ -646,6 +646,7 @@ Fixed the event handler and tested on iPhone.</pre>
           <li>Choose <strong>Loose</strong> (default) or <strong>Tight</strong> item spacing for the journal list.</li>
           <li>Choose 12- or 24-hour timestamps and Regional, MM/DD/YYYY, DD/MM/YYYY, or YYYY-MM-DD dates.</li>
           <li>Reduced-motion preferences disable decorative animation.</li>
+          <li><strong>Advanced</strong> is off by default. Turn it on in Settings to show optional tools such as GitHub Backup.</li>
         </ul>
         <figure class="help-figure">
           <div class="help-figure-placeholder" aria-hidden="true">Screenshot coming soon</div>
@@ -654,22 +655,49 @@ Fixed the event handler and tested on iPhone.</pre>
 
         <h2 id="your-data">Your Data</h2>
         <ul>
-          <li>Journal data is stored in <strong>IndexedDB</strong> in this browser. There is no account or cloud service.</li>
+          <li>Journal data is stored in <strong>IndexedDB</strong> in this browser. There is no Doing Right Now account.</li>
           <li>If you open the app in two tabs or windows at once, they stay in sync automatically — but only in the <strong>same browser on the same device</strong>.</li>
           <li><strong>Different device or browser means a separate journal.</strong> Clearing browser site data can permanently remove it.</li>
           <li>Open <strong>System → Data &amp; backup</strong> to see journal size, browser storage estimates when available, and the last backup time.</li>
-          <li><strong>Export journal</strong> downloads a complete <code>.json</code> backup containing entries, Quick Note, ratings, lists, settings, project documents, and issues. Import can restore this file.</li>
+          <li><strong>Export journal</strong> downloads a complete <code>.json</code> backup containing entries, Quick Note, ratings, lists, settings, project documents, and issues. Import can restore this file. The GitHub token and repository connection are not included.</li>
           <li><strong>Export as text</strong> downloads a readable <code>.txt</code> of the journal, Quick Note, project documents, and issues. It is for reading, sharing, or archiving before a cleanup. It cannot be imported.</li>
-          <li><strong>Import journal</strong> accepts a Doing Right Now JSON backup. After showing its entry count and date range, import <strong>replaces the entire current journal</strong>, Quick Note, ratings, lists, settings, project documents, and issues; it does not merge. Export the current journal first if you may need it.</li>
-          <li>A backup reminder appears after seven days of journal history with no export, or when the latest export is at least 30 days old. Repeat reminders are limited to once a week.</li>
+          <li><strong>Import journal</strong> accepts a Doing Right Now JSON backup. After showing its entry count and date range, import <strong>replaces the entire current journal</strong>, Quick Note, ratings, lists, settings, project documents, and issues; it does not merge. This device’s GitHub connection and token stay put. Export the current journal first if you may need it.</li>
+          <li>A backup reminder appears after seven days of journal history with no export, or when the latest export is at least 30 days old. Repeat reminders are limited to once a week. A successful GitHub backup also counts as an export.</li>
         </ul>
         <p>In <strong>System</strong>, destructive cleanup actions ask for confirmation:</p>
         <ul>
           <li><strong>Clear all except Today</strong> removes entries before today while keeping Quick Note, lists, settings, and projects.</li>
           <li><strong>Clear older entries</strong> keeps a chosen number of recent calendar days and removes earlier entries.</li>
-          <li><strong>Reset</strong> removes journal entries, Quick Note, ratings, custom lists, settings, project documents, and issues, then restores starter People, Projects, Places, and Quick Add lists.</li>
+          <li><strong>Reset</strong> removes journal entries, Quick Note, ratings, custom lists, settings, project documents, issues, and any stored GitHub token, then restores starter People, Projects, Places, and Quick Add lists.</li>
         </ul>
         <p>Clearing and resetting cannot be undone without a previously exported JSON backup.</p>
+
+        <h2 id="github-backup">GitHub Backup</h2>
+        <p>Optional. Off until <strong>Settings → Advanced</strong> is on. Then <strong>System → Data &amp; backup</strong> shows GitHub Backup.</p>
+        <p>This uploads the same JSON as <strong>Export journal</strong> to a private GitHub repository you control. It is backup, not sync. The journal stays in this browser. A failed upload never blocks local saving. Doing Right Now does not host your data.</p>
+        <p><strong>What you need</strong></p>
+        <ol class="steps">
+          <li>A dedicated <strong>private</strong> GitHub repository used only for this backup, for example <code>drn-backup</code>.</li>
+          <li>A <strong>fine-grained personal access token</strong> with access to that repository only, and <strong>Contents: Read and write</strong>. Grant nothing else.</li>
+          <li>In GitHub Backup: repository owner (your GitHub username), repository name, branch (<code>main</code> unless you chose another), and the token.</li>
+        </ol>
+        <p><strong>Create the token</strong></p>
+        <ol class="steps">
+          <li>GitHub → <strong>Settings → Developer settings → Personal access tokens → Fine-grained tokens</strong>.</li>
+          <li><strong>Generate new token</strong>.</li>
+          <li>Resource owner: your account.</li>
+          <li>Repository access: <strong>Only select repositories</strong>, then choose the backup repository.</li>
+          <li>Repository permissions: <strong>Contents → Read and write</strong>. Leave other permissions at No access.</li>
+          <li>Generate the token, copy it once, and paste it into Doing Right Now. Do not commit it to any repository.</li>
+        </ol>
+        <p><strong>Use it</strong></p>
+        <ul>
+          <li><strong>Test Connection</strong> checks owner, repository, branch, and token without changing files.</li>
+          <li><strong>Back Up Now</strong> creates or updates <code>backup.json</code> in that repository. GitHub commit history keeps earlier versions.</li>
+          <li>Restore by downloading <code>backup.json</code> from GitHub and using <strong>Import journal</strong>.</li>
+          <li>The token is stored only in this browser. It is never written into <code>backup.json</code> or a downloaded export.</li>
+        </ul>
+        <p>If the token is exposed, revoke it in GitHub and create a new one.</p>
 
         <h2 id="install-as-app">Install as an app</h2>
         <p>Optional — opens in its own window with an icon. Your journal still lives on this device only; nothing is synced to the cloud.</p>
@@ -695,7 +723,7 @@ Fixed the event handler and tested on iPhone.</pre>
           <li>Your data lives in <strong>plain text</strong> in this browser on this device — not on our servers (there aren't any).</li>
           <li>Anyone with access to your unlocked phone or computer can read it.</li>
           <li>Browser extensions with site access can read page storage on any website, including this one.</li>
-          <li>DRN uses no third-party scripts or analytics. Your journal leaves the browser only when you explicitly export a backup or copy text.</li>
+          <li>DRN uses no third-party scripts or analytics. Your journal leaves the browser only when you explicitly export a backup, copy text, or use optional GitHub Backup.</li>
         </ul>
 
         <h2 id="advanced-tips">Advanced Tips</h2>
@@ -712,7 +740,7 @@ Fixed the event handler and tested on iPhone.</pre>
         </ul>
 
         <h2 id="beta-limitations">Public Beta Notes</h2>
-        <p><strong>1.0.0-beta.1</strong> is a public beta. Back up regularly and expect details of the interface to evolve. Data remains browser-local: there is no account sync, collaborative editing, server recovery, or automatic cross-device backup. The current JSON import is a full replacement, not a merge. Features removed from the earlier app are intentionally absent, and no migration workflow is required.</p>
+        <p><strong>1.0.0-beta.1</strong> is a public beta. Back up regularly and expect details of the interface to evolve. Data remains browser-local. Optional GitHub Backup is a manual snapshot you send to a repository you control; it is not account sync, collaborative editing, or automatic cross-device backup. The current JSON import is a full replacement, not a merge. Features removed from the earlier app are intentionally absent, and no migration workflow is required.</p>
 
         <p class="closing">Doing Right Now was inspired by Novie by the Sea's talk on <a class="text-link" href="https://youtu.be/UFidZJhxz84" target="_blank" rel="noopener noreferrer">interstitial journaling</a> — timestamped lines between tasks, one moment at a time.</p>
 

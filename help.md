@@ -225,7 +225,7 @@ Fixed the event handler and tested on iPhone.
 
 - The right side of the header contains the command icon and Quick Note; the hamburger on the left opens the navigation drawer. Open the palette with its icon or **⌘K**/**Ctrl+K**.
 - Choose in any of three ways: type a more specific phrase and press **Enter**, click or tap a command, or use the arrow keys and **Enter**. For example, instead of stopping at `project`, search for `open document`, `new project`, or `search documents`.
-- Commands cover adding an activity; Today, Yesterday, 7-, 30-, 365-day, and All views; journal Search; Projects (including **Project: Today** and **Project: Search documents & issues**); Quick Note; Zen mode; Help; and temporary Developer tools. Settings commands are prefixed **Settings:**, System commands **System:**, project commands **Project:**, and issue commands **Issue:**. **Add an activity** and **Go to Today** stay first; the remaining commands are alphabetical.
+- Commands cover adding an activity; Today, Yesterday, 7-, 30-, 365-day, and All views; journal Search; Projects (including **Project: Today** and **Project: Search documents & issues**); Quick Note; Zen mode; Help; and temporary Developer tools. Settings commands are prefixed **Settings:**, System commands **System:**, project commands **Project:**, and issue commands **Issue:**. **Add an activity** and **Go to Today** stay first; the remaining commands are alphabetical. **System: Test GitHub connection** and **System: Back up to GitHub** appear only when Advanced is on.
 - Use the expand button at the upper right of Today’s current entry to enter **Zen mode**, a distraction-free full-screen view of the current entry, elapsed duration, and current clock time. Started, completed, important, and question markers appear as icons instead of `^`, `"`, `!`, or `?`. Its **+** returns to Today ready to add another activity.
 
 ---
@@ -254,6 +254,7 @@ The elapsed-time display on Today’s current entry shows how long the newest li
 - Choose **Loose** (default) or **Tight** item spacing for the journal list.
 - Choose 12- or 24-hour timestamps and Regional, MM/DD/YYYY, DD/MM/YYYY, or YYYY-MM-DD dates.
 - Reduced-motion preferences disable decorative animation.
+- **Advanced** is off by default. Turn it on in Settings to show optional tools such as GitHub Backup.
 
 ![Screenshot placeholder: Settings showing appearance, font size, item spacing, date and time formats, and six accents.](placeholder-theme.png)
 
@@ -261,22 +262,52 @@ The elapsed-time display on Today’s current entry shows how long the newest li
 
 ## Your Data
 
-- Journal data is stored in **IndexedDB** in this browser. There is no account or cloud service.
+- Journal data is stored in **IndexedDB** in this browser. There is no Doing Right Now account.
 - Tabs and windows stay in sync automatically only in the **same browser on the same device**.
 - A different device or browser has a separate journal. Clearing browser site data can permanently remove it.
 - Open **System → Data & backup** to see journal size, browser storage estimates when available, and the last backup time.
-- **Export journal** downloads a complete `.json` backup containing entries, Quick Note, ratings, lists, settings, project documents, and issues. Import can restore this file.
+- **Export journal** downloads a complete `.json` backup containing entries, Quick Note, ratings, lists, settings, project documents, and issues. Import can restore this file. The GitHub token and repository connection are not included.
 - **Export as text** downloads a readable `.txt` of the journal, Quick Note, project documents, and issues. It is for reading, sharing, or archiving before a cleanup. It cannot be imported.
-- **Import journal** accepts a Doing Right Now JSON backup. After showing its entry count and date range, import **replaces the entire current journal**, Quick Note, ratings, lists, settings, project documents, and issues; it does not merge. Export the current journal first if you may need it.
-- A backup reminder appears after seven days of journal history with no export, or when the latest export is at least 30 days old. Repeat reminders are limited to once a week.
+- **Import journal** accepts a Doing Right Now JSON backup. After showing its entry count and date range, import **replaces the entire current journal**, Quick Note, ratings, lists, settings, project documents, and issues; it does not merge. This device’s GitHub connection and token stay put. Export the current journal first if you may need it.
+- A backup reminder appears after seven days of journal history with no export, or when the latest export is at least 30 days old. Repeat reminders are limited to once a week. A successful GitHub backup also counts as an export.
 
 In **System**, destructive cleanup actions ask for confirmation:
 
 - **Clear all except Today** removes entries before today while keeping Quick Note, lists, settings, and projects.
 - **Clear older entries** keeps a chosen number of recent calendar days and removes earlier entries.
-- **Reset** removes journal entries, Quick Note, ratings, custom lists, settings, project documents, and issues, then restores starter People, Projects, Places, and Quick Add lists.
+- **Reset** removes journal entries, Quick Note, ratings, custom lists, settings, project documents, issues, and any stored GitHub token, then restores starter People, Projects, Places, and Quick Add lists.
 
 Clearing and resetting cannot be undone without a previously exported JSON backup.
+
+## GitHub Backup
+
+Optional. Off until **Settings → Advanced** is on. Then **System → Data & backup** shows GitHub Backup.
+
+This uploads the same JSON as **Export journal** to a private GitHub repository you control. It is backup, not sync. The journal stays in this browser. A failed upload never blocks local saving. Doing Right Now does not host your data.
+
+**What you need**
+
+1. A dedicated **private** GitHub repository used only for this backup, for example `drn-backup`.
+2. A **fine-grained personal access token** with access to that repository only, and **Contents: Read and write**. Grant nothing else.
+3. In GitHub Backup: repository owner (your GitHub username), repository name, branch (`main` unless you chose another), and the token.
+
+**Create the token**
+
+1. GitHub → **Settings → Developer settings → Personal access tokens → Fine-grained tokens**.
+2. **Generate new token**.
+3. Resource owner: your account.
+4. Repository access: **Only select repositories**, then choose the backup repository.
+5. Repository permissions: **Contents → Read and write**. Leave other permissions at No access.
+6. Generate the token, copy it once, and paste it into Doing Right Now. Do not commit it to any repository.
+
+**Use it**
+
+- **Test Connection** checks owner, repository, branch, and token without changing files.
+- **Back Up Now** creates or updates `backup.json` in that repository. GitHub commit history keeps earlier versions.
+- Restore by downloading `backup.json` from GitHub and using **Import journal**.
+- The token is stored only in this browser. It is never written into `backup.json` or a downloaded export.
+
+If the token is exposed, revoke it in GitHub and create a new one.
 
 ## Install as an App
 
@@ -305,7 +336,7 @@ This isn't a password manager or encrypted vault. Don't store passwords, financi
 - Data is plain text in this browser, not on Doing Right Now servers.
 - Anyone with access to your unlocked device can read it.
 - Browser extensions with site access may be able to read page storage.
-- DRN uses no third-party scripts or analytics. Your journal leaves the browser only when you explicitly export a backup or copy text.
+- DRN uses no third-party scripts or analytics. Your journal leaves the browser only when you explicitly export a backup, copy text, or use optional GitHub Backup.
 
 ## Advanced Tips
 
@@ -321,7 +352,7 @@ This isn't a password manager or encrypted vault. Don't store passwords, financi
 
 ## Public Beta Notes
 
-**1.0.0-beta.1** is a public beta. Back up regularly and expect details of the interface to evolve. Data remains browser-local: there is no account sync, collaborative editing, server recovery, or automatic cross-device backup. The current JSON import is a full replacement, not a merge. Features removed from the earlier app are intentionally absent, and no migration workflow is required.
+**1.0.0-beta.1** is a public beta. Back up regularly and expect details of the interface to evolve. Data remains browser-local. Optional GitHub Backup is a manual snapshot you send to a repository you control; it is not account sync, collaborative editing, or automatic cross-device backup. The current JSON import is a full replacement, not a merge. Features removed from the earlier app are intentionally absent, and no migration workflow is required.
 
 ---
 
