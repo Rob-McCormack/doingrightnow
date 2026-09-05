@@ -661,6 +661,7 @@ Fixed the event handler and tested on iPhone.</pre>
           <li>Open <strong>System → Data &amp; backup</strong> to see journal size, browser storage estimates when available, and the last backup time.</li>
           <li><strong>Export journal</strong> downloads a complete <code>.json</code> backup containing entries, Quick Note, ratings, lists, settings, project documents, and issues. Import can restore this file. The GitHub token and repository connection are not included.</li>
           <li><strong>Export as text</strong> downloads a readable <code>.txt</code> of the journal, Quick Note, project documents, and issues. It is for reading, sharing, or archiving before a cleanup. It cannot be imported.</li>
+          <li><strong>Export as Markdown</strong> downloads the same words as a <code>.md</code> file. GitHub can render it. It cannot be imported.</li>
           <li><strong>Import journal</strong> accepts a Doing Right Now JSON backup. After showing its entry count and date range, import <strong>replaces the entire current journal</strong>, Quick Note, ratings, lists, settings, project documents, and issues; it does not merge. This device’s GitHub connection and token stay put. Export the current journal first if you may need it.</li>
           <li>A backup reminder appears after seven days of journal history with no export, or when the latest export is at least 30 days old. Repeat reminders are limited to once a week. A successful GitHub backup also counts as an export.</li>
         </ul>
@@ -674,7 +675,7 @@ Fixed the event handler and tested on iPhone.</pre>
 
         <h2 id="github-backup">GitHub Backup</h2>
         <p>Optional. Off until <strong>Settings → Advanced</strong> is on. Then <strong>System → Data &amp; backup</strong> shows GitHub Backup.</p>
-        <p>This uploads the same JSON as <strong>Export journal</strong> to a private GitHub repository you control. It is backup, not sync. The journal stays in this browser. A failed upload never blocks local saving. Doing Right Now does not host your data.</p>
+        <p>This uploads the same JSON as <strong>Export journal</strong>, plus a Markdown copy, to a private GitHub repository you control. It is backup, not sync. The journal stays in this browser. A failed upload never blocks local saving. Doing Right Now does not host your data.</p>
         <p><strong>What you need</strong></p>
         <ol class="steps">
           <li>A dedicated <strong>private</strong> GitHub repository used only for this backup, for example <code>drn-backup</code>.</li>
@@ -693,9 +694,9 @@ Fixed the event handler and tested on iPhone.</pre>
         <p><strong>Use it</strong></p>
         <ul>
           <li><strong>Test Connection</strong> checks owner, repository, branch, and token without changing files.</li>
-          <li><strong>Back Up Now</strong> creates or updates <code>backup.json</code> in that repository. GitHub commit history keeps earlier versions.</li>
-          <li>Restore by downloading <code>backup.json</code> from GitHub and using <strong>Import journal</strong>.</li>
-          <li>The token is stored only in this browser. It is never written into <code>backup.json</code> or a downloaded export.</li>
+          <li><strong>Back Up Now</strong> creates or updates <code>backup.json</code> and <code>DoingRightNow.md</code> in that repository. GitHub commit history keeps earlier versions.</li>
+          <li>Restore by downloading <code>backup.json</code> from GitHub and using <strong>Import journal</strong>. <code>DoingRightNow.md</code> is for reading; it cannot be imported.</li>
+          <li>The token is stored only in this browser. It is never written into <code>backup.json</code>, <code>DoingRightNow.md</code>, or a downloaded export.</li>
         </ul>
         <p>If the token is exposed, revoke it in GitHub and create a new one.</p>
 

@@ -268,6 +268,7 @@ The elapsed-time display on Today’s current entry shows how long the newest li
 - Open **System → Data & backup** to see journal size, browser storage estimates when available, and the last backup time.
 - **Export journal** downloads a complete `.json` backup containing entries, Quick Note, ratings, lists, settings, project documents, and issues. Import can restore this file. The GitHub token and repository connection are not included.
 - **Export as text** downloads a readable `.txt` of the journal, Quick Note, project documents, and issues. It is for reading, sharing, or archiving before a cleanup. It cannot be imported.
+- **Export as Markdown** downloads the same words as a `.md` file. GitHub can render it. It cannot be imported.
 - **Import journal** accepts a Doing Right Now JSON backup. After showing its entry count and date range, import **replaces the entire current journal**, Quick Note, ratings, lists, settings, project documents, and issues; it does not merge. This device’s GitHub connection and token stay put. Export the current journal first if you may need it.
 - A backup reminder appears after seven days of journal history with no export, or when the latest export is at least 30 days old. Repeat reminders are limited to once a week. A successful GitHub backup also counts as an export.
 
@@ -283,7 +284,7 @@ Clearing and resetting cannot be undone without a previously exported JSON backu
 
 Optional. Off until **Settings → Advanced** is on. Then **System → Data & backup** shows GitHub Backup.
 
-This uploads the same JSON as **Export journal** to a private GitHub repository you control. It is backup, not sync. The journal stays in this browser. A failed upload never blocks local saving. Doing Right Now does not host your data.
+This uploads the same JSON as **Export journal**, plus a Markdown copy, to a private GitHub repository you control. It is backup, not sync. The journal stays in this browser. A failed upload never blocks local saving. Doing Right Now does not host your data.
 
 **What you need**
 
@@ -303,9 +304,9 @@ This uploads the same JSON as **Export journal** to a private GitHub repository 
 **Use it**
 
 - **Test Connection** checks owner, repository, branch, and token without changing files.
-- **Back Up Now** creates or updates `backup.json` in that repository. GitHub commit history keeps earlier versions.
-- Restore by downloading `backup.json` from GitHub and using **Import journal**.
-- The token is stored only in this browser. It is never written into `backup.json` or a downloaded export.
+- **Back Up Now** creates or updates `backup.json` and `DoingRightNow.md` in that repository. GitHub commit history keeps earlier versions.
+- Restore by downloading `backup.json` from GitHub and using **Import journal**. `DoingRightNow.md` is for reading; it cannot be imported.
+- The token is stored only in this browser. It is never written into `backup.json`, `DoingRightNow.md`, or a downloaded export.
 
 If the token is exposed, revoke it in GitHub and create a new one.
 
