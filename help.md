@@ -304,9 +304,9 @@ This uploads the same JSON as **Export journal**, plus a Markdown copy, to a pri
 **Use it**
 
 - **Test Connection** checks owner, repository, branch, and token without changing files.
-- **Back Up Now** creates or updates `backup.json` and `DoingRightNow.md` in that repository. GitHub commit history keeps earlier versions.
-- Restore by downloading `backup.json` from GitHub and using **Import journal**. `DoingRightNow.md` is for reading; it cannot be imported.
-- The token is stored only in this browser. It is never written into `backup.json`, `DoingRightNow.md`, or a downloaded export.
+- **Back Up Now** creates or updates `DoingRightNow-backup.json` and `DoingRightNow.md` in that repository. GitHub commit history keeps earlier versions.
+- Restore by downloading `DoingRightNow-backup.json` from GitHub and using **Import journal**. `DoingRightNow.md` is for reading; it cannot be imported.
+- The token is stored only in this browser. It is never written into `DoingRightNow-backup.json`, `DoingRightNow.md`, or a downloaded export.
 
 If the token is exposed, revoke it in GitHub and create a new one.
 

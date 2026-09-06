@@ -1,6 +1,6 @@
 # GitHub Backup — later
 
-Shipped: optional Advanced → System GitHub Backup. Manual Test Connection and Back Up Now. `backup.json` plus `DoingRightNow.md`. Local Export as Markdown. Token stays on the device and is stripped from exports. Restore is download `backup.json` + Import journal. Markdown cannot be imported.
+Shipped: optional Advanced → System GitHub Backup. Manual Test Connection and Back Up Now. `DoingRightNow-backup.json` plus `DoingRightNow.md`. Local Export as Markdown. Token stays on the device and is stripped from exports. Restore is download `DoingRightNow-backup.json` + Import journal. Markdown cannot be imported.
 
 Current setup: `GITHUB-SETUP.md`.
 

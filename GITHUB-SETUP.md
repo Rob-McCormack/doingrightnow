@@ -47,14 +47,14 @@ Do not commit the token to any repository. If it is exposed, revoke it on that s
 ## 4. Test, then back up
 
 - **Test Connection** checks owner, repository, branch, and token without changing files. The result appears in the GitHub Backup panel as **Last result**.
-- **Back Up Now** creates or updates `backup.json` and `DoingRightNow.md` in the repository. GitHub commit history keeps earlier versions. JSON is for restore. Markdown is for reading.
+- **Back Up Now** creates or updates `DoingRightNow-backup.json` and `DoingRightNow.md` in the repository. GitHub commit history keeps earlier versions. JSON is for restore. Markdown is for reading.
 - **Last GitHub backup** shows the time of the last successful upload.
 
-The token stays in this browser. It is never written into `backup.json`, `DoingRightNow.md`, or a downloaded export.
+The token stays in this browser. It is never written into `DoingRightNow-backup.json`, `DoingRightNow.md`, or a downloaded export.
 
 ## 5. Restore
 
-1. On GitHub, open `backup.json`.
+1. On GitHub, open `DoingRightNow-backup.json`.
 2. Download the file (or an older version from History).
 3. In Doing Right Now, use **Import journal**. Import replaces the current journal; it does not merge.
 
