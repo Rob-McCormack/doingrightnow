@@ -60,7 +60,7 @@ Use the **ellipsis** beside an entry to open its actions:
 Optional shorthand:
 
 - `@name` tags a person and is shown in violet.
-- `+project` tags a project and is shown in amber. `+Website.12` tags a numbered issue the same way.
+- `+project` tags a project and is shown in amber. `+Website.12` tags a numbered issue the same way. A project name is one tag token: spaces become hyphens, so `Garage Clean up` is stored as `+Garage-Clean-up`. Periods are reserved for issue numbers.
 - `#place` tags a place and is shown in teal.
 - `^` as a standalone marker means started and counts in the day's started total.
 - `"` as a standalone marker means you completed a small step. It is not a start and does not count in started/total.
@@ -131,7 +131,7 @@ The lifecycle is simple:
 That is not a status system. The project text remains; only its temporary visibility changes.
 
 - Every journal has **+Ongoing** — a catch-all document and issue list that cannot be renamed or removed. A new journal includes a short note and two sample issues so you can see how it works; you can edit or delete those.
-- Add another project only if you need a separate document. **+Website** appears next to **+Ongoing** in the picker, not inside it.
+- Add another project only if you need a separate document. **+Website** appears next to **+Ongoing** in the picker, not inside it. Spaces in the name become hyphens so the journal tag stays one word.
 - Starter tag names in Settings (Website, Report, Home) are only tags until you add a project here.
 - Type `+Ongoing.1` in a journal line to point at an issue. Today’s `+` suggestions include those references. The entry’s ellipsis menu (and the editor) list `+Ongoing` and `+Ongoing.1` as links that open that document or issue.
 - Begin a line with `Today:` in a project document or issue to include the complete line in **Today across projects**. Matching is case-insensitive and only occurs at the beginning of a line, so an ordinary sentence containing “today” is ignored.
