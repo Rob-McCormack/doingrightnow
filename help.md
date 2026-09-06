@@ -109,7 +109,7 @@ Quick Note is a shared scratchpad for anything that is not a timestamped entry.
 
 ## Projects
 
-Optional. Open **Projects** from the drawer, or use **Project:** and **Issue:** commands in the command palette. Document and issue commands use the last opened project (default **+Ongoing**); they do not ask which project.
+Optional. Open **Projects** from the drawer, or use **Project:** and **Issue:** commands in the command palette. **Project: Go to Projects** opens the Projects view with the project list on **+Ongoing**. Document and issue commands use the last opened project (default **+Ongoing**); they do not ask which project.
 
 Projects are things you work on. Issues belong to a project. Both are just freeform text. Do things your way.
 
