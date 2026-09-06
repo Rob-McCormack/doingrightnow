@@ -276,7 +276,7 @@ In **System**, destructive cleanup actions ask for confirmation:
 
 - **Clear all except Today** removes entries before today while keeping Quick Note, lists, settings, and projects.
 - **Clear older entries** keeps a chosen number of recent calendar days and removes earlier entries.
-- **Reset** removes journal entries, Quick Note, ratings, custom lists, settings, project documents, issues, and any stored GitHub token, then restores starter People, Projects, Places, and Quick Add lists.
+- **Reset** removes journal entries, Quick Note, ratings, custom lists, settings, project documents, issues, and GitHub Backup settings including the token, then restores starter People, Projects, Places, and Quick Add lists. Files already on GitHub are not changed.
 
 Clearing and resetting cannot be undone without a previously exported JSON backup.
 
@@ -303,8 +303,10 @@ This uploads the same JSON as **Export journal**, plus a Markdown copy, to a pri
 
 **Use it**
 
-- **Test Connection** checks owner, repository, branch, and token without changing files.
+- Backup is manual. Nothing uploads on a timer or when you write a line.
+- **Test Connection** checks owner, repository, branch, and token without changing files. The result appears as **Last result**.
 - **Back Up Now** creates or updates `DoingRightNow-backup.json` and `DoingRightNow.md` in that repository. GitHub commit history keeps earlier versions.
+- When Advanced is on, the command palette includes **GitHub: Backup open** and **GitHub: Back up now**.
 - Restore by downloading `DoingRightNow-backup.json` from GitHub and using **Import journal**. `DoingRightNow.md` is for reading; it cannot be imported.
 - The token is stored only in this browser. It is never written into `DoingRightNow-backup.json`, `DoingRightNow.md`, or a downloaded export.
 

@@ -669,7 +669,7 @@ Fixed the event handler and tested on iPhone.</pre>
         <ul>
           <li><strong>Clear all except Today</strong> removes entries before today while keeping Quick Note, lists, settings, and projects.</li>
           <li><strong>Clear older entries</strong> keeps a chosen number of recent calendar days and removes earlier entries.</li>
-          <li><strong>Reset</strong> removes journal entries, Quick Note, ratings, custom lists, settings, project documents, issues, and any stored GitHub token, then restores starter People, Projects, Places, and Quick Add lists.</li>
+          <li><strong>Reset</strong> removes journal entries, Quick Note, ratings, custom lists, settings, project documents, issues, and GitHub Backup settings including the token, then restores starter People, Projects, Places, and Quick Add lists. Files already on GitHub are not changed.</li>
         </ul>
         <p>Clearing and resetting cannot be undone without a previously exported JSON backup.</p>
 
@@ -693,8 +693,10 @@ Fixed the event handler and tested on iPhone.</pre>
         </ol>
         <p><strong>Use it</strong></p>
         <ul>
-          <li><strong>Test Connection</strong> checks owner, repository, branch, and token without changing files.</li>
+          <li>Backup is manual. Nothing uploads on a timer or when you write a line.</li>
+          <li><strong>Test Connection</strong> checks owner, repository, branch, and token without changing files. The result appears as <strong>Last result</strong>.</li>
           <li><strong>Back Up Now</strong> creates or updates <code>DoingRightNow-backup.json</code> and <code>DoingRightNow.md</code> in that repository. GitHub commit history keeps earlier versions.</li>
+          <li>When Advanced is on, the command palette includes <strong>GitHub: Backup open</strong> and <strong>GitHub: Back up now</strong>.</li>
           <li>Restore by downloading <code>DoingRightNow-backup.json</code> from GitHub and using <strong>Import journal</strong>. <code>DoingRightNow.md</code> is for reading; it cannot be imported.</li>
           <li>The token is stored only in this browser. It is never written into <code>DoingRightNow-backup.json</code>, <code>DoingRightNow.md</code>, or a downloaded export.</li>
         </ul>
