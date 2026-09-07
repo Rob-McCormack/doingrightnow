@@ -42,12 +42,13 @@ Do not commit the token to any repository. If it is exposed, revoke it on that s
 | Branch | `main` unless the repository uses another default |
 | Fine-grained token | the token you just copied |
 
-**Enable GitHub Backup** remembers the connection on this device. **Back Up Now** works as soon as owner, repository, and token are filled in.
+**Enable GitHub Backup** remembers the connection on this device and turns on the daily upload. **Back Up Now** works as soon as owner, repository, and token are filled in.
 
 ## 4. Test, then back up
 
 - **Test Connection** checks owner, repository, branch, and token without changing files. The result appears in the GitHub Backup panel as **Last result**.
 - **Back Up Now** creates or updates `DoingRightNow-backup.json` and `DoingRightNow.md` in the repository. GitHub commit history keeps earlier versions. JSON is for restore. Markdown is for reading.
+- After it is enabled and filled in, the app also uploads once per local day when it is open and the journal has changed. Nothing uploads if the app is closed. Writing a line never starts an upload.
 - **Last GitHub backup** shows the time of the last successful upload.
 
 The token stays in this browser. It is never written into `DoingRightNow-backup.json`, `DoingRightNow.md`, or a downloaded export.

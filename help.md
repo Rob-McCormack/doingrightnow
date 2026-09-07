@@ -305,7 +305,7 @@ This uploads the same JSON as **Export journal**, plus a Markdown copy, to a pri
 
 **Use it**
 
-- Backup is manual. Nothing uploads on a timer or when you write a line.
+- When **Enable GitHub Backup** is on and owner, repository, and token are filled in, the app uploads once per local day if it is open and the journal has changed since the last successful backup. Nothing uploads if the app is closed. Writing a line never starts an upload. A failed daily backup shows a toast; local data stays saved.
 - **Test Connection** checks owner, repository, branch, and token without changing files. The result appears as **Last result**.
 - **Back Up Now** creates or updates `DoingRightNow-backup.json` and `DoingRightNow.md` in that repository. GitHub commit history keeps earlier versions.
 - When Advanced is on, the command palette includes **GitHub: Backup open** and **GitHub: Back up now**.
@@ -352,7 +352,7 @@ This isn't a password manager or encrypted vault. Don't store passwords, financi
 - Data is plain text in this browser, not on Doing Right Now servers.
 - Anyone with access to your unlocked device can read it.
 - Browser extensions with site access may be able to read page storage.
-- DRN uses no third-party scripts or analytics. Your journal leaves the browser only when you explicitly export a backup, copy text, or use optional GitHub Backup.
+- DRN uses no third-party scripts or analytics. Your journal leaves the browser only when you export a backup, copy text, or use optional GitHub Backup, including the daily upload if it is set up.
 
 ## Advanced Tips
 
@@ -368,7 +368,7 @@ This isn't a password manager or encrypted vault. Don't store passwords, financi
 
 ## Public Beta Notes
 
-**1.0.0-beta.1** is a public beta. Back up regularly and expect details of the interface to evolve. Data remains browser-local. Optional GitHub Backup is a manual snapshot you send to a repository you control; it is not account sync, collaborative editing, or automatic cross-device backup. The current JSON import is a full replacement, not a merge. Features removed from the earlier app are intentionally absent, and no migration workflow is required.
+**1.0.0-beta.1** is a public beta. Back up regularly and expect details of the interface to evolve. Data remains browser-local. Optional GitHub Backup sends a snapshot to a repository you control. When it is set up, the app also uploads once per local day if it is open and the journal changed. It is not account sync, collaborative editing, or automatic cross-device backup. The current JSON import is a full replacement, not a merge. Features removed from the earlier app are intentionally absent, and no migration workflow is required.
 
 ---
 
