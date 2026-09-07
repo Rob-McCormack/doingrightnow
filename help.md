@@ -109,7 +109,7 @@ Quick Note is a shared scratchpad for anything that is not a timestamped entry.
 
 ## Projects
 
-Optional. Open **Projects** from the drawer, or use **Project:** and **Issue:** commands in the command palette. **Project: Go to Projects** opens the Projects view with the project list on **+Ongoing**. Document and issue commands use the last opened project (default **+Ongoing**); they do not ask which project.
+Optional. Open **Projects** from the drawer, or use **Project:** and **Issue:** commands in the command palette. **Project: Go to Projects** opens the Projects view with the project list on **+Ongoing**. Document, issue, and export commands use the last opened project (default **+Ongoing**); they do not ask which project.
 
 Projects are things you work on. Issues belong to a project. Both are just freeform text. Do things your way.
 
@@ -141,6 +141,7 @@ That is not a status system. The project text remains; only its temporary visibi
 - Select a project-search result to open its project document or exact issue and select the source line. The regular **Search journal** view continues to search journal entries only.
 - There are no status fields, assignees, or due dates — write those in your own words if you need them. The examples below are only illustrations, not a required format.
 - Export includes project documents and issues in the same JSON backup.
+- **Export project** on the project document or issues list (or **Project: Export** in the command palette) downloads a Markdown copy of that one project and all of its issues. It cannot be imported. **Copy issue as text** still copies a single issue.
 
 Example project document:
 
@@ -225,7 +226,7 @@ Fixed the event handler and tested on iPhone.
 
 - The right side of the header contains the command icon and Quick Note; the hamburger on the left opens the navigation drawer. Open the palette with its icon or **⌘K**/**Ctrl+K**.
 - Choose in any of three ways: type a more specific phrase and press **Enter**, click or tap a command, or use the arrow keys and **Enter**. For example, instead of stopping at `project`, search for `open document`, `new project`, or `search documents`.
-- Commands cover adding an activity; Today, Yesterday, 7-, 30-, 365-day, and All views; journal Search; Projects (including **Project: Today** and **Project: Search documents & issues**); Quick Note; Zen mode; Help; and temporary Developer tools. Settings commands are prefixed **Settings:**, System commands **System:**, project commands **Project:**, issue commands **Issue:**, and GitHub commands **GitHub:**. **Add an activity** and **Go to Today** stay first; the remaining commands are alphabetical. **GitHub:** commands appear only when Advanced is on.
+- Commands cover adding an activity; Today, Yesterday, 7-, 30-, 365-day, and All views; journal Search; Projects (including **Project: Today**, **Project: Search documents & issues**, and **Project: Export**); Quick Note; Zen mode; Help; and temporary Developer tools. Settings commands are prefixed **Settings:**, System commands **System:**, project commands **Project:**, issue commands **Issue:**, and GitHub commands **GitHub:**. **Add an activity** and **Go to Today** stay first; the remaining commands are alphabetical. **GitHub:** commands appear only when Advanced is on.
 - Use the expand button at the upper right of Today’s current entry to enter **Zen mode**, a distraction-free full-screen view of the current entry, elapsed duration, and current clock time. Started, completed, important, and question markers appear as icons instead of `^`, `"`, `!`, or `?`. Its **+** returns to Today ready to add another activity. On desktop, **Escape** also leaves Zen mode.
 
 ---
