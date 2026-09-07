@@ -132,6 +132,7 @@ That is not a status system. The project text remains; only its temporary visibi
 
 - Every journal has **+Ongoing** — a catch-all document and issue list that cannot be renamed or removed. A new journal includes a short note and two sample issues so you can see how it works; you can edit or delete those.
 - Add another project only if you need a separate document. **+Website** appears next to **+Ongoing** in the picker, not inside it. Spaces in the name become hyphens so the journal tag stays one word.
+- Loose items for today can get lost in **+Ongoing** if that document is already busy. That is optional: add your own project, for example **+Todays-Tasks**, and keep a short list in its document. Create issues there only if a line needs its own thread. This is not a built-in project, not a to-do system, and not required. Mark a line `Today:` if you also want it in **Today across projects**.
 - Starter tag names in Settings (Website, Report, Home) are only tags until you add a project here.
 - Type `+Ongoing.1` in a journal line to point at an issue. Today’s `+` suggestions include those references. The entry’s ellipsis menu (and the editor) list `+Ongoing` and `+Ongoing.1` as links that open that document or issue.
 - Begin a line with `Today:` in a project document or issue to include the complete line in **Today across projects**. Matching is case-insensitive and only occurs at the beginning of a line, so an ordinary sentence containing “today” is ignored.
