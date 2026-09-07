@@ -330,6 +330,17 @@ Installing the PWA is optional. It opens in its own window with an icon, but sto
 
 On desktop Chrome, use the install icon in the address bar when offered.
 
+### Two journals on one device
+
+Work and personal (or any two journals) need **separate browser storage**. Doing Right Now does not offer accounts or a second built-in journal.
+
+1. **Two browsers, or two profiles in the same browser.** Chrome, Safari, Firefox, and browser profiles each keep their own IndexedDB. That is the reliable way on every device.
+2. **iPhone or iPad only:** add the journal to the Home Screen more than once from Safari. You can give each icon a different name. On iOS, each Home Screen install typically has its own journal, also separate from the Safari tab. This is iOS behavior, not a Doing Right Now setting.
+
+Installing the same site twice in Chrome on Android or desktop does **not** create a second journal. Those installs share one origin and one database.
+
+On iOS, the Safari tab and a Home Screen icon are already different journals. Export before assuming they share entries.
+
 ## Not a Task Manager
 
 DRN records moments; it doesn't replace a full task manager. For a free, open-source option with projects, timers, and time tracking, see [Super Productivity](https://super-productivity.com/download/). Typical pattern: choose the next thing in your planner, work there, and log a new line in DRN when you switch.
