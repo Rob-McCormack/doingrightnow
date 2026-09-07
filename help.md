@@ -141,7 +141,7 @@ That is not a status system. The project text remains; only its temporary visibi
 - Select a project-search result to open its project document or exact issue and select the source line. The regular **Search journal** view continues to search journal entries only.
 - There are no status fields, assignees, or due dates — write those in your own words if you need them. The examples below are only illustrations, not a required format.
 - Export includes project documents and issues in the same JSON backup.
-- **Export project** on the project document or issues list (or **Project: Export** in the command palette) downloads a Markdown copy of that one project and all of its issues. It cannot be imported. **Copy issue as text** still copies a single issue.
+- **Export project** on the project document or issues list (or **Project: Export** in the command palette) opens a Markdown copy of that one project and all of its issues. Copy it, or download a file. It cannot be imported. On iPhone, **Copy** is more reliable than Download, which may open the file in Safari. **Copy issue as text** still copies a single issue. If only one project exists, the command palette exports that project. With several, it uses the last opened project — the hint shows the name.
 
 Example project document:
 
