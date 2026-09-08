@@ -76,10 +76,11 @@ Special markers are standalone symbols, and an entry can contain only one of `^`
 
 ## Search
 
-Open **Search** from the drawer or command palette. Search is a simple, case-insensitive **substring search** across every entry.
+Open **Search** from the drawer or command palette. Search is a simple, case-insensitive **substring search** across journal entries.
 
 - Typing `Bill` finds that sequence anywhere, including in `@Bill`. Typing `@Bill` narrows the substring to the prefixed text.
 - Search opens with no results and a prompt to type. Results update as you type and display newest first.
+- Below the search box, **All** (the default), **Last 30**, or **Last 365** limits results to that span of days. Copy and Edit use the same filtered list.
 - Search tags directly with `@person`, `+project`, or `#place`.
 - **Copy** copies matching entries as plain text.
 - **Edit** opens an editable plain-text preview before copying; changing the preview does not change the journal.
@@ -147,13 +148,16 @@ That is not a status system. The project text remains; only its temporary visibi
 Example project document:
 
 ```
-WEBSITE REDESIGN
++WEBSITE REDESIGN
 
 Goal
 Launch the new website before October.
 
+Project status
+[>>>>......] 40%
+
 Next
-Today: @Rob — Finish mobile navigation
+@Rob — Finish mobile navigation
 @Sarah — Rewrite the introduction
 @Bill — Review the contact form
 @Nina — Confirm launch copy
@@ -181,6 +185,25 @@ Sep 12 — First full content review — @Rob @Sarah
 Sep 18 — Client review — @Bill
 Sep 25 — Final changes — @Rob
 Oct 1 — Launch — @Rob @Nina
+
+Time
+Sep 1 — @Rob — 1h 20m — Navigation
+Sep 2 — @Rob — 45m — CSS cleanup
+Sep 3 — @Bill — 2h — Contact form
+Sep 4 — @Sarah — 1h — Copy revisions
+
+Notes
+@Bill says the old contact form needs to remain available until launch.
+
+@Sarah will send the final photographs before Sep 12.
+
+@Nina wants the launch announcement ready two days before release.
+
+Possible later
+@Rob — Add testimonials
+@Bill — Improve analytics
+@Sarah — Revisit the contact page
+@Rob — Clean up old CSS
 ```
 
 Example issue:
