@@ -35,7 +35,7 @@ Two brief, dismissible messages guide your first entry and then disappear perman
 - Choose **Save** to keep changes, **Cancel** to discard them, or **Delete** and confirm to remove the entry.
 - Long entries are shortened to three lines with an ellipsis in the journal display. The editor always shows the complete text.
 - The browser’s native spell checker is enabled in the Today composer, entry editor, Quick Note, project documents, issues, and editable copy dialog. Languages and suggestions come from your browser or device; Doing Right Now does not send text anywhere.
-- Addresses beginning with `http://`, `https://`, or `www.` appear as openable links in the editor and entry-actions dialog. `+Ongoing` and `+Ongoing.1` appear in the same list when that project or issue exists; tapping one opens it.
+- Addresses beginning with `http://`, `https://`, or `www.` appear as openable links under the text in the entry editor, project documents, and issues, and in the entry-actions dialog. `+Ongoing` and `+Ongoing.1` appear in the same list when that project or issue exists; tapping one opens it.
 
 ![Screenshot placeholder: the entry dialog with multiline text, character count, detected links, and Save, Cancel, and Delete actions.](placeholder-editing.png)
 
@@ -136,7 +136,7 @@ That is not a status system. The project text remains; only its temporary visibi
 - Select a project-search result to open its project document or exact issue and select the source line.
 - Loose items for today can get lost in **+Ongoing** if that document is already busy. That is optional: add your own project, for example **+Todays-Tasks**, and keep a short list in its document. Create issues there only if a line needs its own thread. This is not a built-in project, not a to-do system, and not required. Mark a line `Today:` if you also want it in **Today across projects**.
 - Starter tag names in Settings (Website, Report, Home) are only tags until you add a project here.
-- Type `+Ongoing.1` in a journal line to point at an issue. Today’s `+` suggestions include those references. The entry’s ellipsis menu (and the editor) list `+Ongoing` and `+Ongoing.1` as links that open that document or issue.
+- Type `+Ongoing.1` in a journal line to point at an issue. Today’s `+` suggestions include those references. The entry’s ellipsis menu (and the editor) list `+Ongoing` and `+Ongoing.1` as links that open that document or issue. Project documents and issues show the same kind of list under the textarea when they contain a web address or a `+` project/issue reference.
 - Begin a line with `Today:` in a project document or issue to include the complete line in **Today across projects**. Matching is case-insensitive and only occurs at the beginning of a line, so an ordinary sentence containing “today” is ignored.
 - Open the collected view with **Project: Today** in the command palette. Each result names its source; selecting it opens the project document or exact issue and selects the matching line.
 - `Today:` lines remain until you edit or remove the prefix. They do not expire automatically.
