@@ -103,7 +103,7 @@ The full entry dialog also displays Quick Add items as buttons. Templates may in
 
 Scratch Pad is for anything that is not a timestamped entry.
 
-- Use the **note icon** in the header, to the right of the command palette, from any view.
+- Use the **pen icon** in the header, to the right of the command palette, from any view.
 - It auto-saves as you type and is not attached to a date.
 - Its **Copy** button copies only the note.
 - The command palette can open and focus Scratch Pad directly.
