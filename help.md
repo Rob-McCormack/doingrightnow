@@ -34,7 +34,7 @@ Two brief, dismissible messages guide your first entry and then disappear perman
 - The dialog editor supports multiple lines and up to **1,000 characters**, with a live character count. Press **Enter** to save or **Shift+Enter** to add a new line.
 - Choose **Save** to keep changes, **Cancel** to discard them, or **Delete** and confirm to remove the entry.
 - Long entries are shortened to three lines with an ellipsis in the journal display. The editor always shows the complete text.
-- The browser’s native spell checker is enabled in the Today composer, entry editor, Quick Note, project documents, issues, and editable copy dialog. Languages and suggestions come from your browser or device; Doing Right Now does not send text anywhere.
+- The browser’s native spell checker is enabled in the Today composer, entry editor, Scratch Pad, project documents, issues, and editable copy dialog. Languages and suggestions come from your browser or device; Doing Right Now does not send text anywhere.
 - Addresses beginning with `http://`, `https://`, or `www.` appear as openable links under the text in the entry editor, project documents, and issues, and in the entry-actions dialog. `+Ongoing` and `+Ongoing.1` appear in the same list when that project or issue exists; tapping one opens it.
 
 ![Screenshot placeholder: the entry dialog with multiline text, character count, detected links, and Save, Cancel, and Delete actions.](placeholder-editing.png)
@@ -99,14 +99,14 @@ The full entry dialog also displays Quick Add items as buttons. Templates may in
 
 ![Screenshot placeholder: the lightning-button menu beside the Today composer, showing reusable activities managed in Settings.](placeholder-quickadd.png)
 
-## Quick Note
+## Scratch Pad
 
-Quick Note is a shared scratchpad for anything that is not a timestamped entry.
+Scratch Pad is for anything that is not a timestamped entry.
 
 - Use the **note icon** in the header, to the right of the command palette, from any view.
 - It auto-saves as you type and is not attached to a date.
 - Its **Copy** button copies only the note.
-- The command palette can open and focus Quick Note directly.
+- The command palette can open and focus Scratch Pad directly.
 
 ## Projects
 
@@ -249,9 +249,9 @@ Fixed the event handler and tested on iPhone.
 
 ## Command Palette & Zen
 
-- The right side of the header contains the command icon and Quick Note; the hamburger on the left opens the navigation drawer. Open the palette with its icon or **⌘K**/**Ctrl+K**.
+- The right side of the header contains the command icon and Scratch Pad; the hamburger on the left opens the navigation drawer. Open the palette with its icon or **⌘K**/**Ctrl+K**.
 - Choose in any of three ways: type a more specific phrase and press **Enter**, click or tap a command, or use the arrow keys and **Enter**. For example, instead of stopping at `project`, search for `open document`, `new project`, or `search documents`.
-- Commands cover adding an activity; Today, Yesterday, 7-, 30-, 365-day, and All views; journal Search; Projects (including **Project: Today**, **Project: Search documents & issues**, and **Project: Export +Name** for each project); Quick Note; Zen mode; Help; and temporary Developer tools. Settings commands are prefixed **Settings:**, System commands **System:**, project commands **Project:**, issue commands **Issue:**, and GitHub commands **GitHub:**. **Add an activity** and **Go to Today** stay first; the remaining commands are alphabetical. **GitHub:** commands appear only when Advanced is on.
+- Commands cover adding an activity; Today, Yesterday, 7-, 30-, 365-day, and All views; journal Search; Projects (including **Project: Today**, **Project: Search documents & issues**, and **Project: Export +Name** for each project); Scratch Pad; Zen mode; Help; and temporary Developer tools. Settings commands are prefixed **Settings:**, System commands **System:**, project commands **Project:**, issue commands **Issue:**, and GitHub commands **GitHub:**. **Add an activity** and **Go to Today** stay first. The last one or two commands you ran from the palette appear next; the rest are alphabetical. Appearance, accent, font, dates, and list-editor commands stay in Settings. **GitHub:** commands appear only when Advanced is on.
 - Use the expand button at the upper right of Today’s current entry to enter **Zen mode**, a distraction-free full-screen view of the current entry, elapsed duration, and current clock time. Started, completed, important, and question markers appear as icons instead of `^`, `"`, `!`, or `?`. Its **+** returns to Today ready to add another activity. On desktop, **Escape** also leaves Zen mode.
 - **Developer tools** is temporary. **OK** adds sample journal entries plus **+Tasks** and **+Website**, each with two issues. Existing data is kept. **Cancel** closes without changing anything.
 
@@ -293,17 +293,17 @@ The elapsed-time display on Today’s current entry shows how long the newest li
 - Tabs and windows stay in sync automatically only in the **same browser on the same device**.
 - A different device or browser has a separate journal. Clearing browser site data can permanently remove it.
 - Open **System → Data & backup** to see journal size, browser storage estimates when available, and the last backup time.
-- **Export journal** downloads a complete `.json` backup containing entries, Quick Note, ratings, lists, settings, project documents, and issues. Import can restore this file. The GitHub token and repository connection are not included.
-- **Export as text** downloads a readable `.txt` of the journal, Quick Note, project documents, and issues. It is for reading, sharing, or archiving before a cleanup. It cannot be imported.
+- **Export journal** downloads a complete `.json` backup containing entries, Scratch Pad, ratings, lists, settings, project documents, and issues. Import can restore this file. The GitHub token and repository connection are not included.
+- **Export as text** downloads a readable `.txt` of the journal, Scratch Pad, project documents, and issues. It is for reading, sharing, or archiving before a cleanup. It cannot be imported.
 - **Export as Markdown** downloads the same words as a `.md` file. GitHub can render it. It cannot be imported. Your own `#` headings are copied as written. The file adds wrapper headings around each project; it does not double yours.
-- **Import journal** accepts a Doing Right Now JSON backup. After showing its entry count and date range, import **replaces the entire current journal**, Quick Note, ratings, lists, settings, project documents, and issues; it does not merge. This device’s GitHub connection and token stay put. Export the current journal first if you may need it.
+- **Import journal** accepts a Doing Right Now JSON backup. After showing its entry count and date range, import **replaces the entire current journal**, Scratch Pad, ratings, lists, settings, project documents, and issues; it does not merge. This device’s GitHub connection and token stay put. Export the current journal first if you may need it.
 - A backup reminder appears after seven days of journal history with no export, or when the latest export is at least 30 days old. Repeat reminders are limited to once a week. A successful GitHub backup also counts as an export.
 
 In **System**, destructive cleanup actions ask for confirmation:
 
-- **Clear all except Today** removes entries before today while keeping Quick Note, lists, settings, and projects.
+- **Clear all except Today** removes entries before today while keeping Scratch Pad, lists, settings, and projects.
 - **Clear older entries** keeps a chosen number of recent calendar days and removes earlier entries.
-- **Reset** removes journal entries, Quick Note, ratings, custom lists, settings, project documents, issues, and GitHub Backup settings including the token, then restores starter People, Projects, Places, and Quick Add lists. Files already on GitHub are not changed.
+- **Reset** removes journal entries, Scratch Pad, ratings, custom lists, settings, project documents, issues, and GitHub Backup settings including the token, then restores starter People, Projects, Places, and Quick Add lists. Files already on GitHub are not changed.
 
 Clearing and resetting cannot be undone without a previously exported JSON backup.
 
@@ -372,7 +372,7 @@ DRN records moments; it doesn't replace a full task manager. For a free, open-so
 
 ## Privacy & Security
 
-This isn't a password manager or encrypted vault. Don't store passwords, financial details, or other highly sensitive information in your journal or Quick Note.
+This isn't a password manager or encrypted vault. Don't store passwords, financial details, or other highly sensitive information in your journal or Scratch Pad.
 
 - Data is plain text in this browser, not on Doing Right Now servers.
 - Anyone with access to your unlocked device can read it.
@@ -386,7 +386,7 @@ This isn't a password manager or encrypted vault. Don't store passwords, financi
 - Emoji are searchable text.
 - Tune the trophy threshold to match your day.
 - Timestamps are intentionally uneditable.
-- Quick Note is meant for one-off scraps, not a parallel planning system.
+- Scratch Pad is meant for one-off scraps, not a parallel planning system.
 - Projects are optional. **+Ongoing** is always there if you want a catch-all; ignore extra named projects if the journal is enough.
 - Star ratings are for personal pattern-spotting; there is no aggregate score.
 - Export before switching devices or clearing browser data.

@@ -394,7 +394,7 @@
           <li>The dialog editor supports multiple lines and up to <strong>1,000 characters</strong>, with a live character count. Press <strong>Enter</strong> to save or <strong>Shift+Enter</strong> to add a new line.</li>
           <li>Choose <strong>Save</strong> to keep your changes, <strong>Cancel</strong> to discard them, or <strong>Delete</strong> and confirm to remove the entry.</li>
           <li>Long entries are shortened to three lines with an ellipsis in the journal display. The editor always shows the complete text.</li>
-          <li>The browser’s native spell checker is enabled in the Today composer, entry editor, Quick Note, project documents, issues, and editable copy dialog. Languages and suggestions come from your browser or device; Doing Right Now does not send text anywhere.</li>
+          <li>The browser’s native spell checker is enabled in the Today composer, entry editor, Scratch Pad, project documents, issues, and editable copy dialog. Languages and suggestions come from your browser or device; Doing Right Now does not send text anywhere.</li>
           <li>Addresses beginning with <code>http://</code>, <code>https://</code>, or <code>www.</code> appear as openable links under the text in the entry editor, project documents, and issues, and in the entry-actions dialog. <code>+Ongoing</code> and <code>+Ongoing.1</code> appear in the same list when that project or issue exists; tapping one opens it.</li>
         </ul>
         <figure class="help-figure">
@@ -500,13 +500,13 @@
           <figcaption>The lightning-button menu beside the Today composer, showing reusable activities managed in Settings.</figcaption>
         </figure>
 
-        <h2 id="notes">Quick Note</h2>
-        <p>A shared scratchpad for anything that is not a timestamped entry—a URL, reminder, or thought.</p>
+        <h2 id="notes">Scratch Pad</h2>
+        <p>A shared pad for anything that is not a timestamped entry—a URL, reminder, or thought.</p>
         <ul>
           <li>Use the <strong>note icon</strong> in the header, to the right of the command palette, from any view.</li>
           <li>It auto-saves as you type and is not attached to a date.</li>
           <li>Its <strong>Copy</strong> button copies only the note.</li>
-          <li>The command palette can open and focus Quick Note directly.</li>
+          <li>The command palette can open and focus Scratch Pad directly.</li>
         </ul>
 
         <h2 id="projects">Projects</h2>
@@ -617,9 +617,9 @@ Fixed the event handler and tested on iPhone.</pre>
 
         <h2 id="command-palette">Command Palette &amp; Zen</h2>
         <ul>
-          <li>The right side of the header contains the command icon and Quick Note; the hamburger on the left opens the navigation drawer. Open the palette with its icon or <strong>⌘K</strong>/<strong>Ctrl+K</strong>.</li>
+          <li>The right side of the header contains the command icon and Scratch Pad; the hamburger on the left opens the navigation drawer. Open the palette with its icon or <strong>⌘K</strong>/<strong>Ctrl+K</strong>.</li>
           <li>Choose in any of three ways: type a more specific phrase and press <strong>Enter</strong>, click or tap a command, or use the arrow keys and <strong>Enter</strong>. For example, instead of stopping at <code>project</code>, search for <code>open document</code>, <code>new project</code>, or <code>search documents</code>.</li>
-          <li>Commands cover adding an activity; Today, Yesterday, 7-, 30-, 365-day, and All views; journal Search; Projects (including <strong>Project: Today</strong>, <strong>Project: Search documents &amp; issues</strong>, and <strong>Project: Export +Name</strong> for each project); Quick Note; Zen mode; Help; and temporary Developer tools. Settings commands are prefixed <strong>Settings:</strong>, System commands <strong>System:</strong>, project commands <strong>Project:</strong>, issue commands <strong>Issue:</strong>, and GitHub commands <strong>GitHub:</strong>. <strong>Add an activity</strong> and <strong>Go to Today</strong> stay first; the remaining commands are alphabetical. <strong>GitHub:</strong> commands appear only when Advanced is on.</li>
+          <li>Commands cover adding an activity; Today, Yesterday, 7-, 30-, 365-day, and All views; journal Search; Projects (including <strong>Project: Today</strong>, <strong>Project: Search documents &amp; issues</strong>, and <strong>Project: Export +Name</strong> for each project); Scratch Pad; Zen mode; Help; and temporary Developer tools. Settings commands are prefixed <strong>Settings:</strong>, System commands <strong>System:</strong>, project commands <strong>Project:</strong>, issue commands <strong>Issue:</strong>, and GitHub commands <strong>GitHub:</strong>. <strong>Add an activity</strong> and <strong>Go to Today</strong> stay first. The last one or two commands you ran from the palette appear next; the rest are alphabetical. Appearance, accent, font, dates, and list-editor commands stay in Settings. <strong>GitHub:</strong> commands appear only when Advanced is on.</li>
           <li>Use the expand button at the upper right of Today’s current entry to enter <strong>Zen mode</strong>, a distraction-free full-screen view of the current entry, elapsed duration, and current clock time. Started, completed, important, and question markers appear as icons instead of <code>^</code>, <code>"</code>, <code>!</code>, or <code>?</code>. Its <strong>+</strong> returns to Today ready to add another activity. On desktop, <strong>Escape</strong> also leaves Zen mode.</li>
           <li><strong>Developer tools</strong> is temporary. <strong>OK</strong> adds sample journal entries plus <code>+Tasks</code> and <code>+Website</code>, each with two issues. Existing data is kept. <strong>Cancel</strong> closes without changing anything.</li>
         </ul>
@@ -664,17 +664,17 @@ Fixed the event handler and tested on iPhone.</pre>
           <li>If you open the app in two tabs or windows at once, they stay in sync automatically — but only in the <strong>same browser on the same device</strong>.</li>
           <li><strong>Different device or browser means a separate journal.</strong> Clearing browser site data can permanently remove it.</li>
           <li>Open <strong>System → Data &amp; backup</strong> to see journal size, browser storage estimates when available, and the last backup time.</li>
-          <li><strong>Export journal</strong> downloads a complete <code>.json</code> backup containing entries, Quick Note, ratings, lists, settings, project documents, and issues. Import can restore this file. The GitHub token and repository connection are not included.</li>
-          <li><strong>Export as text</strong> downloads a readable <code>.txt</code> of the journal, Quick Note, project documents, and issues. It is for reading, sharing, or archiving before a cleanup. It cannot be imported.</li>
+          <li><strong>Export journal</strong> downloads a complete <code>.json</code> backup containing entries, Scratch Pad, ratings, lists, settings, project documents, and issues. Import can restore this file. The GitHub token and repository connection are not included.</li>
+          <li><strong>Export as text</strong> downloads a readable <code>.txt</code> of the journal, Scratch Pad, project documents, and issues. It is for reading, sharing, or archiving before a cleanup. It cannot be imported.</li>
           <li><strong>Export as Markdown</strong> downloads the same words as a <code>.md</code> file. GitHub can render it. It cannot be imported. Your own <code>#</code> headings are copied as written. The file adds wrapper headings around each project; it does not double yours.</li>
-          <li><strong>Import journal</strong> accepts a Doing Right Now JSON backup. After showing its entry count and date range, import <strong>replaces the entire current journal</strong>, Quick Note, ratings, lists, settings, project documents, and issues; it does not merge. This device’s GitHub connection and token stay put. Export the current journal first if you may need it.</li>
+          <li><strong>Import journal</strong> accepts a Doing Right Now JSON backup. After showing its entry count and date range, import <strong>replaces the entire current journal</strong>, Scratch Pad, ratings, lists, settings, project documents, and issues; it does not merge. This device’s GitHub connection and token stay put. Export the current journal first if you may need it.</li>
           <li>A backup reminder appears after seven days of journal history with no export, or when the latest export is at least 30 days old. Repeat reminders are limited to once a week. A successful GitHub backup also counts as an export.</li>
         </ul>
         <p>In <strong>System</strong>, destructive cleanup actions ask for confirmation:</p>
         <ul>
-          <li><strong>Clear all except Today</strong> removes entries before today while keeping Quick Note, lists, settings, and projects.</li>
+          <li><strong>Clear all except Today</strong> removes entries before today while keeping Scratch Pad, lists, settings, and projects.</li>
           <li><strong>Clear older entries</strong> keeps a chosen number of recent calendar days and removes earlier entries.</li>
-          <li><strong>Reset</strong> removes journal entries, Quick Note, ratings, custom lists, settings, project documents, issues, and GitHub Backup settings including the token, then restores starter People, Projects, Places, and Quick Add lists. Files already on GitHub are not changed.</li>
+          <li><strong>Reset</strong> removes journal entries, Scratch Pad, ratings, custom lists, settings, project documents, issues, and GitHub Backup settings including the token, then restores starter People, Projects, Places, and Quick Add lists. Files already on GitHub are not changed.</li>
         </ul>
         <p>Clearing and resetting cannot be undone without a previously exported JSON backup.</p>
 
@@ -734,7 +734,7 @@ Fixed the event handler and tested on iPhone.</pre>
         <p>Typical pattern: Open Super Productivity and choose the next thing → work there → log the next line in DRN when you switch tasks.</p>
 
         <h2 id="privacy-security">Privacy &amp; security</h2>
-        <p>This isn't a password manager or encrypted vault. Don't store passwords, financial details, or other highly sensitive information in your journal or Quick Note.</p>
+        <p>This isn't a password manager or encrypted vault. Don't store passwords, financial details, or other highly sensitive information in your journal or Scratch Pad.</p>
         <ul>
           <li>Your data lives in <strong>plain text</strong> in this browser on this device — not on our servers (there aren't any).</li>
           <li>Anyone with access to your unlocked phone or computer can read it.</li>
@@ -749,7 +749,7 @@ Fixed the event handler and tested on iPhone.</pre>
           <li><strong>Emoji are searchable text.</strong> Paste 🤡 into search to find every entry containing it.</li>
           <li><strong>Tune the trophy threshold to match your day, not a generic number.</strong> If your entries are naturally longer or shorter than average, adjust it in Settings so the trophy actually reflects a good day for you.</li>
           <li><strong>The un-editable timestamp is a feature, not a limitation.</strong> If you want to reconstruct what you were doing at a specific time, the journal is more trustworthy than a to-do list precisely because you can't quietly rewrite history.</li>
-          <li><strong>Quick Note is not a second inbox.</strong> It is meant for one-off scraps, not a parallel planning system.</li>
+          <li><strong>Scratch Pad is not a second inbox.</strong> It is meant for one-off scraps, not a parallel planning system.</li>
           <li><strong>Projects are optional.</strong> <code>+Ongoing</code> is always there if you want a catch-all; ignore extra named projects if the journal is enough.</li>
           <li><strong>Star ratings are for your own pattern-spotting</strong>, not a metric to optimize — there's no aggregate score anywhere in the app by design.</li>
           <li><strong>Export before switching devices or clearing your browser.</strong> There is no account recovery; the JSON export is your portable restorable copy.</li>

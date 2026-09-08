@@ -43,7 +43,7 @@ The current release is **1.0.0-beta.1**.
 
 - Slide-out drawer and command-palette navigation, plus substring search across the journal
 - Entry actions for copying to Today, toggling markers, and deleting
-- Quick Note, Settings-managed Quick Add templates, and tag suggestions
+- Scratch Pad, Settings-managed Quick Add templates, and tag suggestions
 - Zen mode and a keyboard command palette
 - Day ratings, started/total counts, and configurable trophies
 - Light, dark, and system appearance with six accents
