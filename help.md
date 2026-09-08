@@ -26,7 +26,7 @@ Two brief, dismissible messages guide your first entry and then disappear perman
 
 - The **Today** composer creates a timestamped entry. The newest line is the current item: taller than the rest, with its elapsed timer under the timestamp when the timer is enabled.
 - Entries can't be reordered, and their timestamps can't be changed.
-- Open the navigation drawer with the hamburger. Tap the current view title, such as **Yesterday** or **Search**, to return directly to Today; tapping **Today** scrolls to the top without opening the keyboard.
+- Open the navigation drawer with the hamburger. Tap the current view title, such as **Yesterday**, **Projects**, or **Search**, to return directly to Today; tapping **Today** scrolls to the top without opening the keyboard.
 - Tap an entry to view and edit its complete text.
 
 ## Editing a Line
@@ -106,7 +106,7 @@ Scratch Pad is for anything that is not a timestamped entry.
 - Use the **pen icon** in the header, to the right of the command palette, from any view.
 - It auto-saves as you type and is not attached to a date.
 - Its **Copy** button copies only the note.
-- The command palette can open and focus Scratch Pad directly.
+- The command palette command is **Scratch Pad open**.
 
 ## Projects
 
@@ -251,7 +251,7 @@ Fixed the event handler and tested on iPhone.
 
 - The right side of the header contains the command icon and Scratch Pad; the hamburger on the left opens the navigation drawer. Open the palette with its icon or **⌘K**/**Ctrl+K**.
 - Choose in any of three ways: type a more specific phrase and press **Enter**, click or tap a command, or use the arrow keys and **Enter**. For example, instead of stopping at `project`, search for `open document`, `new project`, or `search documents`.
-- Commands cover adding an activity; Today, Yesterday, 7-, 30-, 365-day, and All views; journal Search; Projects (including **Project: Today**, **Project: Search documents & issues**, and **Project: Export +Name** for each project); Scratch Pad; Zen mode; Help; and temporary Developer tools. Settings commands are prefixed **Settings:**, System commands **System:**, project commands **Project:**, issue commands **Issue:**, and GitHub commands **GitHub:**. **Add an activity** and **Go to Today** stay first. The last one or two commands you ran from the palette appear next; the rest are alphabetical. Appearance, accent, font, dates, and list-editor commands stay in Settings. **GitHub:** commands appear only when Advanced is on.
+- Commands cover adding an activity; Today, Yesterday, 7-, 30-, 365-day, and All views; journal Search; Projects (including **Project: Today**, **Project: Search documents & issues**, and **Project: Export +Name** for each project); **Scratch Pad open**; Zen mode; Help; and temporary Developer tools. Settings commands are prefixed **Settings:**, System commands **System:**, project commands **Project:**, issue commands **Issue:**, and GitHub commands **GitHub:**. **Add an activity** and **Go to Today** stay first. The last one or two commands you ran from the palette appear next; the rest are alphabetical. Appearance, accent, font, dates, and list-editor commands stay in Settings. **GitHub:** commands appear only when Advanced is on.
 - Use the expand button at the upper right of Today’s current entry to enter **Zen mode**, a distraction-free full-screen view of the current entry, elapsed duration, and current clock time. Started, completed, important, and question markers appear as icons instead of `^`, `"`, `!`, or `?`. Its **+** returns to Today ready to add another activity. On desktop, **Escape** also leaves Zen mode.
 - **Developer tools** is temporary. **OK** adds sample journal entries plus **+Tasks** and **+Website**, each with two issues. Existing data is kept. **Cancel** closes without changing anything.
 
