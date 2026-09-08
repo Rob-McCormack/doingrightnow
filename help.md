@@ -132,7 +132,7 @@ That is not a status system. The project text remains; only its temporary visibi
 
 - Every journal has **+Ongoing** — a catch-all document and issue list that cannot be renamed or removed. A new journal includes a short note and two sample issues so you can see how it works; you can edit or delete those.
 - Add another project only if you need a separate document. A new project starts with a blank document. **+Website** appears next to **+Ongoing** in the picker, not inside it. Spaces in the name become hyphens so the journal tag stays one word. The **Projects** label above the picker shows the count, such as **Projects (3)**, with the number in the accent color.
-- The search icon next to the project picker opens **Search projects & issues**. It searches every project document and issue together and returns each complete matching line. **Project: Search documents & issues** in the command palette opens the same screen. The regular **Search journal** view continues to search journal entries only.
+- The search icon next to the project picker opens **Search projects & issues**. Document and Issues are hidden while you search. It searches every project document and issue together and returns each complete matching line. **Project: Search documents & issues** in the command palette opens the same screen. The regular **Search journal** view continues to search journal entries only.
 - Select a project-search result to open its project document or exact issue and select the source line.
 - Loose items for today can get lost in **+Ongoing** if that document is already busy. That is optional: add your own project, for example **+Todays-Tasks**, and keep a short list in its document. Create issues there only if a line needs its own thread. This is not a built-in project, not a to-do system, and not required. Mark a line `Today:` if you also want it in **Today across projects**.
 - Starter tag names in Settings (Website, Report, Home) are only tags until you add a project here.
@@ -142,7 +142,7 @@ That is not a status system. The project text remains; only its temporary visibi
 - `Today:` lines remain until you edit or remove the prefix. They do not expire automatically.
 - There are no status fields, assignees, or due dates — write those in your own words if you need them. The examples below are only illustrations, not a required format.
 - Export includes project documents and issues in the same JSON backup.
-- **Export project** on the project document or issues list opens that project’s Markdown, with **Copy** and **Download** at the top. It cannot be imported. On iPhone, **Copy** is more reliable than Download, which may open the file in Safari. **Copy issue as text** still copies a single issue. In the command palette, type **export** to see **Project: Export +Name** for every project.
+- **Export project** on the project document or issues list opens that project’s Markdown, with **Copy** and **Download** at the top. It cannot be imported. On iPhone, **Copy** is more reliable than Download, which may open the file in Safari. Your own `#` headings are copied as written. **Copy issue as text** still copies a single issue. In the command palette, type **export** to see **Project: Export +Name** for every project.
 
 Example project document:
 
@@ -270,7 +270,7 @@ The elapsed-time display on Today’s current entry shows how long the newest li
 - Open **System → Data & backup** to see journal size, browser storage estimates when available, and the last backup time.
 - **Export journal** downloads a complete `.json` backup containing entries, Quick Note, ratings, lists, settings, project documents, and issues. Import can restore this file. The GitHub token and repository connection are not included.
 - **Export as text** downloads a readable `.txt` of the journal, Quick Note, project documents, and issues. It is for reading, sharing, or archiving before a cleanup. It cannot be imported.
-- **Export as Markdown** downloads the same words as a `.md` file. GitHub can render it. It cannot be imported.
+- **Export as Markdown** downloads the same words as a `.md` file. GitHub can render it. It cannot be imported. Your own `#` headings are copied as written. The file adds wrapper headings around each project; it does not double yours.
 - **Import journal** accepts a Doing Right Now JSON backup. After showing its entry count and date range, import **replaces the entire current journal**, Quick Note, ratings, lists, settings, project documents, and issues; it does not merge. This device’s GitHub connection and token stay put. Export the current journal first if you may need it.
 - A backup reminder appears after seven days of journal history with no export, or when the latest export is at least 30 days old. Repeat reminders are limited to once a week. A successful GitHub backup also counts as an export.
 
