@@ -131,15 +131,15 @@ The lifecycle is simple:
 That is not a status system. The project text remains; only its temporary visibility changes.
 
 - Every journal has **+Ongoing** — a catch-all document and issue list that cannot be renamed or removed. A new journal includes a short note and two sample issues so you can see how it works; you can edit or delete those.
-- Add another project only if you need a separate document. **+Website** appears next to **+Ongoing** in the picker, not inside it. Spaces in the name become hyphens so the journal tag stays one word. The **Projects** label above the picker shows the count, such as **Projects (3)**, with the number in the accent color.
+- Add another project only if you need a separate document. A new project starts with a blank document. **+Website** appears next to **+Ongoing** in the picker, not inside it. Spaces in the name become hyphens so the journal tag stays one word. The **Projects** label above the picker shows the count, such as **Projects (3)**, with the number in the accent color.
+- The search icon next to the project picker opens **Search projects & issues**. It searches every project document and issue together and returns each complete matching line. **Project: Search documents & issues** in the command palette opens the same screen. The regular **Search journal** view continues to search journal entries only.
+- Select a project-search result to open its project document or exact issue and select the source line.
 - Loose items for today can get lost in **+Ongoing** if that document is already busy. That is optional: add your own project, for example **+Todays-Tasks**, and keep a short list in its document. Create issues there only if a line needs its own thread. This is not a built-in project, not a to-do system, and not required. Mark a line `Today:` if you also want it in **Today across projects**.
 - Starter tag names in Settings (Website, Report, Home) are only tags until you add a project here.
 - Type `+Ongoing.1` in a journal line to point at an issue. Today’s `+` suggestions include those references. The entry’s ellipsis menu (and the editor) list `+Ongoing` and `+Ongoing.1` as links that open that document or issue.
 - Begin a line with `Today:` in a project document or issue to include the complete line in **Today across projects**. Matching is case-insensitive and only occurs at the beginning of a line, so an ordinary sentence containing “today” is ignored.
-- Open the collected view with the calendar-check icon in Projects or **Project: Today** in the command palette. Each result names its source; selecting it opens the project document or exact issue and selects the matching line.
+- Open the collected view with **Project: Today** in the command palette. Each result names its source; selecting it opens the project document or exact issue and selects the matching line.
 - `Today:` lines remain until you edit or remove the prefix. They do not expire automatically.
-- For any other text, use **Project: Search documents & issues** in the command palette. It searches every project document and issue together and returns each complete matching line.
-- Select a project-search result to open its project document or exact issue and select the source line. The regular **Search journal** view continues to search journal entries only.
 - There are no status fields, assignees, or due dates — write those in your own words if you need them. The examples below are only illustrations, not a required format.
 - Export includes project documents and issues in the same JSON backup.
 - **Export project** on the project document or issues list opens that project’s Markdown, with **Copy** and **Download** at the top. It cannot be imported. On iPhone, **Copy** is more reliable than Download, which may open the file in Safari. **Copy issue as text** still copies a single issue. In the command palette, type **export** to see **Project: Export +Name** for every project.
