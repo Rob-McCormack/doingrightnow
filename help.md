@@ -253,6 +253,7 @@ Fixed the event handler and tested on iPhone.
 - Choose in any of three ways: type a more specific phrase and press **Enter**, click or tap a command, or use the arrow keys and **Enter**. For example, instead of stopping at `project`, search for `open document`, `new project`, or `search documents`.
 - Commands cover adding an activity; Today, Yesterday, 7-, 30-, 365-day, and All views; journal Search; Projects (including **Project: Today**, **Project: Search documents & issues**, and **Project: Export +Name** for each project); Quick Note; Zen mode; Help; and temporary Developer tools. Settings commands are prefixed **Settings:**, System commands **System:**, project commands **Project:**, issue commands **Issue:**, and GitHub commands **GitHub:**. **Add an activity** and **Go to Today** stay first; the remaining commands are alphabetical. **GitHub:** commands appear only when Advanced is on.
 - Use the expand button at the upper right of Today’s current entry to enter **Zen mode**, a distraction-free full-screen view of the current entry, elapsed duration, and current clock time. Started, completed, important, and question markers appear as icons instead of `^`, `"`, `!`, or `?`. Its **+** returns to Today ready to add another activity. On desktop, **Escape** also leaves Zen mode.
+- **Developer tools** is temporary. **OK** adds sample journal entries plus **+Tasks** and **+Website**, each with two issues. Existing data is kept. **Cancel** closes without changing anything.
 
 ---
 
