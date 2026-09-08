@@ -106,7 +106,7 @@ Scratch Pad is for anything that is not a timestamped entry.
 - Use the **pen icon** in the header, to the right of the command palette, from any view.
 - It auto-saves as you type and is not attached to a date.
 - Its **Copy** button copies only the note.
-- The command palette command is **Scratch Pad open**.
+- The command palette command is **Open Scratch Pad**.
 
 ## Projects
 
@@ -251,7 +251,7 @@ Fixed the event handler and tested on iPhone.
 
 - The right side of the header contains the command icon and Scratch Pad; the hamburger on the left opens the navigation drawer. Open the palette with its icon or **⌘K**/**Ctrl+K**.
 - Choose in any of three ways: type a more specific phrase and press **Enter**, click or tap a command, or use the arrow keys and **Enter**. For example, instead of stopping at `project`, search for `open document`, `new project`, or `search documents`.
-- Commands cover adding an activity; Today, Yesterday, 7-, 30-, 365-day, and All views; journal Search; Projects (including **Project: Today**, **Project: Search documents & issues**, and **Project: Export +Name** for each project); **Scratch Pad open**; Zen mode; Help; and temporary Developer tools. Settings commands are prefixed **Settings:**, System commands **System:**, project commands **Project:**, issue commands **Issue:**, and GitHub commands **GitHub:**. **Add an activity** and **Go to Today** stay first. The last one or two commands you ran from the palette appear next; the rest are alphabetical. Appearance, accent, font, dates, and list-editor commands stay in Settings. **GitHub:** commands appear only when Advanced is on.
+- Commands cover adding an activity; Today, Yesterday, 7-, 30-, 365-day, and All views; journal Search; Projects (including **Project: Today**, **Project: Search documents & issues**, and **Project: Export +Name** for each project); Scratch Pad; Zen mode; Help; and temporary Developer tools. Settings commands are prefixed **Settings:**, System commands **System:**, project commands **Project:**, issue commands **Issue:**, and GitHub commands **GitHub:**. **Add an activity** and **Go to Today** stay first. The last one or two commands you ran from the palette appear next; the rest are alphabetical. Appearance, accent, font, dates, and list-editor commands stay in Settings. **GitHub:** commands appear only when Advanced is on.
 - Use the expand button at the upper right of Today’s current entry to enter **Zen mode**, a distraction-free full-screen view of the current entry, elapsed duration, and current clock time. Started, completed, important, and question markers appear as icons instead of `^`, `"`, `!`, or `?`. Its **+** returns to Today ready to add another activity. On desktop, **Escape** also leaves Zen mode.
 - **Developer tools** is temporary. **OK** adds sample journal entries plus **+Tasks** and **+Website**, each with two issues. Existing data is kept. **Cancel** closes without changing anything.
 
@@ -333,7 +333,7 @@ This uploads the same JSON as **Export journal**, plus a Markdown copy, to a pri
 - When **Enable GitHub Backup** is on and owner, repository, and token are filled in, the app uploads once per local day if it is open and the journal has changed since the last successful backup. Nothing uploads if the app is closed. Writing a line never starts an upload. A failed daily backup shows a toast; local data stays saved.
 - **Test Connection** checks owner, repository, branch, and token without changing files. The result appears as **Last result**.
 - **Back Up Now** creates or updates `DoingRightNow-backup.json` and `DoingRightNow.md` in that repository. GitHub commit history keeps earlier versions.
-- When Advanced is on, the command palette includes **GitHub: Backup open** and **GitHub: Back up now**.
+- When Advanced is on, the command palette includes **GitHub: Open backup** and **GitHub: Back up now**.
 - Restore by downloading `DoingRightNow-backup.json` from GitHub and using **Import journal**. `DoingRightNow.md` is for reading; it cannot be imported.
 - The token is stored only in this browser. It is never written into `DoingRightNow-backup.json`, `DoingRightNow.md`, or a downloaded export.
 

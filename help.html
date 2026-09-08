@@ -506,7 +506,7 @@
           <li>Use the <strong>pen icon</strong> in the header, to the right of the command palette, from any view.</li>
           <li>It auto-saves as you type and is not attached to a date.</li>
           <li>Its <strong>Copy</strong> button copies only the note.</li>
-          <li>The command palette command is <strong>Scratch Pad open</strong>.</li>
+          <li>The command palette command is <strong>Open Scratch Pad</strong>.</li>
         </ul>
 
         <h2 id="projects">Projects</h2>
@@ -619,7 +619,7 @@ Fixed the event handler and tested on iPhone.</pre>
         <ul>
           <li>The right side of the header contains the command icon and Scratch Pad; the hamburger on the left opens the navigation drawer. Open the palette with its icon or <strong>⌘K</strong>/<strong>Ctrl+K</strong>.</li>
           <li>Choose in any of three ways: type a more specific phrase and press <strong>Enter</strong>, click or tap a command, or use the arrow keys and <strong>Enter</strong>. For example, instead of stopping at <code>project</code>, search for <code>open document</code>, <code>new project</code>, or <code>search documents</code>.</li>
-          <li>Commands cover adding an activity; Today, Yesterday, 7-, 30-, 365-day, and All views; journal Search; Projects (including <strong>Project: Today</strong>, <strong>Project: Search documents &amp; issues</strong>, and <strong>Project: Export +Name</strong> for each project); <strong>Scratch Pad open</strong>; Zen mode; Help; and temporary Developer tools. Settings commands are prefixed <strong>Settings:</strong>, System commands <strong>System:</strong>, project commands <strong>Project:</strong>, issue commands <strong>Issue:</strong>, and GitHub commands <strong>GitHub:</strong>. <strong>Add an activity</strong> and <strong>Go to Today</strong> stay first. The last one or two commands you ran from the palette appear next; the rest are alphabetical. Appearance, accent, font, dates, and list-editor commands stay in Settings. <strong>GitHub:</strong> commands appear only when Advanced is on.</li>
+          <li>Commands cover adding an activity; Today, Yesterday, 7-, 30-, 365-day, and All views; journal Search; Projects (including <strong>Project: Today</strong>, <strong>Project: Search documents &amp; issues</strong>, and <strong>Project: Export +Name</strong> for each project); Scratch Pad; Zen mode; Help; and temporary Developer tools. Settings commands are prefixed <strong>Settings:</strong>, System commands <strong>System:</strong>, project commands <strong>Project:</strong>, issue commands <strong>Issue:</strong>, and GitHub commands <strong>GitHub:</strong>. <strong>Add an activity</strong> and <strong>Go to Today</strong> stay first. The last one or two commands you ran from the palette appear next; the rest are alphabetical. Appearance, accent, font, dates, and list-editor commands stay in Settings. <strong>GitHub:</strong> commands appear only when Advanced is on.</li>
           <li>Use the expand button at the upper right of Today’s current entry to enter <strong>Zen mode</strong>, a distraction-free full-screen view of the current entry, elapsed duration, and current clock time. Started, completed, important, and question markers appear as icons instead of <code>^</code>, <code>"</code>, <code>!</code>, or <code>?</code>. Its <strong>+</strong> returns to Today ready to add another activity. On desktop, <strong>Escape</strong> also leaves Zen mode.</li>
           <li><strong>Developer tools</strong> is temporary. <strong>OK</strong> adds sample journal entries plus <code>+Tasks</code> and <code>+Website</code>, each with two issues. Existing data is kept. <strong>Cancel</strong> closes without changing anything.</li>
         </ul>
@@ -701,7 +701,7 @@ Fixed the event handler and tested on iPhone.</pre>
           <li>When <strong>Enable GitHub Backup</strong> is on and owner, repository, and token are filled in, the app uploads once per local day if it is open and the journal has changed since the last successful backup. Nothing uploads if the app is closed. Writing a line never starts an upload. A failed daily backup shows a toast; local data stays saved.</li>
           <li><strong>Test Connection</strong> checks owner, repository, branch, and token without changing files. The result appears as <strong>Last result</strong>.</li>
           <li><strong>Back Up Now</strong> creates or updates <code>DoingRightNow-backup.json</code> and <code>DoingRightNow.md</code> in that repository. GitHub commit history keeps earlier versions.</li>
-          <li>When Advanced is on, the command palette includes <strong>GitHub: Backup open</strong> and <strong>GitHub: Back up now</strong>.</li>
+          <li>When Advanced is on, the command palette includes <strong>GitHub: Open backup</strong> and <strong>GitHub: Back up now</strong>.</li>
           <li>Restore by downloading <code>DoingRightNow-backup.json</code> from GitHub and using <strong>Import journal</strong>. <code>DoingRightNow.md</code> is for reading; it cannot be imported.</li>
           <li>The token is stored only in this browser. It is never written into <code>DoingRightNow-backup.json</code>, <code>DoingRightNow.md</code>, or a downloaded export.</li>
         </ul>
