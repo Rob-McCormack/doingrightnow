@@ -377,6 +377,7 @@ This isn't a password manager or encrypted vault. Don't store passwords, financi
 - Data is plain text in this browser, not on Doing Right Now servers.
 - Anyone with access to your unlocked device can read it.
 - Browser extensions with site access may be able to read page storage.
+- Import a JSON backup only if you exported it or trust the file. Journal lines are shown as text, not as HTML.
 - DRN uses no third-party scripts or analytics. Your journal leaves the browser only when you export a backup, copy text, or use optional GitHub Backup, including the daily upload if it is set up.
 
 ## Advanced Tips
