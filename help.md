@@ -292,7 +292,7 @@ The elapsed-time display on Today’s current entry shows how long the newest li
 - Journal data is stored in **IndexedDB** in this browser. There is no Doing Right Now account.
 - Tabs and windows stay in sync automatically only in the **same browser on the same device**.
 - A different device or browser has a separate journal. Clearing browser site data can permanently remove it.
-- Open **System → Data & backup** to see journal size, browser storage estimates when available, and the last backup time.
+- Open **System → Data & backup** to see how full this browser’s storage is, the journal size, and the last backup time.
 - **Export journal** downloads a complete `.json` backup containing entries, Scratch Pad, ratings, lists, settings, project documents, and issues. Import can restore this file. The GitHub token and repository connection are not included.
 - **Export as text** downloads a readable `.txt` of the journal, Scratch Pad, project documents, and issues. It is for reading, sharing, or archiving before a cleanup. It cannot be imported.
 - **Export as Markdown** downloads the same words as a `.md` file. GitHub can render it. It cannot be imported. Your own `#` headings are copied as written. The file adds wrapper headings around each project; it does not double yours.
