@@ -277,13 +277,13 @@ The elapsed-time display on Today’s current entry shows how long the newest li
 ## Theme & Appearance
 
 - Choose **System**, **Light**, or **Dark** in Settings, or use **Settings: Toggle Light/Dark** in the command palette.
-- Choose Small, Medium, or Large text and one of six accents: Green, Blue, Violet, Amber, Coral, or Pumpkin. The app icon remains green.
+- Choose Small, Medium, or Large text and an accent: Green, Blue, Violet, Amber, Coral, Pumpkin, or Custom. Custom is a hue slider; lightness stays readable in Light and Dark. The app icon remains green.
 - Choose **Loose** (default) or **Tight** item spacing for the journal list.
 - Choose 12- or 24-hour timestamps and Regional, MM/DD/YYYY, DD/MM/YYYY, or YYYY-MM-DD dates.
 - Reduced-motion preferences disable decorative animation.
 - **Advanced** is off by default. Turn it on in Settings to show optional tools such as GitHub Backup.
 
-![Screenshot placeholder: Settings showing appearance, font size, item spacing, date and time formats, and six accents.](placeholder-theme.png)
+![Screenshot placeholder: Settings showing appearance, font size, item spacing, date and time formats, accents, and a hue slider.](placeholder-theme.png)
 
 ---
 

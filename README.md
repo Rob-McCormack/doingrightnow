@@ -46,7 +46,7 @@ The current release is **1.0.0-beta.1**.
 - Scratch Pad, Settings-managed Quick Add templates, and tag suggestions
 - Zen mode and a keyboard command palette
 - Day ratings, started/total counts, and configurable trophies
-- Light, dark, and system appearance with six accents
+- Light, dark, and system appearance with six accents plus a custom hue
 - Complete JSON export/import with replacement confirmation
 - Offline PWA support
 
