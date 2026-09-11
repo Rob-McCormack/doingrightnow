@@ -252,7 +252,7 @@ Fixed the event handler and tested on iPhone.
 - The right side of the header contains the command icon and Scratch Pad; the hamburger on the left opens the navigation drawer. Open the palette with its icon or **⌘K**/**Ctrl+K**.
 - Choose in any of three ways: type a more specific phrase and press **Enter**, click or tap a command, or use the arrow keys and **Enter**. For example, instead of stopping at `project`, search for `open document`, `new project`, `search documents`, or a project name such as `tasks`.
 - Commands cover adding an activity; Today, Yesterday, 7-, 30-, 365-day, and All views; journal Search; Projects (including **Project: Name** and **Project: Export +Name** for each project, **Project: Today**, and **Project: Search documents & issues**); Scratch Pad; Zen mode; Help; and temporary Developer tools. Settings commands are prefixed **Settings:**, System commands **System:**, project commands **Project:**, issue commands **Issue:**, and GitHub commands **GitHub:**. **Add an activity** and **Go to Today** stay first. The last one or two commands you ran from the palette appear next; the rest are alphabetical. Appearance, accent, font, dates, and list-editor commands stay in Settings. **GitHub:** commands appear only when Advanced is on.
-- Use the expand button at the upper right of Today’s current entry to enter **Zen mode**, a distraction-free full-screen view of the current entry, elapsed duration, and current clock time. Started, completed, important, and question markers appear as icons instead of `^`, `"`, `!`, or `?`. Its **+** returns to Today ready to add another activity. On desktop, **Escape** also leaves Zen mode.
+- Use the timer icon or the expand button at the upper right of Today’s current entry to enter **Zen mode**, a distraction-free full-screen view of the current entry, elapsed duration, and current clock time. Started, completed, important, and question markers appear as icons instead of `^`, `"`, `!`, or `?`. Its **+** returns to Today ready to add another activity. On desktop, **Escape** also leaves Zen mode.
 - **Developer tools** is temporary. **OK** adds sample journal entries plus **+Tasks** and **+Website**, each with two issues. Existing data is kept. **Cancel** closes without changing anything.
 
 ---
@@ -267,7 +267,7 @@ Fixed the event handler and tested on iPhone.
 
 ## Timer on the Current Line
 
-The elapsed-time display on Today’s current entry shows how long the newest line has been current. It appears under that entry’s timestamp: the animated timer icon, then the numeric readout. It is enabled by default, but it is optional.
+The elapsed-time display on Today’s current entry shows how long the newest line has been current. It appears under that entry’s timestamp: the animated timer icon, then the numeric readout. It is enabled by default, but it is optional. Tap the timer icon to enter Zen mode.
 
 - It counts seconds and minutes, then hours, up to **8hr+**.
 - The stopwatch hand circles every minute to show passing time; it is not a target or countdown.
@@ -395,7 +395,7 @@ This isn't a password manager or encrypted vault. Don't store passwords, financi
 
 ## Public Beta Notes
 
-**1.0.0-beta.1** is a public beta. Back up regularly and expect details of the interface to evolve. Data remains browser-local. Optional GitHub Backup sends a snapshot to a repository you control. When it is set up, the app also uploads once per local day if it is open. It is not account sync, collaborative editing, or automatic cross-device backup. The current JSON import is a full replacement, not a merge. Features removed from the earlier app are intentionally absent, and no migration workflow is required.
+**1.0.0-beta.1** is a public beta. Back up regularly and expect details of the interface to evolve. Data remains browser-local. Optional GitHub Backup sends a snapshot to a repository you control. When it is set up, the app also uploads once per local day if it is open. It is not account sync, collaborative editing, or automatic cross-device backup. The current JSON import is a full replacement, not a merge. Features removed from the earlier app are intentionally absent, and no migration workflow is required. When a new version is available while the journal is open, a message offers **Refresh**. You can also reload the page from the browser.
 
 ---
 
