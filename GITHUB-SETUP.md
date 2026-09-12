@@ -32,8 +32,7 @@ Do not commit the token to any repository. If it is exposed, revoke it on that s
 ## 3. Fill in Doing Right Now
 
 1. Open the journal.
-2. **Settings → Advanced** — turn it on.
-3. **System → Data & backup** — GitHub Backup is at the bottom.
+2. **System → Data & backup** — GitHub Backup is at the bottom.
 
 | Field | Example |
 |---|---|

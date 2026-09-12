@@ -619,7 +619,7 @@ Fixed the event handler and tested on iPhone.</pre>
         <ul>
           <li>The right side of the header contains the command icon and Scratch Pad; the hamburger on the left opens the navigation drawer. Open the palette with its icon or <strong>⌘K</strong>/<strong>Ctrl+K</strong>.</li>
           <li>Choose in any of three ways: type a more specific phrase and press <strong>Enter</strong>, click or tap a command, or use the arrow keys and <strong>Enter</strong>. For example, instead of stopping at <code>project</code>, search for <code>open document</code>, <code>new project</code>, <code>search documents</code>, or a project name such as <code>tasks</code>.</li>
-          <li>Commands cover adding an activity; Today, Yesterday, 7-, 30-, 365-day, and All views; journal Search; Projects (including <strong>Project: Name</strong> and <strong>Project: Export +Name</strong> for each project, <strong>Project: Today</strong>, and <strong>Project: Search documents &amp; issues</strong>); Scratch Pad; Zen mode; Help; and temporary Developer tools. Settings commands are prefixed <strong>Settings:</strong>, System commands <strong>System:</strong>, project commands <strong>Project:</strong>, issue commands <strong>Issue:</strong>, and GitHub commands <strong>GitHub:</strong>. <strong>Add an activity</strong> and <strong>Go to Today</strong> stay first. The last one or two commands you ran from the palette appear next; the rest are alphabetical. Appearance, accent, font, dates, and list-editor commands stay in Settings. <strong>GitHub:</strong> commands appear only when Advanced is on.</li>
+          <li>Commands cover adding an activity; Today, Yesterday, 7-, 30-, 365-day, and All views; journal Search; Projects (including <strong>Project: Name</strong> and <strong>Project: Export +Name</strong> for each project, <strong>Project: Today</strong>, and <strong>Project: Search documents &amp; issues</strong>); Scratch Pad; Zen mode; Help; and temporary Developer tools. Settings commands are prefixed <strong>Settings:</strong>, System commands <strong>System:</strong>, project commands <strong>Project:</strong>, issue commands <strong>Issue:</strong>, and GitHub commands <strong>GitHub:</strong>. <strong>Add an activity</strong> and <strong>Go to Today</strong> stay first. The last one or two commands you ran from the palette appear next; the rest are alphabetical. Appearance, accent, font, dates, and list-editor commands stay in Settings. <strong>GitHub:</strong> commands open backup settings and upload.</li>
           <li>Use the timer icon or the expand button at the upper right of Today’s current entry to enter <strong>Zen mode</strong>, a distraction-free full-screen view of the current entry, elapsed duration, and current clock time. Started, completed, important, and question markers appear as icons instead of <code>^</code>, <code>"</code>, <code>!</code>, or <code>?</code>. Its <strong>+</strong> returns to Today ready to add another activity. On desktop, <strong>Escape</strong> also leaves Zen mode.</li>
           <li><strong>Developer tools</strong> is temporary. <strong>OK</strong> adds sample journal entries plus <code>+Tasks</code> and <code>+Website</code>, each with two issues. Existing data is kept. <strong>Cancel</strong> closes without changing anything.</li>
         </ul>
@@ -651,7 +651,6 @@ Fixed the event handler and tested on iPhone.</pre>
           <li>Choose <strong>Loose</strong> (default) or <strong>Tight</strong> item spacing for the journal list.</li>
           <li>Choose 12- or 24-hour timestamps and Regional, MM/DD/YYYY, DD/MM/YYYY, or YYYY-MM-DD dates.</li>
           <li>Reduced-motion preferences disable decorative animation.</li>
-          <li><strong>Advanced</strong> is off by default. Turn it on in Settings to show optional tools such as GitHub Backup.</li>
         </ul>
         <figure class="help-figure">
           <div class="help-figure-placeholder" aria-hidden="true">Screenshot coming soon</div>
@@ -680,7 +679,7 @@ Fixed the event handler and tested on iPhone.</pre>
         <p>Clearing and resetting cannot be undone without a previously exported JSON backup.</p>
 
         <h2 id="github-backup">GitHub Backup</h2>
-        <p>Optional. Off until <strong>Settings → Advanced</strong> is on. Then <strong>System → Data &amp; backup</strong> shows GitHub Backup.</p>
+        <p>Optional. <strong>System → Data &amp; backup</strong> includes GitHub Backup.</p>
         <p>This uploads the same JSON as <strong>Export journal</strong>, plus a Markdown copy, to a private GitHub repository you control. It is backup, not sync. The journal stays in this browser. A failed upload never blocks local saving. Doing Right Now does not host your data.</p>
         <p><strong>What you need</strong></p>
         <ol class="steps">
@@ -702,7 +701,8 @@ Fixed the event handler and tested on iPhone.</pre>
           <li>When <strong>Enable GitHub Backup</strong> is on and owner, repository, and token are filled in, the app uploads once per local day if it is open. Nothing uploads if the app is closed. Writing a line never starts an upload. While a daily backup uploads, a message says it is saving, then that it was saved. A failed one shows a toast and leaves local data saved. Several tabs in the same browser share one daily upload.</li>
           <li><strong>Test Connection</strong> checks owner, repository, branch, and token without changing files. The result appears as <strong>Last result</strong>.</li>
           <li><strong>Back Up Now</strong> creates or updates <code>DoingRightNow-backup.json</code> and <code>DoingRightNow.md</code> in that repository. GitHub commit history keeps earlier versions.</li>
-          <li>When Advanced is on, the command palette includes <strong>GitHub: Open backup</strong> and <strong>GitHub: Back up now</strong>.</li>
+          <li>Dates and times in the backup files use this device’s local time.</li>
+          <li>The command palette includes <strong>GitHub: Open backup</strong> and <strong>GitHub: Back up now</strong>.</li>
           <li>Restore by downloading <code>DoingRightNow-backup.json</code> from GitHub and using <strong>Import journal</strong>. <code>DoingRightNow.md</code> is for reading; it cannot be imported.</li>
           <li>The token is stored only in this browser. It is never written into <code>DoingRightNow-backup.json</code>, <code>DoingRightNow.md</code>, or a downloaded export.</li>
         </ul>

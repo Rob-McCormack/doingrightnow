@@ -251,7 +251,7 @@ Fixed the event handler and tested on iPhone.
 
 - The right side of the header contains the command icon and Scratch Pad; the hamburger on the left opens the navigation drawer. Open the palette with its icon or **⌘K**/**Ctrl+K**.
 - Choose in any of three ways: type a more specific phrase and press **Enter**, click or tap a command, or use the arrow keys and **Enter**. For example, instead of stopping at `project`, search for `open document`, `new project`, `search documents`, or a project name such as `tasks`.
-- Commands cover adding an activity; Today, Yesterday, 7-, 30-, 365-day, and All views; journal Search; Projects (including **Project: Name** and **Project: Export +Name** for each project, **Project: Today**, and **Project: Search documents & issues**); Scratch Pad; Zen mode; Help; and temporary Developer tools. Settings commands are prefixed **Settings:**, System commands **System:**, project commands **Project:**, issue commands **Issue:**, and GitHub commands **GitHub:**. **Add an activity** and **Go to Today** stay first. The last one or two commands you ran from the palette appear next; the rest are alphabetical. Appearance, accent, font, dates, and list-editor commands stay in Settings. **GitHub:** commands appear only when Advanced is on.
+- Commands cover adding an activity; Today, Yesterday, 7-, 30-, 365-day, and All views; journal Search; Projects (including **Project: Name** and **Project: Export +Name** for each project, **Project: Today**, and **Project: Search documents & issues**); Scratch Pad; Zen mode; Help; and temporary Developer tools. Settings commands are prefixed **Settings:**, System commands **System:**, project commands **Project:**, issue commands **Issue:**, and GitHub commands **GitHub:**. **Add an activity** and **Go to Today** stay first. The last one or two commands you ran from the palette appear next; the rest are alphabetical. Appearance, accent, font, dates, and list-editor commands stay in Settings. **GitHub:** commands open backup settings and upload.
 - Use the timer icon or the expand button at the upper right of Today’s current entry to enter **Zen mode**, a distraction-free full-screen view of the current entry, elapsed duration, and current clock time. Started, completed, important, and question markers appear as icons instead of `^`, `"`, `!`, or `?`. Its **+** returns to Today ready to add another activity. On desktop, **Escape** also leaves Zen mode.
 - **Developer tools** is temporary. **OK** adds sample journal entries plus **+Tasks** and **+Website**, each with two issues. Existing data is kept. **Cancel** closes without changing anything.
 
@@ -281,7 +281,6 @@ The elapsed-time display on Today’s current entry shows how long the newest li
 - Choose **Loose** (default) or **Tight** item spacing for the journal list.
 - Choose 12- or 24-hour timestamps and Regional, MM/DD/YYYY, DD/MM/YYYY, or YYYY-MM-DD dates.
 - Reduced-motion preferences disable decorative animation.
-- **Advanced** is off by default. Turn it on in Settings to show optional tools such as GitHub Backup.
 
 ![Screenshot placeholder: Settings showing appearance, font size, item spacing, date and time formats, accents, and a hue slider.](placeholder-theme.png)
 
@@ -310,7 +309,7 @@ Clearing and resetting cannot be undone without a previously exported JSON backu
 
 ## GitHub Backup
 
-Optional. Off until **Settings → Advanced** is on. Then **System → Data & backup** shows GitHub Backup.
+Optional. **System → Data & backup** includes GitHub Backup.
 
 This uploads the same JSON as **Export journal**, plus a Markdown copy, to a private GitHub repository you control. It is backup, not sync. The journal stays in this browser. A failed upload never blocks local saving. Doing Right Now does not host your data.
 
@@ -334,7 +333,8 @@ This uploads the same JSON as **Export journal**, plus a Markdown copy, to a pri
 - When **Enable GitHub Backup** is on and owner, repository, and token are filled in, the app uploads once per local day if it is open. Nothing uploads if the app is closed. Writing a line never starts an upload. While a daily backup uploads, a message says it is saving, then that it was saved. A failed one shows a toast and leaves local data saved. Several tabs in the same browser share one daily upload.
 - **Test Connection** checks owner, repository, branch, and token without changing files. The result appears as **Last result**.
 - **Back Up Now** creates or updates `DoingRightNow-backup.json` and `DoingRightNow.md` in that repository. GitHub commit history keeps earlier versions.
-- When Advanced is on, the command palette includes **GitHub: Open backup** and **GitHub: Back up now**.
+- Dates and times in the backup files use this device’s local time.
+- The command palette includes **GitHub: Open backup** and **GitHub: Back up now**.
 - Restore by downloading `DoingRightNow-backup.json` from GitHub and using **Import journal**. `DoingRightNow.md` is for reading; it cannot be imported.
 - The token is stored only in this browser. It is never written into `DoingRightNow-backup.json`, `DoingRightNow.md`, or a downloaded export.
 
