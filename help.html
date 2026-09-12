@@ -701,7 +701,7 @@ Fixed the event handler and tested on iPhone.</pre>
           <li>When <strong>Enable GitHub Backup</strong> is on and owner, repository, and token are filled in, the app uploads once per local day if it is open. Nothing uploads if the app is closed. Writing a line never starts an upload. While a daily backup uploads, a message says it is saving, then that it was saved. A failed one shows a toast and leaves local data saved. Several tabs in the same browser share one daily upload.</li>
           <li><strong>Test Connection</strong> checks owner, repository, branch, and token without changing files. The result appears as <strong>Last result</strong>.</li>
           <li><strong>Back Up Now</strong> creates or updates <code>DoingRightNow-backup.json</code> and <code>DoingRightNow.md</code> in that repository. GitHub commit history keeps earlier versions.</li>
-          <li>Dates and times in the backup files use this device’s local time.</li>
+          <li>Dates and times in the backup files and on GitHub History use this device’s local time.</li>
           <li>The command palette includes <strong>GitHub: Open backup</strong> and <strong>GitHub: Back up now</strong>.</li>
           <li>Restore by downloading <code>DoingRightNow-backup.json</code> from GitHub and using <strong>Import journal</strong>. <code>DoingRightNow.md</code> is for reading; it cannot be imported.</li>
           <li>The token is stored only in this browser. It is never written into <code>DoingRightNow-backup.json</code>, <code>DoingRightNow.md</code>, or a downloaded export.</li>
