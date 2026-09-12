@@ -48,7 +48,7 @@ Do not commit the token to any repository. If it is exposed, revoke it on that s
 
 - **Test Connection** checks owner, repository, branch, and token without changing files. The result appears in the GitHub Backup panel as **Last result**.
 - **Back Up Now** creates or updates `DoingRightNow-backup.json` and `DoingRightNow.md` in the repository. GitHub commit history keeps earlier versions. JSON is for restore. Markdown is for reading.
-- After it is enabled and filled in, the app also uploads once per local day when it is open. A brief toast confirms a successful daily upload. Nothing uploads if the app is closed. Writing a line never starts an upload. Several tabs in the same browser share one daily upload.
+- After it is enabled and filled in, the app also uploads once per local day when it is open. A message says it is saving, then that it was saved. Nothing uploads if the app is closed. Writing a line never starts an upload. Several tabs in the same browser share one daily upload.
 - **Last GitHub backup** shows the time of the last successful upload.
 
 The token stays in this browser. It is never written into `DoingRightNow-backup.json`, `DoingRightNow.md`, or a downloaded export.

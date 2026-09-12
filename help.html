@@ -699,7 +699,7 @@ Fixed the event handler and tested on iPhone.</pre>
         </ol>
         <p><strong>Use it</strong></p>
         <ul>
-          <li>When <strong>Enable GitHub Backup</strong> is on and owner, repository, and token are filled in, the app uploads once per local day if it is open. Nothing uploads if the app is closed. Writing a line never starts an upload. A successful daily backup shows a brief toast; a failed one shows a toast and leaves local data saved. Several tabs in the same browser share one daily upload.</li>
+          <li>When <strong>Enable GitHub Backup</strong> is on and owner, repository, and token are filled in, the app uploads once per local day if it is open. Nothing uploads if the app is closed. Writing a line never starts an upload. While a daily backup uploads, a message says it is saving, then that it was saved. A failed one shows a toast and leaves local data saved. Several tabs in the same browser share one daily upload.</li>
           <li><strong>Test Connection</strong> checks owner, repository, branch, and token without changing files. The result appears as <strong>Last result</strong>.</li>
           <li><strong>Back Up Now</strong> creates or updates <code>DoingRightNow-backup.json</code> and <code>DoingRightNow.md</code> in that repository. GitHub commit history keeps earlier versions.</li>
           <li>When Advanced is on, the command palette includes <strong>GitHub: Open backup</strong> and <strong>GitHub: Back up now</strong>.</li>
