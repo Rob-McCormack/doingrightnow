@@ -330,7 +330,7 @@ This uploads the same JSON as **Export journal**, plus a Markdown copy, to a pri
 
 **Use it**
 
-- When **Enable GitHub Backup** is on and owner, repository, and token are filled in, the app uploads once per local day if it is open. Nothing uploads if the app is closed. Writing a line never starts an upload. While a daily backup uploads, a message says it is saving, then that it was saved. A failed one shows a toast and leaves local data saved. Several tabs in the same browser share one daily upload.
+- When **Enable GitHub Backup** is on and owner, repository, and token are filled in, the app uploads once per local day if it is open. Nothing uploads if the app is closed. Writing a line never starts an upload. While a daily backup uploads, a spinner shows it is saving, then a message says it was saved. A failed one shows a toast and leaves local data saved. Several tabs in the same browser share one daily upload.
 - **Test Connection** checks owner, repository, branch, and token without changing files. The result appears as **Last result**.
 - **Back Up Now** creates or updates `DoingRightNow-backup.json` and `DoingRightNow.md` in that repository. GitHub commit history keeps earlier versions.
 - Dates and times in the backup files and on GitHub History use this device’s local time.
