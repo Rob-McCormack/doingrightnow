@@ -81,6 +81,10 @@ html[data-item-spacing="tight"] .sample-entry{padding:4px 0}
 .copy-results{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:42px;padding:8px 12px;border:1px solid var(--line);border-radius:12px;background:var(--soft);color:var(--green);font-weight:750}
 .copy-results svg{width:16px;height:16px}
 .copy-results.copied{color:#3f7d52}
+.icon-set{display:flex;flex-wrap:wrap;gap:8px 4px;margin-top:4px}
+.icon-set span{display:grid;justify-items:center;gap:4px;width:68px;color:var(--muted);font-size:.75rem}
+.icon-set svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.icon-set .stays-green{color:#3f7d52}
 .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);width:max-content;max-width:calc(100% - 28px);display:flex;align-items:center;gap:14px;background:#253028;color:#fff;border-radius:14px;padding:12px 16px;box-shadow:0 12px 36px #24302830;font-size:.9375rem;z-index:10}
 .toast button{background:#ffffff24;color:#fff;border-radius:8px;padding:6px 11px}
 html[data-theme="dark"] .toast{background:#e5eee7;color:#253028}
@@ -107,7 +111,56 @@ html[data-theme="dark"] .toast button{background:#25302815;color:#253028}
     </div>
   </header>
   <main class="main">
-    <p class="rule">Open this file in a browser and use the samples. The sentence under each heading is the rule. A later pass checks <strong>DoingRightNow.html</strong> against this page.</p>
+    <p class="rule">Open this file in a browser and use the samples. The sentence under each heading is the rule.</p>
+
+    <!-- Embedded Lucide SVG icons. Source: https://github.com/lucide-icons/lucide
+    ISC License. Copyright (c) 2026 Lucide Icons and Contributors.
+    Permission to use, copy, modify, and/or distribute this software for any
+    purpose with or without fee is hereby granted, provided that the above
+    copyright notice and this permission notice appear in all copies.
+    THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+    WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+    MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+    ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+    WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+    ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+    OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+    Feather-derived icons in this file: plus, search, clipboard, check, x.
+    MIT License. Copyright (c) 2013-present Cole Bemis.
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+    The above copyright notice and this permission notice shall be included in all
+    copies or substantial portions of the Software.
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE. -->
+    <section>
+      <h2>One local file</h2>
+      <p class="rule">Each app is <strong>one HTML file</strong>, and it stays local. Open the file in a browser. There is no build step and no dependency. The page loads nothing from the network: no scripts, no fonts, no icon library. The journal stays in this browser, on this device.</p>
+      <p class="rule">Icons are <strong>Lucide</strong>, pasted in as SVG. Do not add the Lucide script, an icon font, or a CDN. Each icon is a 24 by 24 stroke in <strong>currentColor</strong>, with round caps and joins. In a button it draws at 20px with stroke 1.8. Decorative icons are hidden from assistive tech. Keep the Lucide ISC notice in the file. Icons taken from Feather also keep the MIT notice. The app mark and the timer stay the original green.</p>
+      <div class="icon-set" aria-hidden="true">
+        <span><svg viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>Menu</span>
+        <span><svg viewBox="0 0 24 24"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>Note</span>
+        <span><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5v14"/></svg>Plus</span>
+        <span><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>Search</span>
+        <span><svg viewBox="0 0 24 24"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>Copy</span>
+        <span><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Check</span>
+        <span><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg>Close</span>
+        <span><svg viewBox="0 0 24 24"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>Quick</span>
+        <span><svg viewBox="0 0 24 24"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"/><circle cx="12" cy="12" r="3"/></svg>Settings</span>
+        <span><svg viewBox="0 0 24 24"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/></svg>Started</span>
+        <span class="stays-green"><svg viewBox="0 0 24 24"><path d="M10 2h4M12 6V2"/><circle cx="12" cy="14" r="8"/><path d="M12 14 15 11"/></svg>Timer</span>
+      </div>
+      <p class="help">Paste the path into the file. The timer hand can move. Everything else is a still stroke.</p>
+    </section>
 
     <section>
       <h2>Color and type</h2>
