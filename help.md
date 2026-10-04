@@ -21,7 +21,7 @@ The menu holds Today, Yesterday, the last 7, 30, and 60 days, All, and Search. Y
 
 ## Scratch Pad
 
-The pen icon opens a note that saves as you type. Copy places only that note on the clipboard. One overall pad, not a note for each day.
+The pen icon opens a note that saves as you type. Copy places only that note on the clipboard. Ctrl-Enter, or Command-Enter on a Mac, closes it. One overall pad, not a note for each day.
 
 ## Quick Add and tags
 
@@ -43,7 +43,7 @@ On Today, the newest entry shows a green timer under its time. The second hand m
 
 ## Started
 
-The thumb beside a line means you began. A faint thumb is still open. A green thumb means you started. Use **···** to edit any line. You can change the words and the time of day. The date stays the day it was written. Delete asks before the line is removed.
+The thumb beside a line means you began. A faint thumb is still open. A green thumb means you started. Use **···** to edit any line. You can change the words and the time of day. The date stays the day it was written. Ctrl-Enter, or Command-Enter on a Mac, saves and closes. Delete asks before the line is removed.
 
 ## Appearance
 
