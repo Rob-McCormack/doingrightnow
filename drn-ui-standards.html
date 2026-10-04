@@ -33,18 +33,18 @@ section{padding:26px 0;border-top:1px solid var(--line)}
 section h2{margin:0 0 8px;font-size:1.05rem}
 .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .primary,.secondary,.danger{border-radius:10px;padding:10px 15px;min-height:42px}
-.primary{background:var(--green);color:#fff}
+.primary{background:var(--green);color:var(--accent-ink,#fff)}
 .primary:hover{filter:brightness(.94)}
 .secondary{background:var(--soft);color:var(--green)}
 .danger{background:#f7e6e4;color:var(--danger)}
-html[data-theme="dark"] .primary{background:#477e57;color:#fff}
 html[data-theme="dark"] .danger{background:#492b29;color:#ffb9b3}
+html[data-font-size="small"]{font-size:14px}
+html[data-font-size="large"]{font-size:18px}
 button.icon{height:42px;width:42px;display:grid;place-items:center;border-radius:12px;background:transparent;color:var(--muted)}
 button.icon:hover{background:var(--soft);color:var(--green)}
 .segments{display:flex;gap:3px;background:var(--bg);border:1px solid var(--line);padding:3px;border-radius:11px}
 .segments button{padding:7px 13px;background:transparent;border-radius:8px;font-size:.875rem}
-.segments button[aria-pressed="true"]{background:var(--green);color:#fff}
-html[data-theme="dark"] .segments button[aria-pressed="true"]{background:#477e57;color:#fff}
+.segments button[aria-pressed="true"]{background:var(--green);color:var(--accent-ink,#fff)}
 .swatches{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
 .swatch{display:flex;align-items:center;gap:8px;min-width:140px;font-size:.875rem;color:var(--muted)}
 .swatch i{width:28px;height:28px;border-radius:8px;border:1px solid var(--line);display:block}
@@ -60,7 +60,24 @@ dialog p{color:var(--muted);font-size:.9375rem}
 .actions{display:flex;justify-content:flex-end;gap:9px;margin-top:24px;flex-wrap:wrap}
 .actions .danger{margin-right:auto}
 label.field{display:grid;gap:6px;margin:15px 0;font-size:.9375rem}
-input{border:1px solid var(--line);border-radius:10px;background:var(--bg);padding:10px 12px;min-width:0}
+input,select{border:1px solid var(--line);border-radius:10px;background:var(--bg);padding:10px 12px;min-width:0}
+.pref{display:grid;gap:18px}
+.pref-row{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.pref-row b{display:block}
+.pref-row .help{margin:0}
+.format-controls{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.format-controls label{display:grid;gap:5px;color:var(--muted);font-size:.82rem}
+.format-controls select{width:100%}
+.accent-grid{display:flex;flex-wrap:wrap;gap:7px}
+.accent-grid button{display:flex;align-items:center;gap:7px;border:1px solid var(--line);background:var(--bg);border-radius:99px;padding:7px 10px}
+.accent-grid button[aria-pressed="true"]{border-color:var(--green);font-weight:750}
+.accent-dot{width:13px;height:13px;border-radius:50%;background:var(--swatch);flex:0 0 13px}
+.accent-hue{margin-top:12px}
+.accent-hue input{display:block;width:100%;height:22px;margin:0;padding:0;border:0;background:linear-gradient(90deg,oklch(.52 .13 0),oklch(.52 .13 60),oklch(.52 .13 120),oklch(.52 .13 180),oklch(.52 .13 240),oklch(.52 .13 300),oklch(.52 .13 360));border-radius:99px;appearance:none}
+.accent-hue input::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--green);border:2px solid var(--panel);box-shadow:0 0 0 1px var(--line)}
+.sample-entry{display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:17px 0;margin-top:14px}
+html[data-item-spacing="tight"] .sample-entry{padding:4px 0}
+@media(max-width:420px){.format-controls{grid-template-columns:1fr}}
 .copy-results{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:42px;padding:8px 12px;border:1px solid var(--line);border-radius:12px;background:var(--soft);color:var(--green);font-weight:750}
 .copy-results svg{width:16px;height:16px}
 .copy-results.copied{color:#3f7d52}
@@ -84,6 +101,7 @@ html[data-theme="dark"] .toast button{background:#25302815;color:#253028}
       <p>Doing Right Now, and the other apps that should feel the same.</p>
     </div>
     <div class="segments" role="group" aria-label="Appearance">
+      <button type="button" data-theme="system" aria-pressed="false">System</button>
       <button type="button" data-theme="light" aria-pressed="false">Light</button>
       <button type="button" data-theme="dark" aria-pressed="false">Dark</button>
     </div>
@@ -100,6 +118,74 @@ html[data-theme="dark"] .toast button{background:#25302815;color:#253028}
         <span class="swatch"><i style="background:#fbfcfa"></i>Panel</span>
         <span class="swatch"><i style="background:#657269"></i>Muted</span>
         <span class="swatch"><i style="background:#a23c36"></i>Danger</span>
+      </div>
+    </section>
+
+    <section>
+      <h2>Settings</h2>
+      <p class="rule">Preferences live in Settings. <strong>System, Light, or Dark</strong> sets the theme. <strong>S, M, L</strong> sets the type size. <strong>Loose or Tight</strong> sets the space around entries. Time and date formats change how a timestamp is written. Accent colors are Green, Blue, Violet, Amber, Coral, Pumpkin, and a custom hue. Lightness stays readable. The app icon and the timer stay green.</p>
+      <div class="pref">
+        <div class="pref-row">
+          <span><b>Appearance</b><span class="help">Follow your system or choose a mode</span></span>
+          <div class="segments" role="group" aria-label="Appearance">
+            <button type="button" data-theme="system">System</button>
+            <button type="button" data-theme="light">Light</button>
+            <button type="button" data-theme="dark">Dark</button>
+          </div>
+        </div>
+        <div class="pref-row">
+          <span><b>Font size</b><span class="help">Adjust text throughout the app</span></span>
+          <div class="segments" role="group" aria-label="Font size">
+            <button type="button" data-font-size="small">S</button>
+            <button type="button" data-font-size="medium">M</button>
+            <button type="button" data-font-size="large">L</button>
+          </div>
+        </div>
+        <div class="pref-row">
+          <span><b>Item spacing</b><span class="help">Space around journal entries</span></span>
+          <div class="segments" role="group" aria-label="Item spacing">
+            <button type="button" data-item-spacing="loose">Loose</button>
+            <button type="button" data-item-spacing="tight">Tight</button>
+          </div>
+        </div>
+        <div>
+          <b>Time &amp; date format</b>
+          <div class="format-controls" style="margin-top:10px">
+            <label>Time
+              <select id="time-format">
+                <option value="12">12-hour (am/pm)</option>
+                <option value="24">24-hour</option>
+              </select>
+            </label>
+            <label>Date
+              <select id="date-format">
+                <option value="regional">Regional</option>
+                <option value="mdy">MM/DD/YYYY</option>
+                <option value="dmy">DD/MM/YYYY</option>
+                <option value="iso">YYYY-MM-DD</option>
+              </select>
+            </label>
+          </div>
+          <p class="sample-entry"><span id="sample-time">3:45 PM</span><span id="sample-date">Oct 4, 2026</span></p>
+        </div>
+        <div>
+          <b>Accent color</b>
+          <div class="accent-grid" role="group" aria-label="Accent color" style="margin-top:10px">
+            <button type="button" data-accent="green"><span class="accent-dot" style="--swatch:#3f7d52"></span>Green</button>
+            <button type="button" data-accent="blue"><span class="accent-dot" style="--swatch:#3478b8"></span>Blue</button>
+            <button type="button" data-accent="violet"><span class="accent-dot" style="--swatch:#7540bf"></span>Violet</button>
+            <button type="button" data-accent="amber"><span class="accent-dot" style="--swatch:#a87500"></span>Amber</button>
+            <button type="button" data-accent="coral"><span class="accent-dot" style="--swatch:#c52f21"></span>Coral</button>
+            <button type="button" data-accent="pumpkin"><span class="accent-dot" style="--swatch:#b85c16"></span>Pumpkin</button>
+            <button type="button" data-accent="custom"><span class="accent-dot" id="accent-custom-dot" style="--swatch:#3f7d52"></span>Custom</button>
+          </div>
+          <div class="accent-hue"><input type="range" id="accent-hue" min="0" max="360" value="145" step="1" aria-label="Accent hue"></div>
+          <p class="help">Hue only. Lightness stays readable in Light and Dark. The app icon and the timer stay green.</p>
+        </div>
+        <div>
+          <button type="button" class="secondary" id="reset-preferences">Reset preferences</button>
+          <p class="help">Restores System, Medium, Loose, 12-hour, Regional, and Green. It does not change the journal or lists.</p>
+        </div>
       </div>
     </section>
 
@@ -227,13 +313,83 @@ document.querySelectorAll('dialog').forEach(dialog => {
     if (event.target === dialog && (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom)) dialog.close();
   });
 });
+const ACCENTS = {
+  green:['#3f7d52','#79b98b',145], blue:['#3478b8','#70aee3',207], violet:['#7540bf','#b290d9',266],
+  amber:['#8a6100','#e2b84b',42], coral:['#c52f21','#f17961',5], pumpkin:['#b85c16','#e98a43',26]
+};
+let themeChoice = 'system', accent = 'green', hue = 145;
+const darkNow = () => themeChoice === 'dark' || (themeChoice === 'system' && matchMedia('(prefers-color-scheme: dark)').matches);
+function inkFor(color){
+  const probe = document.createElement('canvas').getContext('2d');
+  probe.fillStyle = '#010101';
+  probe.fillStyle = color;
+  const hex = probe.fillStyle;
+  if (!/^#[0-9a-f]{6}$/i.test(hex)) return '#fff';
+  const n = parseInt(hex.slice(1), 16), channels = [(n>>16)&255,(n>>8)&255,n&255].map(v => { v/=255; return v<=.04045 ? v/12.92 : ((v+.055)/1.055)**2.4; });
+  const lum = channels[0]*.2126 + channels[1]*.7152 + channels[2]*.0722;
+  return (1.05/(lum+.05)) >= ((lum+.05)/.05) ? '#fff' : '#000';
+}
+function accentColor(dark){
+  if (accent === 'custom') {
+    const h = ((hue % 360) + 360) % 360;
+    const near = Math.min(Math.abs(h-55), 360-Math.abs(h-55));
+    const yellow = Math.max(0, 1-near/40);
+    const c = (0.12 - yellow*0.03).toFixed(3);
+    const l = (dark ? 0.72 - yellow*0.06 : 0.42 - yellow*0.08).toFixed(3);
+    return `oklch(${l} ${c} ${h})`;
+  }
+  return ACCENTS[accent][dark ? 1 : 0];
+}
+function applyAccent(){
+  const dark = darkNow();
+  const color = accentColor(dark);
+  const root = document.documentElement;
+  root.style.setProperty('--green', color);
+  root.style.setProperty('--soft', `color-mix(in srgb, var(--panel) 88%, ${color})`);
+  root.style.setProperty('--accent-ink', inkFor(color));
+  $('accent-custom-dot').style.setProperty('--swatch', accent === 'custom' ? color : '#3f7d52');
+  document.querySelectorAll('[data-accent]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.accent === accent)));
+}
 function setTheme(theme){
-  document.documentElement.dataset.theme = theme;
-  document.body.style.colorScheme = theme;
+  themeChoice = theme;
+  const resolved = darkNow() ? 'dark' : 'light';
+  document.documentElement.dataset.theme = resolved;
+  document.body.style.colorScheme = resolved;
   document.querySelectorAll('[data-theme]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.theme === theme)));
+  applyAccent();
+}
+function setFont(size){
+  document.documentElement.dataset.fontSize = size;
+  document.querySelectorAll('[data-font-size]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.fontSize === size)));
+}
+function setSpacing(spacing){
+  document.documentElement.dataset.itemSpacing = spacing;
+  document.querySelectorAll('[data-item-spacing]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.itemSpacing === spacing)));
+}
+function showStamp(){
+  const formats = {regional:'Oct 4, 2026', mdy:'10/04/2026', dmy:'04/10/2026', iso:'2026-10-04'};
+  $('sample-time').textContent = $('time-format').value === '24' ? '15:45' : '3:45 PM';
+  $('sample-date').textContent = formats[$('date-format').value];
 }
 document.querySelectorAll('[data-theme]').forEach(button => button.onclick = () => setTheme(button.dataset.theme));
-setTheme(matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+document.querySelectorAll('[data-font-size]').forEach(button => button.onclick = () => setFont(button.dataset.fontSize));
+document.querySelectorAll('[data-item-spacing]').forEach(button => button.onclick = () => setSpacing(button.dataset.itemSpacing));
+document.querySelectorAll('[data-accent]').forEach(button => button.onclick = () => {
+  accent = button.dataset.accent;
+  if (accent !== 'custom') { hue = ACCENTS[accent][2]; $('accent-hue').value = String(hue); }
+  applyAccent();
+});
+$('accent-hue').oninput = () => { accent = 'custom'; hue = Number($('accent-hue').value); applyAccent(); };
+$('time-format').onchange = showStamp;
+$('date-format').onchange = showStamp;
+$('reset-preferences').onclick = () => {
+  accent = 'green'; hue = 145; $('accent-hue').value = '145';
+  $('time-format').value = '12'; $('date-format').value = 'regional';
+  setTheme('system'); setFont('medium'); setSpacing('loose'); showStamp(); applyAccent();
+  toast('Preferences reset');
+};
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => { if (themeChoice === 'system') setTheme('system'); });
+setTheme('system'); setFont('medium'); setSpacing('loose'); showStamp();
 $('toast-saved').onclick = () => toast('Entry updated');
 $('toast-backup').onclick = () => toast('JSON backup downloaded');
 $('toast-fail').onclick = () => toast('Could not copy.');
