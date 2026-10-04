@@ -1,401 +1,92 @@
 # Doing Right Now — Help
 
-A journal for getting unstuck. Write one line for what you're doing right now, timestamp it automatically, and move on. No planning, no streaks, no pressure to finish.
-
-This reference covers the **1.0.0-beta.1** public beta.
+A private journal in this browser. Write one timestamped line, then do that. It is a record of starting, not a task list.
 
 [New here? Read the philosophy →](/guide)
 
 ---
 
-## Quick Start
+## Quick start
 
-1. Open the journal — you land on **Today**.
-2. A new journal starts with one normal entry, **Trying out Doing Right Now**, to demonstrate the journal. You can edit or delete it.
-3. Type what you're doing right now in the composer at the top, then press **Enter** or the Enter-icon button.
-4. When what you're doing changes, write the next line. That's the whole app.
-5. Everything stays in this browser — no sign-up and no cloud sync.
+1. Write the smallest thing you are doing.
+2. Press Enter. The line gets the current time.
+3. Start a line with **8:30 AM** or **08:30** to choose a time today.
+4. End a line with **!** to make the text bold.
 
-![The Today view with the composer and timestamped entries. The newest line is the current item.](images/screenshot-680.jpg)
+![The Today view with the composer and timestamped entries.](images/screenshot-680.jpg)
 
-Two brief, dismissible messages guide your first entry and then disappear permanently. That's enough to start. Everything below is optional.
+## Navigation
 
----
-
-## The Journal
-
-- The **Today** composer creates a timestamped entry. The newest line is the current item: taller than the rest, with its elapsed timer under the timestamp when the timer is enabled.
-- Entries can't be reordered, and their timestamps can't be changed.
-- Open the navigation drawer with the hamburger. Tap the current view title, such as **Yesterday**, **Projects**, or **Search**, to return directly to Today; tapping **Today** scrolls to the top without opening the keyboard.
-- Tap an entry to view and edit its complete text.
-
-## Editing a Line
-
-- The dialog editor supports multiple lines and up to **1,000 characters**, with a live character count. Press **Enter** to save or **Shift+Enter** to add a new line.
-- Choose **Save** to keep changes, **Cancel** to discard them, or **Delete** and confirm to remove the entry.
-- Long entries are shortened to three lines with an ellipsis in the journal display. The editor always shows the complete text.
-- The browser’s native spell checker is enabled in the Today composer, entry editor, Scratch Pad, project documents, issues, and editable copy dialog. Languages and suggestions come from your browser or device; Doing Right Now does not send text anywhere.
-- Addresses beginning with `http://`, `https://`, or `www.` appear as openable links under the text in the entry editor, project documents, and issues, and in the entry-actions dialog. `+Ongoing` and `+Ongoing.1` appear in the same list when that project or issue exists; tapping one opens it.
-
-![Screenshot placeholder: the entry dialog with multiline text, character count, detected links, and Save, Cancel, and Delete actions.](placeholder-editing.png)
-
-## Entry Actions
-
-Use the **ellipsis** beside an entry to open its actions:
-
-- **Copy to Today** duplicates it with a new current timestamp; the original remains unchanged.
-- **Mark as started (`^`)** — you began this. Counts in the day's started total.
-- **Mark as completed (`"`)** — you finished a small step. Different from started; it does not count in started/total.
-- **Mark as important (`!`)** — worth noticing.
-- **Mark as question (`?`)** — an open loop.
-- An entry can have only one of these special markers. Choosing another replaces the current one.
-- **Delete entry** asks for confirmation before permanently removing it.
-
-![Screenshot placeholder: the ellipsis entry-actions dialog with Copy to Today, marker controls, links, and Delete entry.](placeholder-actions.png)
-
----
-
-## Tags & Formatting
-
-Optional shorthand:
-
-- `@name` tags a person and is shown in violet.
-- `+project` tags a project and is shown in amber. `+Website.12` tags a numbered issue the same way. A project name is one tag token: spaces become hyphens, so `Garage Clean up` is stored as `+Garage-Clean-up`. Periods are reserved for issue numbers.
-- `#place` tags a place and is shown in teal.
-- `^` as a standalone marker means started and counts in the day's started total.
-- `"` as a standalone marker means you completed a small step. It is not a start and does not count in started/total.
-- `!` as a standalone marker means important.
-- `?` as a standalone marker means question or open loop.
-- Backticks display inline text in monospace, such as `` `next step` ``.
-
-Example: `Email @Bill about +Website ^`
-
-Type `@`, `+`, or `#` to see matching suggestions. Suggestions come from the People, Projects, and Places lists managed in **Settings**. Type `+Ongoing.` or `ongoing.` to list that project’s issues (`+Ongoing.1`). Matching is case-insensitive and based on the text after the prefix. `+Website.12` is highlighted as a project tag.
-
-Special markers are standalone symbols, and an entry can contain only one of `^`, `"`, `!`, or `?`. If you type more than one, the last one is kept. Emoji are ordinary searchable text; for example, 🤡 can flag a distraction and ✅ can flag a small win.
-
-## Search
-
-Open **Search** from the drawer or command palette. Search is a simple, case-insensitive **substring search** across journal entries.
-
-- Typing `Bill` finds that sequence anywhere, including in `@Bill`. Typing `@Bill` narrows the substring to the prefixed text.
-- Search opens with no results and a prompt to type. Results update as you type and display newest first.
-- Below the search box, **All** (the default), **Last 30**, or **Last 365** limits results to that span of days. Copy and Edit use the same filtered list.
-- Search tags directly with `@person`, `+project`, or `#place`.
-- **Copy** copies matching entries as plain text.
-- **Edit** opens an editable plain-text preview before copying; changing the preview does not change the journal.
-
-![Screenshot placeholder: the Search view with a search box, result count, and Copy and Edit controls.](placeholder-search.png)
-
-## Quick Add
-
-Quick Add stores reusable activity text. Manage the list in **Settings → Quick Add**.
-
-1. Use the lightning button beside the Today composer to open the Quick Add menu.
-2. Choose an item to append it to anything already in the composer.
-3. Edit the combined text if needed, then press **Enter** or the Enter-icon button to create the entry.
-
-The full entry dialog also displays Quick Add items as buttons. Templates may include tags, markers, and backtick formatting.
-
-![Screenshot placeholder: the lightning-button menu beside the Today composer, showing reusable activities managed in Settings.](placeholder-quickadd.png)
+The menu holds Today, Yesterday, the last 7, 30, and 60 days, All, and Search. Yesterday, the longer ranges, and All each have a search at the top that stays inside that view. Search in the menu looks through the whole journal. Copy places the lines on screen onto the clipboard, then the button reads Copied. Tap the view name in the title bar to return to Today. On Today, that tap scrolls to the top.
 
 ## Scratch Pad
 
-Scratch Pad is for anything that is not a timestamped entry.
+The pen icon opens a note that saves as you type. Copy places only that note on the clipboard. One overall pad, not a note for each day.
 
-- Use the **pen icon** in the header, to the right of the command palette, from any view.
-- It auto-saves as you type and is not attached to a date.
-- Its **Copy** button copies only the note.
-- The command palette command is **Open Scratch Pad**.
+## Quick Add and tags
 
-## Projects
+The lightning button inserts a saved activity. Edit that list in Settings.
 
-Optional. Open **Projects** from the drawer, or use **Project:** and **Issue:** commands in the command palette. **Project: Go to Projects** opens the Projects view with the project list on **+Ongoing**. Document and issue commands use the last opened project (default **+Ongoing**); they do not ask which project. Each project also appears as **Project: Name**. Type **tasks** to open **+Tasks**. **Project: Export +Name** still lists each project for export.
+| Syntax | Meaning |
+| --- | --- |
+| `@name` | Person, shown in violet |
+| `#place` | Location, shown in teal |
+| `+project` | Project, shown in amber |
 
-Projects are things you work on. Issues belong to a project. Both are just freeform text. Do things your way.
+Keep a tag to one word. Use a hyphen for more than one word, such as `+annual-report`. Search for a tag to find its entries.
 
-### Today across projects
+Example: `Call @Alex at #office about +website!`
 
-**Today: may be the complete feature.**
+## Timer and Zen mode
 
-It answers the one cross-project question that fits Doing Right Now:
+On Today, the newest entry shows a green timer under its time. The second hand marks passing time. Tap the timer, or the expand icon at the upper right of that entry, to open Zen mode. Tap anywhere in Zen mode to return. The **+** button closes Zen mode and puts the cursor on the next line.
 
-> What deserves my attention now?
+## Started
 
-The lifecycle is simple:
+The thumb beside a line means you began. A faint thumb is still open. A green thumb means you started. Use **···** to edit any line. You can change the words and the time of day. The date stays the day it was written. Delete asks before the line is removed.
 
-1. Add `Today:` to the beginning of a line in a project document or issue.
-2. It appears in **Today across projects**.
-3. Open it and work.
-4. Remove `Today:` when it no longer needs attention.
+## Appearance
 
-That is not a status system. The project text remains; only its temporary visibility changes.
+Settings is Preferences & lists. Choose System, Light, or Dark, a font size, Loose or Tight spacing, and a time and date format. Accent colors are Green, Blue, Violet, Amber, Coral, Pumpkin, and a custom hue. The app icon and the timer stay green.
 
-- Every journal has **+Ongoing** — a catch-all document and issue list that cannot be renamed or removed. A new journal includes a short note and two sample issues so you can see how it works; you can edit or delete those.
-- Add another project only if you need a separate document. A new project starts with a blank document. **+Website** appears next to **+Ongoing** in the picker, not inside it. Spaces in the name become hyphens so the journal tag stays one word. The **Projects** label above the picker shows the count, such as **Projects (3)**, with the number in the accent color.
-- The search icon next to the project picker opens **Search projects & issues**. Document and Issues are hidden while you search. It searches every project document and issue together and returns each complete matching line. **Project: Search documents & issues** in the command palette opens the same screen. The regular **Search journal** view continues to search journal entries only.
-- Select a project-search result to open its project document or exact issue and select the source line.
-- Loose items for today can get lost in **+Ongoing** if that document is already busy. That is optional: add your own project, for example **+Todays-Tasks**, and keep a short list in its document. Create issues there only if a line needs its own thread. This is not a built-in project, not a to-do system, and not required. Mark a line `Today:` if you also want it in **Today across projects**.
-- If you reuse the same outline, add your own project, for example **+Template**. Put the document starter in that project’s document, and put issue starters as issues there. Copy and paste them into a new project or a new issue. This is not a built-in project, not a template engine, and not required.
-- Starter tag names in Settings (Website, Report, Home) are only tags until you add a project here.
-- Type `+Ongoing.1` in a journal line to point at an issue. Today’s `+` suggestions include those references. The entry’s ellipsis menu (and the editor) list `+Ongoing` and `+Ongoing.1` as links that open that document or issue. Project documents and issues show the same kind of list under the textarea when they contain a web address or a `+` project/issue reference.
-- Begin a line with `Today:` in a project document or issue to include the complete line in **Today across projects**. Matching is case-insensitive and only occurs at the beginning of a line, so an ordinary sentence containing “today” is ignored.
-- Open the collected view with **Project: Today** in the command palette. Each result names its source; selecting it opens the project document or exact issue and selects the matching line.
-- `Today:` lines remain until you edit or remove the prefix. They do not expire automatically.
-- There are no status fields, assignees, or due dates — write those in your own words if you need them. The examples below are only illustrations, not a required format.
-- Export includes project documents and issues in the same JSON backup.
-- **Export project** on the project document or issues list opens that project’s Markdown, with **Copy** and **Download** at the top. It cannot be imported. On iPhone, **Copy** is more reliable than Download, which may open the file in Safari. Your own `#` headings are copied as written. **Copy issue as text** still copies a single issue. In the command palette, type a project name to open it as **Project: Name**, or type **export** to see **Project: Export +Name** for every project.
+## Your data
 
-Example project document:
+Entries stay in this browser. Tabs opened from the same address share the journal. A different browser, profile, or device has its own journal.
 
-```
-+WEBSITE REDESIGN
+Download JSON to keep a backup, or Markdown for a readable copy. Markdown cannot be imported. Import adds entries and can update ones with the same ID. It does not replace the rest of the journal.
 
-Goal
-Launch the new website before October.
+A JSON backup from the earlier Doing Right Now journal is accepted. The lines keep the words you wrote, including a `^`. Projects, issues, and day ratings in that file are left out. The first time this journal opens in a browser that already has the earlier journal, and this one is still empty, those lines, the Scratch Pad, and Quick Add are brought over with their original times.
 
-Project status
-[>>>>......] 40%
+Clearing this site’s data in the browser removes the journal. Export JSON first if you may need it.
 
-Next
-@Rob — Finish mobile navigation
-@Sarah — Rewrite the introduction
-@Bill — Review the contact form
-@Nina — Confirm launch copy
+## Install as an app
 
-Milestones
-Sep 12 — Content complete — @Sarah
-Sep 20 — Internal review — @Rob @Bill
-Sep 27 — Launch candidate — @Rob
-Oct 1 — Launch — @Rob @Nina
+Installing is optional. The journal opens in its own window. Storage stays in that browser.
 
-Timeline
-Sep 1–10 — Content — @Sarah
-Sep 8–18 — Development — @Rob
-Sep 18–25 — Testing — @Bill
-Sep 25–30 — Final changes — @Rob @Sarah
+**iPhone or iPad (Safari):** open the journal in Safari, then tap **Share → Add to Home Screen**.
 
-Waiting
-@Sarah — Photographs
-@Bill — Pricing copy
-@Nina — Final approval
+**Mac (Safari):** open the journal in Safari (macOS Sonoma or later), then choose **File → Add to Dock…**, or **Share → Add to Dock**.
 
-Calendar
-Sep 5 — Order remaining assets — @Sarah
-Sep 12 — First full content review — @Rob @Sarah
-Sep 18 — Client review — @Bill
-Sep 25 — Final changes — @Rob
-Oct 1 — Launch — @Rob @Nina
-
-Time
-Sep 1 — @Rob — 1h 20m — Navigation
-Sep 2 — @Rob — 45m — CSS cleanup
-Sep 3 — @Bill — 2h — Contact form
-Sep 4 — @Sarah — 1h — Copy revisions
-
-Notes
-@Bill says the old contact form needs to remain available until launch.
-
-@Sarah will send the final photographs before Sep 12.
-
-@Nina wants the launch announcement ready two days before release.
-
-Possible later
-@Rob — Add testimonials
-@Bill — Improve analytics
-@Sarah — Revisit the contact page
-@Rob — Clean up old CSS
-```
-
-Example issue:
-
-```
-+Website.1
-
-Mobile menu closes unexpectedly on iPhone.
-
-Sept 1, 2026
-
-STARTED:
-Reproduced the problem in Safari.
-
-@Rob is checking the outside-click handler.
-
-Need to:
-Today: test touch events
-- test scroll behaviour
-- compare with desktop Safari
-
-Sept 2, 2026
-
-PROGRESS 50%:
-The issue appears to happen only after scrolling.
-
-Possible fix:
-Ignore outside-click events while the mobile menu is being scrolled.
-
-DONE:
-Fixed the event handler and tested on iPhone.
-```
-
-## Views, Copy & Editable Plain Text
-
-- History views group entries by day and show the newest entries first.
-- In Yesterday, 7-, 30-, 365-day, All journal, and Search views, **Copy** sends displayed entries to the clipboard as readable plain text.
-- **Edit** opens the same plain text in a dialog. You may revise it before copying; those revisions never alter saved entries.
-- Plain text includes date headings, optional ratings as `*` characters, timestamps, and entry text.
-
-![Screenshot placeholder: a history view and its editable plain-text copy dialog.](placeholder-copy.png)
-
-## Command Palette & Zen
-
-- The right side of the header contains the command icon and Scratch Pad; the hamburger on the left opens the navigation drawer. Open the palette with its icon or **⌘K**/**Ctrl+K**.
-- Choose in any of three ways: type a more specific phrase and press **Enter**, click or tap a command, or use the arrow keys and **Enter**. For example, instead of stopping at `project`, search for `open document`, `new project`, `search documents`, or a project name such as `tasks`.
-- Commands cover adding an activity; Today, Yesterday, 7-, 30-, 365-day, and All views; journal Search; Projects (including **Project: Name** and **Project: Export +Name** for each project, **Project: Today**, and **Project: Search documents & issues**); Scratch Pad; Zen mode; Help; and temporary Developer tools. Settings commands are prefixed **Settings:**, System commands **System:**, project commands **Project:**, issue commands **Issue:**, and GitHub commands **GitHub:**. **Add an activity** and **Go to Today** stay first. The last one or two commands you ran from the palette appear next; the rest are alphabetical. Appearance, accent, font, dates, and list-editor commands stay in Settings. **GitHub:** commands open backup settings and upload.
-- Use the timer icon or the expand button at the upper right of Today’s current entry to enter **Zen mode**, a distraction-free full-screen view of the current entry, elapsed duration, and current clock time. Started, completed, important, and question markers appear as icons instead of `^`, `"`, `!`, or `?`. Its **+** returns to Today ready to add another activity. On desktop, **Escape** also leaves Zen mode.
-- **Developer tools** is temporary. **OK** adds sample journal entries plus **+Tasks** and **+Website**, each with two issues. Existing data is kept. **Cancel** closes without changing anything.
-
----
-
-## Day Ratings & Counts
-
-- On any **past** day, tap the date to cycle a star rating from 0 to 5. Today can't be rated.
-- Every day header shows **started/total**. “Started” means entries carrying the `^` marker.
-- A trophy appears when a day's total reaches the threshold configured in Settings (default 6).
-
-![Screenshot placeholder: a past day's heading with rating, started/total badge, and trophy.](placeholder-daystars.png)
-
-## Timer on the Current Line
-
-The elapsed-time display on Today’s current entry shows how long the newest line has been current. It appears under that entry’s timestamp: the animated timer icon, then the numeric readout. It is enabled by default, but it is optional. Tap the timer icon to enter Zen mode.
-
-- It counts seconds and minutes, then hours, up to **8hr+**.
-- The stopwatch hand circles every minute to show passing time; it is not a target or countdown.
-- If the timer feels distracting, visually dominant, or creates pressure, turn it off in **Settings → Timer on current entry**. The journal works exactly the same without it.
-- The duration does not use AM/PM and is not logged or reported elsewhere.
-
-## Theme & Appearance
-
-- Choose **System**, **Light**, or **Dark** in Settings, or use **Settings: Toggle Light/Dark** in the command palette.
-- Choose Small, Medium, or Large text and an accent: Green, Blue, Violet, Amber, Coral, Pumpkin, or Custom. Custom is a hue slider; lightness stays readable in Light and Dark. The app icon remains green.
-- Choose **Loose** (default) or **Tight** item spacing for the journal list.
-- Choose 12- or 24-hour timestamps and Regional, MM/DD/YYYY, DD/MM/YYYY, or YYYY-MM-DD dates.
-- Reduced-motion preferences disable decorative animation.
-
-![Screenshot placeholder: Settings showing appearance, font size, item spacing, date and time formats, accents, and a hue slider.](placeholder-theme.png)
-
----
-
-## Your Data
-
-- Journal data is stored in **IndexedDB** in this browser. There is no Doing Right Now account.
-- Tabs and windows stay in sync automatically only in the **same browser on the same device**.
-- A different device or browser has a separate journal. Clearing browser site data can permanently remove it.
-- **Export journal** and **Import journal** are the first actions in **System → Data & backup**.
-- **Export journal** downloads a complete `.json` backup containing entries, Scratch Pad, ratings, lists, settings, project documents, and issues. Import can restore this file. The GitHub token and repository connection are not included.
-- **Import journal** accepts a Doing Right Now JSON backup. After showing its entry count and date range, import **replaces the entire current journal**, Scratch Pad, ratings, lists, settings, project documents, and issues; it does not merge. This device’s GitHub connection and token stay put. Export the current journal first if you may need it.
-- Open **System → Data & backup** to see how full this browser’s storage is, the journal size, and the last backup time.
-- **Export as text** downloads a readable `.txt` of the journal, Scratch Pad, project documents, and issues. It is for reading, sharing, or archiving before a cleanup. It cannot be imported.
-- **Export as Markdown** downloads the same words as a `.md` file. GitHub can render it. It cannot be imported. Your own `#` headings are copied as written. The file adds wrapper headings around each project; it does not double yours.
-- A backup reminder appears after seven days of journal history with no export, or when the latest export is at least 30 days old. Repeat reminders are limited to once a week. A successful GitHub backup also counts as an export.
-
-In **System**, destructive cleanup actions ask for confirmation:
-
-- **Clear all except Today** removes entries before today while keeping Scratch Pad, lists, settings, and projects.
-- **Clear older entries** keeps a chosen number of recent calendar days and removes earlier entries.
-- **Reset** removes journal entries, Scratch Pad, ratings, custom lists, settings, project documents, issues, and GitHub Backup settings including the token, then restores starter People, Projects, Places, and Quick Add lists. Files already on GitHub are not changed.
-
-Clearing and resetting cannot be undone without a previously exported JSON backup.
-
-## GitHub Backup
-
-Optional. **System → Data & backup** includes GitHub Backup.
-
-This uploads the same JSON as **Export journal**, plus a Markdown copy, to a private GitHub repository you control. It is backup, not sync. The journal stays in this browser. A failed upload never blocks local saving. Doing Right Now does not host your data.
-
-**What you need**
-
-1. A dedicated **private** GitHub repository used only for this backup, for example `drn-backup`.
-2. A **fine-grained personal access token** with access to that repository only, and **Contents: Read and write**. Grant nothing else.
-3. In GitHub Backup: repository owner (your GitHub username), repository name, branch (`main` unless you chose another), and the token.
-
-**Create the token**
-
-1. GitHub → **Settings → Developer settings → Personal access tokens → Fine-grained tokens**.
-2. **Generate new token**.
-3. Resource owner: your account.
-4. Repository access: **Only select repositories**, then choose the backup repository.
-5. Repository permissions: **Contents → Read and write**. Leave other permissions at No access.
-6. Generate the token, copy it once, and paste it into Doing Right Now. Do not commit it to any repository.
-
-**Use it**
-
-- When **Enable GitHub Backup** is on and owner, repository, and token are filled in, the app uploads once per local day if it is open. Nothing uploads if the app is closed. Writing a line never starts an upload. While a daily backup uploads, a spinner shows it is saving, then a message says it was saved. A failed one shows a toast and leaves local data saved. Several tabs in the same browser share one daily upload.
-- **Test Connection** checks owner, repository, branch, and token without changing files. The result appears as **Last result**.
-- **Back Up Now** creates or updates `DoingRightNow-backup.json` and `DoingRightNow.md` in that repository. GitHub commit history keeps earlier versions.
-- Dates and times in the backup files and on GitHub History use this device’s local time.
-- The command palette includes **GitHub: Open backup** and **GitHub: Back up now**.
-- Restore by downloading `DoingRightNow-backup.json` from GitHub and using **Import journal**. `DoingRightNow.md` is for reading; it cannot be imported.
-- The token is stored only in this browser. It is never written into `DoingRightNow-backup.json`, `DoingRightNow.md`, or a downloaded export.
-
-If the token is exposed, revoke it in GitHub and create a new one.
-
-## Install as an App
-
-Installing the PWA is optional. It opens in its own window with an icon, but storage remains local to that browser installation.
-
-**iPhone or iPad (Safari):**
-
-1. Open the journal in Safari.
-2. Tap **Share → Add to Home Screen**.
-
-**Mac (Safari):**
-
-1. Open the journal in Safari (macOS Sonoma or later).
-2. Choose **File → Add to Dock…**, or **Share → Add to Dock**.
-
-On desktop Chrome, use the install icon in the address bar when offered.
+On desktop Chrome, use the install icon in the address bar when it is offered.
 
 ### Two journals on one device
 
-Work and personal (or any two journals) need **separate browser storage**. Doing Right Now does not offer accounts or a second built-in journal.
+Work and personal journals need separate browser storage. Doing Right Now does not offer accounts or a second built-in journal.
 
-1. **Two browsers, or two profiles in the same browser.** Chrome, Safari, Firefox, and browser profiles each keep their own IndexedDB. That is the reliable way on every device.
-2. **iPhone or iPad only:** add the journal to the Home Screen more than once from Safari. You can give each icon a different name. On iOS, each Home Screen install typically has its own journal, also separate from the Safari tab. This is iOS behavior, not a Doing Right Now setting.
+1. Use two browsers, or two profiles in the same browser. Each keeps its own journal.
+2. On iPhone or iPad, add the journal to the Home Screen more than once from Safari. Each Home Screen install typically has its own journal, also separate from the Safari tab.
 
-Installing the same site twice in Chrome on Android or desktop does **not** create a second journal. Those installs share one origin and one database.
+Installing the same site twice in Chrome on Android or desktop does not create a second journal. Those installs share one database.
 
 On iOS, the Safari tab and a Home Screen icon are already different journals. Export before assuming they share entries.
 
-## Not a Task Manager
+## Privacy
 
-DRN records moments; it doesn't replace a full task manager. For a free, open-source option with projects, timers, and time tracking, see [Super Productivity](https://super-productivity.com/download/). Typical pattern: choose the next thing in your planner, work there, and log a new line in DRN when you switch.
+This is not a password manager. Keep passwords and financial details out of the journal and the Scratch Pad.
 
-## Privacy & Security
+Data is plain text in this browser. Anyone with the unlocked device can read it. Browser extensions with site access may be able to read it. Import a JSON file only if you exported it or trust it. Journal lines are shown as text.
 
-This isn't a password manager or encrypted vault. Don't store passwords, financial details, or other highly sensitive information in your journal or Scratch Pad.
-
-- Data is plain text in this browser, not on Doing Right Now servers.
-- Anyone with access to your unlocked device can read it.
-- Browser extensions with site access may be able to read page storage.
-- Import a JSON backup only if you exported it or trust the file. Journal lines are shown as text, not as HTML.
-- DRN uses no third-party scripts or analytics. Your journal leaves the browser only when you export a backup, copy text, or use optional GitHub Backup, including the daily upload if it is set up.
-
-## Advanced Tips
-
-- Use `^` to count starts and `"` to mark a completed small step. Add or remove either from the ellipsis menu. Treat started/total as a record rather than a quota.
-- Search exactly the fragment you remember. Search does not interpret operators or quotes; every query is one case-insensitive substring.
-- Emoji are searchable text.
-- Tune the trophy threshold to match your day.
-- Timestamps are intentionally uneditable.
-- Scratch Pad is meant for one-off scraps, not a parallel planning system.
-- Projects are optional. **+Ongoing** is always there if you want a catch-all; ignore extra named projects if the journal is enough.
-- Star ratings are for personal pattern-spotting; there is no aggregate score.
-- Export before switching devices or clearing browser data.
-
-## Public Beta Notes
-
-**1.0.0-beta.1** is a public beta. Back up regularly and expect details of the interface to evolve. Data remains browser-local. Optional GitHub Backup sends a snapshot to a repository you control. When it is set up, the app also uploads once per local day if it is open. It is not account sync, collaborative editing, or automatic cross-device backup. The current JSON import is a full replacement, not a merge. Features removed from the earlier app are intentionally absent, and no migration workflow is required. When a new version is available while the journal is open, a message offers **Refresh**. You can also reload the page from the browser.
+The journal leaves the browser when you export, copy, or share it yourself.
 
 ---
 

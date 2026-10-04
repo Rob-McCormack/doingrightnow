@@ -18,7 +18,7 @@ One prompt: **What are you doing right now?**
 - **Empty your working memory.** Your brain is a processor, not a storage drive. Log the line so you don’t have to hold it in your head.
 - **Anchor your attention.** Your timeline is a safety net. Come back anytime and see exactly what you were just doing.
 
-Entries group by day in Today, Yesterday, 7-day, 30-day, 365-day, and All views.
+Entries group by day in Today, Yesterday, 7-day, 30-day, 60-day, and All views. Search covers the whole journal.
 
 ## Markup
 
@@ -29,25 +29,18 @@ Optional tags in any line:
 | `@person` | Person |
 | `#location` | Place |
 | `+project` | Project |
-| `^` | Marks the line as started |
-| `"` | Marks the line as a completed small step |
-| `!` | Marks the line as important |
-| `?` | Marks the line as a question |
-| `` `text` `` | Monospace highlight |
+| `!` at the end of a line | Bold text |
 
-Markers are standalone symbols. People, Places, Projects, and Quick Add suggestions are managed in Settings.
+Keep a tag to one word, or use a hyphen, such as `+annual-report`. The thumb beside a line means you began. Quick Add lives in Settings.
 
-## Public beta
+## What it includes
 
-The current release is **1.0.0-beta.1**.
-
-- Slide-out drawer and command-palette navigation, plus substring search across the journal
-- Entry actions for copying to Today, toggling markers, and deleting
-- Scratch Pad, Settings-managed Quick Add templates, and tag suggestions
-- Zen mode and a keyboard command palette
-- Day ratings, started/total counts, and configurable trophies
-- Light, dark, and system appearance with six accents plus a custom hue
-- Complete JSON export/import with replacement confirmation
+- One prompt, a timestamp, and a timer on today's newest line
+- Zen mode from the timer or the expand icon
+- Scratch Pad and Quick Add
+- Search, copy, and day views through the last 60 days
+- Light, dark, and system appearance, with accent colors
+- JSON backup and restore, plus a Markdown copy
 - Offline PWA support
 
 ## Run locally
@@ -68,7 +61,7 @@ Then visit [http://127.0.0.1:8000/](http://127.0.0.1:8000/).
 
 ## Privacy
 
-Everything lives in this browser’s IndexedDB. No accounts, no cloud, no tracking. Export a JSON backup or manage stored data from System.
+Everything lives in this browser’s IndexedDB. No accounts, no cloud, no tracking. Export a JSON backup from Settings.
 
 ## Credits
 

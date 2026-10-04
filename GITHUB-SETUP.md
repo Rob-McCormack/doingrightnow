@@ -1,5 +1,7 @@
 # GitHub Backup setup
 
+The current journal does not include GitHub Backup. Download JSON or Markdown from Settings. The notes below describe the earlier app, kept here for when backup to a private repository is discussed again.
+
 Optional. Doing Right Now stays local-first. GitHub Backup sends a JSON snapshot to a private repository you control. It is backup, not sync. A failed upload never blocks saving in the browser.
 
 Use the journal from a website origin (`https://doingrightnow.com` or localhost). A downloaded `file://` copy cannot reach the GitHub API.
