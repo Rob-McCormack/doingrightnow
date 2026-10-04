@@ -18,7 +18,7 @@ When you can't start, write the smallest step — one timestamped line at a time
 
 ## What it is
 
-Doing Right Now (DRN) is a minimalist journal for getting unstuck. Not a planner, to-do list, or habit tracker. You write what you're doing *right now*, it timestamps automatically, and when it changes you write the next line. Everything stays on your device — no sign-up, no cloud, no ads, no tracking.
+Doing Right Now (DRN) is a minimalist journal for getting unstuck. Not a planner, to-do list, or habit tracker. You write what you're doing *right now*, it timestamps automatically, and when it changes you write the next line. Everything stays on your device — no sign-up, no ads, no tracking. An optional GitHub backup can copy the journal to a private repository you control.
 
 ## What it is not
 
@@ -28,7 +28,7 @@ Doing Right Now (DRN) is a minimalist journal for getting unstuck. Not a planner
 
 ## Privacy (important for reviewers)
 
-All data lives in the browser's local storage on that device. No accounts, no servers, no analytics. **Export All** is the only backup.
+All data lives in the browser on that device. No accounts, no servers, no analytics. Export JSON from System, or optionally back up to a private GitHub repository you control. There is no sync.
 
 ## Assets in this folder
 

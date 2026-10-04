@@ -1,6 +1,6 @@
 # Doing Right Now
 
-A minimalist, offline-first journal to cure task paralysis. No logins, no cloud — just focus on your next tiny step.
+A minimalist, offline-first journal to cure task paralysis. No logins — just focus on your next tiny step.
 
 **Don’t plan your entire day. Just start with what’s right in front of you.**
 
@@ -41,6 +41,7 @@ Keep a tag to one word, or use a hyphen, such as `+annual-report`. The thumb bes
 - Search, copy, and day views through the last 60 days
 - Light, dark, and system appearance, with accent colors
 - JSON backup and restore, plus a Markdown copy
+- Optional GitHub Backup to a private repository you control
 - Offline PWA support
 
 ## Run locally
@@ -61,7 +62,7 @@ Then visit [http://127.0.0.1:8000/](http://127.0.0.1:8000/).
 
 ## Privacy
 
-Everything lives in this browser’s IndexedDB. No accounts, no cloud, no tracking. Export a JSON backup from Settings.
+Everything lives in this browser’s IndexedDB. No accounts and no tracking. Export a JSON backup from System, or turn on GitHub Backup to copy it to a private repository you control.
 
 ## Credits
 

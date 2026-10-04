@@ -53,7 +53,9 @@ Settings is Preferences & lists. Choose System, Light, or Dark, a font size, Loo
 
 Entries stay in this browser. Tabs opened from the same address share the journal. A different browser, profile, or device has its own journal.
 
-Download JSON to keep a backup, or Markdown for a readable copy. Markdown cannot be imported. Import adds entries and can update ones with the same ID. It does not replace the rest of the journal.
+System downloads JSON to keep a backup, or Markdown for a readable copy. Markdown cannot be imported. Import adds entries and can update ones with the same ID. It does not replace the rest of the journal.
+
+GitHub Backup is optional, at the bottom of System. It uploads `DoingRightNow-backup.json` and `DoingRightNow.md` to a private repository you control. Turn it on to back up once per local day while the app is open, or use Back Up Now. Nothing uploads if the app is closed. Writing a line never waits on GitHub. The token stays on this device and is left out of the backup files. To restore, download `DoingRightNow-backup.json` from GitHub and use Import. Use the journal from the website. A downloaded file opened from your computer cannot reach GitHub. Setup steps are in `GITHUB-SETUP.md`.
 
 A JSON backup from the earlier Doing Right Now journal is accepted. The lines keep the words you wrote, including a `^`. Projects, issues, and day ratings in that file are left out. The first time this journal opens in a browser that already has the earlier journal, and this one is still empty, those lines, the Scratch Pad, and Quick Add are brought over with their original times.
 
@@ -86,7 +88,7 @@ This is not a password manager. Keep passwords and financial details out of the 
 
 Data is plain text in this browser. Anyone with the unlocked device can read it. Browser extensions with site access may be able to read it. Import a JSON file only if you exported it or trust it. Journal lines are shown as text.
 
-The journal leaves the browser when you export, copy, or share it yourself.
+The journal leaves the browser when you export, copy, share it, or turn on GitHub Backup. That backup goes only to the private repository you name.
 
 ---
 
