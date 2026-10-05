@@ -19,8 +19,9 @@ body{margin:0;color:var(--ink);background:var(--bg);min-height:100vh}
 button,input,select,textarea{font:inherit;color:inherit}
 button{cursor:pointer;border:0}
 button:disabled{cursor:default;opacity:.5}
-button,input,select{outline-offset:3px}
-button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #76a986}
+button,input,select,textarea{outline-offset:3px}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #76a986}
+textarea{border:1px solid var(--line);border-radius:10px;background:var(--bg);padding:10px 12px;min-width:0}
 button svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
 .shell{max-width:780px;min-height:100vh;margin:auto;background:var(--panel)}
 .topbar{display:flex;align-items:center;gap:12px;padding:16px 24px;border-bottom:1px solid var(--line)}
@@ -111,7 +112,14 @@ html[data-theme="dark"] .toast button{background:#25302815;color:#253028}
     </div>
   </header>
   <main class="main">
-    <p class="rule">Open this file in a browser and use the samples. The sentence under each heading is the rule.</p>
+    <p class="rule">This file is the reference for a new local app. The sentence under each heading is the rule. Open the file and use the samples.</p>
+
+    <section>
+      <h2>Build a new app</h2>
+      <p class="rule">A new app is <strong>one new HTML file</strong>. Copy the style in this file and the shell functions in the script: <strong>toast</strong>, <strong>setTheme</strong>, <strong>setFont</strong>, <strong>setSpacing</strong>, and <strong>applyAccent</strong>. Keep those names. Add rules only for the new screen.</p>
+      <p class="rule">Copy the shared shell from this page. Entries, the timer, and GitHub Backup belong to the journal. A new app names its own things, and it keeps these preferences, toasts, dialogs, copy buttons, and errors.</p>
+      <p class="rule">Text the person wrote is rendered as elements, with <strong>textContent</strong>. Leave that text out of innerHTML. A link in that text may use http, https, or mailto.</p>
+    </section>
 
     <!-- Embedded Lucide SVG icons. Source: https://github.com/lucide-icons/lucide
     ISC License. Copyright (c) 2026 Lucide Icons and Contributors.
@@ -144,7 +152,7 @@ html[data-theme="dark"] .toast button{background:#25302815;color:#253028}
     SOFTWARE. -->
     <section>
       <h2>One local file</h2>
-      <p class="rule">Each app is <strong>one HTML file</strong>, and it stays local. Open the file in a browser. There is no build step and no dependency. The page loads nothing from the network: no scripts, no fonts, no icon library. The journal stays in this browser, on this device.</p>
+      <p class="rule">Each app is <strong>one HTML file</strong>, and it stays local. Open the file in a browser. There is no build step and no dependency. The page loads nothing from the network: no scripts, no fonts, no icon library. What the person writes stays in this browser, on this device.</p>
       <p class="rule">Icons are <strong>Lucide</strong>, pasted in as SVG. Do not add the Lucide script, an icon font, or a CDN. Each icon is a 24 by 24 stroke in <strong>currentColor</strong>, with round caps and joins. In a button it draws at 20px with stroke 1.8. Decorative icons are hidden from assistive tech. Keep the Lucide ISC notice in the file. Icons taken from Feather also keep the MIT notice. The app mark and the timer stay the original green.</p>
       <div class="icon-set" aria-hidden="true">
         <span><svg viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>Menu</span>
@@ -160,6 +168,12 @@ html[data-theme="dark"] .toast button{background:#25302815;color:#253028}
         <span class="stays-green"><svg viewBox="0 0 24 24"><path d="M10 2h4M12 6V2"/><circle cx="12" cy="14" r="8"/><path d="M12 14 15 11"/></svg>Timer</span>
       </div>
       <p class="help">Paste the path into the file. The timer hand can move. Everything else is a still stroke.</p>
+    </section>
+
+    <section>
+      <h2>Storage</h2>
+      <p class="rule">Each app has its own <strong>IndexedDB</strong> database. Open <strong>one connection</strong> when the page loads and reuse it. Keep one store for documents, one record each, and a meta store for preferences. Save the record that changed.</p>
+      <p class="rule">If another tab upgrades the database, close the connection and show an error that asks for a reload. <strong>Reset preferences</strong> restores System, Medium, Loose, 12-hour, Regional, and Green. It leaves the documents in place.</p>
     </section>
 
     <section>
@@ -269,7 +283,7 @@ html[data-theme="dark"] .toast button{background:#25302815;color:#253028}
 
     <section>
       <h2>Dialogs</h2>
-      <p class="rule">Use a dialog when the person must read or decide. Title at the left, close icon at the right. A short green label may sit above the title. <strong>Cancel</strong> is secondary. The confirming button is primary and sits at the end. A destructive button is danger and sits at the start. Escape or a click on the dimmed backdrop closes it. The dialog stays until the person closes it.</p>
+      <p class="rule">Use a dialog when the person must read or decide. Title at the left, close icon at the right. A short green label may sit above the title. <strong>Cancel</strong> is secondary. The confirming button is primary and sits at the end. A destructive button is danger and sits at the start. Escape or a click on the dimmed backdrop closes it. <strong>Ctrl-Enter</strong> or <strong>Command-Enter</strong> clicks the primary button when the dialog has one. The dialog stays until the person closes it.</p>
       <div class="row">
         <button class="secondary" type="button" id="open-info">Open a dialog</button>
         <button class="danger" type="button" id="open-delete">Delete this entry?</button>
@@ -337,6 +351,8 @@ html[data-theme="dark"] .toast button{background:#25302815;color:#253028}
 </div>
 
 <script>
+// Shell for a new app. Copy these functions and keep the names:
+// toast, setTheme, setFont, setSpacing, applyAccent.
 const $ = id => document.getElementById(id);
 let toastTimer, copyTimer;
 const dialogOpen = () => [...document.querySelectorAll('dialog')].some(dialog => dialog.hasAttribute('open'));
@@ -461,6 +477,14 @@ $('copy-ok').onclick = () => {
 };
 $('copy-fail').onclick = () => toast('Could not copy.');
 $('show-error').onclick = () => { $('page-error').hidden = !$('page-error').hidden; };
+document.addEventListener('keydown', event => {
+  if (event.key !== 'Enter' || !(event.ctrlKey || event.metaKey) || event.shiftKey || event.altKey || event.isComposing) return;
+  const dialog = [...document.querySelectorAll('dialog')].findLast(item => item.open);
+  const save = dialog && dialog.querySelector('.actions .primary');
+  if (!save || save.disabled) return;
+  event.preventDefault();
+  save.click();
+});
 </script>
 </body>
 </html>
