@@ -52,6 +52,13 @@ button.icon:hover{background:var(--soft);color:var(--green)}
 .help{font-size:.875rem;color:var(--muted);margin:8px 0 0}
 .error{color:var(--danger);background:#f7e6e4;padding:12px 14px;border-radius:10px;margin:0}
 html[data-theme="dark"] .error{background:#492b29;color:#ffb9b3}
+.activity-emphasis{font-weight:750}
+.tag-person{color:#7845b5}.tag-place{color:#00776f}.tag-project{color:#956000}
+html[data-theme="dark"] .tag-person{color:#c3a0ef}
+html[data-theme="dark"] .tag-place{color:#67d4c8}
+html[data-theme="dark"] .tag-project{color:#f1c575}
+.tag-person,.tag-place,.tag-project{font-weight:750}
+.tag-line{margin:12px 0 0;padding:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow-wrap:anywhere}
 dialog{width:min(520px,calc(100% - 28px));max-height:90vh;border:1px solid var(--line);border-radius:20px;padding:24px;background:var(--panel);color:var(--ink);box-shadow:0 20px 80px #14221930}
 dialog::backdrop{background:#101b1466}
 dialog h2{margin:0;font-size:1.25rem}
@@ -116,7 +123,7 @@ html[data-theme="dark"] .toast button{background:#25302815;color:#253028}
 
     <section>
       <h2>Build a new app</h2>
-      <p class="rule">A new app is <strong>one new HTML file</strong>. Copy the style in this file and the shell functions in the script: <strong>toast</strong>, <strong>setTheme</strong>, <strong>setFont</strong>, <strong>setSpacing</strong>, and <strong>applyAccent</strong>. Keep those names. Add rules only for the new screen.</p>
+      <p class="rule">A new app is <strong>one new HTML file</strong>. Copy the style in this file and the shell functions in the script: <strong>toast</strong>, <strong>setTheme</strong>, <strong>setFont</strong>, <strong>setSpacing</strong>, <strong>applyAccent</strong>, <strong>activitySegments</strong>, and <strong>paintActivity</strong>. Keep those names. Add rules only for the new screen.</p>
       <p class="rule">Copy the shared shell from this page. Entries, the timer, and GitHub Backup belong to the journal. A new app names its own things, and it keeps these preferences, toasts, dialogs, copy buttons, and errors.</p>
       <p class="rule">Text the person wrote is rendered as elements, with <strong>textContent</strong>. Leave that text out of innerHTML. A link in that text may use http, https, or mailto.</p>
     </section>
@@ -186,6 +193,14 @@ html[data-theme="dark"] .toast button{background:#25302815;color:#253028}
         <span class="swatch"><i style="background:#657269"></i>Muted</span>
         <span class="swatch"><i style="background:#a23c36"></i>Danger</span>
       </div>
+    </section>
+
+    <section>
+      <h2>Tags</h2>
+      <p class="rule"><strong>@name</strong> is a person, in violet. <strong>#place</strong> is a place, in teal. <strong>+project</strong> is a project, in amber. A tag is the mark plus one word. It starts a line, or follows a space or an opening bracket. Join words with a hyphen, such as <strong>+annual-report</strong>. A line that ends with <strong>!</strong> is bold.</p>
+      <p class="rule">Copy <strong>activitySegments</strong> and <strong>paintActivity</strong>. They paint the line as elements and set each word with textContent. The mark stays in the text.</p>
+      <p class="tag-line" id="tag-sample"></p>
+      <p class="help">Call @Alex at #office about +website!</p>
     </section>
 
     <section>
@@ -352,8 +367,31 @@ html[data-theme="dark"] .toast button{background:#25302815;color:#253028}
 
 <script>
 // Shell for a new app. Copy these functions and keep the names:
-// toast, setTheme, setFont, setSpacing, applyAccent.
+// toast, setTheme, setFont, setSpacing, applyAccent, activitySegments, paintActivity.
 const $ = id => document.getElementById(id);
+function activitySegments(text){
+  const segments = [], pattern = /(^|[\s([{])([@#+][\p{L}\p{N}_][\p{L}\p{N}_-]*)/gu;
+  let end = 0;
+  for (const match of text.matchAll(pattern)) {
+    const start = match.index + match[1].length;
+    if (start > end) segments.push({text: text.slice(end, start), type: ''});
+    const token = match[2];
+    segments.push({text: token, type: token[0] === '@' ? 'person' : token[0] === '#' ? 'place' : 'project'});
+    end = start + token.length;
+  }
+  if (end < text.length) segments.push({text: text.slice(end), type: ''});
+  return segments;
+}
+function paintActivity(node, text){
+  node.classList.toggle('activity-emphasis', text.trimEnd().endsWith('!'));
+  node.replaceChildren(...activitySegments(text).map(segment => {
+    const span = document.createElement('span');
+    if (segment.type) span.className = 'tag-' + segment.type;
+    span.textContent = segment.text;
+    return span;
+  }));
+}
+paintActivity($('tag-sample'), 'Call @Alex at #office about +website!');
 let toastTimer, copyTimer;
 const dialogOpen = () => [...document.querySelectorAll('dialog')].some(dialog => dialog.hasAttribute('open'));
 function toast(message){
