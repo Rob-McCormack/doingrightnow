@@ -101,6 +101,10 @@ html[data-theme="dark"] .toast button{background:#25302815;color:#253028}
 .editor[data-mode="preview"]{grid-template-columns:1fr}
 .editor[data-mode="preview"] .write-pane{display:none}
 .write-pane{display:block;min-width:0}
+.write-pane label{display:block}
+.marks{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.marks button{background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:99px;padding:6px 10px;min-height:34px;font-size:.875rem}
+.marks button:hover{border-color:var(--green);color:var(--green)}
 #source{display:block;width:100%;min-height:62vh;resize:vertical;line-height:1.55;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.95em}
 .preview{min-width:0;min-height:62vh;border:1px solid var(--line);border-radius:12px;background:var(--bg);padding:14px 16px;overflow:auto}
 .preview h1,.preview h2,.preview h3,.preview h4,.preview h5,.preview h6{margin:.8em 0 .3em;line-height:1.25}
@@ -192,10 +196,21 @@ SOFTWARE. -->
       <span class="status" id="status" aria-live="polite">Saved</span>
     </div>
     <div class="editor" id="editor" data-mode="split">
-      <label class="write-pane">
-        <span class="sr-only">Markdown</span>
-        <textarea id="source" spellcheck="true" placeholder="Write here." disabled></textarea>
-      </label>
+      <div class="write-pane">
+        <div class="marks" role="toolbar" aria-label="Markdown">
+          <button type="button" data-mark="heading" disabled>Heading</button>
+          <button type="button" data-mark="bold" disabled>Bold</button>
+          <button type="button" data-mark="italic" disabled>Italic</button>
+          <button type="button" data-mark="list" disabled>List</button>
+          <button type="button" data-mark="link" disabled>Link</button>
+          <button type="button" data-mark="quote" disabled>Quote</button>
+          <button type="button" data-mark="code" disabled>Code</button>
+        </div>
+        <label>
+          <span class="sr-only">Markdown</span>
+          <textarea id="source" spellcheck="true" placeholder="Write here." disabled></textarea>
+        </label>
+      </div>
       <div class="preview" id="preview" aria-label="Preview"></div>
     </div>
     <div class="row foot">
@@ -838,7 +853,7 @@ function askDelete(id){
 }
 function enable(){
   ['source','new-doc','open-docs','open-settings','copy-note','download','open-file'].forEach(id => { $(id).disabled = false; });
-  document.querySelectorAll('[data-view]').forEach(button => { button.disabled = false; });
+  document.querySelectorAll('[data-view],[data-mark]').forEach(button => { button.disabled = false; });
 }
 async function start(){
   try {
@@ -863,6 +878,134 @@ async function start(){
   }
 }
 document.querySelectorAll('[data-view]').forEach(button => button.onclick = () => setView(button.dataset.view, true));
+let markRange = {start:0, end:0};
+function rememberSelection(){
+  const el = $('source');
+  markRange = {start: el.selectionStart, end: el.selectionEnd};
+}
+['keyup','mouseup','select'].forEach(type => $('source').addEventListener(type, rememberSelection));
+function selectionNow(){
+  const el = $('source');
+  if (document.activeElement === el) return {start: el.selectionStart, end: el.selectionEnd};
+  return markRange;
+}
+function writeNote(start, end, insert, selectStart, selectEnd){
+  const el = $('source');
+  el.focus();
+  el.setRangeText(insert, start, end, 'end');
+  el.setSelectionRange(selectStart, selectEnd);
+  markRange = {start: selectStart, end: selectEnd};
+  el.dispatchEvent(new Event('input', {bubbles:true}));
+}
+function wrapped(text, start, end, before, after){
+  const selected = text.slice(start, end);
+  const whole = selected.length > before.length + after.length && selected.startsWith(before) && selected.endsWith(after);
+  if (whole && !(before === '*' && selected.startsWith('**'))) return {from: start, to: end, inner: selected.slice(before.length, -after.length)};
+  const outside = start >= before.length && text.slice(start - before.length, start) === before && text.slice(end, end + after.length) === after;
+  const boldEdge = before === '*' && (text[start - 2] === '*' || text[end + 1] === '*');
+  if (outside && !boldEdge) return {from: start - before.length, to: end + after.length, inner: selected};
+  return null;
+}
+function wrapMark(before, after, example){
+  const el = $('source');
+  const {start, end} = selectionNow();
+  const found = end > start ? wrapped(el.value, start, end, before, after) : null;
+  if (found) { writeNote(found.from, found.to, found.inner, found.from, found.from + found.inner.length); return; }
+  if (start === end) {
+    writeNote(start, end, before + example + after, start + before.length, start + before.length + example.length);
+    return;
+  }
+  writeNote(start, end, before + el.value.slice(start, end) + after, start + before.length, end + before.length);
+}
+function lineSpan(text, start, end){
+  const from = text.lastIndexOf('\n', start - 1) + 1;
+  const at = end > start && text[end - 1] === '\n' ? end - 1 : end;
+  const hit = text.indexOf('\n', at);
+  return {from, to: hit === -1 ? text.length : hit};
+}
+const LINE_MARKS = {
+  heading:{test:line => /^#{1,6}\s+/.test(line), add:'# ', example:'Heading', strip:line => line.replace(/^#{1,6}\s+/, '')},
+  list:{test:line => /^[-*]\s+/.test(line), add:'- ', example:'list item', strip:line => line.replace(/^[-*]\s+/, '')},
+  quote:{test:line => /^>\s?/.test(line), add:'> ', example:'quote', strip:line => line.replace(/^>\s?/, '')}
+};
+function applyLines(kind){
+  const el = $('source');
+  const {start, end} = selectionNow();
+  const spec = LINE_MARKS[kind];
+  const {from, to} = lineSpan(el.value, start, end);
+  const lines = el.value.slice(from, to).split('\n');
+  const filled = lines.filter(line => line.trim());
+  if (!filled.length) {
+    writeNote(from, to, spec.add + spec.example, from + spec.add.length, from + spec.add.length + spec.example.length);
+    return;
+  }
+  const remove = filled.every(line => spec.test(line));
+  const next = lines.map(line => {
+    if (!line.trim()) return line;
+    if (remove) return spec.strip(line);
+    return spec.test(line) ? line : spec.add + line;
+  }).join('\n');
+  if (start === end) {
+    const shift = (remove ? spec.strip(lines[0]).length - lines[0].length : (spec.test(lines[0]) ? 0 : spec.add.length));
+    const pos = Math.max(from, start + shift);
+    writeNote(from, to, next, pos, pos);
+    return;
+  }
+  writeNote(from, to, next, from, from + next.length);
+}
+function applyLink(){
+  const el = $('source');
+  const {start, end} = selectionNow();
+  const selected = el.value.slice(start, end);
+  if (!selected) {
+    const sample = '[link text](https://)';
+    const cursor = start + sample.indexOf('https://') + 'https://'.length;
+    writeNote(start, end, sample, cursor, cursor);
+    return;
+  }
+  const insert = '[' + selected + '](https://)';
+  const cursor = start + insert.length - 1;
+  writeNote(start, end, insert, cursor, cursor);
+}
+function applyCode(){
+  const el = $('source');
+  const {start, end} = selectionNow();
+  const selected = el.value.slice(start, end);
+  if (selected.includes('\n')) {
+    const trimmed = selected.trim();
+    if (/^```[^\n]*\n[\s\S]*\n```$/.test(trimmed)) {
+      const inner = trimmed.replace(/^```[^\n]*\n/, '').replace(/\n```$/, '');
+      const at = start + selected.indexOf(trimmed);
+      writeNote(at, at + trimmed.length, inner, at, at + inner.length);
+      return;
+    }
+    const body = selected.replace(/\n$/, '');
+    const insert = '```\n' + body + '\n```';
+    writeNote(start, end, insert, start + 4, start + 4 + body.length);
+    return;
+  }
+  wrapMark('`', '`', 'code');
+}
+function applyMark(kind){
+  if ($('source').disabled) return;
+  if (kind === 'bold') wrapMark('**', '**', 'bold');
+  else if (kind === 'italic') wrapMark('_', '_', 'italic');
+  else if (kind === 'link') applyLink();
+  else if (kind === 'code') applyCode();
+  else applyLines(kind);
+}
+document.querySelectorAll('[data-mark]').forEach(button => {
+  button.addEventListener('mousedown', event => event.preventDefault());
+  button.onclick = () => applyMark(button.dataset.mark);
+});
+document.addEventListener('keydown', event => {
+  if (event.isComposing || event.altKey || event.shiftKey || !(event.metaKey || event.ctrlKey)) return;
+  if (document.activeElement !== $('source') || dialogOpen()) return;
+  const key = event.key.toLowerCase();
+  if (key !== 'b' && key !== 'i') return;
+  event.preventDefault();
+  applyMark(key === 'b' ? 'bold' : 'italic');
+});
 $('source').addEventListener('input', () => {
   paintPreview();
   $('status').textContent = 'Saving…';
